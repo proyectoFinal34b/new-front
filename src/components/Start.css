@@ -1,0 +1,92 @@
+video {
+    top: 0;
+    left: 0;
+    position:absolute;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -5;
+}
+
+.wrapper {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    height: 100vh;
+}
+
+.div_logo {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -100px;
+    margin-bottom: 50px;
+}
+
+.overlay {
+    top: 0;
+    left: 0;
+    position:absolute;
+    width: 100vw;
+    height: 100vh;
+    background: #1c1c1d;
+    opacity: 0.7;
+    z-index: -1;
+    mix-blend-mode: overlay;
+}
+
+.img {
+    width: 100px;
+    height: 100px;
+}
+
+.title {
+    display: inline-block;
+    color:#fff;
+    margin-left: 10px;
+}
+
+.text {
+    color:#fff;
+    width: 400px;
+    margin-bottom: 40px;
+}
+
+
+.custom-btn {
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+  }
+
+  .btn-2 {
+    background: #385eb3;
+    background: linear-gradient(0deg, #5f64a5 0%, #385eb3 100%);
+    border: none;
+    align-self: flex-end;
+  }
+  .btn-2:before {
+    height: 0%;
+    width: 2px;
+  }
+  .btn-2:hover {
+    box-shadow:  4px 4px 6px 0 rgba(82, 82, 82, 0.5),
+                -4px -4px 6px 0 rgba(54, 56, 59, 0.5), 
+      inset -4px -4px 6px 0 rgba(109, 109, 109, 0.2),
+      inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+  }

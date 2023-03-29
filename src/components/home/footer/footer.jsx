@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div>
       <div>
-        <a href="https://www.facebook.com/BastetRescate">
+        <a href="https://www.facebook.com/BastetRescate" target="_blank">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
@@ -19,7 +19,7 @@ export default function Footer() {
           ></path>
         </svg>
         </a>
-        <a href="https://www.instagram.com/bastetrescate/?hl=es">
+        <a href="https://www.instagram.com/bastetrescate/?hl=es" target="_blank">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
