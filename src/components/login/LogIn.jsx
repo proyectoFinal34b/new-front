@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from 'react-router-dom'
 
 export default function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,7 +31,7 @@ export default function Login() {
               className="block text-gray-700 text-sm font-bold mb-2"
               for="username"
             >
-              Username
+              Usuario
             </label>
 
             <input
@@ -46,7 +47,7 @@ export default function Login() {
               className="block text-gray-700 text-sm font-bold mb-2"
               for="password"
             >
-              Password
+              Contraseña
             </label>
             <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -58,17 +59,17 @@ export default function Login() {
           </div>
           <div className="flex items-center justify-center">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-gray-900 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Iniciar sesión
             </button>
           </div>
           <a
-            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+            className="inline-block align-baseline font-bold text-sm text-gray-900 hover:text-teal-500"
             href="#"
           >
-            Forgot Password?
+            Has olvidado tu contraseña?
           </a>
         </form>
       ) : (
@@ -77,6 +78,11 @@ export default function Login() {
           <button onClick={handleLogout}>Cerrar sesión</button>
         </div>
       )}
+      <Link to='/home' className="bg-gray-900 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit">
+        <button >
+          Home</button>
+        </Link>
     </div>
   );
 }
