@@ -11,7 +11,7 @@ export default function Start() {
                 <img src={img} className='img'/>
             </div>
             <p className='text'>Bienvenido a Bastet tu lugar en la red!</p>
-            <Link to='/home'><button className='custom-btn btn-2'>HOME</button></Link>
+            <Link to='/home'><button className="bg-gray-900 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">HOME</button></Link>
 
             <video muted autoPlay loop ><source src={video} type='Video/mp4'/></video>
             <div className='overlay'></div>
