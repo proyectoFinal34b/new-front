@@ -1,7 +1,7 @@
 export const PRODUCTS = [
-    { name: "Producto 1", link: "#" },
-    { name: "Producto 2", link: "#" },
-    { name: "Producto 3", link: "#" },
+    { name: "Juguetes", link: "#" },
+    { name: "Comida", link: "#" },
+    { name: "Limpieza", link: "#" },
   ];
   export const RESOURCES = [
     { name: "Informacion", link: "#" },
