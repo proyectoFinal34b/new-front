@@ -1,29 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react'
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCats } from "../../redux/actions";
+import style from './SearchBar.module.css'
 
-export default function SearchBar(props) {
-  const [searchText, setSearchText] = useState('');
+export default function SearchCats (){
+const dispatch = useDispatch()
+const allCats = useSelector(state => state.cats);
+const [name, setName] = useState("")
 
-  const handleInputChange = (event) => {
-    setSearchText(event.target.value);
-  };
+function handleSubmit(e) {
+    e.preventDefault();
+    if (name) {
+      dispatch(getCats(name));
+  
+      setName("");
+    } else {
+      alert("Ingrese un gato");
+    }
+  }
 
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-    console.log(`Searching for ${searchText}`);
+  function handleChange(e) {
+    e.preventDefault();
+    setName(e.target.value);
+  }
 
-    // Lógica de búsqueda
-    const filteredResults = props.results.filter((result) => {
-      return result.title.toLowerCase().includes(searchText.toLowerCase());
-    });
-
-    props.onSearch(filteredResults);
-  };
-
-  return (
-    <form onSubmit={handleSearchSubmit}>
-      <input type="text" placeholder="Search..." onChange={handleInputChange} value={searchText} />
-      <button type="submit">Search</button>
-    </form>
-  );
+return(
+    <div>
+        <input
+        className={style.boton}
+        type="text"
+        value={name}
+        placeholder="Gato..." 
+        onChange={(e) => handleChange(e)}
+        />
+        <button className={style.boton2} type="submit" onClick={(e) => handleSubmit(e)}>Buscar</button>
+    </div>
+)
 }
-

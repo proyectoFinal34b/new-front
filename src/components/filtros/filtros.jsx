@@ -1,49 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Gatos = [
-  { id: 1, nombre: "Luna", raza: "Persa", sexo: "Hembra", edad: 2 },
-  { id: 2, nombre: "Milo", raza: "Siames", sexo: "Macho", edad: 3 },
-  { id: 3, nombre: "Simba", raza: "Bengala", sexo: "Macho", edad: 1 },
-  { id: 4, nombre: "Grisito", raza: "Mestizo", sexo: "Macho", edad: 5 },
-  { id: 5, nombre: "Nina", raza: "Persa", sexo: "Hembra", edad: 2 },
+  { id: 1, nombre: 'Mittens', status: 'Adoptado', edad: 2, sexo: 'Hembra' },
+  { id: 2, nombre: 'Toby', status: 'En albergue', edad: 4, sexo: 'Macho' },
+  { id: 3, nombre: 'Socks', status: 'Apadrinado', edad: 3, sexo: 'Hembra' },
+  { id: 4, nombre: 'Oliver', status: 'Adoptado', edad: 1, sexo: 'Macho' },
+  { id: 5, nombre: 'Luna', status: 'Apadrinado', edad: 5, sexo: 'Hembra' },
+  { id: 6, nombre: 'Simba', status: 'En albergue', edad: 2, sexo: 'Macho' },
+  { id: 7, nombre: 'Ginger', status: 'En albergue', edad: 4, sexo: 'Hembra' },
+  { id: 8, nombre: 'Whiskers', status: 'Adoptado', edad: 3, sexo: 'Macho' },
+  { id: 9, nombre: 'Milo', status: 'En albergue', edad: 2, sexo: 'Macho' },
+  { id: 10, nombre: 'Misty', status: 'Apadrinado', edad: 1, sexo: 'Hembra' },
 ];
 
 export default function GatosFiltrados() {
   const [gatos, setGatos] = useState(Gatos);
-  const [filtroRaza, setFiltroRaza] = useState("");
+  const [filtroStatus, setFiltroStatus] = useState("");
   const [filtroSexo, setFiltroSexo] = useState("");
   const [filtroEdad, setFiltroEdad] = useState("");
 
-  function filtrarGatos() {
+  function aplicarFiltros(status, sexo, edad)  {
     let tempGatos = Gatos;
   
-    if (filtroRaza) {
-      tempGatos = tempGatos.filter((gato) => gato.raza === filtroRaza);
+    if (status) {
+      tempGatos = tempGatos.filter((gato) => gato.status === filtroStatus);
     }
-    if (filtroSexo) {
+    if (sexo) {
       tempGatos = tempGatos.filter((gato) => gato.sexo === filtroSexo);
     }
-    if (filtroEdad) {
+    if (edad) {
       tempGatos = tempGatos.filter((gato) => gato.edad === parseInt(filtroEdad));
     }
     setGatos(tempGatos);
   }
 
+  useEffect(() => {
+    aplicarFiltros(filtroStatus, filtroSexo, filtroEdad);
+  }, [filtroStatus, filtroSexo, filtroEdad]);
+
   return (
     <div>
       <h2>Gatos en adopción</h2>
       <div>
-        <label htmlFor="raza">Raza:</label>
+        <label htmlFor="status">Estado:</label>
         <select
-          id="raza"
-          onChange={(e) => setFiltroRaza(e.target.value)}
-          value={filtroRaza}
+          id="status"
+          onChange={(e) => setFiltroStatus(e.target.value)}
+          value={filtroStatus}
         >
-          <option value="">Cualquier raza</option>
-          <option value="Persa">Persa</option>
-          <option value="Siames">Siames</option>
-          <option value="Bengala">Bengala</option>
-          <option value="Mestizo">Mestizo</option>
+          <option value="">Todos los gatos</option>
+          <option value="En albergue">En Albergue</option>
+          <option value="Adoptado">Adoptado</option>
+          <option value="Apadrinado">Apadrinado</option>
         </select>
       </div>
       <div>
@@ -53,7 +61,7 @@ export default function GatosFiltrados() {
           onChange={(e) => setFiltroSexo(e.target.value)}
           value={filtroSexo}
         >
-          <option value="">Cualquier sexo</option>
+          <option value="">Cualquier Sexo</option>
           <option value="Hembra">Hembra</option>
           <option value="Macho">Macho</option>
         </select>
@@ -70,16 +78,14 @@ export default function GatosFiltrados() {
           <option value="2">2 años</option>
           <option value="3">3 años</option>
           <option value="4">4 años</option>
-          <option value="5">5 años o más</option>
+          <option value="5">5 años</option>
         </select> 
-
-</div>
-      <button onClick={filtrarGatos}>Filtrar</button>
+      </div>
       <ul>
         {gatos.map((gato) => (
           <li key={gato.id}>
             <p>Nombre: {gato.nombre}</p>
-            <p>Raza: {gato.raza}</p>
+            <p>Raza: {gato.status}</p>
             <p>Sexo: {gato.sexo}</p>
             <p>Edad: {gato.edad} años</p>
           </li>
