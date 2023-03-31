@@ -7,7 +7,7 @@ import Portada from "./portada/portada";
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-gray-100">
       <Navbar/>
       <Portada/>
       <About/>
