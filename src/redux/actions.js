@@ -11,7 +11,7 @@ export const getCats = () => async (dispatch) => {
 };
 
 export const searchCats = (name) => async (dispatch) => {
-    return await axios.get(`http://localhost:3001/cat?name=${name}`)
+    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat?name=${name}`)
     .then(r => dispatch({ type : SEARCH_CATS, payload : r.data}))
     .catch(e => console.error(e))
 };
