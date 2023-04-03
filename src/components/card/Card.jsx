@@ -4,7 +4,7 @@ import { getCats } from '../../redux/actions'
 
 export default function Card() {
   const dispatch = useDispatch();
-  const cats = useSelector(state => state.cats);
+  const cats = useSelector(state => state.allCats);
 
   useEffect(() => {
     dispatch(getCats());
