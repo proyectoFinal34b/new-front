@@ -12,20 +12,24 @@ export default function Card() {
   console.log(cats)
 
   return (
-    <div>
-      {Array.isArray(cats)?cats.map(function(cat) {
-        return (
-          <div key={cat.id}>
-            <h2>{cat.name}</h2>
-            <img src={cat.image} alt={cat.name} />
-            <h3>Edad: {cat.age}</h3>
-          
-          </div>
+    <div class="flex flex flex-col my-10">
+  {cats.map(function(cat) {
+    return (
+      <div class="bg-white w-1/4 m-auto border-1 border-dashed border-gray-900 shadow-md rounded-lg overflow-hidden" key={cat.id}>
+        <img src={cat.image} alt={cat.name} class="w-full h-15 object-cover object-center" />
+        <div class="p-4">
+          <p class="mb-1 text-gray-900 font-semibold">{cat.name}</p>
 
-        );
-      })
-    :<p>{cats}</p>}
-    </div>
+          <span class="text-gray-700">Edad: {cat.age}</span>
+
+          <div class="mt-8 mb-3">
+            <a href="/detail" class="px-4 py-2 bg-teal-500 shadow-lg border rounded-lg text-white uppercase font-semibold tracking-wider focus:outline-none focus:shadow-outline hover:bg-teal-400 active:bg-teal-400">Adoptar</a>
+          </div>
+        </div>
+      </div>
+    );
+  })}
+</div>
   );
 };
 
