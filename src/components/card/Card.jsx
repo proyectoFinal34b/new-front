@@ -9,18 +9,22 @@ export default function Card() {
   useEffect(() => {
     dispatch(getCats());
   }, [dispatch]);
+  console.log(cats)
 
   return (
     <div>
-      {cats.map(function(cat) {
+      {Array.isArray(cats)?cats.map(function(cat) {
         return (
           <div key={cat.id}>
             <h2>{cat.name}</h2>
             <img src={cat.image} alt={cat.name} />
             <h3>Edad: {cat.age}</h3>
+          
           </div>
+
         );
-      })}
+      })
+    :<p>{cats}</p>}
     </div>
   );
 };
