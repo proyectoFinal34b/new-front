@@ -119,7 +119,7 @@ export default function GatosFiltrados() {
       tempGatos = tempGatos.filter((gato) => gato.status === status);
     }
     if (gender) {
-      tempGatos = tempGatos.filter((gato) => gato.gender === gender);
+      tempGatos = tempGatos.filter((gato) => gato.gender.toLowerCase() === gender);
       
     }
     if (age) {
@@ -138,14 +138,18 @@ export default function GatosFiltrados() {
   }, [filtroStatus, filtroGender, filtroAge]);
 
   return (
-    <div>
-      <h2>Gatos</h2>
-      <div>
-        <label htmlFor="status">Estado:</label>
+    <div className="flex justify-center items-center">
+    <div className="p-4 dark:bg-gray-900 rounded-md w-1/2">
+      <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Gatos</h2>
+      <div className="flex flex-col mb-3">
+        <label htmlFor="status" className="mb-2 font-bold text-gray-100">
+          Estado:
+        </label>
         <select
           id="status"
           onChange={(e) => setFiltroStatus(e.target.value)}
           value={filtroStatus}
+          className="rounded-md border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500 h-10 px-4"
         >
           <option value="">Todos los gatos</option>
           <option value="albergue">En Albergue</option>
@@ -153,24 +157,30 @@ export default function GatosFiltrados() {
           <option value="apadrinado">Apadrinado</option>
         </select>
       </div>
-      <div>
-        <label htmlFor="gender">Sexo:</label>
+      <div className="flex flex-col mb-4">
+        <label htmlFor="gender" className="mb-2 font-bold text-gray-100">
+          Sexo:
+        </label>
         <select
           id="gender"
           onChange={(e) => setFiltroGender(e.target.value)}
           value={filtroGender}
+          className="rounded-md border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500 h-10 px-4"
         >
           <option value="">Cualquier Sexo</option>
           <option value="hembra">Hembra</option>
           <option value="macho">Macho</option>
         </select>
       </div>
-      <div>
-        <label htmlFor="age">Edad:</label>
+      <div className="flex flex-col mb-4">
+        <label htmlFor="age" className="mb-2 font-bold text-gray-100">
+          Edad:
+        </label>
         <select
           id="age"
           onChange={(e) => setFiltroAge(e.target.value)}
           value={filtroAge}
+          className="rounded-md border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500 h-10 px-4"
         >
           <option value="">Cualquier edad</option>
           <option value="1">1 año</option>
@@ -178,8 +188,9 @@ export default function GatosFiltrados() {
           <option value="3">3 años</option>
           <option value="4">4 años</option>
           <option value="5">5 años</option>
-        </select> 
+        </select>
       </div>
+    </div>
     </div>
   );
 }

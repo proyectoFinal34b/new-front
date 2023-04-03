@@ -72,6 +72,14 @@ export default function Login() {
             >
               Has olvidado tu contraseña?
             </a>
+            <p>
+            <a
+              className="inline-block align-baseline font-bold text-sm text-gray-900 hover:text-teal-500"
+              href="#"
+            >
+              Registrarte
+            </a>
+            </p>
           </form>
         ) : (
           <div>
