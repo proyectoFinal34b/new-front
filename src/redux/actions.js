@@ -5,7 +5,7 @@ export const SEARCH_CATS = 'SEARCH_CATS';
 export const FILTER_CATS = 'FILTER_CATS'
 
 export const getCats = () => async (dispatch) => {
-    return await axios.get('https://proyectofinal-gg57.onrender.com/cat')
+    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat`)
     .then(r => dispatch({ type : GET_CATS, payload : r.data}))
     .catch(e => console.error(e))
 };
