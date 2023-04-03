@@ -40,14 +40,14 @@ import { searchCats } from "../../redux/actions";
 
 export default function SearchBar() {
   const dispatch = useDispatch();
-  const allCats = useSelector(state => state.cats);
+  const allCats = useSelector(state => state.allCats);
   const [name, setName] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
     if (name) {
-      dispatch(searchCats(name));
-      setName("");
+      dispatch(searchCats(name)) .then((response)=>console.log(response))
+      setName("")
       if (allCats.length === 0) {
         alert(`No se encontró ningún gato llamado ${name}`);
       }
