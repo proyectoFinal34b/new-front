@@ -13,7 +13,7 @@ export default function GatosRender() {
     return (
         <div>
         <Navbar/>
-        <SearchBar/>
+        {/* <SearchBar/> */}
         <GatosFiltrados />
         <Card />
         <Footer/>

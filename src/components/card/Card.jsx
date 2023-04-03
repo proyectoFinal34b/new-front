@@ -13,7 +13,7 @@ export default function Card() {
 
   return (
     <div class="flex flex flex-col my-10">
-  {cats.map(function(cat) {
+  {Array.isArray(cats) ? cats.map(function(cat) {
     return (
       <div class="bg-white w-1/4 m-auto border-1 border-dashed border-gray-900 shadow-md rounded-lg overflow-hidden" key={cat.id}>
         <img src={cat.image} alt={cat.name} class="w-full h-15 object-cover object-center" />
@@ -28,7 +28,7 @@ export default function Card() {
         </div>
       </div>
     );
-  })}
+  }): <span>{cats}</span>}
 </div>
   );
 };

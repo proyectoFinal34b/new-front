@@ -37,6 +37,7 @@ import React from 'react'
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchCats } from "../../redux/actions";
+import swal from 'sweetalert';
 
 export default function SearchBar() {
   const dispatch = useDispatch();
