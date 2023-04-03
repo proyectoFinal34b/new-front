@@ -8,6 +8,7 @@ import GatosRender from './components/gatos/gatos';
 import ProductosRender from './components/productos/productos';
 import SobreNosotros from './components/sobre-nosotros/sobre-nosotros';
 import UsuariosRender from './components/usuarios/usuarios';
+import CreateForm from './components/form/FormularioCreacion';
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react';
 import axios from 'axios'
@@ -25,6 +26,7 @@ function App() {
       <Route path ="/productos" element={<ProductosRender/>}></Route>
       <Route path ="/about-me" element={<SobreNosotros/>}></Route>
       <Route path ="/usuario" element={<UsuariosRender/>}></Route>
+      <Route path="/post" element={<CreateForm/>} />
      </Routes>
     </div>
 
