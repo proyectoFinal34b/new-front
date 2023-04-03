@@ -113,17 +113,19 @@ export default function GatosFiltrados() {
 
   function aplicarFiltros(status, gender, age) {
     let tempGatos = gatos;
+    
 
     if (status) {
       tempGatos = tempGatos.filter((gato) => gato.status === status);
     }
     if (gender) {
       tempGatos = tempGatos.filter((gato) => gato.gender === gender);
+      
     }
     if (age) {
       tempGatos = tempGatos.filter((gato) => gato.age === parseInt(age));
     }
-    
+    console.log(tempGatos)
     return tempGatos;
   }
 
@@ -132,6 +134,7 @@ export default function GatosFiltrados() {
   
   useEffect(() => {
     dispatch(filterCats(gatosFiltrados));
+    
   }, [filtroStatus, filtroGender, filtroAge]);
 
   return (
