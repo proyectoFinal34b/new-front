@@ -1,4 +1,4 @@
-import { FILTER_CATS, GET_CATS,SEARCH_CATS } from "./actions";
+import { FILTER_CATS, GET_CATS,SEARCH_CATS, POST_CATS } from "./actions";
 
 const initialState = {
     cats:[],
@@ -28,13 +28,17 @@ const reducer = (state = initialState, action) => {
       // if (action.payload.age) {
       //   tempGatos = tempGatos.filter((gato) => gato.age === parseInt(action.payload.age));
       // }
-      return {
-        ...state,
-        allCats: action.payload
-      };
+            return {
+            ...state,
+            allCats: action.payload
+        };
+        case POST_CATS:
+             return {
+            ...state,
+        };
         default:
             return {...state};
-    }
+        }
 
 
 }
