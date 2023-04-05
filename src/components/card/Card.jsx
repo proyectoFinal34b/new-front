@@ -7,7 +7,7 @@ import gatos from './gatos';
 export default function Card() {
   
   const dispatch = useDispatch();
-   const cats =gatos //useSelector(state => state.allCats);
+   const cats =  useSelector(state => state.allCats); //gatos
   const [currentPage, setCurrentPage] = useState(1);
   const [catsPerPage, setcatsPerPage] = useState(8);
   const indexOfLastcat = currentPage * catsPerPage;
