@@ -1,74 +1,76 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { postCats, getCats } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 
 function validate(input) {
-    let errors = {};
-  
-    if (!input.name) {
-      errors.name = "Se requiere un nombre";
-    } else if (!input.name.match(/^[A-Za-z\s]+$/)) {
-      errors.name = "Sólo letras por favor";
-    }
-  
-    if (!input.age) errors.age = "La edad es obligatoria";
-  
-    if (!input.gender) {
-      errors.gender = "Este campo es obligatorio";
-    } else if (input.gender !== "Macho" && input.gender !== "Hembra") {
-      errors.gender = "El género debe ser 'Macho' o 'Hembra'";
-    }
-  
-    if (!input.description) errors.description = "Este campo es obligatorio";
-  
-    if (
-      !input.state.adoptado &&
-      !input.state.apadrinado &&
-      !input.state.albergue &&
-      Object.keys(errors).length === 0
-    ) {
-      errors.state = "Debe seleccionar al menos una opción";
-    }
-  
-    return errors;
+  let errors = {};
+
+  if (!input.name) {
+    errors.name = "Se requiere un nombre";
+  } else if (!input.name.match(/^[A-Za-z\s]+$/)) {
+    errors.name = "Sólo letras por favor";
   }
+
+  if (!input.age) errors.age = "La edad es obligatoria";
+
+  if (!input.gender) {
+    errors.gender = "Este campo es obligatorio";
+  }
+
+  if (!input.description) errors.description = "Este campo es obligatorio";
+
+  if (!input.state) {
+    errors.state = "Debe seleccionar una opción";
+  }   
+  return errors;
+}
 
 export default function PostCats() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
-  const [state, setState] = useState({
+  const [catState, setCatState] = useState({
     adoptado: false,
     apadrinado: false,
-    albergue: false,
+    enAlbergue: false,
   });
 
   const [input, setInput] = useState({
     name: "",
     age: "",
     gender: "",
-    state: {
-      adoptado: false,
-      apadrinado: false,
-      albergue: false,
-    },
-    image: "",
+    state: "",
+    image: [],
     description: "",
     arrived: "",
   });
 
   function handleChange(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    if (name === "image") {
+      setInput(prevState => ({
+        ...prevState,
+        [name]: [...prevState[name], value],
+      }));
+    } else {
+      setInput({
+        ...input,
+        [name]: value,
+      });
+    }
   }
 
+  function handleSelect(e) {
+    const { name, value } = e.target;
+    let newValue = value;
 
-  function handleCheckbox(e) {
-    const { name, checked } = e.target;
-    setState((prevState) => ({ ...prevState, [name]: checked }));
+    if (name === "state") {
+      newValue = String(value);
+    }
+
+    setInput((prevState) => ({
+      ...prevState,
+      [name]: newValue,
+    }));
   }
 
   function handleSubmit(e) {
@@ -85,15 +87,20 @@ export default function PostCats() {
       age: "",
       gender: "",
       state: {
-        adoptado: false,
-        apadrinado: false,
-        albergue: false,
+        adoptado: null,
+        apadrinado: null,
+        albergue: null,
       },
-      image: "",
+      image: [],
       description: "",
       arrived: "",
     });
-    navigate.push("/home");
+    setCatState({
+      adoptado: false,
+      apadrinado: false,
+      enAlbergue: false,
+    });
+    setErrors({});
   }
 
   useEffect(() => {
@@ -116,17 +123,19 @@ export default function PostCats() {
         {errors.name && (<p>{errors.name}</p>)}
         </div>
         <div>
-        <label className="mb-2 font-bold text-gray-100">Género:</label>
-        <input
-        type= "text"
-        placeholder="Macho/Hembra"
-        value= {input.gender}
-        name="gender" 
-        onChange={(e) => {handleChange(e)}}
-        className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-        />
-        {errors.gender && (<p>{errors.gender}</p>)}
-        </div>
+  <label className="mb-2 font-bold text-gray-100">Género:</label>
+  <select
+    value={input.gender}
+    name="gender"
+    onChange={(e) => { handleSelect(e) }}
+    className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+  >
+    <option value="">Seleccione una opción</option>
+    <option value="macho">Macho</option>
+    <option value="hembra">Hembra</option>
+  </select>
+  {errors.gender && (<p>{errors.gender}</p>)}
+</div>
         <div>
         <label className="mb-2 font-bold text-gray-100">Edad:</label>
         <input 
@@ -171,33 +180,20 @@ export default function PostCats() {
         className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"/>
         </div>
         <div>
-        <label className="mb-2 font-bold text-gray-100">Estado:</label>
-        <div>
-        <label>Adoptado</label>
-        <input 
-        type="checkbox" 
-        name="state" 
-        value="adoptado" 
-        onChange={handleCheckbox}/>
-        </div>
-        <div>
-        <label>Apadrinado</label>
-        <input 
-        type="checkbox"
-        name="apadrinado" 
-        value="apadrinado" 
-        onChange={handleCheckbox}/>
-        </div>
-        <div>
-        <label>En albergue</label>
-        <input 
-        type="checkbox"
-        name="albergue" 
-        value="albergue" 
-        onChange={handleCheckbox}/>
-        </div>
-        {errors.state && <p>Debe seleccionar una opción</p>}
-        </div>
+  <label className="mb-2 font-bold text-gray-100">Estado:</label>
+  <select
+    name="state"
+    value={input.state}
+    onChange={(e) => { handleSelect(e) }}
+    className="mb-2"
+  >
+    <option value="">Selecciona un estado</option>
+    <option value="adoptado">Adoptado</option>
+    <option value="apadrinado">Apadrinado</option>
+    <option value="enAlbergue">En Albergue</option>
+  </select>
+  {errors.state && (<p>{errors.state}</p>)}
+</div>
         <button type="submit" className="ml-2 px-4 py-2 font-medium text-gray bg-teal-400 rounded-md hover:bg-teal-500 focus:outline-none focus:bg-blue-600">Enviar</button>
         </form>
         </div>

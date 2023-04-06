@@ -16,6 +16,7 @@ export default function GatosRender() {
         <Navbar/>
         <PostCats/>
         {/* <SearchBar/> */}
+        <PostCats />
         <GatosFiltrados />
         <Card />
         <Footer/>
