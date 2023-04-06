@@ -3,29 +3,27 @@ import { postCats, getCats } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 
 function validate(input) {
-    let errors = {};
-  
-    if (!input.name) {
-      errors.name = "Se requiere un nombre";
-    } else if (!input.name.match(/^[A-Za-z\s]+$/)) {
-      errors.name = "Sólo letras por favor";
-    }
-  
-    if (!input.age) errors.age = "La edad es obligatoria";
-  
-    if (!input.gender) {
-      errors.gender = "Este campo es obligatorio";
-    } 
-  
-    if (!input.description) errors.description = "Este campo es obligatorio";
-  
-    if (!input.state) {
-      errors.state = "Debe seleccionar una opción";
-    }   
-    return errors;
+  let errors = {};
+
+  if (!input.name) {
+    errors.name = "Se requiere un nombre";
+  } else if (!input.name.match(/^[A-Za-z\s]+$/)) {
+    errors.name = "Sólo letras por favor";
   }
-   
-  
+
+  if (!input.age) errors.age = "La edad es obligatoria";
+
+  if (!input.gender) {
+    errors.gender = "Este campo es obligatorio";
+  }
+
+  if (!input.description) errors.description = "Este campo es obligatorio";
+
+  if (!input.state) {
+    errors.state = "Debe seleccionar una opción";
+  }   
+  return errors;
+}
 
 export default function PostCats() {
   const dispatch = useDispatch();
@@ -41,36 +39,41 @@ export default function PostCats() {
     age: "",
     gender: "",
     state: "",
-    image: "",
+    image: [],
     description: "",
     arrived: "",
   });
 
   function handleChange(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    if (name === "image") {
+      setInput(prevState => ({
+        ...prevState,
+        [name]: [...prevState[name], value],
+      }));
+    } else {
+      setInput({
+        ...input,
+        [name]: value,
+      });
+    }
   }
 
   function handleSelect(e) {
     const { name, value } = e.target;
     let newValue = value;
-  
+
     if (name === "state") {
-      // Cambia el tipo de datos de `newValue` a una cadena
       newValue = String(value);
     }
-  
+
     setInput((prevState) => ({
       ...prevState,
       [name]: newValue,
     }));
   }
-  
-  
-  
-function handleSubmit(e) {
+
+  function handleSubmit(e) {
     e.preventDefault();
     const errors = validate(input);
     if (Object.keys(errors).length > 0) {
@@ -88,7 +91,7 @@ function handleSubmit(e) {
         apadrinado: null,
         albergue: null,
       },
-      image: "",
+      image: [],
       description: "",
       arrived: "",
     });
@@ -99,9 +102,6 @@ function handleSubmit(e) {
     });
     setErrors({});
   }
-
-  
-
 
   useEffect(() => {
     dispatch(getCats());
