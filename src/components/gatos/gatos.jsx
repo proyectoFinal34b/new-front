@@ -5,6 +5,7 @@ import Footer from "../home/footer/footer";
 import { Link } from "react-router-dom";
 import GatosFiltrados from "../filtros/filtros"
 import Card from "../card/Card"
+import PostCats from "../form/FormularioCreacion";
 
 
 
@@ -13,6 +14,7 @@ export default function GatosRender() {
     return (
         <div>
         <Navbar/>
+        <PostCats/>
         {/* <SearchBar/> */}
         <GatosFiltrados />
         <Card />
