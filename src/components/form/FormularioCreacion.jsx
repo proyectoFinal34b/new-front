@@ -11,13 +11,18 @@ function validate(input) {
     errors.name = "Sólo letras por favor";
   }
 
-  if (!input.age) errors.age = "La edad es obligatoria";
+  if (!input.age) errors.age = "Debe seleccionar una opción";
 
   if (!input.gender) {
     errors.gender = "Este campo es obligatorio";
   }
 
-  if (!input.description) errors.description = "Este campo es obligatorio";
+  if (!input.description) {
+    errors.description = "Este campo es obligatorio";
+  }
+  if (!input.image) {
+    errors.image = "Se requiere una imagen"
+  }
 
   if (!input.state) {
     errors.state = "Debe seleccionar una opción";
@@ -108,7 +113,7 @@ export default function PostCats() {
   }, [dispatch]);
 
   return (
-    <div className="sticky top-3 flex justify-start items-center p-1">
+    <div>
     <div className="p-4 dark:bg-gray-900 rounded-md w-1/5">
       <form onSubmit={(e) => handleSubmit(e)}>
         <div>
@@ -168,6 +173,7 @@ export default function PostCats() {
         onChange={(e) => {handleChange(e)}}
         className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
         />
+        {errors.image && (<p >{errors.image}</p>)}
         </div>
         <div>
         <label className="mb-2 font-bold text-gray-100">Llegada:</label>
