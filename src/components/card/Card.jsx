@@ -39,8 +39,8 @@ export default function Card() {
   }): <span>{cats}</span>}
     <div>
         <Paginado
-         catsPerPage={catsPerPage}
-          allcats={cats?.length}
+         elementsPerPage={catsPerPage}
+          allelements={cats?.length}
           paginado={setCurrentPage}
           currentPage={currentPage}
         />
