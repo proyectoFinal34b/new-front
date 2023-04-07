@@ -75,7 +75,7 @@ export default function Login() {
             <p>
             <a
               className="inline-block align-baseline font-bold text-sm text-gray-900 hover:text-teal-500"
-              href="#"
+              href="/login/registro"
             >
               Registrarte
             </a>
