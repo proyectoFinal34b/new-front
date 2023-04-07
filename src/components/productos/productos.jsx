@@ -7,6 +7,7 @@ import { getProduct } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Productcard from "./productcard/productcard";
 import Paginado from "../card/paginado/paginado";
+import PostProduct from "./form/formulario";
 
 
 
@@ -33,6 +34,7 @@ export default function ProductosRender() {
             />)
             :
             <img src = {cargando} alt="" />}
+            <PostProduct/>
             <Paginado
                 elementsPerPage={productsPerPage}
                 allelements={products?.length}
