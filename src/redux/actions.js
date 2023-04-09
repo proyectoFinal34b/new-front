@@ -5,6 +5,7 @@ export const SEARCH_CATS = 'SEARCH_CATS';
 export const FILTER_CATS = 'FILTER_CATS'
 export const POST_CATS = 'POST_CATS'
 export const GET_PRODUCT='GET_PRODUCT'
+export const GET_USERS='GET_USERS'
 
 export const getCats = () => async (dispatch) => {
     return await axios.get(`https://proyectofinal-gg57.onrender.com/cat`)
@@ -33,7 +34,22 @@ export const postCats = (payload) => async (dispatch) => {
   export const getProduct = () => async (dispatch) => {
     return await axios.get(`https://proyectofinal-gg57.onrender.com/product`)
     .then(r => dispatch({ type : GET_PRODUCT, payload : r.data}))
-    .catch(e => console.error(e))};
+
+    .catch(e => console.error(e))}
+
+    export function getUsers(){
+      return async function(dispatch){
+          try{
+              let response = await axios.get(`https://proyectofinal-gg57.onrender.com/user`);
+              return dispatch({
+              type: GET_USERS,
+              payload: response.data,
+          });
+          } catch (error) {
+              alert(error) 
+          }
+      }
+  };
 
     export const postProduct=(body)=>async (dispatch)=>{
 
@@ -45,3 +61,4 @@ export const postCats = (payload) => async (dispatch) => {
     }
     };
     
+
