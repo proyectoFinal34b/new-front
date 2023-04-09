@@ -44,25 +44,51 @@ export default function PostCats() {
     age: "",
     gender: "",
     state: "",
-    image: [],
+    image: { URL: "", file: "" },
     description: "",
     arrived: "",
   });
 
   function handleChange(e) {
     const { name, value } = e.target;
-    if (name === "image") {
-      setInput(prevState => ({
-        ...prevState,
-        [name]: [...prevState[name], value],
-      }));
-    } else {
       setInput({
         ...input,
         [name]: value,
       });
-    }
+      setErrors(validate({ ...input, [name]: value }));
+      console.log(errors);
   }
+  
+  function handleImageChange(e){
+    const file= e.target.files[0];
+    setInput({
+        ...input,
+        image: {URL: URL.createObjectURL(file), file}
+    })
+    setErrors(validate({
+        ...input,
+        image: {URL: URL.createObjectURL(file), file}
+    }))
+  }
+
+  const uploadImage = async (file) => {
+    let formData = new FormData();
+    formData?.append("file", file);
+    formData?.append("upload_preset", "bastet_preset");
+    formData.append("api_key", 543988556363587);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open(
+      "POST",
+      "https://api.cloudinary.com/v1_1/ddjt3rahz/image/upload",
+      false
+    );
+
+    xhr.send(formData);
+    const imageResponse = JSON.parse(xhr.responseText);
+
+    return imageResponse.secure_url;
+  };
 
   function handleSelect(e) {
     const { name, value } = e.target;
@@ -78,14 +104,15 @@ export default function PostCats() {
     }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const errors = validate(input);
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
       return;
     }
-    dispatch(postCats(input));
+    const newImage= await uploadImage(input.image.file);
+    dispatch(postCats({...input, image:[newImage]}));
     alert("Gato Creado");
     setInput({
       name: "",
@@ -96,7 +123,7 @@ export default function PostCats() {
         apadrinado: null,
         albergue: null,
       },
-      image: [],
+      image: { URL: "", file: "" },
       description: "",
       arrived: "",
     });
@@ -114,6 +141,7 @@ export default function PostCats() {
 
   return (
     <div>
+      
     <div className="p-4 dark:bg-gray-900 rounded-md w-1/5">
       <form onSubmit={(e) => handleSubmit(e)}>
         <div>
@@ -145,6 +173,7 @@ export default function PostCats() {
         <label className="mb-2 font-bold text-gray-100">Edad:</label>
         <input 
         type="number" 
+        min="0"
         placeholder="1,2,3..."
         value={input.age} 
         name="age"  
@@ -166,12 +195,14 @@ export default function PostCats() {
         </div>
         <div>
         <label className="mb-2 font-bold text-gray-100">Imagen:</label>
+        {input.image.URL && <img  className="border-2 border-gray-900 bg-white h-50   focus:outline-none" src={input.image.URL} alt="imagen" />}
+       
         <input 
-        type="text"
-        value={input.image}  
+
+        type="file"
         name="image"  
-        onChange={(e) => {handleChange(e)}}
-        className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        onChange={(e) => {handleImageChange(e)}}
+        className=" text-white   pr-16 rounded-lg text-sm focus:outline-none"
         />
         {errors.image && (<p >{errors.image}</p>)}
         </div>
