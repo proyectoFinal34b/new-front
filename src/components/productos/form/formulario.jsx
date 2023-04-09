@@ -145,7 +145,8 @@ export default function PostProduct() {
         </div>
         <div className="flex flex-col justify-center ">
           <label className="mb-2 font-bold text-gray-100">Imagen del Producto</label>
-          <img className="border-2 border-gray-900 bg-white h-50   focus:outline-none" src={input.image.URL} alt='productImage'/>
+          {input.image.URL&&<img className="border-2 border-gray-900 bg-white h-50   focus:outline-none" src={input.image.URL} alt='productImage'/>}
+          
           <input className="border-2 border-gray-900 text-white  shadow-lg shadow-white-500/50 px-5 pr-16 rounded-lg text-sm focus:outline-none"
             type="file"
             accept="image/*"
