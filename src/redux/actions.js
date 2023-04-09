@@ -28,24 +28,10 @@ export const postCats = (payload) => async (dispatch) => {
       const json = await axios.post('https://proyectofinal-gg57.onrender.com/cat', payload);
       return json;
     } catch (error) {
-      console.log(error);
+      throw Error(error);
     }
   };
   export const getProduct = () => async (dispatch) => {
     return await axios.get(`https://proyectofinal-gg57.onrender.com/product`)
     .then(r => dispatch({ type : GET_PRODUCT, payload : r.data}))
     .catch(e => console.error(e))}
-
-    export function getUsers(){
-      return async function(dispatch){
-          try{
-              let response = await axios.get(`https://proyectofinal-gg57.onrender.com/user`);
-              return dispatch({
-              type: GET_USERS,
-              payload: response.data,
-          });
-          } catch (error) {
-              alert(error) 
-          }
-      }
-  };
