@@ -34,4 +34,35 @@ export const postCats = (payload) => async (dispatch) => {
   export const getProduct = () => async (dispatch) => {
     return await axios.get(`https://proyectofinal-gg57.onrender.com/product`)
     .then(r => dispatch({ type : GET_PRODUCT, payload : r.data}))
+<<<<<<< HEAD
     .catch(e => console.error(e))}
+=======
+
+    .catch(e => console.error(e))}
+
+    export function getUsers(){
+      return async function(dispatch){
+          try{
+              let response = await axios.get(`https://proyectofinal-gg57.onrender.com/user`);
+              return dispatch({
+              type: GET_USERS,
+              payload: response.data,
+          });
+          } catch (error) {
+              alert(error) 
+          }
+      }
+  };
+
+    export const postProduct=(body)=>async (dispatch)=>{
+
+     try {
+      const json = await axios.post('https://proyectofinal-gg57.onrender.com/product', body);
+      return json;
+    } catch (error) {
+      throw Error(error);
+    }
+    };
+    
+
+>>>>>>> dev
