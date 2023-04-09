@@ -28,7 +28,7 @@ function App() {
       <Route path ="/gatos" element={<GatosRender/>}></Route>
       <Route path ="/detail" element={<DetailCat/>}></Route>
       <Route path ="/productos" element={<ProductosRender/>}></Route>
-      <Route path ="/about-me" element={<SobreNosotros/>}></Route>
+      <Route path ="/about-us" element={<SobreNosotros/>}></Route>
       <Route path ="/usuario" element={<UsuariosRender/>}></Route>
       {/* <Route path="/post" element={<CreateForm/>} /> */}
      </Routes>
