@@ -5,12 +5,14 @@ import {
   POST_CATS,
   GET_PRODUCT,
   FILTER_PRODUCT,
+  GET_USERS
 } from "./actions";
 
 const initialState = {
   cats: [],
   allCats: [],
   allProducts: [],
+  allUsers: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -38,6 +40,11 @@ const reducer = (state = initialState, action) => {
           ...state,
           allProducts: action.payload,
         };
+      case GET_USERS:
+        return {
+          ...state,
+          allUsers: action.payload,
+        }
     default:
       return { ...state };
   }

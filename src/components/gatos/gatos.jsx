@@ -14,11 +14,12 @@ export default function GatosRender() {
     return (
         <div>
         <Navbar/>
-        {/* <PostCats/> */}
+        {/* <div className="flex flex-row"> */}
         {/* <SearchBar/> */}
-        {/* <PostCats /> */}
+        <PostCats />
         <GatosFiltrados />
         <Card />
+        {/* </div> */}
         <Footer/>
         </div>
     )

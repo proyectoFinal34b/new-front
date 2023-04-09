@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { filterProduct, getProduct } from "../../../redux/actions";
-import SearchBar from "../../searchbar/Searchbar";
 
 
 
 
-export default function GatosFiltrados() {
+export default function ProductFiltrados() {
     const dispatch = useDispatch();
     const [filtroPrice, setFiltroPrice] = useState("");
     const [filtroAlfabetico, setFiltroAlfabetico] = useState("");
@@ -95,7 +94,6 @@ export default function GatosFiltrados() {
                 <option value="1">Menor a mayor</option>
                 <option value="2">Mayor a menor</option>
                 </select>
-                <SearchBar/>
                 </div>
             </div>
         </div>

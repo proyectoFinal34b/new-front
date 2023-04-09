@@ -7,6 +7,8 @@ import { getProduct } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Productcard from "./productcard/productcard";
 import Paginado from "../card/paginado/paginado";
+import PostProduct from "./form/formulario";
+import ProductFiltrados from "./filtros tienda/filtrosT";
 
 
 
@@ -24,6 +26,8 @@ export default function ProductosRender() {
     return (
         <div>
             <Navbar/>
+            {/* <ProductFiltrados/> */}
+            {/* <PostProduct/> */}
             {products.length?products
              .slice(indexOfFirstproduct, indexOfLastproduct)
             .map((e)=><Productcard 
