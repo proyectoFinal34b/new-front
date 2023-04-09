@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Productcard from "./productcard/productcard";
 import Paginado from "../card/paginado/paginado";
 import PostProduct from "./form/formulario";
+import ProductFiltrados from "./filtros tienda/filtrosT";
 
 
 
@@ -25,22 +26,28 @@ export default function ProductosRender() {
     return (
         <div>
             <Navbar/>
-            {products.length?products
-             .slice(indexOfFirstproduct, indexOfLastproduct)
+            <div class="sticky top-3 flex justify-between items-center px-3 p-3">
+            <ProductFiltrados/>
+            <PostProduct/>
+            </div>
+            <div class="flex flex-col my-10 justify-center items-center">
+            {products?.length?products
+            .slice(indexOfFirstproduct, indexOfLastproduct)
             .map((e)=><Productcard 
             name={e.name}
             image={e.image}
             price={e.price}
+            ratings={e.ratings}
             />)
             :
-            <img src = {cargando} alt="" />}
-            <PostProduct/>
+            <img src={cargando} alt="" />}
+        </div>
             <Paginado
                 elementsPerPage={productsPerPage}
                 allelements={products?.length}
                 paginado={setCurrentPage}
                 currentPage={currentPage}/>
-            {/* <Footer/> */}
+            <Footer/>
         </div>
     )
 }

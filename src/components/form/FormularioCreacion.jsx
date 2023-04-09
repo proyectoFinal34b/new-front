@@ -140,9 +140,9 @@ export default function PostCats() {
   }, [dispatch]);
 
   return (
-    <div>
-      
+    // <div className="sticky top-3 flex justify-end items-center p-1">
     <div className="p-4 dark:bg-gray-900 rounded-md w-1/5">
+      <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Formulario de creacion</h2>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div>
         <label className="mb-2 font-bold text-gray-100">Nombre:</label>
@@ -234,6 +234,6 @@ export default function PostCats() {
         <button type="submit" className="ml-2 px-4 py-2 font-medium text-gray bg-teal-400 rounded-md hover:bg-teal-500 focus:outline-none focus:bg-blue-600">Enviar</button>
         </form>
         </div>
-        </div>
+        // </div>
         )
       }
