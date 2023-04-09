@@ -143,7 +143,7 @@ export default function GatosFiltrados() {
   }, [filtroStatus, filtroGender, filtroAge]);
 
   return (
-    <div className="sticky top-3 flex justify-start items-center p-1">
+    // <div className="sticky top-3 flex justify-start items-center p-1">
     <div className="p-4 dark:bg-gray-900 rounded-md w-1/5">
       <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Gatos</h2>
       <div className="flex flex-col mb-3">
@@ -197,6 +197,6 @@ export default function GatosFiltrados() {
         <SearchBar/>
       </div>
     </div>
-    </div>
+    // </div>
   );
 }

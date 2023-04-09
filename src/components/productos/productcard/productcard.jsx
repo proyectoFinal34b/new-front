@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Productcard(props) {
   return (
-    <div class="h-screnn flex items-center justify_center gap-10">
+    <div class="flex flex flex-col my-10">
 
     <div class="bg-white text-gray-700 w-72 min-h-10rem shadow-lg rounded-md overflow-hidden">
       {/* imagen */}
