@@ -11,27 +11,33 @@ export default function ProductFiltrados() {
     const [filtroAlfabetico, setFiltroAlfabetico] = useState("");
     const [filtroCategory, setFiltroCategory] = useState("");
 
-    const productos = useSelector((state) => state.product);
+    const productos = useSelector((state) => state.allProducts);
 
     useEffect(() => {
         dispatch(getProduct());
       }, [dispatch]);
 
     function aplicarFiltrosProductos(price, alfabetico, category){
-        let tempProductos = [...productos];
+        let tempProductos = productos;
+        console.log(productos,tempProductos)
      if (category) {
     tempProductos = tempProductos.filter(producto => producto.category === category);
     }
-     if (alfabetico === "ascendente") {
+    if (alfabetico){
+        if (alfabetico === "ascendente") {
     tempProductos.sort((a, b) => a.name.localeCompare(b.name));
     } else if (alfabetico === "descendente") {
     tempProductos.sort((a, b) => b.name.localeCompare(a.name));
      }
-    if (price === "ascendente") {
+    }
+     if (price){
+        if (price === "ascendente") {
     tempProductos.sort((a, b) => a.price - b.price);
     } else if (price === "descendente") {
     tempProductos.sort((a, b) => b.price - a.price);
     }
+     }
+    
 }
 
     const productosFiltrados = aplicarFiltrosProductos(filtroCategory, filtroAlfabetico, filtroPrice);

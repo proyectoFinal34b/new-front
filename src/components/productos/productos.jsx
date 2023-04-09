@@ -26,9 +26,10 @@ export default function ProductosRender() {
     return (
         <div>
             <Navbar/>
-            {/* <ProductFiltrados/> */}
-            {/* <PostProduct/> */}
-            {products.length?products
+            <ProductFiltrados/>
+            <PostProduct/>
+            {console.log(products.length)}
+            {products?.length?products
              .slice(indexOfFirstproduct, indexOfLastproduct)
             .map((e)=><Productcard 
             name={e.name}
