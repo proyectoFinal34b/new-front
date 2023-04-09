@@ -14,9 +14,9 @@ export default function GatosRender() {
     return (
         <div>
         <Navbar/>
-        <PostCats/>
+        {/* <PostCats/> */}
         {/* <SearchBar/> */}
-        <PostCats />
+        {/* <PostCats /> */}
         <GatosFiltrados />
         <Card />
         <Footer/>

@@ -30,6 +30,7 @@ export default function ProductosRender() {
             name={e.name}
             image={e.image}
             price={e.price}
+            ratings={e.ratings}
             />)
             :
             <img src = {cargando} alt="" />}
