@@ -26,11 +26,13 @@ export default function ProductosRender() {
     return (
         <div>
             <Navbar/>
+            <div class="sticky top-3 flex justify-between items-center px-3 p-3">
             <ProductFiltrados/>
             <PostProduct/>
-            {console.log(products.length)}
+            </div>
+            <div class="flex flex-col my-10 justify-center items-center">
             {products?.length?products
-             .slice(indexOfFirstproduct, indexOfLastproduct)
+            .slice(indexOfFirstproduct, indexOfLastproduct)
             .map((e)=><Productcard 
             name={e.name}
             image={e.image}
@@ -38,13 +40,14 @@ export default function ProductosRender() {
             ratings={e.ratings}
             />)
             :
-            <img src = {cargando} alt="" />}
+            <img src={cargando} alt="" />}
+        </div>
             <Paginado
                 elementsPerPage={productsPerPage}
                 allelements={products?.length}
                 paginado={setCurrentPage}
                 currentPage={currentPage}/>
-            {/* <Footer/> */}
+            <Footer/>
         </div>
     )
 }

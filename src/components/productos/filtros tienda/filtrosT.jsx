@@ -49,7 +49,7 @@ export default function ProductFiltrados() {
     
     
     return(
-        <div className="sticky top-3 flex justify-start items-center p-1">
+        // <div className="sticky top-3 flex justify-start items-center p-1">
             <div className="p-4 dark:bg-gray-900 rounded-md w-1/5">
             <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Productos</h2>
             {/* category */}
@@ -102,6 +102,6 @@ export default function ProductFiltrados() {
                 </select>
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }
