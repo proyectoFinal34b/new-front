@@ -8,7 +8,7 @@ import GatosRender from './components/gatos/gatos';
 import ProductosRender from './components/productos/productos';
 import SobreNosotros from './components/sobre-nosotros/sobre-nosotros';
 import UsuariosRender from './components/usuarios/usuarios';
-import DetailCat from './components/card/detial';
+import DetailCat from './components/card/detail';
 import CreateForm from './components/form/FormularioCreacion';
 import Registro from './components/login/Registro';
 import { useDispatch } from 'react-redux'

@@ -140,7 +140,7 @@ export default function PostCats() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="sticky top-3 flex justify-end items-center p-1">
       
     <div className="p-4 dark:bg-gray-900 rounded-md w-1/5">
       <form onSubmit={(e) => handleSubmit(e)}>
