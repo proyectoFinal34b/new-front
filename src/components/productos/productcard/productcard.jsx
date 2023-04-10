@@ -1,4 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addToCard } from "../../../redux/actions"; 
+
+
+const dispatch = useDispatch();
+
+function handleAddToCart(product) {
+  dispatch(addToCard(product));
+}
 
 export default function Productcard(props) {
   return (
@@ -27,7 +36,7 @@ export default function Productcard(props) {
       <span class="flex items-center mt-1">{props.ratings}</span>
       {/* button */}
       <div class="mt-5 flex gap-2">
-        <button class="bg-teal-500/80 hover:bg-teal-500/90 px-6 py-2 rounded-md text-white font-medium tracking-winder transition">Agregar al carro</button>
+        <button class="bg-teal-500/80 hover:bg-teal-500/90 px-6 py-2 rounded-md text-white font-medium tracking-winder transition" onClick={() => handleAddToCart(props)}>Agregar al carro</button>
         <button class="flex-grow flex justify-center items-center bg-gray-300/60 hover:bg-gray-300/80 transition rounded-md"><img class="opacity-50 w-6" src="https://cdn-icons-png.flaticon.com/512/109/109791.png" alt="" /></button>
       </div>
       </div>

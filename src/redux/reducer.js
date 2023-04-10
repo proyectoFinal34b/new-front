@@ -5,7 +5,8 @@ import {
   POST_CATS,
   GET_PRODUCT,
   FILTER_PRODUCT,
-  GET_USERS
+  GET_USERS,
+  ADD_TO_CARD
 } from "./actions";
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   allCats: [],
   allProducts: [],
   allUsers: [],
+  card: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -44,7 +46,12 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           allUsers: action.payload,
-        }
+        };
+      case ADD_TO_CARD:
+        return {
+        ...state,
+        card: [...state.card, action.payload]
+      };
     default:
       return { ...state };
   }
