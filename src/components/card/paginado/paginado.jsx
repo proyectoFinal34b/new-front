@@ -1,14 +1,14 @@
 import React from "react";
 
 export default function Paginado({
-  catsPerPage,
-  allcats,
+  elementsPerPage,
+  allelements,
   paginado,
   currentPage,
 }) {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(allcats / catsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(allelements / elementsPerPage); i++) {
     //cantidad de elementos totales, dividido limite de elementos por pagina
     pageNumbers.push(i);
   }

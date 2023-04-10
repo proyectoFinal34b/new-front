@@ -1,19 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getUsers } from "../../redux/actions"
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { compareSync } from "bcryptjs";
+
 
 export default function Login() {
+  const dispatch = useDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const allUsers = useSelector(state => state.allUsers);
+  
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+
 
   function handleLogin(e) {
     e.preventDefault();
-    if (username === "usuario" && password === "contraseña") {
+    const user = allUsers.find(user => user.email === email);
+    if (!user) {
+      alert("Email o contraseña incorrectos");
+      return;
+    }
+    console.log("Usuario encontrado:", user);
+    const passwordMatch = compareSync(password, user.password);
+    console.log(passwordMatch)
+    if (passwordMatch) {
       setIsLoggedIn(true);
+      //axios.get('https://proyectofinal-gg57.onrender.com/user/validate', { email: user.email, password: user.password });
     } else {
-      alert("Nombre de usuario o contraseña incorrectos");
+      alert("Email o contraseña incorrectos");
     }
   }
+  
 
   function handleLogout() {
     setIsLoggedIn(false);
@@ -30,17 +53,17 @@ export default function Login() {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="username"
+                for="email"
               >
-                Usuario
+                Email
               </label>
 
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 placeholder="Nombre de usuario"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="mb-6">
@@ -75,7 +98,7 @@ export default function Login() {
             <p>
             <a
               className="inline-block align-baseline font-bold text-sm text-gray-900 hover:text-teal-500"
-              href="#"
+              href="/login/registro"
             >
               Registrarte
             </a>
@@ -83,7 +106,7 @@ export default function Login() {
           </form>
         ) : (
           <div>
-            <h1>Bienvenido, {username}!</h1>
+            <h1>Bienvenido, {email}!</h1>
             <button onClick={handleLogout}>Cerrar sesión</button>
           </div>
         )}

@@ -14,9 +14,10 @@ export default function GatosRender() {
     return (
         <div>
         <Navbar/>
-        {/* <SearchBar/> */}
-        <PostCats />
-        <GatosFiltrados />
+        <div class="sticky top-3 flex justify-between items-center px-3 p-3">
+            <GatosFiltrados />
+            <PostCats />
+        </div>
         <Card />
         <Footer/>
         </div>

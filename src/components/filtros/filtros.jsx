@@ -112,19 +112,23 @@ export default function GatosFiltrados() {
     dispatch(getCats());
   }, [dispatch]);
 
-  function aplicarFiltros(status, gender, age) {
+  function aplicarFiltros(state, gender, age) {
     let tempGatos = gatos;
     
 
-    if (status) {
-      tempGatos = tempGatos.filter((gato) => gato.status === status);
+    if (state) {
+      tempGatos = tempGatos.filter((gato) => gato.state === state);
     }
     if (gender) {
       tempGatos = tempGatos.filter((gato) => gato.gender.toLowerCase() === gender);
       
     }
     if (age) {
-      tempGatos = tempGatos.filter((gato) => gato.age === parseInt(age));
+      if (age==="5"){
+        tempGatos = tempGatos.filter((gato) => gato.age >= parseInt(age));
+      }
+      else{
+      tempGatos = tempGatos.filter((gato) => gato.age === parseInt(age));}
     }
     console.log(tempGatos)
     return tempGatos;
@@ -139,7 +143,7 @@ export default function GatosFiltrados() {
   }, [filtroStatus, filtroGender, filtroAge]);
 
   return (
-    <div className="sticky top-3 flex justify-start items-center p-1">
+    // <div className="sticky top-3 flex justify-start items-center p-1">
     <div className="p-4 dark:bg-gray-900 rounded-md w-1/5">
       <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Gatos</h2>
       <div className="flex flex-col mb-3">
@@ -147,7 +151,7 @@ export default function GatosFiltrados() {
           Estado:
         </label>
         <select
-          id="status"
+          id="state"
           onChange={(e) => setFiltroStatus(e.target.value)}
           value={filtroStatus}
           className="rounded-md border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500 h-10 px-4"
@@ -188,11 +192,11 @@ export default function GatosFiltrados() {
           <option value="2">2 años</option>
           <option value="3">3 años</option>
           <option value="4">4 años</option>
-          <option value="5">5 años</option>
+          <option value="5">5 años o mas</option>
         </select>
         <SearchBar/>
       </div>
     </div>
-    </div>
+    // </div>
   );
 }
