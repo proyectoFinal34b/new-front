@@ -35,14 +35,8 @@ export const postCats = (payload) => async (dispatch) => {
 export const getProduct = () => async (dispatch) => {
     return await axios.get(`https://proyectofinal-gg57.onrender.com/product`)
     .then(r => dispatch({ type : GET_PRODUCT, payload : r.data}))
-<<<<<<< HEAD
-<<<<<<< HEAD
     .catch(e => console.error(e))}
-=======
 
-=======
->>>>>>> dev
-    .catch(e => console.error(e))}
 
     export const filterProduct = (filtered) => {
       return {type: FILTER_PRODUCT, payload: filtered}
@@ -71,6 +65,4 @@ export const postProduct=(body)=>async (dispatch)=>{
       throw Error(error);
     }
     };
-    
 
->>>>>>> dev
