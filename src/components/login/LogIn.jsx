@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getUsers } from "../../redux/actions"
+import { getUsers, isLogged } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { compareSync } from "bcryptjs";
@@ -8,7 +8,7 @@ import { compareSync } from "bcryptjs";
 
 export default function Login() {
   const dispatch = useDispatch();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = useSelector(state=>state.logged)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const allUsers = useSelector(state => state.allUsers);
@@ -19,27 +19,21 @@ export default function Login() {
   }, [dispatch]);
 
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
-    const user = allUsers.find(user => user.email === email);
-    if (!user) {
-      alert("Email o contraseña incorrectos");
-      return;
-    }
-    console.log("Usuario encontrado:", user);
-    const passwordMatch = compareSync(password, user.password);
-    console.log(passwordMatch)
-    if (passwordMatch) {
-      setIsLoggedIn(true);
-      //axios.get('https://proyectofinal-gg57.onrender.com/user/validate', { email: user.email, password: user.password });
+    const validation = await axios.post('http://localhost:3001/user/validate', { email: email, password: password });
+    console.log(validation)
+    if (validation.data.logged) {
+      dispatch(isLogged(validation.data.logged))
     } else {
       alert("Email o contraseña incorrectos");
     }
   }
   
+  
 
   function handleLogout() {
-    setIsLoggedIn(false);
+    dispatch(isLogged(false))
   }
 
   return (
