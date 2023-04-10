@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Productcard from "./productcard/productcard";
 import Paginado from "../card/paginado/paginado";
 import PostProduct from "./form/formulario";
+import ProductFiltrados from "./filtros tienda/filtrosT";
+import Renderizados from "./productos renderizados/renderizados";
 
 
 
@@ -15,7 +17,8 @@ import PostProduct from "./form/formulario";
 export default function ProductosRender() {
     const dispatch=useDispatch()
     const products=useSelector((state)=>state.allProducts)
-    useEffect(()=>{dispatch(getProduct())},[])
+    const [prueba, setPrueba]= useState(false)
+    useEffect(()=>{dispatch(getProduct())},[dispatch, prueba])
     const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(8);
   const indexOfLastproduct = currentPage * productsPerPage;
@@ -25,22 +28,31 @@ export default function ProductosRender() {
     return (
         <div>
             <Navbar/>
-            {products.length?products
-             .slice(indexOfFirstproduct, indexOfLastproduct)
+            <div class="sticky top-3 flex justify-between items-center px-3 p-3">
+            <ProductFiltrados setPrueba={setPrueba} prueba={prueba}/>
+            <PostProduct/>
+            </div>
+            {/* <div class="flex flex-col my-10 justify-center items-center">
+             {console.log(prueba,products)}
+             {products?.length?products
+            .slice(indexOfFirstproduct, indexOfLastproduct)
             .map((e)=><Productcard 
             name={e.name}
             image={e.image}
             price={e.price}
+            ratings={e.ratings}
             />)
             :
-            <img src = {cargando} alt="" />}
-            <PostProduct/>
+            <img src={cargando} alt="" />}
+           
+        </div> */}
+        <Renderizados indexOfFirstproduct={indexOfFirstproduct} indexOfLastproduct={indexOfLastproduct} />
             <Paginado
                 elementsPerPage={productsPerPage}
                 allelements={products?.length}
                 paginado={setCurrentPage}
                 currentPage={currentPage}/>
-            {/* <Footer/> */}
+            <Footer/>
         </div>
     )
 }
