@@ -37,6 +37,7 @@ export const getProduct = () => async (dispatch) => {
     .then(r => dispatch({ type : GET_PRODUCT, payload : r.data}))
     .catch(e => console.error(e))}
 
+
 export const filterProduct = (filtered) => {
       return {type: FILTER_PRODUCT, payload: filtered}
   }
@@ -64,5 +65,4 @@ export const postProduct=(body)=>async (dispatch)=>{
       throw Error(error);
     }
     };
-    
 
