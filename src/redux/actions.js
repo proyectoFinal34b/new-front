@@ -38,7 +38,7 @@ export const getProduct = () => async (dispatch) => {
     .catch(e => console.error(e))}
 
 
-    export const filterProduct = (filtered) => {
+export const filterProduct = (filtered) => {
       return {type: FILTER_PRODUCT, payload: filtered}
   }
 
