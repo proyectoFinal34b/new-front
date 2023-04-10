@@ -25,7 +25,6 @@ export default function ProductFiltrados(props) {
     // }
     if (alfabetico){
         if (alfabetico === "ascendente") {
-    console.log("hola")
            tempProductos= tempProductos.sort((a, b) => a.name.localeCompare(b.name));
 
     } else if (alfabetico === "descendente") {

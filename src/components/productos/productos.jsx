@@ -9,6 +9,7 @@ import Productcard from "./productcard/productcard";
 import Paginado from "../card/paginado/paginado";
 import PostProduct from "./form/formulario";
 import ProductFiltrados from "./filtros tienda/filtrosT";
+import Renderizados from "./productos renderizados/renderizados";
 
 
 
@@ -31,7 +32,7 @@ export default function ProductosRender() {
             <ProductFiltrados setPrueba={setPrueba} prueba={prueba}/>
             <PostProduct/>
             </div>
-            <div class="flex flex-col my-10 justify-center items-center">
+            {/* <div class="flex flex-col my-10 justify-center items-center">
              {console.log(prueba,products)}
              {products?.length?products
             .slice(indexOfFirstproduct, indexOfLastproduct)
@@ -44,7 +45,8 @@ export default function ProductosRender() {
             :
             <img src={cargando} alt="" />}
            
-        </div>
+        </div> */}
+        <Renderizados indexOfFirstproduct={indexOfFirstproduct} indexOfLastproduct={indexOfLastproduct} />
             <Paginado
                 elementsPerPage={productsPerPage}
                 allelements={products?.length}
