@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getUsers } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios"
+import axios from "axios";
+import { compareSync } from "bcryptjs";
+
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -19,17 +21,22 @@ export default function Login() {
 
   function handleLogin(e) {
     e.preventDefault();
-    const user = allUsers.find(user => user.email === email );
-    console.log("ok", user)
-    const pass = allUsers.find(user => user.password === password);
-    console.log("8", pass)
-    if (user && pass) {
-         axios.get('https://proyectofinal-gg57.onrender.com/user/validate', { email: user.email, password: pass.password });
-        setIsLoggedIn(true);
+    const user = allUsers.find(user => user.email === email);
+    if (!user) {
+      alert("Email o contraseña incorrectos");
+      return;
+    }
+    console.log("Usuario encontrado:", user);
+    const passwordMatch = compareSync(password, user.password);
+    console.log(passwordMatch)
+    if (passwordMatch) {
+      setIsLoggedIn(true);
+      //axios.get('https://proyectofinal-gg57.onrender.com/user/validate', { email: user.email, password: user.password });
     } else {
       alert("Email o contraseña incorrectos");
     }
   }
+  
 
   function handleLogout() {
     setIsLoggedIn(false);

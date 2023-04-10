@@ -26,7 +26,7 @@ useEffect(()=>{
     axios.post("https://proyectofinal-gg57.onrender.com/user", data)
     .then((data) => {
       if(data) {
-        alert(alert("usuario Registrado"))
+        alert("usuario Registrado")
         navigate("/login", {replace:true});
       }else{
 
