@@ -24,7 +24,7 @@ export default function Login() {
     const validation = await axios.post('http://localhost:3001/user/validate', { email: email, password: password });
     console.log(validation)
     if (validation.data.logged) {
-      dispatch(isLogged(validation.data.logged))
+      dispatch(isLogged({logged:validation.data}))
     } else {
       alert("Email o contraseña incorrectos");
     }

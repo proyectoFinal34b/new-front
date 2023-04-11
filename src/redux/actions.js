@@ -8,10 +8,12 @@ export const GET_PRODUCT='GET_PRODUCT'
 export const FILTER_PRODUCT ='FILTER_PRODUCT'
 export const GET_USERS='GET_USERS'
 export const LOGGED = 'LOGGED'
+// export const ADD_TO_CARD= 'ADD_TO_CARD'
 
 export const getCats = () => async (dispatch) => {
     return await axios.get(`http://localhost:3001/cat`)
-    .then(r => dispatch({ type : GET_CATS, payload : r.data}))
+    .then(r => {dispatch({ type : GET_CATS, payload : r.data})
+    console.log(r.data, "action")})
     .catch(e => console.error(e))
 };
 
@@ -68,9 +70,17 @@ export const postProduct=(body)=>async (dispatch)=>{
     };
 
 export const isLogged = (logged)=>{
-    return {
+  return {
       type: LOGGED,
-      payload: logged
+      payload: {logged: logged.logged.logged, data:logged.logged.validatedUser}
     }
 }
+
+    // export const addToCard = (product) => {
+    //   return {
+    //     type: "ADD_TO_CARD",
+    //     payload: product
+    //   };
+    // };
+    
 
