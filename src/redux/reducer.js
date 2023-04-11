@@ -16,7 +16,7 @@ const initialState = {
   allCats: [],
   allProducts: [],
   allUsers: [],
-  logged: false
+  logged: false,
   card: [],
 };
 
