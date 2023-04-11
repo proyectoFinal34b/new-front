@@ -7,6 +7,7 @@ export const POST_CATS = 'POST_CATS'
 export const GET_PRODUCT='GET_PRODUCT'
 export const FILTER_PRODUCT ='FILTER_PRODUCT'
 export const GET_USERS='GET_USERS'
+export const LOGGED = 'LOGGED'
 
 export const getCats = () => async (dispatch) => {
     return await axios.get(`https://proyectofinal-gg57.onrender.com/cat`)
@@ -65,4 +66,12 @@ export const postProduct=(body)=>async (dispatch)=>{
       throw Error(error);
     }
     };
+
+    export const isLogged = (logged)=>{
+      return {
+        type: LOGGED,
+        payload: logged
+      }
+  } 
+  
 
