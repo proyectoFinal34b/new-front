@@ -14,7 +14,7 @@ const Portada = () => {
           <div className="md:w-1/2 md:pr-4 relative flex justify-center items-center flex-col">
             <h1 className="text-3xl font-extrabold text-gray-900 sm:text-9xl">BASTET</h1>
             <h2 className="text-3xl font-extrabold text-gray-700 sm:text-5xl">exceso de mimos</h2>
-            <p className="mt-7 text-gray-500 sm:text-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. </p>
+            <p className="mt-7 text-gray-500 sm:text-xl">Bastet es una organización dedicada al cuidado de gatos, que ofrece servicios de apadrinamiento, adopción y albergue temporal para aquellos gatos que necesitan un hogar amoroso. Además, cuentan con una tienda en línea y física que ofrece una amplia variedad de productos para felinos de alta calidad. Su misión es asegurarse de que cada gato tenga la mejor oportunidad de encontrar un hogar amoroso y recibir los cuidados que necesitan. </p>
           </div>
           <div className="md:w-1/2 relative">
             <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-teal-600 opacity-40 z-0 mix-blend-multiply"></div>

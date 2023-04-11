@@ -5,7 +5,7 @@ import { filterProduct, getProduct } from "../../../redux/actions";
 
 
 
-export default function ProductFiltrados() {
+export default function ProductFiltrados(props) {
     const dispatch = useDispatch();
     const [filtroPrice, setFiltroPrice] = useState("");
     const [filtroAlfabetico, setFiltroAlfabetico] = useState("");
@@ -17,17 +17,20 @@ export default function ProductFiltrados() {
         dispatch(getProduct());
       }, [dispatch]);
 
-    function aplicarFiltrosProductos(price, alfabetico, category){
+    function aplicarFiltrosProductos( alfabetico,price ){
         let tempProductos = productos;
-        console.log(productos,tempProductos)
-     if (category) {
-    tempProductos = tempProductos.filter(producto => producto.category === category);
-    }
+        // console.log(productos,tempProductos)
+    //  if (category) {
+    // tempProductos = tempProductos.filter(producto => producto.category === category);
+    // }
     if (alfabetico){
         if (alfabetico === "ascendente") {
-    tempProductos.sort((a, b) => a.name.localeCompare(b.name));
+    console.log("hola")
+           tempProductos= tempProductos.sort((a, b) => a.name.localeCompare(b.name));
+
     } else if (alfabetico === "descendente") {
-    tempProductos.sort((a, b) => b.name.localeCompare(a.name));
+      
+        tempProductos=tempProductos.sort((a, b) => b.name.localeCompare(a.name));
      }
     }
      if (price){
@@ -37,15 +40,17 @@ export default function ProductFiltrados() {
     tempProductos.sort((a, b) => b.price - a.price);
     }
      }
-    
+      
+     console.log(tempProductos)
+    return tempProductos
 }
 
-    const productosFiltrados = aplicarFiltrosProductos(filtroCategory, filtroAlfabetico, filtroPrice);
+    const productosFiltrados = aplicarFiltrosProductos( filtroAlfabetico, filtroPrice);
 
     useEffect(() => {
         dispatch(filterProduct(productosFiltrados));
-        
-      }, [filtroCategory, filtroAlfabetico, filtroPrice]);
+       props.setPrueba(!props.prueba)
+      }, [ filtroAlfabetico, filtroPrice]);
     
     
     return(
@@ -53,7 +58,7 @@ export default function ProductFiltrados() {
             <div className="p-4 dark:bg-gray-900 rounded-md w-1/5">
             <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Productos</h2>
             {/* category */}
-                <div className="flex flex-col mb-3">
+                {/* <div className="flex flex-col mb-3">
                 <label htmlFor="category" className="mb-2 font-bold text-gray-100">
                 Categoria:
                 </label>
@@ -68,7 +73,7 @@ export default function ProductFiltrados() {
                 <option value="adoptado">Limpieza</option>
                 <option value="apadrinado">Comida</option>
                 </select>
-                </div>
+                </div> */}
             {/* orden alfabetico */}
                 <div className="flex flex-col mb-4">
                 <label htmlFor="alfabetico" className="mb-2 font-bold text-gray-100">
@@ -81,8 +86,8 @@ export default function ProductFiltrados() {
                 className="rounded-md border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500 h-10 px-4"
                 >
                 <option value="">Cualquier orden</option>
-                <option value="hembra">A-z</option>
-                <option value="macho">Z-a</option>
+                <option value="ascendente">A-z</option>
+                <option value="descendente">Z-a</option>
                 </select>
                 </div>
             {/* price */}
@@ -97,8 +102,8 @@ export default function ProductFiltrados() {
                 className="rounded-md border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500 h-10 px-4"
                 >
                 <option value="">Cualquier precio</option>
-                <option value="1">Menor a mayor</option>
-                <option value="2">Mayor a menor</option>
+                <option value="ascendente">Menor a mayor</option>
+                <option value="descendente">Mayor a menor</option>
                 </select>
                 </div>
             </div>

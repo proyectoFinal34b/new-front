@@ -16,7 +16,8 @@ import ProductFiltrados from "./filtros tienda/filtrosT";
 export default function ProductosRender() {
     const dispatch=useDispatch()
     const products=useSelector((state)=>state.allProducts)
-    useEffect(()=>{dispatch(getProduct())},[])
+    const [prueba, setPrueba]= useState(false)
+    useEffect(()=>{dispatch(getProduct())},[dispatch, prueba])
     const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(8);
   const indexOfLastproduct = currentPage * productsPerPage;
@@ -27,11 +28,12 @@ export default function ProductosRender() {
         <div>
             <Navbar/>
             <div class="sticky top-3 flex justify-between items-center px-3 p-3">
-            <ProductFiltrados/>
+            <ProductFiltrados setPrueba={setPrueba} prueba={prueba}/>
             <PostProduct/>
             </div>
             <div class="flex flex-col my-10 justify-center items-center">
-            {products?.length?products
+             {console.log(prueba,products)}
+             {products?.length?products
             .slice(indexOfFirstproduct, indexOfLastproduct)
             .map((e)=><Productcard 
             name={e.name}
@@ -41,6 +43,7 @@ export default function ProductosRender() {
             />)
             :
             <img src={cargando} alt="" />}
+           
         </div>
             <Paginado
                 elementsPerPage={productsPerPage}

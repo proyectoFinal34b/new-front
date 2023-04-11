@@ -6,7 +6,7 @@ import {
   GET_PRODUCT,
   FILTER_PRODUCT,
   GET_USERS,
-  ADD_TO_CARD
+  // ADD_TO_CARD
 } from "./actions";
 
 const initialState = {
@@ -47,11 +47,11 @@ const reducer = (state = initialState, action) => {
           ...state,
           allUsers: action.payload,
         };
-      case ADD_TO_CARD:
-        return {
-        ...state,
-        card: [...state.card, action.payload]
-      };
+      // case ADD_TO_CARD:
+      //   return {
+      //   ...state,
+      //   card: [...state.card, action.payload]
+      // };
     default:
       return { ...state };
   }

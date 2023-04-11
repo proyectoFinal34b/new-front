@@ -7,7 +7,7 @@ export const POST_CATS = 'POST_CATS'
 export const GET_PRODUCT='GET_PRODUCT'
 export const FILTER_PRODUCT ='FILTER_PRODUCT'
 export const GET_USERS='GET_USERS'
-export const ADD_TO_CARD='ADD_TO_CARD'
+// export const ADD_TO_CARD= 'ADD_TO_CARD'
 
 export const getCats = () => async (dispatch) => {
     return await axios.get(`https://proyectofinal-gg57.onrender.com/cat`)
@@ -38,7 +38,8 @@ export const getProduct = () => async (dispatch) => {
     .then(r => dispatch({ type : GET_PRODUCT, payload : r.data}))
     .catch(e => console.error(e))}
 
-    export const filterProduct = (filtered) => {
+
+export const filterProduct = (filtered) => {
       return {type: FILTER_PRODUCT, payload: filtered}
   }
 
@@ -67,11 +68,11 @@ export const postProduct=(body)=>async (dispatch)=>{
     };
 
 
-    export const addToCard = (product) => {
-      return {
-        type: "ADD_TO_CARD",
-        payload: product
-      };
-    };
+    // export const addToCard = (product) => {
+    //   return {
+    //     type: "ADD_TO_CARD",
+    //     payload: product
+    //   };
+    // };
     
 
