@@ -19,27 +19,31 @@ active:false
     exclude:["password"]
   });
 useEffect(()=>{
-    reset({name:"", lastName:"", email:"", password:""})
+    reset({name:"", lastName:"", email:"", password:"", phoneNumber:"", adress:""})
   }, [isSubmitSuccessful, reset] )
 
-  const onSubmit = (data, )=>{
-    axios.post("https://proyectofinal-gg57.onrender.com/user", data)
-    .then((data) => {
-      if(data) {
-        alert("usuario Registrado")
-        navigate("/login", {replace:true});
-      }else{
-
-      }
-    })
-      .catch (error => {
-        alert("el email ya existe", error)
+  const onSubmit = (data) => {
+    axios
+      .post("https://proyectofinal-gg57.onrender.com/user", data)
+      .then((data) => {
+        if (data) {
+          alert("Usuario registrado");
+          navigate("/login", { replace: true });
+        } else {
+          alert("Ha ocurrido un error al registrar el usuario");
+        }
       })
+      .catch((error) => {
+        alert("El email ya existe", error);
+      });
+  };
+  
 
-    }
+    
 return(
       <div className="flex items-center justify-center h-screen">
         <div className="w-full sm:max-w-md md:max-w-lg lg:max-w-xl">
+        <h1 className="text-center text-2xl font-bold mb-4">Formulario de Registro de Usuarios</h1>
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -67,6 +71,32 @@ return(
             pattern:/^[a-zA-Z0-9]+(?:.[a-zA-Z0-9]+)@[a-zA-Z0-9]+(?:.[a-zA-Z0-9]+)$/
                   })}></input>
                   {errors.email?.type==="pattern" && <p className="text-red-500">ingrese un email valido</p>}
+        </div>
+        <div>
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+        Dirección:
+      </label>
+      <input
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        type="text"
+        {...register("address", { required: true })}
+      />
+      {errors.address?.type === "required" && (
+        <p className="text-red-500">Se requiere una dirección</p>
+      )}
+      </div>
+      <div>
+      <label className="block text-gray-700 text-sm font-bold mb-2">
+        Teléfono:
+      </label>
+      <input
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        type="number"
+        {...register("phoneNumber", { required: true })}
+      />
+      {errors.phoneNumber?.type === "required" && (
+        <p className="text-red-500">Se requiere un número de teléfono</p>
+      )}
         </div>
   <div>
           <label className="block text-gray-700 text-sm font-bold mb-2">
