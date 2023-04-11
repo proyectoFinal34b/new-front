@@ -1,44 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getUsers } from "../../redux/actions"
+import { getUsers, isLogged } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { compareSync } from "bcryptjs";
-
 
 export default function Login() {
   const dispatch = useDispatch();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const allUsers = useSelector(state => state.allUsers);
-  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
 
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("email");
+    const storedIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    setEmail(storedEmail || "");
+    setIsLoggedIn(storedIsLoggedIn);
+  }, []);
 
-  function handleLogin(e) {
+  useEffect(() => {
+    localStorage.setItem("isLoggedIn", isLoggedIn);
+    localStorage.setItem("email", email);
+  }, [isLoggedIn, email]);
+
+  async function handleLogin(e) {
     e.preventDefault();
-    const user = allUsers.find(user => user.email === email);
-    if (!user) {
-      alert("Email o contraseña incorrectos");
-      return;
-    }
-    console.log("Usuario encontrado:", user);
-    const passwordMatch = compareSync(password, user.password);
-    console.log(passwordMatch)
-    if (passwordMatch) {
+    const validation = await axios.post('https://proyectofinal-gg57.onrender.com/user/validate', { email: email, password: password });
+    console.log(validation)
+    if (validation.data.logged) {
+      dispatch(isLogged(validation.data.logged));
       setIsLoggedIn(true);
-      //axios.get('https://proyectofinal-gg57.onrender.com/user/validate', { email: user.email, password: user.password });
     } else {
       alert("Email o contraseña incorrectos");
     }
   }
-  
 
   function handleLogout() {
+    dispatch(isLogged(false));
+    setEmail("");
     setIsLoggedIn(false);
   }
 
