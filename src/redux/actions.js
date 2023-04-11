@@ -8,6 +8,7 @@ export const GET_PRODUCT='GET_PRODUCT'
 export const FILTER_PRODUCT ='FILTER_PRODUCT'
 export const GET_USERS='GET_USERS'
 export const LOGGED = 'LOGGED'
+
 // export const ADD_TO_CARD= 'ADD_TO_CARD'
 
 
@@ -76,6 +77,7 @@ export const postProduct=(body)=>async (dispatch)=>{
       }
   } 
   
+
     // export const addToCard = (product) => {
     //   return {
     //     type: "ADD_TO_CARD",
