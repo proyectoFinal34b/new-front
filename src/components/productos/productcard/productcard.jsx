@@ -22,7 +22,7 @@ export default function Productcard(props) {
       <span class="text-xl font-bold">{"$" + (props.price-(props.discount?.value/100)*props.price)}</span>
       <div class="flex items-center gap-1 mt-4 justify-evenly ">
        {props.discount.active ?  <div><span class="text-sm line-through opacity-50 ">{"$" + props.price}</span>
-        <span class="bg-green-500 px-1.5 py-0.5 rounded-md text-xs text-white">save 20%</span></div> : ""}
+        <span class="bg-green-500 mx-2 px-1.5 py-0.5 rounded-md text-xs text-white">save {props.discount.value}%</span></div> : ""}
       </div>
       </div>
       {/* rating */}
