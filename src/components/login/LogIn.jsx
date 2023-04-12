@@ -3,37 +3,43 @@ import { Link } from "react-router-dom";
 import { getUsers, isLogged } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { compareSync } from "bcryptjs";
-
 
 export default function Login() {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(state=>state.logged)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const allUsers = useSelector(state => state.allUsers);
-  
+  const isLoggedIn = useSelector(state=>state.logged)
 
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
 
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("email");
+    const storedIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    setEmail(storedEmail || "");
+
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("isLoggedIn", isLoggedIn);
+    localStorage.setItem("email", email);
+  }, [isLoggedIn, email]);
 
   async function handleLogin(e) {
     e.preventDefault();
     const validation = await axios.post('http://localhost:3001/user/validate', { email: email, password: password });
     console.log(validation)
     if (validation.data.logged) {
-      dispatch(isLogged({logged:validation.data}))
+      dispatch(isLogged(validation.data));
     } else {
       alert("Email o contraseña incorrectos");
     }
   }
-  
-  
 
   function handleLogout() {
-    dispatch(isLogged(false))
+    dispatch(isLogged(false));
+    setEmail("");
   }
 
   return (

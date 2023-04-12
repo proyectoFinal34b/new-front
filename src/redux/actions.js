@@ -10,6 +10,7 @@ export const GET_USERS='GET_USERS'
 export const LOGGED = 'LOGGED'
 // export const ADD_TO_CARD= 'ADD_TO_CARD'
 
+
 export const getCats = () => async (dispatch) => {
     return await axios.get(`http://localhost:3001/cat`)
     .then(r => {dispatch({ type : GET_CATS, payload : r.data})
@@ -72,7 +73,7 @@ export const postProduct=(body)=>async (dispatch)=>{
 export const isLogged = (logged)=>{
   return {
       type: LOGGED,
-      payload: {logged: logged.logged.logged, data:logged.logged.validatedUser}
+      payload: {logged: logged.logged, data:logged.validatedUser}
     }
 }
 
@@ -83,4 +84,5 @@ export const isLogged = (logged)=>{
     //   };
     // };
     
+
 
