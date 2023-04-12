@@ -24,8 +24,8 @@ export default function Card() {
   {Array.isArray(cats) ? cats.slice(indexOfFirstcat, indexOfLastcat).map(function(cat) {
     return (
       <div>
-      <div class="bg-white mb-5 w-72 m-auto border-1 border-dashed border-gray-900 shadow-2xl rounded-lg overflow-hidden md:w-64 md:mb-4" key={cat.id}>
-        <img src={cat.image} alt={cat.name} class="object-cover w-60 h-48 m-auto my-4 object-center md:w-52 md:h-40" />
+      <div class="bg-white mb-5 w-72 m-auto border-1 border-dashed border-gray-900 shadow-2xl rounded-lg overflow-hidden md:w-80 md:mb-4" key={cat.id}>
+        <img src={cat.image} alt={cat.name} class="object-cover w-60 h-48 m-auto my-4 object-center md:w-64 md:h-44" />
         <div class="p-4">
           <p class="mb-1 text-gray-900 font-semibold">{cat.name}</p>
 
