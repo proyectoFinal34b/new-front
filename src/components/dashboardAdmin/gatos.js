@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { sortTable } from "./logic/ordenamientoTablas";
 
 export default function Gatos({ cats }) {
   const [filters, setFilters] = useState({
@@ -8,46 +9,19 @@ export default function Gatos({ cats }) {
 
   const handleColumnClick = (columnName) => {
     if (columnName === filters.column) {
-  setFilters({
+      setFilters({
         ...filters,
         direction: filters.direction === "asc" ? "desc" : "asc",
       });
     } else {
-  setFilters({
+      setFilters({
         column: columnName,
         direction: "asc",
       });
     }
-    console.log(filters)
   };
-  
-  const filteredCats = [...cats]?.sort((a, b) => {
-    const columnA = a[filters.column];
-    const columnB = b[filters.column];
-    if (filters.direction === "asc") {
-      if (typeof columnA === "number" && typeof columnB === "number") {
-        return columnA - columnB;
-      } else if (typeof columnA === "string" && typeof columnB === "string") {
-        return columnA.localeCompare(columnB);
-      } else if (typeof columnA === "boolean" && typeof columnB === "boolean") {
-        return columnA === columnB ? 0 : columnA ? -1 : 1;
-      } else {
-        return 0;
-      }
-    } else {
-      if (typeof columnA === "number" && typeof columnB === "number") {
-        return columnB - columnA;
-      } else if (typeof columnA === "string" && typeof columnB === "string") {
-        return columnB.localeCompare(columnA);
-      } else if (typeof columnA === "boolean" && typeof columnB === "boolean") {
-        return columnA === columnB ? 0 : columnA ? 1 : -1;
-      } else {
-        return 0;
-      }
-    }
-  });
-  
-  
+
+  const filteredCats = sortTable(filters.column, filters.direction, cats);
 
   return (
     <>
@@ -75,10 +49,14 @@ export default function Gatos({ cats }) {
                 </button>
               </th>
               <th>
-                <button onClick={() => handleColumnClick("state")}>Estado</button>
+                <button onClick={() => handleColumnClick("state")}>
+                  Estado
+                </button>
               </th>
               <th>
-                <button onClick={() => handleColumnClick("status")}>Status</button>
+                <button onClick={() => handleColumnClick("status")}>
+                  Status
+                </button>
               </th>
               <th>
                 <button onClick={() => handleColumnClick("id")}>ID</button>
@@ -95,7 +73,7 @@ export default function Gatos({ cats }) {
                   <td>{cat.age}</td>
                   <td>{cat.gender}</td>
                   <td>{cat.state}</td>
-                  <td>{cat.status===true ? "activo" : "inactivo"}</td>
+                  <td>{cat.status === true ? "activo" : "inactivo"}</td>
                   <td>{cat.id}</td>
                   <td>
                     <button>Edit button</button>

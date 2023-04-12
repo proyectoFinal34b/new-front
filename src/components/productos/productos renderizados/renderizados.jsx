@@ -12,7 +12,7 @@ export default function Renderizados(props) {
         dispatch(getProduct())
     },[dispatch])
   return (
-    <div class="flex flex-col my-10 justify-center items-center">
+    <div class="">
              {/* {console.log(prueba,products)} */}
              {products?.length?products
             .slice(props.indexOfFirstproduct, props.indexOfLastproduct)
@@ -21,6 +21,7 @@ export default function Renderizados(props) {
             image={e.image}
             price={e.price}
             ratings={e.ratings}
+            discount={e.discount}
             />)
             :
             <img src={cargando} alt="" />}
