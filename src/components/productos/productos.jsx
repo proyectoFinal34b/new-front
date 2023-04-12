@@ -38,7 +38,7 @@ export default function ProductosRender() {
             <img src={cargando} alt="" />}
            
         </div> */}
-        <div className="md:col-span-3 sm:columns-2 xl:columns-3 lg:columns-3 md:mt-5">
+        <div className=" md:col-span-3 sm:columns-2 xl:columns-3 lg:columns-3 md:mt-5">
             <Renderizados indexOfFirstproduct={indexOfFirstproduct} indexOfLastproduct={indexOfLastproduct} />
             </div>
             </div>
