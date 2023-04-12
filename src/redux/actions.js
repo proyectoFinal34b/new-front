@@ -8,6 +8,7 @@ export const GET_PRODUCT='GET_PRODUCT'
 export const FILTER_PRODUCT ='FILTER_PRODUCT'
 export const GET_USERS='GET_USERS'
 export const LOGGED = 'LOGGED'
+
 // export const ADD_TO_CARD= 'ADD_TO_CARD'
 
 
@@ -70,12 +71,14 @@ export const postProduct=(body)=>async (dispatch)=>{
     }
     };
 
+
 export const isLogged = (logged)=>{
   return {
       type: LOGGED,
       payload: {logged: logged.logged, data:logged.validatedUser}
     }
 }
+
 
     // export const addToCard = (product) => {
     //   return {
