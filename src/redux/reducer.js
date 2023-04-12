@@ -5,7 +5,6 @@ import {
   POST_CATS,
   GET_PRODUCT,
   FILTER_PRODUCT,
-
   GET_USERS,
   // ADD_TO_CARD
   LOGGED,
@@ -16,7 +15,8 @@ const initialState = {
   allCats: [],
   allProducts: [],
   allUsers: [],
-  logged: false,
+  logged : false,
+  user:{},
   card: [],
 };
 
@@ -50,11 +50,15 @@ const reducer = (state = initialState, action) => {
           ...state,
           allUsers: action.payload,
         };
-        case LOGGED:
-          return {
-            ...state,
-            logged: action.payload
-          }
+
+      case LOGGED:
+        console.log(action.payload.logged, action.payload.data ,"action.payload")
+        return {
+          ...state, 
+          logged: action.payload.logged, 
+          user: action.payload.data
+        }
+
       // case ADD_TO_CARD:
       //   return {
       //   ...state,

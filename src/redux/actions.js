@@ -13,13 +13,14 @@ export const LOGGED = 'LOGGED'
 
 
 export const getCats = () => async (dispatch) => {
-    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat`)
-    .then(r => dispatch({ type : GET_CATS, payload : r.data}))
+    return await axios.get(`http://localhost:3001/cat`)
+    .then(r => {dispatch({ type : GET_CATS, payload : r.data})
+    console.log(r.data, "action")})
     .catch(e => console.error(e))
 };
 
 export const searchCats = (name) => async (dispatch) => {
-    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat?name=${name}`)
+    return await axios.get(`http://localhost:3001/cat?name=${name}`)
     .then(r => dispatch({ type : SEARCH_CATS, payload : r.data}))
     .catch(e => console.error(e))
 };
@@ -30,14 +31,14 @@ export const filterCats = (filtered) => {
 
 export const postCats = (payload) => async (dispatch) => {
     try {
-      const json = await axios.post('https://proyectofinal-gg57.onrender.com/cat', payload);
+      const json = await axios.post('http://localhost:3001/cat', payload);
       return json;
     } catch (error) {
       throw Error(error);
     }
   };
 export const getProduct = () => async (dispatch) => {
-    return await axios.get(`https://proyectofinal-gg57.onrender.com/product`)
+    return await axios.get(`http://localhost:3001/product`)
     .then(r => dispatch({ type : GET_PRODUCT, payload : r.data}))
     .catch(e => console.error(e))}
 
@@ -49,7 +50,7 @@ export const filterProduct = (filtered) => {
 export function getUsers(){
       return async function(dispatch){
           try{
-              let response = await axios.get(`https://proyectofinal-gg57.onrender.com/user`);
+              let response = await axios.get(`http://localhost:3001/user`);
               return dispatch({
               type: GET_USERS,
               payload: response.data,
@@ -63,20 +64,21 @@ export function getUsers(){
 export const postProduct=(body)=>async (dispatch)=>{
 
      try {
-      const json = await axios.post('https://proyectofinal-gg57.onrender.com/product', body);
+      const json = await axios.post('http://localhost:3001/product', body);
       return json;
     } catch (error) {
       throw Error(error);
     }
     };
 
-    export const isLogged = (logged)=>{
-      return {
-        type: LOGGED,
-        payload: logged
-      }
-  } 
-  
+
+export const isLogged = (logged)=>{
+  return {
+      type: LOGGED,
+      payload: {logged: logged.logged, data:logged.validatedUser}
+    }
+}
+
 
     // export const addToCard = (product) => {
     //   return {

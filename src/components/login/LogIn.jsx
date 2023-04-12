@@ -8,7 +8,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = useSelector(state=>state.logged)
 
   useEffect(() => {
     dispatch(getUsers());
@@ -18,7 +18,7 @@ export default function Login() {
     const storedEmail = localStorage.getItem("email");
     const storedIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     setEmail(storedEmail || "");
-    setIsLoggedIn(storedIsLoggedIn);
+
   }, []);
 
   useEffect(() => {
@@ -28,11 +28,10 @@ export default function Login() {
 
   async function handleLogin(e) {
     e.preventDefault();
-    const validation = await axios.post('https://proyectofinal-gg57.onrender.com/user/validate', { email: email, password: password });
+    const validation = await axios.post('http://localhost:3001/user/validate', { email: email, password: password });
     console.log(validation)
     if (validation.data.logged) {
-      dispatch(isLogged(validation.data.logged));
-      setIsLoggedIn(true);
+      dispatch(isLogged(validation.data));
     } else {
       alert("Email o contraseña incorrectos");
     }
@@ -41,7 +40,6 @@ export default function Login() {
   function handleLogout() {
     dispatch(isLogged(false));
     setEmail("");
-    setIsLoggedIn(false);
   }
 
   return (
