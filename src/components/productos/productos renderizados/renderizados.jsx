@@ -17,11 +17,13 @@ export default function Renderizados(props) {
              {products?.length?products
             .slice(props.indexOfFirstproduct, props.indexOfLastproduct)
             .map((e)=><Productcard 
+            key={e.id}
             name={e.name}
             image={e.image}
             price={e.price}
             ratings={e.ratings}
             discount={e.discount}
+            id={e.id}
             />)
             :
             <img src={cargando} alt="" />}
