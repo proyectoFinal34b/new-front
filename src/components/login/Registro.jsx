@@ -71,7 +71,8 @@ return(
             pattern:/^[a-zA-Z0-9]+(?:.[a-zA-Z0-9]+)@[a-zA-Z0-9]+(?:.[a-zA-Z0-9]+)$/
                   })}></input>
                   {errors.email?.type==="pattern" && <p className="text-red-500">ingrese un email valido</p>}
-        </div>
+                  {errors.email?.type==="required" && <p className="text-red-500">Se requiere un mail</p>}
+        </div>    
         <div>
         <label className="block text-gray-700 text-sm font-bold mb-2">
         Dirección:
