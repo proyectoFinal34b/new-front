@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { sortTable } from "./logic/ordenamientoTablas";
 import { CSVLink } from "react-csv";
+import Buttons from "./logic/buttons";
 
 export default function Gatos({ cats }) {
   const stylesNameCol = "w-28 p-2";
@@ -28,31 +29,34 @@ export default function Gatos({ cats }) {
 
   //Tabla excel
   const csvHeaders = [
-    {label:"Nombre", key:"name"},
-    {label:"Arrivo", key:"arrived"},
-    {label:"Edad", key:"age"},
-    {label:"Género", key:"gender"},
-    {label:"Estado", key:"state"},
-    {label:"Activo", key:"active"},
-    {label:"ID", key:"id"},
-  ]
-  const csvData = filteredCats.map((cat)=>({
+    { label: "Nombre", key: "name" },
+    { label: "Arrivo", key: "arrived" },
+    { label: "Edad", key: "age" },
+    { label: "Género", key: "gender" },
+    { label: "Estado", key: "state" },
+    { label: "Activo", key: "active" },
+    { label: "ID", key: "id" },
+  ];
+  const csvData = filteredCats.map((cat) => ({
     name: cat.name,
     arrived: cat.arrived,
-    age:cat.age,
-    gender:cat.gender,
-    state:cat.state,
+    age: cat.age,
+    gender: cat.gender,
+    state: cat.state,
     active: cat.state ? "Sí" : "No",
-    id:cat.id
-  }))
+    id: cat.id,
+  }));
   const csvFileName = "cats.csv";
 
   return (
     <>
       <h1>Soy la view gatos</h1>
+
+      <Buttons></Buttons>
+
       <div id="table-cats">
         <table className="table-fixed cursor-default m-auto border-collapse border border-slate-900">
-          <thead >
+          <thead>
             <tr className="bg-tableCol  text-white border-collapse border border-slate-900">
               <th className={stylesNameCol}>
                 <button onClick={() => handleColumnClick("name")}>
@@ -91,14 +95,17 @@ export default function Gatos({ cats }) {
           <tbody>
             {filteredCats?.map((cat) => {
               return (
-                <tr key={cat.id} className="hover:bg-gray-300 border-b border-slate-300 ">
+                <tr
+                  key={cat.id}
+                  className="hover:bg-gray-300 border-b border-slate-300 "
+                >
                   <td className={stylesTd}>{cat.name}</td>
                   <td>{cat.arrived.slice(2, 10)}</td>
                   <td>{cat.age}</td>
-                  <td>{cat.gender==="macho"? "M" : "H"}</td>
+                  <td>{cat.gender === "macho" ? "M" : "H"}</td>
                   <td>{cat.state}</td>
                   {cat.status === true ? (
-                    <td >
+                    <td>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         class="icon icon-tabler icon-tabler-circle-check m-auto"
@@ -147,9 +154,23 @@ export default function Gatos({ cats }) {
             })}
           </tbody>
         </table>
-        <CSVLink data={csvData} headers={csvHeaders} filename={csvFileName}>
-        Descargar CSV
-      </CSVLink>
+        <div className=" font-medium mt-5 flex justify-center items-center">
+          <CSVLink
+            className="bg-[#134E4A] text-white flex shadow-md w-44 justify-center items-center p-2 rounded-md hover:bg-teal-500 hover:text-white"
+            data={csvData}
+            headers={csvHeaders}
+            filename={csvFileName}
+          >
+            Descargar CSV
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+  <polyline points="7 11 12 16 17 11" />
+  <line x1="12" y1="4" x2="12" y2="16" />
+</svg>
+          </CSVLink>
+          
+        </div>
       </div>
     </>
   );
