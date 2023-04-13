@@ -8,7 +8,7 @@ function PasswordResetForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://proyectofinal-gg57.onrender.com/user/password", { email:email });
+      const response = await axios.post("https://proyectofinal-gg57.onrender.com/forgot", { email:email });
       console.log(response)
       alert('Se ha enviado un correo electrónico para restablecer su contraseña');
       setEmail('');

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form"
 import useFormPersist from "react-hook-form-persist"
+import { Link } from "react-router-dom";
 
 export default function Registro() {
   const navigate = useNavigate();
@@ -124,6 +125,11 @@ return(
         Registrarse
     </button>
         </form>
+        <p className="text-center mb-8">
+          <Link to='/home' className="text-sm text-gray-500 hover:text-teal-400">
+            Volver a la página de inicio
+          </Link>
+        </p>
       </div>
       </div>
         )
