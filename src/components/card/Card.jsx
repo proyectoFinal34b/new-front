@@ -2,6 +2,7 @@ import React, { useEffect ,useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCats } from '../../redux/actions'
 import Paginado from "../card/paginado/paginado.jsx"
+import Loader from '../dashboardAdmin/loading';
 
 export default function Card() {
   
@@ -39,7 +40,7 @@ export default function Card() {
       </div>
       </div>
     );
-  }): <span>{cats}</span>}
+  }): <Loader></Loader>}
     
 </div>
 
