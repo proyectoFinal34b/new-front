@@ -28,7 +28,7 @@ export default function Login() {
 
   async function handleLogin(e) {
     e.preventDefault();
-    const validation = await axios.post('http://localhost:3001/user/validate', { email: email, password: password });
+    const validation = await axios.post('https://proyectofinal-gg57.onrender.com/user/validate', { email: email, password: password });
     console.log(validation)
     if (validation.data.logged) {
       dispatch(isLogged(validation.data));
@@ -91,7 +91,7 @@ export default function Login() {
             </div>
             <a
               className="inline-block align-baseline font-bold text-sm text-gray-900 hover:text-teal-500"
-              href="#"
+              href="/resetpassword"
             >
               Has olvidado tu contraseña?
             </a>
