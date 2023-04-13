@@ -17,20 +17,16 @@ export const TOTAL_AMOUNT="TOTAL_AMOUNT"
 
 
 export const getCats = () => async (dispatch) => {
-  return await axios
-    .get(`http://localhost:3001/cat`)
-    .then((r) => {
-      dispatch({ type: GET_CATS, payload: r.data });
-      console.log(r.data, "action");
-    })
-    .catch((e) => console.error(e));
+    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat`)
+    .then(r => {dispatch({ type : GET_CATS, payload : r.data})
+    console.log(r.data, "action")})
+    .catch(e => console.error(e))
 };
 
 export const searchCats = (name) => async (dispatch) => {
-  return await axios
-    .get(`http://localhost:3001/cat?name=${name}`)
-    .then((r) => dispatch({ type: SEARCH_CATS, payload: r.data }))
-    .catch((e) => console.error(e));
+    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat?name=${name}`)
+    .then(r => dispatch({ type : SEARCH_CATS, payload : r.data}))
+    .catch(e => console.error(e))
 };
 
 export const filterCats = (filtered) => {
@@ -38,46 +34,46 @@ export const filterCats = (filtered) => {
 };
 
 export const postCats = (payload) => async (dispatch) => {
-  try {
-    const json = await axios.post("http://localhost:3001/cat", payload);
-    return json;
-  } catch (error) {
-    throw Error(error);
-  }
-};
+    try {
+      const json = await axios.post('https://proyectofinal-gg57.onrender.com/cat', payload);
+      return json;
+    } catch (error) {
+      throw Error(error);
+    }
+  };
 export const getProduct = () => async (dispatch) => {
-  return await axios
-    .get(`http://localhost:3001/product`)
-    .then((r) => dispatch({ type: GET_PRODUCT, payload: r.data }))
-    .catch((e) => console.error(e));
-};
+    return await axios.get(`https://proyectofinal-gg57.onrender.com/product`)
+    .then(r => dispatch({ type : GET_PRODUCT, payload : r.data}))
+    .catch(e => console.error(e))}
+
 
 export const filterProduct = (filtered) => {
   return { type: FILTER_PRODUCT, payload: filtered };
 };
 
-export function getUsers() {
-  return async function (dispatch) {
-    try {
-      let response = await axios.get(`http://localhost:3001/user`);
-      return dispatch({
-        type: GET_USERS,
-        payload: response.data,
-      });
-    } catch (error) {
-      alert(error);
-    }
+export function getUsers(){
+      return async function(dispatch){
+          try{
+              let response = await axios.get(`https://proyectofinal-gg57.onrender.com/user`);
+              return dispatch({
+              type: GET_USERS,
+              payload: response.data,
+          });
+          } catch (error) {
+              alert(error) 
+          }
+      }
   };
-}
 
-export const postProduct = (body) => async (dispatch) => {
-  try {
-    const json = await axios.post("http://localhost:3001/product", body);
-    return json;
-  } catch (error) {
-    throw Error(error);
-  }
-};
+export const postProduct=(body)=>async (dispatch)=>{
+
+     try {
+      const json = await axios.post('https://proyectofinal-gg57.onrender.com/product', body);
+      return json;
+    } catch (error) {
+      throw Error(error);
+    }
+    };
 
 export const isLogged = (logged) => {
   return {

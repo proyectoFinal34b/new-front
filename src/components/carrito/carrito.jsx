@@ -2,33 +2,44 @@ import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog, Transition } from "@headlessui/react";
 import { useEffect } from "react";
-import { delFromCart , clearCart, addToCart} from "../../redux/actions";
+import {
+  delFromCart,
+  clearCart,
+  addToCart,
+  totalamount,
+} from "../../redux/actions";
 
-export default function Cart() {
-  const [open, setOpen] = useState(true);
+export default function Cart(props) {
+  // const [open, setOpen] = useState(false);
   const cart = useSelector((state) => state.cart);
-  const totalAmout= useSelector((state)=> state.totalAmout)
   const dispatch = useDispatch();
+  const [totalAmount, setTotalAmount] = useState(false);
 
+  //   useEffect(() => {
+  //     dispatch();
+  //   }, []);
+  function removeAll(id) {
+    dispatch(delFromCart(id, true));
+  }
+  function limpiarCarrito() {
+    dispatch(clearCart());
+  }
+  function addOne(id) {
+    dispatch(addToCart(id));
+    setTotalAmount(!totalAmount);
+  }
+  function removeOne(id) {
+    dispatch(delFromCart(id));
+    setTotalAmount(!totalAmount);
+  }
   useEffect(() => {
-    dispatch();
-  }, []);
-  function removeAll(id){
-    dispatch(delFromCart(id, true))
-  }
-  function limpiarCarrito(){
-    dispatch(clearCart())
-  }
-  function addOne(id){
-    dispatch(addToCart(id))
-  }
-  function removeOne(id){
-    dispatch(delFromCart(id))
-  }
+    dispatch(totalamount());
+    console.log(totalAmount);
+  }, [dispatch, totalAmount]);
 
   return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setOpen}>
+    <Transition.Root show={props.open} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={props.onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
@@ -58,13 +69,13 @@ export default function Cart() {
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                       <div className="flex items-start justify-between">
                         <Dialog.Title className="text-lg font-medium text-gray-900">
-                          Shopping cart
+                          Carrito de compras
                         </Dialog.Title>
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
                             className="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() => setOpen(false)}
+                            onClick={() => props.setModal(null)}
                           >
                             <span className="sr-only">Close panel</span>
                           </button>
@@ -77,7 +88,7 @@ export default function Cart() {
                             role="list"
                             className="-my-6 divide-y divide-gray-200"
                           >
-                            {cart?.map((item) => (
+                            {cart.items?.map((item) => (
                               <li key={item.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
@@ -104,16 +115,24 @@ export default function Cart() {
                                   <div className="flex flex-1 items-end justify-between text-sm">
                                     <p className="text-gray-500">
                                       Cantidad
-                                      <button onClick={()=> removeOne(item.id)}>-</button> 
-                                      <p>{item.quantity}</p>
-                                      <button onClick={()=> addOne(item.id)}>+</button> 
+                                      <div className="flex justify-between border-solid border-slate-400 border-2 ">
+                                        <button
+                                          onClick={() => removeOne(item.id)}
+                                        >
+                                          ➖
+                                        </button>
+                                        <p className="text-base">{item.quantity}</p>
+                                        <button onClick={() => addOne(item.id)}>
+                                          ➕
+                                        </button>
+                                      </div>
                                     </p>
 
                                     <div className="flex">
                                       <button
                                         type="button"
                                         className="font-medium text-indigo-600 hover:text-indigo-500"
-                                        onClick={()=> removeAll(item.id)}
+                                        onClick={() => removeAll(item.id)}
                                       >
                                         Eliminar
                                       </button>
@@ -127,17 +146,17 @@ export default function Cart() {
                       </div>
                     </div>
                     <div className="mt-6">
-                        <button
-                        onClick={()=> limpiarCarrito()}
-                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                        >
-                          Limpiar Carrito
-                        </button>
-                      </div>
+                      <button
+                        onClick={() => limpiarCarrito()}
+                        className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                      >
+                        Limpiar Carrito
+                      </button>
+                    </div>
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>${totalAmout}.00</p>
+                        <p>${cart.total}.00</p>
                       </div>
                       <div className="mt-6">
                         <a
@@ -153,7 +172,7 @@ export default function Cart() {
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() => setOpen(false)}
+                            onClick={() => props.setModal(false)}
                           >
                             Ver más productos
                             <span aria-hidden="true"> &rarr;</span>

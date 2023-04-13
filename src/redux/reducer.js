@@ -21,8 +21,10 @@ const initialState = {
   allUsers: [],
   logged: false,
   user: {},
-  cart: [],
-  totalAmout: 0,
+  cart: {
+    items:[],
+    total:0
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -68,49 +70,56 @@ const reducer = (state = initialState, action) => {
       let newItem = state.allProducts.find(
         (product) => product.id === action.payload
       );
-      let itemincart = state.cart.find((item) => item.id === newItem.id);
+      let itemincart = state.cart.items.find((item) => item.id === newItem.id);
       return itemincart
         ? {
             ...state,
-            cart: state.cart.map((item) =>
+            cart:{
+              ...state.cart,
+              items:state.cart.items.map((item) =>
               item.id === newItem.id
                 ? { ...item, quantity: item.quantity + 1 }
                 : item
             ),
+            } 
           }
-        : { ...state, cart: [...state.cart, { ...newItem, quantity: 1 }] };
+        : { ...state, cart: {...state.cart, items:[...state.cart.items, { ...newItem, quantity: 1 }]} };
 
     case DEL_ONE_FROM_CART:
-      let deletitem = state.cart.find((item) => item.id === action.payload);
+      let deletitem = state.cart.items.find((item) => item.id === action.payload);
       return deletitem.quantity > 1
         ? {
             ...state,
-            cart: state.cart.map((item) =>
+            cart: {...state.cart, 
+              items:state.cart.items.map((item) =>
               item.id === action.payload
                 ? { ...item, quantity: item.quantity - 1 }
                 : item
             ),
-          }
+          }}
         : {
             ...state,
-            cart: state.cart.filter((item) => item.id !== action.payload),
+            cart: {...state.cart, items: state.cart.items.filter((item) => item.id !== action.payload)},
           };
     case DEL_ALL_FROM_CART:
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload),
+        cart: {...state.cart, items:state.cart.items.filter((item) => item.id !== action.payload)} ,
       };
     case CLEAR_CART:
-      return initialState;
-    case TOTAL_AMOUNT:
-      let finalValue =[...state.cart]
-      let initialValue = 0;
       return {
         ...state,
-        totalAmout:finalValue.reduce(
+        cart:{...state.cart, items:[]}
+      };
+    case TOTAL_AMOUNT:
+      let finalValue =[...state.cart.items]
+      let initialValue =0; 
+      return {
+        ...state,
+        cart:{...state.cart, total: finalValue.reduce(
           (acc, item) => acc + item.price * item.quantity,
           initialValue
-        ),
+        ),}
       };
 
     default:

@@ -1,12 +1,22 @@
 import React from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { isLogged } from "../../redux/actions";
+import Cart from "../carrito/carrito";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.logged);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  const [open, setOpen] = useState(null);
+  const handleOpen = () => {
+    setOpen(true);
+    console.log(open);
+  };
+  const handleClose = () => setOpen(null);
+
   return (
     <nav className="shadow-md bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -18,22 +28,24 @@ const Navbar = () => {
             <div>
               Hola,{user.name}!!
               <button
-                className="text-white bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
                 onClick={() => dispatch(isLogged({ logged: false, data: {} }))}
               >
                 Log out
               </button>
             </div>
           ) : (
-            <NavLink to="/login">
-              <button
-                type="button"
-                className="text-white bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
-              >
-                Iniciar sesion
-              </button>{" "}
-            </NavLink>
+            <>
+              <NavLink to="/login">
+                <button
+                  type="button"
+                  className="text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
+                >
+                  iniciar sesion
+                </button>{" "}
+              </NavLink>
+            </>
           )}
+
           <button
             data-collapse-toggle="navbar-cta"
             type="button"
@@ -56,7 +68,28 @@ const Navbar = () => {
               ></path>
             </svg>
           </button>
+
+          <div>
+            <button
+              // className="btn btn-info"
+              onClick={() => handleOpen()}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22"
+              className="w-8 h-8">
+                <path
+                  d="m26.818 19.04l3.607-10.796c.181-.519.044-.831-.102-1.037-.374-.527-1.143-.532-1.292-.532l-20.385-.004-.544-2.581c-.147-.609-.581-1.19-1.456-1.19h-5.729c-.594 0-.917.278-.917.833v1.49c0 .537.322.677.938.677h4.837l3.702 15.717c-.588.623-.908 1.531-.908 2.378 0 1.864 1.484 3.582 3.38 3.582 1.79 0 3.132-1.677 3.35-2.677h7.21c.218 1 1.305 2.717 3.349 2.717 1.863 0 3.378-1.614 3.378-3.475 0-1.851-1.125-3.492-3.359-3.492-.929 0-2.031.5-2.543 1.25h-8.859c-.643-1-1.521-1.31-2.409-1.345l-.123-.655h13.479c1.016 0 1.216-.37 1.396-.86"
+                  fill="#fff"
+                  transform="matrix(.64733 0 0 .64733 1.125 1.125)"
+                />
+              </svg>
+            </button>
+            {open && (
+              <Cart onClose={handleClose} setModal={setOpen} open={open} />
+            )}
+            {/* {open? <Cart setOpen={setOpen} />: <p onClose={setOpen(true)} className='bg-grey 900'>SVG</p>} */}
+          </div>
         </div>
+
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-cta"
