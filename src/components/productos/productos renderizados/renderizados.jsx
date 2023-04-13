@@ -1,9 +1,9 @@
 import React from 'react'
 import Productcard from '../productcard/productcard'
-import cargando from "../../../image/en-proceso.png"
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getProduct } from '../../../redux/actions'
+import Loader from '../../dashboardAdmin/loading'
 
 export default function Renderizados(props) {
     const dispatch=useDispatch()
@@ -24,7 +24,7 @@ export default function Renderizados(props) {
             discount={e.discount}
             />)
             :
-            <img src={cargando} alt="" />}
+            <Loader></Loader>}
            
         </div>
   )
