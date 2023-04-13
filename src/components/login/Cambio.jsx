@@ -14,7 +14,7 @@ function ChangePasswordForm() {
       return;
     }
     try {
-      const response = await axios.post('https://proyectofinal-gg57.onrender.com/forgot', { password });
+      const response = await axios.post('', { password });
       console.log(response);
       alert('La contraseña se ha cambiado con éxito');
       setPassword('');
