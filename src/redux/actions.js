@@ -1,16 +1,25 @@
-import axios from 'axios'
+import axios from "axios";
 
-export const GET_CATS = 'GET_CATS';
-export const SEARCH_CATS = 'SEARCH_CATS';
-export const FILTER_CATS = 'FILTER_CATS'
-export const POST_CATS = 'POST_CATS'
-export const GET_PRODUCT='GET_PRODUCT'
-export const FILTER_PRODUCT ='FILTER_PRODUCT'
-export const GET_USERS='GET_USERS'
+export const GET_CATS = "GET_CATS";
+export const SEARCH_CATS = "SEARCH_CATS";
+export const FILTER_CATS = "FILTER_CATS";
+export const POST_CATS = "POST_CATS";
+export const GET_PRODUCT = "GET_PRODUCT";
+export const FILTER_PRODUCT = "FILTER_PRODUCT";
+export const GET_USERS = "GET_USERS";
+export const LOGGED = "LOGGED";
+export const ADD_TO_CART="ADD_TO_CART";
+export const DEL_ALL_FROM_CART="DEL_ALL_FROM_CART"
+export const DEL_ONE_FROM_CART="DEL_ONE_FROM_CART"
+export const CLEAR_CART="CLEAR_CART";
+export const TOTAL_AMOUNT="TOTAL_AMOUNT"
+
+
 
 export const getCats = () => async (dispatch) => {
     return await axios.get(`https://proyectofinal-gg57.onrender.com/cat`)
-    .then(r => dispatch({ type : GET_CATS, payload : r.data}))
+    .then(r => {dispatch({ type : GET_CATS, payload : r.data})
+    console.log(r.data, "action")})
     .catch(e => console.error(e))
 };
 
@@ -21,8 +30,8 @@ export const searchCats = (name) => async (dispatch) => {
 };
 
 export const filterCats = (filtered) => {
-    return {type: FILTER_CATS, payload: filtered}
-}
+  return { type: FILTER_CATS, payload: filtered };
+};
 
 export const postCats = (payload) => async (dispatch) => {
     try {
@@ -39,8 +48,8 @@ export const getProduct = () => async (dispatch) => {
 
 
 export const filterProduct = (filtered) => {
-      return {type: FILTER_PRODUCT, payload: filtered}
-  }
+  return { type: FILTER_PRODUCT, payload: filtered };
+};
 
 export function getUsers(){
       return async function(dispatch){
@@ -66,3 +75,36 @@ export const postProduct=(body)=>async (dispatch)=>{
     }
     };
 
+export const isLogged = (logged) => {
+  return {
+    type: LOGGED,
+    payload: { logged: logged.logged, data: logged.validatedUser },
+  };
+};
+
+export const addToCart = (product) => {
+  return {
+    type: ADD_TO_CART,
+    payload: product,
+  };
+};
+export const delFromCart = (product, all = false) => {
+  if (all) {
+    return {
+      type: DEL_ALL_FROM_CART,
+      payload: product,
+    };
+  } else return { type: DEL_ONE_FROM_CART, payload: product };
+};
+
+export const clearCart = () => {
+  return {
+    type: CLEAR_CART,
+  };
+};
+export const totalamount= ()=>{
+  return{ 
+    type:TOTAL_AMOUNT
+
+  }
+}

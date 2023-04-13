@@ -2,14 +2,13 @@ import React, { useEffect ,useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCats } from '../../redux/actions'
 import Paginado from "../card/paginado/paginado.jsx"
-import gatos from './gatos';
 
 export default function Card() {
   
   const dispatch = useDispatch();
    const cats =  useSelector(state => state.allCats); //gatos
   const [currentPage, setCurrentPage] = useState(1);
-  const [catsPerPage, setcatsPerPage] = useState(8);
+  const [catsPerPage, setcatsPerPage] = useState(9);
   const indexOfLastcat = currentPage * catsPerPage;
   const indexOfFirstcat = indexOfLastcat - catsPerPage;
 
@@ -19,11 +18,14 @@ export default function Card() {
   console.log(cats)
 
   return (
-    <div class="flex flex flex-col my-10">
+    <>
+    <div className=''>
+    <div class=" my-10 sm:columns-2 xl:columns-3 lg:columns-3">
   {Array.isArray(cats) ? cats.slice(indexOfFirstcat, indexOfLastcat).map(function(cat) {
     return (
-      <div class="bg-white w-1/4 m-auto border-1 border-dashed border-gray-900 shadow-md rounded-lg overflow-hidden" key={cat.id}>
-        <img src={cat.image} alt={cat.name} class="w-full h-15 object-cover object-center" />
+      <div>
+      <div class="bg-white mb-5 w-72 m-auto border-1 border-dashed border-gray-900 shadow-2xl rounded-lg overflow-hidden md:w-80 md:mb-4" key={cat.id}>
+        <img src={cat.image} alt={cat.name} class="object-cover w-60 h-48 m-auto my-4 object-center md:w-64 md:h-44" />
         <div class="p-4">
           <p class="mb-1 text-gray-900 font-semibold">{cat.name}</p>
 
@@ -35,17 +37,20 @@ export default function Card() {
         </div>
         
       </div>
+      </div>
     );
   }): <span>{cats}</span>}
-    <div>
+    
+</div>
+
         <Paginado
          elementsPerPage={catsPerPage}
           allelements={cats?.length}
           paginado={setCurrentPage}
           currentPage={currentPage}
         />
-      </div>
-</div>
+  </div>    
+</>
   );
 };
 

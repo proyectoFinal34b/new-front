@@ -14,9 +14,17 @@ import Registro from './components/login/Registro';
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react';
 import axios from 'axios'
+import Dashboard from './components/dashboardAdmin/dashboard';
+import { getUsers } from './redux/actions';
+import { getCats } from './redux/actions';
 
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(getUsers)
+    dispatch(getCats)
+  },[])
   return (
     <div className="App">
       <Routes>
@@ -30,7 +38,8 @@ function App() {
       <Route path ="/productos" element={<ProductosRender/>}></Route>
       <Route path ="/about-us" element={<SobreNosotros/>}></Route>
       <Route path ="/usuario" element={<UsuariosRender/>}></Route>
-      {/* <Route path="/post" element={<CreateForm/>} /> */}
+     <Route path='/dashboard' element={<Dashboard/>}></Route>
+     {/* <Route path="/post" element={<CreateForm/>} /> */}
      </Routes>
     </div>
 

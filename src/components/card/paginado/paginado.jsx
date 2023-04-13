@@ -16,12 +16,16 @@ export default function Paginado({
     e.preventDefault();
     if (currentPage > 1) {
       paginado(currentPage - 1);
+    } else {
+      paginado(Math.ceil(allelements / elementsPerPage))
     }
   }
   function handlenext(e) {
     e.preventDefault();
     if (currentPage < pageNumbers.length) {
       paginado(currentPage + 1);
+    }else {
+      paginado(1)
     }
   }
   return (

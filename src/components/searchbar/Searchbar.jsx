@@ -37,7 +37,6 @@ import React from 'react'
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchCats } from "../../redux/actions";
-import swal from 'sweetalert';
 
 export default function SearchBar() {
   const dispatch = useDispatch();
@@ -63,18 +62,18 @@ export default function SearchBar() {
   }
 
   return (
-    <div className="flex justify-center mt-2 p-2">
+    <div className="justify-center mt-2">
       <input
         type="text"
         value={name}
         placeholder="Gato.."
         onChange={(e) => handleChange(e)}
-        className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        className="border-2 md:w-full md:px-3 md:pr-8 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
       />
       <button
         type="submit"
         onClick={(e) => handleSubmit(e)}
-        className="ml-2 px-4 py-2 font-medium text-gray bg-teal-400 rounded-md hover:bg-teal-500 focus:outline-none focus:bg-blue-600"
+        className="md:w-2/3  px-5 py-2 my-2 font-medium text-gray bg-teal-400 rounded-md hover:bg-teal-500 focus:outline-none focus:bg-blue-600"
       >
         Buscar
       </button>

@@ -5,7 +5,13 @@ import {
   POST_CATS,
   GET_PRODUCT,
   FILTER_PRODUCT,
-  GET_USERS
+  GET_USERS,
+  LOGGED,
+  ADD_TO_CART,
+  DEL_ALL_FROM_CART,
+  DEL_ONE_FROM_CART,
+  CLEAR_CART,
+  TOTAL_AMOUNT,
 } from "./actions";
 
 const initialState = {
@@ -13,6 +19,12 @@ const initialState = {
   allCats: [],
   allProducts: [],
   allUsers: [],
+  logged: false,
+  user: {},
+  cart: {
+    items:[],
+    total:0
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,16 +47,81 @@ const reducer = (state = initialState, action) => {
         ...state,
         allProducts: action.payload,
       };
-      case FILTER_PRODUCT:
-        return {
-          ...state,
-          allProducts: action.payload,
-        };
-      case GET_USERS:
-        return {
-          ...state,
-          allUsers: action.payload,
-        }
+    case FILTER_PRODUCT:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+    case GET_USERS:
+      return {
+        ...state,
+        allUsers: action.payload,
+      };
+
+    case LOGGED:
+      console.log(action.payload.logged, action.payload.data, "action.payload");
+      return {
+        ...state,
+        logged: action.payload.logged,
+        user: action.payload.data,
+      };
+
+    case ADD_TO_CART:
+      let newItem = state.allProducts.find(
+        (product) => product.id === action.payload
+      );
+      let itemincart = state.cart.items.find((item) => item.id === newItem.id);
+      return itemincart
+        ? {
+            ...state,
+            cart:{
+              ...state.cart,
+              items:state.cart.items.map((item) =>
+              item.id === newItem.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            ),
+            } 
+          }
+        : { ...state, cart: {...state.cart, items:[...state.cart.items, { ...newItem, quantity: 1 }]} };
+
+    case DEL_ONE_FROM_CART:
+      let deletitem = state.cart.items.find((item) => item.id === action.payload);
+      return deletitem.quantity > 1
+        ? {
+            ...state,
+            cart: {...state.cart, 
+              items:state.cart.items.map((item) =>
+              item.id === action.payload
+                ? { ...item, quantity: item.quantity - 1 }
+                : item
+            ),
+          }}
+        : {
+            ...state,
+            cart: {...state.cart, items: state.cart.items.filter((item) => item.id !== action.payload)},
+          };
+    case DEL_ALL_FROM_CART:
+      return {
+        ...state,
+        cart: {...state.cart, items:state.cart.items.filter((item) => item.id !== action.payload)} ,
+      };
+    case CLEAR_CART:
+      return {
+        ...state,
+        cart:{...state.cart, items:[]}
+      };
+    case TOTAL_AMOUNT:
+      let finalValue =[...state.cart.items]
+      let initialValue =0; 
+      return {
+        ...state,
+        cart:{...state.cart, total: finalValue.reduce(
+          (acc, item) => acc + item.price * item.quantity,
+          initialValue
+        ),}
+      };
+
     default:
       return { ...state };
   }
