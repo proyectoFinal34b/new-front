@@ -12,15 +12,18 @@ export default function Renderizados(props) {
         dispatch(getProduct())
     },[dispatch])
   return (
-    <div class="flex flex-col my-10 justify-center items-center">
+    <div class="">
              {/* {console.log(prueba,products)} */}
              {products?.length?products
             .slice(props.indexOfFirstproduct, props.indexOfLastproduct)
             .map((e)=><Productcard 
+            key={e.id}
             name={e.name}
             image={e.image}
             price={e.price}
             ratings={e.ratings}
+            discount={e.discount}
+            id={e.id}
             />)
             :
             <img src={cargando} alt="" />}
