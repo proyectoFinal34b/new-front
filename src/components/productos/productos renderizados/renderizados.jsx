@@ -1,9 +1,9 @@
 import React from 'react'
 import Productcard from '../productcard/productcard'
-import cargando from "../../../image/en-proceso.png"
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getProduct } from '../../../redux/actions'
+import Loader from '../../dashboardAdmin/loading'
 
 export default function Renderizados(props) {
     const dispatch=useDispatch()
@@ -17,14 +17,16 @@ export default function Renderizados(props) {
              {products?.length?products
             .slice(props.indexOfFirstproduct, props.indexOfLastproduct)
             .map((e)=><Productcard 
+            key={e.id}
             name={e.name}
             image={e.image}
             price={e.price}
             ratings={e.ratings}
             discount={e.discount}
+            id={e.id}
             />)
             :
-            <img src={cargando} alt="" />}
+            <Loader></Loader>}
            
         </div>
   )

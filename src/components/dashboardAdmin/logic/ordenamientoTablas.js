@@ -1,7 +1,11 @@
 export const sortTable = (column, direction, data) => {
     return [...data]?.sort((a, b) => {
-      const columnA = a[column];
-      const columnB = b[column];
+        const columnA = column === "desVal" ? a.discount.value  :
+        column === "category" ? a.category.name :
+        column==="list" ? a.list.length : a[column];
+        const columnB = column === "desVal" ? b.discount.value  :
+        column === "category" ? b.category.name : 
+        column==="list" ? b.list.length : b[column];
       if (direction === "asc") {
         if (typeof columnA === "number" && typeof columnB === "number") {
           return columnA - columnB;

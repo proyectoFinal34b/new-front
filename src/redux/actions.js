@@ -1,17 +1,21 @@
-import axios from 'axios'
+import axios from "axios";
 
-export const GET_CATS = 'GET_CATS';
-export const SEARCH_CATS = 'SEARCH_CATS';
+export const GET_CATS = "GET_CATS";
+export const SEARCH_CATS = "SEARCH_CATS";
 export const GET_CATS_BY_ID = 'GET_CATS_BY_ID';
-export const FILTER_CATS = 'FILTER_CATS'
-export const POST_CATS = 'POST_CATS'
-export const GET_PRODUCT='GET_PRODUCT'
+export const FILTER_CATS = "FILTER_CATS";
+export const POST_CATS = "POST_CATS";
+export const GET_PRODUCT = "GET_PRODUCT";
 export const GET_PRODUCT_BY_ID='GET_PRODUCT_BY_ID'
-export const FILTER_PRODUCT ='FILTER_PRODUCT'
-export const GET_USERS='GET_USERS'
-export const LOGGED = 'LOGGED'
+export const FILTER_PRODUCT = "FILTER_PRODUCT";
+export const GET_USERS = "GET_USERS";
+export const LOGGED = "LOGGED";
+export const ADD_TO_CART="ADD_TO_CART";
+export const DEL_ALL_FROM_CART="DEL_ALL_FROM_CART"
+export const DEL_ONE_FROM_CART="DEL_ONE_FROM_CART"
+export const CLEAR_CART="CLEAR_CART";
+export const TOTAL_AMOUNT="TOTAL_AMOUNT"
 
-// export const ADD_TO_CARD= 'ADD_TO_CARD'
 
 
 export const getCats = () => async (dispatch) => {
@@ -34,8 +38,8 @@ export const getCatsById = (id) => async (dispatch) => {
 }
 
 export const filterCats = (filtered) => {
-    return {type: FILTER_CATS, payload: filtered}
-}
+  return { type: FILTER_CATS, payload: filtered };
+};
 
 export const postCats = (payload) => async (dispatch) => {
     try {
@@ -57,8 +61,8 @@ export const getProductsById = (id) => async (dispatch) => {
 }
 
 export const filterProduct = (filtered) => {
-      return {type: FILTER_PRODUCT, payload: filtered}
-  }
+  return { type: FILTER_PRODUCT, payload: filtered };
+};
 
 export function getUsers(){
       return async function(dispatch){
@@ -84,21 +88,36 @@ export const postProduct=(body)=>async (dispatch)=>{
     }
     };
 
-
-export const isLogged = (logged)=>{
+export const isLogged = (logged) => {
   return {
-      type: LOGGED,
-      payload: {logged: logged.logged, data:logged.validatedUser}
-    }
+    type: LOGGED,
+    payload: { logged: logged.logged, data: logged.validatedUser },
+  };
+};
+
+export const addToCart = (product) => {
+  return {
+    type: ADD_TO_CART,
+    payload: product,
+  };
+};
+export const delFromCart = (product, all = false) => {
+  if (all) {
+    return {
+      type: DEL_ALL_FROM_CART,
+      payload: product,
+    };
+  } else return { type: DEL_ONE_FROM_CART, payload: product };
+};
+
+export const clearCart = () => {
+  return {
+    type: CLEAR_CART,
+  };
+};
+export const totalamount= ()=>{
+  return{ 
+    type:TOTAL_AMOUNT
+
+  }
 }
-
-
-    // export const addToCard = (product) => {
-    //   return {
-    //     type: "ADD_TO_CARD",
-    //     payload: product
-    //   };
-    // };
-    
-
-

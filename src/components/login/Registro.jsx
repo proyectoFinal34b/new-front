@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form"
 import useFormPersist from "react-hook-form-persist"
+import { Link } from "react-router-dom";
 
 export default function Registro() {
   const navigate = useNavigate();
@@ -71,7 +72,8 @@ return(
             pattern:/^[a-zA-Z0-9]+(?:.[a-zA-Z0-9]+)@[a-zA-Z0-9]+(?:.[a-zA-Z0-9]+)$/
                   })}></input>
                   {errors.email?.type==="pattern" && <p className="text-red-500">ingrese un email valido</p>}
-        </div>
+                  {errors.email?.type==="required" && <p className="text-red-500">Se requiere un mail</p>}
+        </div>    
         <div>
         <label className="block text-gray-700 text-sm font-bold mb-2">
         Dirección:
@@ -123,6 +125,11 @@ return(
         Registrarse
     </button>
         </form>
+        <p className="text-center mb-8">
+          <Link to='/home' className="text-sm text-gray-500 hover:text-teal-400">
+            Volver a la página de inicio
+          </Link>
+        </p>
       </div>
       </div>
         )
