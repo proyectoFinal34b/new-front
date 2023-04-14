@@ -90,7 +90,7 @@ const Navbar = () => {
             )}
             {/* {open? <Cart setOpen={setOpen} />: <p onClose={setOpen(true)} className='bg-grey 900'>SVG</p>} */}
           </div>
-          {/* :""} */}
+           {/* :""}  */}
         </div>
 
         <div
