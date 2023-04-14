@@ -10,6 +10,7 @@ const Navbar = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+
   const [open, setOpen] = useState(null);
   const handleOpen = () => {
     setOpen(true);

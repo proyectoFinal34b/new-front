@@ -23,13 +23,13 @@ const CheckoutForm = () => {
     setLoading(true)
 
     if (!error){ //si no existe un error
-        // console.log(paymentMethod)
+        console.log(paymentMethod)
         const {id} = paymentMethod; //le paso a la base de datos lo que tiene que guardar
 
         try {
-            const {data} = await axios.post("https://proyectofinal-gg57.onrender.com/api/checkout",{
-            id,
-            // amount: valorFinal * 100,
+            const {data} = await axios.post("https://proyectofinal-gg57.onrender.com/payment/checkout",{
+            id: id,
+            amount: 10000,
         })
 
             console.log(data)
@@ -45,34 +45,34 @@ const CheckoutForm = () => {
 
 
     return (
-        <div class="min-w-screen min-h-screen bg-gray-200 flex items-center justify-center px-5 pb-10 pt-16">
-            <div class="w-full mx-auto rounded-lg bg-white shadow-lg p-5 text-gray-700">
-            <div class="w-full pt-1 pb-5">
-            <div class="bg-indigo-500 text-white overflow-hidden rounded-full w-20 h-20 -mt-16 mx-auto shadow-lg flex justify-center items-center">
-                <i class="mdi mdi-credit-card-outline text-3xl"></i>
+        <div className="min-w-screen min-h-screen bg-gray-200 flex items-center justify-center px-5 pb-10 pt-16">
+            <div className="w-full mx-auto rounded-lg bg-white shadow-lg p-5 text-gray-700">
+            <div className="w-full pt-1 pb-5">
+            <div className="bg-indigo-500 text-white overflow-hidden rounded-full w-20 h-20 -mt-16 mx-auto shadow-lg flex justify-center items-center">
+                <i className="mdi mdi-credit-card-outline text-3xl"></i>
             </div>
         </div>
-        <div class="mb-10">
-            <h1 class="text-3xl font-extrabold text-gray-900 sm:text-2xl">Metodos de pago</h1>
+        <div className="mb-10">
+            <h1 className="text-3xl font-extrabold text-gray-900 sm:text-2xl">Metodos de pago</h1>
         </div>
-        <div class="mb-3 flex -mx-2">
-        <div class="px-2">
-            <label for="type1" class="flex items-center cursor-pointer">
-                <input type="radio" class="form-radio h-5 w-5 text-indigo-500" name="type" id="type1" checked/>
-                <img src="https://leadershipmemphis.org/wp-content/uploads/2020/08/780370.png" class="h-8 ml-3" />
+        <div className="mb-3 flex -mx-2">
+        <div className="px-2">
+            <label for="type1" className="flex items-center cursor-pointer">
+                <input type="radio" className="form-radio h-5 w-5 text-indigo-500" name="type" id="type1" checked/>
+                <img src="https://leadershipmemphis.org/wp-content/uploads/2020/08/780370.png" className="h-8 ml-3" />
             </label>
             </div>
         </div>
-        <div class="mb-3">
-            <label class="font-bold sm:text-xl mb-2 ml-1">Nombre</label>
+        <div className="mb-3">
+            <label className="font-bold sm:text-xl mb-2 ml-1">Nombre</label>
             <div>
-                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="John Smith" type="text"/>
+                <input className="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="John Smith" type="text"/>
             </div>
         </div>
         <form onSubmit={handleSubmit}>
         {/* producto de la compra */}
-        <div class="mb-3">
-        <label class="font-bold sm:text-xl mb-2 ml-1">Tarjeta</label>
+        <div className="mb-3">
+        <label className="font-bold sm:text-xl mb-2 ml-1">Tarjeta</label>
         <CardElement className="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"/>
         </div>
         <h3 className="font-bold sm:text-xl mb-2 ml-1 p-3">Precio:</h3>
