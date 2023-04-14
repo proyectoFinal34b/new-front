@@ -24,9 +24,9 @@ export default function DetailProductosFilter(props) {
                     <div class="flex h-96 align-items-left flex-col justify-center pl-5">
                         <h1 class="text-3xl font-extrabold text-gray-900 sm:text-5xl underline pb-2">{productId.name}</h1>
                         <div class="border border-gray-300 p-4 rounded-md mt-4 text-gray-500">{productId.summary}</div> 
-                        <div class="text-gray-500">Stock: {productId.stock}</div>
-                        <div class="text-black font-bold py-2 px-4 rounded-md border border-green-600 mt-5">Precio: ${productId.price}</div>
-                        <a href="youtube.com" class="bg-green-500 text-white font-bold py-2 px-4 rounded-md border border-green-600 mt-5">
+                        <div class="text-gray-500 mt-1 mb-5">Stock: {productId.stock}</div>
+                        <div class="text-black font-bold py-2 px-4 rounded-md border border-green-600">Precio: ${productId.price}</div>
+                        <a href="" class="bg-green-500 text-white font-bold py-2 px-4 rounded-md border border-green-600 mt-5">
                             Comprar  
                         </a> 
                     </div>
