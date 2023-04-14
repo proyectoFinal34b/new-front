@@ -15,7 +15,7 @@ export default function DetailGatosFilter(props) {
     }, [dispatch, id])
 
     return(
-        <div class="flex flex-col bg-[url('https://previews.123rf.com/images/svetlanaprikhnenko/svetlanaprikhnenko1304/svetlanaprikhnenko130400007/18847705-fondo-incons%C3%BAtil-con-huella-de-gato-y-perro.jpg')]">
+        <div class="flex flex-col bg-white">
             <div class="flex-1 flex items-center justify-center m-12">
                 <div class="h-full grid grid-cols-2 rounded-lg p-5 flex-1 bg-gray-200 border-2 border-zinc-300 shadow-2xl">
                     <div class="flex justify-center break-after-right">
