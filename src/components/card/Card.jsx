@@ -8,7 +8,7 @@ export default function Card() {
   
   const dispatch = useDispatch();
    const cats =  useSelector(state => state.allCats); //gatos
-  const [currentPage, setCurrentPage] = useState(1);
+   const currentPage = useSelector(state=>state.currentPage)
   const [catsPerPage, setcatsPerPage] = useState(9);
   const indexOfLastcat = currentPage * catsPerPage;
   const indexOfFirstcat = indexOfLastcat - catsPerPage;
@@ -47,8 +47,6 @@ export default function Card() {
         <Paginado
          elementsPerPage={catsPerPage}
           allelements={cats?.length}
-          paginado={setCurrentPage}
-          currentPage={currentPage}
         />
   </div>    
 </>
