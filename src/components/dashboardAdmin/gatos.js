@@ -22,7 +22,7 @@ const handleColumnClickCat = (columnName) => {
   };
   
   const handlerClickTypeCat = (e)=>{
-    handlerClickType(e, filters, setFilters, cats, setShow)
+    handlerClickType(e, filters, setFilters, cats, setShow, "state")
   }
 
   return (

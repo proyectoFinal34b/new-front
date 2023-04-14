@@ -97,7 +97,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { filterCats, getCats } from "../../redux/actions";
+import { currentPageFunction, filterCats, getCats } from "../../redux/actions";
 import SearchBar from "../searchbar/Searchbar"
 
 export default function GatosFiltrados() {
@@ -152,7 +152,7 @@ export default function GatosFiltrados() {
         </label>
         <select
           id="state"
-          onChange={(e) => setFiltroStatus(e.target.value)}
+          onChange={(e) =>(setFiltroStatus(e.target.value),dispatch(currentPageFunction(1)))}
           value={filtroStatus}
           className="md:px-0 md:w-full rounded-md border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500 h-10 px-4"
         >
@@ -168,7 +168,7 @@ export default function GatosFiltrados() {
         </label>
         <select
           id="gender"
-          onChange={(e) => setFiltroGender(e.target.value)}
+          onChange={(e) =>(setFiltroStatus(e.target.value),dispatch(currentPageFunction(1)))}
           value={filtroGender}
           className="md:px-1 md:w-full rounded-md border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500 h-10 px-4"
         >
@@ -183,7 +183,7 @@ export default function GatosFiltrados() {
         </label>
         <select
           id="age"
-          onChange={(e) => setFiltroAge(e.target.value)}
+          onChange={(e) =>(setFiltroStatus(e.target.value),dispatch(currentPageFunction(1)))}
           value={filtroAge}
           className="md:px-1 md:w-full rounded-md border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500 h-10 px-4"
         >

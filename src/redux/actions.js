@@ -15,18 +15,18 @@ export const DEL_ALL_FROM_CART="DEL_ALL_FROM_CART"
 export const DEL_ONE_FROM_CART="DEL_ONE_FROM_CART"
 export const CLEAR_CART="CLEAR_CART";
 export const TOTAL_AMOUNT="TOTAL_AMOUNT"
-
+export const CURRENT_PAGE = "CURRENT_PAGE"
 
 
 export const getCats = () => async (dispatch) => {
-    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat`)
+    return await axios.get(`http://localhost:3001/cat`)
     .then(r => {dispatch({ type : GET_CATS, payload : r.data})
     console.log(r.data, "action")})
     .catch(e => console.error(e))
 };
 
 export const searchCats = (name) => async (dispatch) => {
-    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat?name=${name}`)
+    return await axios.get(`http://localhost:3001/cat?name=${name}`)
     .then(r => dispatch({ type : SEARCH_CATS, payload : r.data}))
     .catch(e => console.error(e))
 };
@@ -119,5 +119,12 @@ export const totalamount= ()=>{
   return{ 
     type:TOTAL_AMOUNT
 
+  }
+}
+
+export const currentPageFunction = (payload) => {
+  return{
+    type: CURRENT_PAGE,
+    payload: payload
   }
 }

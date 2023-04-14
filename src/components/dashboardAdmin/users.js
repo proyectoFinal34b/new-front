@@ -2,29 +2,31 @@ import React, { useState } from "react";
 import { sortTable } from "./logic/ordenamientoTablas";
 import { CSVLink } from "react-csv";
 import Buttons from "./logic/buttons";
+import { handleColumnClick, handlerClick, handlerClickType } from "./logic/handlers";
+import Example from "./charts/chart";
 
 export default function Usuarios({ users }) {
   const stylesNameCol = "w-28 px-2 py-3 cursor-pointer";
   const stylesTd = "h-8 px-2 py-3";
   const [filters, setFilters] = useState({
+    date: "historico",
+    type:"",
     column: "id",
     direction: "desc",
   });
+  const [show, setShow] = useState([...users])
 
-  const handleColumnClick = (columnName) => {
-    if (columnName === filters.column) {
-      setFilters({
-        ...filters,
-        direction: filters.direction === "asc" ? "desc" : "asc",
-      });
-    } else {
-      setFilters({
-        column: columnName,
-        direction: "asc",
-      });
-    }
+  const handleColumnClickUser = (columnName) => {
+    handleColumnClick(columnName, filters, setFilters, show, setShow)
   };
-
+    const handlerClickUser = (e) => {
+      handlerClick(e, filters, setFilters, users, setShow)
+    };
+    
+    const handlerClickTypeUser = (e)=>{
+      handlerClickType(e, filters, setFilters, users, setShow, "status")
+    }
+  
   const filteredUsers = sortTable(filters.column, filters.direction, users);
   
     // Define las opciones para la descarga del CSV
@@ -51,48 +53,53 @@ export default function Usuarios({ users }) {
   return (
     <>
       <h1>Soy la view users</h1>
-      <Buttons></Buttons>
+      <Example data={show} arg={filters.type} periodo={filters.date}></Example>
+      <button value="superAdmin" onClick={handlerClickTypeUser}>Super Admin</button>
+      <button value="admin" onClick={handlerClickTypeUser}>Admin</button>
+      <button value="user" onClick={handlerClickTypeUser}>User</button>
+  
+      <Buttons handlerClick={handlerClickUser}></Buttons>
       <div>
         <table className="table-fixed cursor-default m-auto border-collapse border border-slate-900">
           <thead>
             <tr className="bg-tableCol  text-white border-collapse border border-slate-900">
               <th
                 className={stylesNameCol}
-                onClick={() => handleColumnClick("name")}
+                onClick={() => handleColumnClickUser("name")}
               >
                 Nombre
               </th>
               <th
                 className={stylesNameCol}
-                onClick={() => handleColumnClick("lastName")}
+                onClick={() => handleColumnClickUser("lastName")}
               >
                 Apellido
               </th>
               <th
                 className={stylesNameCol}
-                onClick={() => handleColumnClick("email")}
+                onClick={() => handleColumnClickUser("email")}
               >
                 Email
               </th>
               <th
                 className={stylesNameCol}
-                onClick={() => handleColumnClick("createdAt")}
+                onClick={() => handleColumnClickUser("createdAt")}
               >
                 Creado
               </th>
               <th
                 className={stylesNameCol}
-                onClick={() => handleColumnClick("status")}
+                onClick={() => handleColumnClickUser("status")}
               >
                 Status
               </th>
               <th
                 className={stylesNameCol}
-                onClick={() => handleColumnClick("active")}
+                onClick={() => handleColumnClickUser("active")}
               >
                 Activo
               </th>
-              <th className="w-16 p-2" onClick={() => handleColumnClick("id")}>
+              <th className="w-16 p-2" onClick={() => handleColumnClickUser("id")}>
                 ID
               </th>
               <th className={stylesNameCol}>Edit</th>

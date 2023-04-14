@@ -2,29 +2,30 @@ import React, { useState } from "react";
 import { sortTable } from "./logic/ordenamientoTablas";
 import { CSVLink } from "react-csv";
 import Buttons from "./logic/buttons";
+import { handleColumnClick, handlerClick, handlerClickType } from "./logic/handlers";
+import Example from "./charts/chart";
 
 export default function Productos({ products }) {
   const stylesNameCol = "w-28 p-2 cursor-pointer ";
   const stylesTd = "h-8 px-2 py-3 ";
   const [filters, setFilters] = useState({
+    date: "historico",
+    type:"",
     column: "id",
     direction: "desc",
   });
-  console.log(filters);
+  const [show, setShow] = useState([...products])
 
-  const handleColumnClick = (columnName) => {
-    if (columnName === filters.column) {
-      setFilters({
-        ...filters,
-        direction: filters.direction === "asc" ? "desc" : "asc",
-      });
-    } else {
-      setFilters({
-        column: columnName,
-        direction: "asc",
-      });
-    }
-  };
+  const handleColumnClickProducts = (columnName) => {
+    handleColumnClick(columnName, filters, setFilters, show, setShow)
+   };
+   const handlerClickProductos = (e)=>{
+     handlerClick(e, filters, setFilters, products, setShow)
+   }
+ 
+   const handlerClickTypeProductos = (e) => {
+     handlerClickType(e, filters, setFilters, products, setShow, "stock")
+   }
 
   const filteredProducts = sortTable(
     filters.column,
@@ -60,23 +61,25 @@ const csvFileName = "productos.csv";
   return (
     <>
       <h1>Soy la view products</h1>
-      <Buttons></Buttons>
+      <Example data={show} arg={filters.type} periodo={filters.date}></Example>
+    
+      <Buttons handlerClick={handlerClickProductos}></Buttons>
       <div>
         <table className="table-fixed cursor-default m-auto border-collapse border border-slate-900">
           <thead className="bg-tableCol  text-white border-collapse border border-slate-900">
             <th
               className="w-22 p-2"
-              onClick={() => handleColumnClick("name")}
+              onClick={() => handleColumnClickProducts("name")}
             >
               Nombre
             </th>
-            <th className="w-16 p-2" onClick={() => handleColumnClick("price")}>Precio</th>
-            <th className="w-16 p-2" onClick={() => handleColumnClick("stock")}>Stock</th>
-            <th className="w-16 p-2" onClick={() => handleColumnClick("categoryId")}>Categoria</th>
+            <th className="w-16 p-2" onClick={() => handleColumnClickProducts("price")}>Precio</th>
+            <th className="w-16 p-2" onClick={() => handleColumnClickProducts("stock")}>Stock</th>
+            <th className="w-16 p-2" onClick={() => handleColumnClickProducts("categoryId")}>Categoria</th>
             <th className={stylesNameCol} >Desc active</th>
-            <th className={stylesNameCol} onClick={() => handleColumnClick("desVal")}>Desc valor</th>
-            <th className="w-20 p-2" onClick={() => handleColumnClick("active")}>Activo</th>
-            <th className="w-16 p-2" onClick={() => handleColumnClick("id")}>ID</th>
+            <th className={stylesNameCol} onClick={() => handleColumnClickProducts("desVal")}>Desc valor</th>
+            <th className="w-20 p-2" onClick={() => handleColumnClickProducts("active")}>Activo</th>
+            <th className="w-16 p-2" onClick={() => handleColumnClickProducts("id")}>ID</th>
             <th className={stylesNameCol}>Edit</th>
           </thead>
           <tbody>
