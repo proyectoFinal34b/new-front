@@ -19,7 +19,7 @@ export const TOTAL_AMOUNT="TOTAL_AMOUNT"
 
 
 export const getCats = () => async (dispatch) => {
-    return await axios.get(https://proyectofinal-gg57.onrender.com/cat`)
+    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat`)
     .then(r => {dispatch({ type : GET_CATS, payload : r.data})
     console.log(r.data, "action")})
     .catch(e => console.error(e))
