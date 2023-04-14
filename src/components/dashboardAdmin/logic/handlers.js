@@ -44,7 +44,7 @@ export const handlerClick = (e, filters, setFilters, array, setShow) => {
     }
   };
   
-export const handlerClickType = (e, filters, setFilters, array, setShow) => {
+export const handlerClickType = (e, filters, setFilters, array, setShow, arg) => {
     if (filters.type === e.target.value) {
       setFilters({ ...filters, type: "" });
       reset(setShow,array);
@@ -54,11 +54,11 @@ export const handlerClickType = (e, filters, setFilters, array, setShow) => {
         setShow(
           [...array].filter(
             (cat) =>
-              cat.state === e.target.value && filterByDate(cat.updatedAt, filters.date)
+              cat[arg] === e.target.value && filterByDate(cat.updatedAt, filters.date)
           )
         );
       } else {
-        setShow([...array].filter((cat) => cat.state === e.target.value));
+        setShow([...array].filter((cat) => cat[arg] === e.target.value));
       }
     }
   };

@@ -9,9 +9,7 @@ export default class Example extends PureComponent {
     const {data} = this.props
     const sortedData = [...data].sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
 
-    console.log(data)
     const dataForChart = sortedData.map(d=>{
-      console.log(d)
       return(
         {date: d.updatedAt.slice(2,10), type: d.state==="albergue"? 1 :  
         d.state==="apadrinado"? 2 : 3}
@@ -30,13 +28,11 @@ export default class Example extends PureComponent {
     
       return acc;
     }, []);
-    console.log(dataByDay)
 
 
     return (
       <>
       <div className="m-auto flex items-center justify-center">
-      {console.log("entre")}
       <BarChart
       width={900}
       height={300}
@@ -54,7 +50,7 @@ export default class Example extends PureComponent {
       <Tooltip />
       <Legend />
       <Bar dataKey="count" fill="#A3E3DD" />
-    </BarChart>{console.log("sali")}</div></>
+    </BarChart></div></>
       
     );
   }
