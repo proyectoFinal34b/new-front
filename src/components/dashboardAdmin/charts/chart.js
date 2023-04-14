@@ -7,7 +7,10 @@ export default class Example extends PureComponent {
 
   render() {
     const {data} = this.props
-    const dataForChart = data.map(d=>{
+    const sortedData = [...data].sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
+
+    console.log(data)
+    const dataForChart = sortedData.map(d=>{
       console.log(d)
       return(
         {date: d.updatedAt.slice(2,10), type: d.state==="albergue"? 1 :  
