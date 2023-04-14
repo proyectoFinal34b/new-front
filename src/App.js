@@ -11,6 +11,7 @@ import UsuariosRender from './components/usuarios/usuarios';
 import DetailCat from './components/card/detail';
 import CreateForm from './components/form/FormularioCreacion';
 import Registro from './components/login/Registro';
+import PasarelaDePagos from './components/stripe/stripe';
 import Contraseña from './components/login/Contraseña';
 import Cambio from './components/login/Cambio'
 import { useDispatch } from 'react-redux'
@@ -42,7 +43,8 @@ function App() {
       <Route path ="/productos" element={<ProductosRender/>}></Route>
       <Route path ="/about-us" element={<SobreNosotros/>}></Route>
       <Route path ="/usuario" element={<UsuariosRender/>}></Route>
-     <Route path='/dashboard' element={<Dashboard/>}></Route>
+      <Route path='/dashboard' element={<Dashboard/>}></Route>
+      <Route path='/pasarela' element={<PasarelaDePagos/>}></Route>
      {/* <Route path="/post" element={<CreateForm/>} /> */}
      </Routes>
     </div>
