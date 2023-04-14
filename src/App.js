@@ -32,8 +32,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-      <Route exact path='/' element={<Start/>} />
-      <Route path='/home'element={<Home/>}> </Route>
+      <Route path='/'element={<Home/>}> </Route>
       <Route path ="/login/" element={<Login/>}></Route>
       <Route path ="/login/registro" element={<Registro/>}></Route>
       <Route path = "/resetpassword" element={<Contraseña/>}></Route>
