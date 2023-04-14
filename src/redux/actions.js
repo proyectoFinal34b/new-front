@@ -13,7 +13,7 @@ export const LOGGED = 'LOGGED'
 
 
 export const getCats = () => async (dispatch) => {
-    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat`)
+    return await axios.get(`http://localhost:3001/cat`)
     .then(r => {dispatch({ type : GET_CATS, payload : r.data})
     console.log(r.data, "action")})
     .catch(e => console.error(e))
@@ -38,7 +38,7 @@ export const postCats = (payload) => async (dispatch) => {
     }
   };
 export const getProduct = () => async (dispatch) => {
-    return await axios.get(`https://proyectofinal-gg57.onrender.com/product`)
+    return await axios.get(`http://localhost:3001/product`)
     .then(r => dispatch({ type : GET_PRODUCT, payload : r.data}))
     .catch(e => console.error(e))}
 

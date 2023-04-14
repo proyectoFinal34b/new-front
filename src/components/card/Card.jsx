@@ -33,7 +33,7 @@ export default function Card() {
           <span class="text-gray-700">Edad: {cat.age}</span>
 
           <div class="mt-8 mb-3">
-            <a href="/detail" class="px-4 py-2 bg-teal-500 shadow-lg border rounded-lg text-white uppercase font-semibold tracking-wider focus:outline-none focus:shadow-outline hover:bg-teal-400 active:bg-teal-400">Adoptar</a>
+            <a href={`/${cat.id}`} class="px-4 py-2 bg-teal-500 shadow-lg border rounded-lg text-white uppercase font-semibold tracking-wider focus:outline-none focus:shadow-outline hover:bg-teal-400 active:bg-teal-400">Adoptar</a>
           </div>
         </div>
         
