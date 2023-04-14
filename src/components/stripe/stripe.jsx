@@ -17,9 +17,9 @@ const CheckoutForm = () => {
     const [loading, setLoading] = useState(false);
     const totalamount=useSelector((state)=>state.cart.total);
 
-    useEffect(() =>{
-        mostrarAlerta()
-    }, []);
+    // useEffect(() =>{
+    //     mostrarAlerta()
+    // }, []);
 
     const mostrarAlerta = () =>{
         Swal.fire({
@@ -62,7 +62,8 @@ const CheckoutForm = () => {
             const {data} = await axios.post("https://proyectofinal-gg57.onrender.com/payment/checkout",{
             id: id,
             amount: totalamount * 100
-        })
+        }) 
+        mostrarAlerta()
 
             console.log(data)
 
