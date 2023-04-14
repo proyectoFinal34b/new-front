@@ -4,6 +4,7 @@ import {Elements, CardElement, useStripe, useElements} from '@stripe/react-strip
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const stripePromise = loadStripe("pk_test_51Mw8EZKXctGo6PdRordVcWqK5Eb4jPlAgImQ2oQijGbhgqRuTLFipWxQNKEJ5cOpEW6OpjQzsMKbcOLLE4rkaRBc00NRHlsSSD") //conectar con stripe
 
@@ -14,6 +15,7 @@ const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const [loading, setLoading] = useState(false);
+    const totalamount=useSelector((state)=>state.cart.total);
 
     useEffect(() =>{
         mostrarAlerta()
@@ -27,11 +29,17 @@ const CheckoutForm = () => {
             confirmButtonText: 'volver al inicio',
             confirmButtonColor: '#b6ece5',
             timer:  '20000',
+            timerProgressBar: true,
             position: 'top',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowOutsideClick: false,
         }
         ).then(response =>{
             if(response.isConfirmed){
-                <Link to='/home'> </Link>
+                window.location.href = "/home";
+            }else{
+                window.location.href = "/home";
             }
         })
     }
@@ -50,9 +58,10 @@ const CheckoutForm = () => {
         const {id} = paymentMethod; //le paso a la base de datos lo que tiene que guardar
 
         try {
+            console.log(totalamount)
             const {data} = await axios.post("https://proyectofinal-gg57.onrender.com/payment/checkout",{
-            id,
-            amount: 10000,
+            id: id,
+            amount: totalamount * 100
         })
 
             console.log(data)
@@ -99,7 +108,8 @@ const CheckoutForm = () => {
         <label className="font-bold sm:text-xl mb-2 ml-1">Tarjeta</label>
         <CardElement className="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"/>
         </div>
-        <h3 className="font-bold sm:text-xl mb-2 ml-1 p-3">Precio:</h3>
+        <h3 className="font-bold sm:text-xl mb-2 ml-1 p-3">Precio: ${totalamount}.00</h3>
+
         <button disabled={!stripe} className="bg-teal-500/80 hover:bg-teal-500/90 px-6 py-2 rounded-md text-white font-medium tracking-winder transition">
         {loading ? (
             <div role="status">

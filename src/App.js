@@ -8,7 +8,8 @@ import GatosRender from './components/gatos/gatos';
 import ProductosRender from './components/productos/productos';
 import SobreNosotros from './components/sobre-nosotros/sobre-nosotros';
 import UsuariosRender from './components/usuarios/usuarios';
-import DetailCat from './components/card/detail';
+import DetailGatos from "./components/detail/render/detailCats"
+import DetailProductos from './components/detail/render/detailProducts';
 import CreateForm from './components/form/FormularioCreacion';
 import Registro from './components/login/Registro';
 import PasarelaDePagos from './components/stripe/stripe';
@@ -39,8 +40,9 @@ function App() {
       <Route path = "/changepassword" element={<Cambio/>}></Route>
       <Route path ="/donaciones" element={<DonacionesRender/>}></Route>
       <Route path ="/gatos" element={<GatosRender/>}></Route>
-      <Route path ="/detail" element={<DetailCat/>}></Route>
+      <Route path ="/gatos/:id" element={<DetailGatos/>}></Route>
       <Route path ="/productos" element={<ProductosRender/>}></Route>
+      <Route path ="/productos/:id" element={<DetailProductos/>}></Route>
       <Route path ="/about-us" element={<SobreNosotros/>}></Route>
       <Route path ="/usuario" element={<UsuariosRender/>}></Route>
       <Route path='/dashboard' element={<Dashboard/>}></Route>

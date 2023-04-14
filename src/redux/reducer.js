@@ -1,9 +1,11 @@
 import {
   FILTER_CATS,
   GET_CATS,
+  GET_CATS_BY_ID,
   SEARCH_CATS,
   POST_CATS,
   GET_PRODUCT,
+  GET_PRODUCT_BY_ID,
   FILTER_PRODUCT,
   GET_USERS,
   LOGGED,
@@ -16,8 +18,10 @@ import {
 
 const initialState = {
   cats: [],
+  catsById: [],
   allCats: [],
   allProducts: [],
+  productsById: [],
   allUsers: [],
   logged: false,
   user: {},
@@ -33,6 +37,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, allCats: action.payload, cats: action.payload };
     case SEARCH_CATS:
       return { ...state, allCats: action.payload };
+    case GET_CATS_BY_ID:
+      return { ...state, catsById: action.payload }
     case FILTER_CATS:
       return {
         ...state,
@@ -47,6 +53,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         allProducts: action.payload,
       };
+    case GET_PRODUCT_BY_ID:
+      return{ ...state, productsById: action.payload}
     case FILTER_PRODUCT:
       return {
         ...state,
