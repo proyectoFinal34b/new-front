@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import {loadStripe,} from '@stripe/stripe-js'
+import React, { useState, useEffect } from "react";
+import {loadStripe} from '@stripe/stripe-js'
 import {Elements, CardElement, useStripe, useElements} from '@stripe/react-stripe-js'
 import axios from "axios";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const stripePromise = loadStripe("pk_test_51Mw8EZKXctGo6PdRordVcWqK5Eb4jPlAgImQ2oQijGbhgqRuTLFipWxQNKEJ5cOpEW6OpjQzsMKbcOLLE4rkaRBc00NRHlsSSD") //conectar con stripe
@@ -15,12 +17,39 @@ const CheckoutForm = () => {
     const [loading, setLoading] = useState(false);
     const totalamount=useSelector((state)=>state.cart.total);
 
+    useEffect(() =>{
+        mostrarAlerta()
+    }, []);
+
+    const mostrarAlerta = () =>{
+        Swal.fire({
+            title: 'Pago exitoso',
+            text:  'tu pago ha sido realizado',
+            icon:  'success',
+            confirmButtonText: 'volver al inicio',
+            confirmButtonColor: '#b6ece5',
+            timer:  '20000',
+            timerProgressBar: true,
+            position: 'top',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+        }
+        ).then(response =>{
+            if(response.isConfirmed){
+                window.location.href = "/home";
+            }else{
+                window.location.href = "/home";
+            }
+        })
+    }
+
     const handleSubmit = async (e) => {
     e.preventDefault();
 
     const {error, paymentMethod} = await stripe.createPaymentMethod({
-        type: 'card',       //tipo de pago que estamos registrando
-        card: elements.getElement(CardElement)  //es como un documentGetById
+        type: "card",       //tipo de pago que estamos registrando
+        card: elements.getElement(CardElement),  //es como un documentGetById
     });
     setLoading(true)
 
@@ -46,6 +75,7 @@ const CheckoutForm = () => {
     }
 };
 
+    console.log(!stripe || loading);
 
     return (
         <div className="min-w-screen min-h-screen bg-gray-200 flex items-center justify-center px-5 pb-10 pt-16">
