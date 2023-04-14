@@ -2,9 +2,11 @@ import axios from "axios";
 
 export const GET_CATS = "GET_CATS";
 export const SEARCH_CATS = "SEARCH_CATS";
+export const GET_CATS_BY_ID = 'GET_CATS_BY_ID';
 export const FILTER_CATS = "FILTER_CATS";
 export const POST_CATS = "POST_CATS";
 export const GET_PRODUCT = "GET_PRODUCT";
+export const GET_PRODUCT_BY_ID='GET_PRODUCT_BY_ID'
 export const FILTER_PRODUCT = "FILTER_PRODUCT";
 export const GET_USERS = "GET_USERS";
 export const LOGGED = "LOGGED";
@@ -29,6 +31,12 @@ export const searchCats = (name) => async (dispatch) => {
     .catch(e => console.error(e))
 };
 
+export const getCatsById = (id) => async (dispatch) => {
+    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat/${id}`)
+    .then(r => dispatch({ type : GET_CATS_BY_ID, payload : r.data}))
+    .catch(e => console.error(e))
+}
+
 export const filterCats = (filtered) => {
   return { type: FILTER_CATS, payload: filtered };
 };
@@ -46,6 +54,11 @@ export const getProduct = () => async (dispatch) => {
     .then(r => dispatch({ type : GET_PRODUCT, payload : r.data}))
     .catch(e => console.error(e))}
 
+export const getProductsById = (id) => async (dispatch) => {
+    return await axios.get(`https://proyectofinal-gg57.onrender.com/product/${id}`)
+    .then(r => dispatch({ type : GET_PRODUCT_BY_ID, payload : r.data}))
+    .catch(e => console.error(e))
+}
 
 export const filterProduct = (filtered) => {
   return { type: FILTER_PRODUCT, payload: filtered };

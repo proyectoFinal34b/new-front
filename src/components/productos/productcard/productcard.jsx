@@ -38,7 +38,9 @@ dispatch(addToCart(id))
       <div className="mt-2 flex gap-2">
         <button onClick={()=>agregarAlCarro(props.id)} className="bg-teal-500/80 hover:bg-teal-500/90 px-6 py-2 rounded-md text-white font-medium tracking-winder transition">Agregar al carro</button>
         <button className="flex-grow flex justify-center items-center bg-gray-300/60 hover:bg-gray-300/80 transition rounded-md"><img class="opacity-50 w-6" src="https://cdn-icons-png.flaticon.com/512/109/109791.png" alt="" /></button>
+       
       </div>
+      <a href={`/productos/${props.id}`} class="bg-teal-500/80 hover:bg-teal-500/90 px-6 py-2 rounded-md text-white font-medium tracking-winder transition">Detalle</a>
       </div>
     </div>
 
