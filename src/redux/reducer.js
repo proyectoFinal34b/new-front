@@ -1,48 +1,80 @@
-import { FILTER_CATS, GET_CATS,SEARCH_CATS, POST_CATS } from "./actions";
+import {
+  FILTER_CATS,
+  GET_CATS,
+  GET_CATS_BY_ID,
+  SEARCH_CATS,
+  POST_CATS,
+  GET_PRODUCT,
+  GET_PRODUCT_BY_ID,
+  FILTER_PRODUCT,
+  GET_USERS,
+  // ADD_TO_CARD
+  LOGGED,
+} from "./actions";
 
 const initialState = {
-    cats:[],
-    allCats: [],
-}
-
+  cats: [],
+  catsById: [],
+  allCats: [],
+  allProducts: [],
+  productsById: [],
+  allUsers: [],
+  logged : false,
+  user:{},
+  card: [],
+};
 
 const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case GET_CATS:
-            return {...state,
-                allCats: action.payload,
-                cats: action.payload,
-            }
-        case SEARCH_CATS:
-            return {...state,
-                allCats: action.payload
-            }
-        case FILTER_CATS:
-      //       let tempGatos = state.allCats;
-      // if (action.payload.status) {
-      //   tempGatos = tempGatos.filter((gato) => gato.status === action.payload.status);
-      // }
-      // if (action.payload.gender) {
-      //   tempGatos = tempGatos.filter((gato) => gato.gender === action.payload.gender);
-      // }
-      // if (action.payload.age) {
-      //   tempGatos = tempGatos.filter((gato) => gato.age === parseInt(action.payload.age));
-      // }
-            return {
-            ...state,
-            allCats: action.payload
+  switch (action.type) {
+    case GET_CATS:
+      return { ...state, allCats: action.payload, cats: action.payload };
+    case SEARCH_CATS:
+      return { ...state, allCats: action.payload };
+    case GET_CATS_BY_ID:
+      return { ...state, catsById: action.payload }
+    case FILTER_CATS:
+      return {
+        ...state,
+        allCats: action.payload,
+      };
+    case POST_CATS:
+      return {
+        ...state,
+      };
+    case GET_PRODUCT:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+    case GET_PRODUCT_BY_ID:
+      return{ ...state, productsById: action.payload}
+      case FILTER_PRODUCT:
+        return {
+          ...state,
+          allProducts: action.payload,
         };
-        case POST_CATS:
-             return {
-            ...state,
+      case GET_USERS:
+        return {
+          ...state,
+          allUsers: action.payload,
         };
-        default:
-            return {...state};
+
+      case LOGGED:
+        console.log(action.payload.logged, action.payload.data ,"action.payload")
+        return {
+          ...state, 
+          logged: action.payload.logged, 
+          user: action.payload.data
         }
 
-
-}
-
-
+      // case ADD_TO_CARD:
+      //   return {
+      //   ...state,
+      //   card: [...state.card, action.payload]
+      // };
+    default:
+      return { ...state };
+  }
+};
 
 export default reducer;

@@ -1,14 +1,14 @@
 import React from "react";
 
 export default function Paginado({
-  catsPerPage,
-  allcats,
+  elementsPerPage,
+  allelements,
   paginado,
   currentPage,
 }) {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(allcats / catsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(allelements / elementsPerPage); i++) {
     //cantidad de elementos totales, dividido limite de elementos por pagina
     pageNumbers.push(i);
   }
@@ -16,12 +16,16 @@ export default function Paginado({
     e.preventDefault();
     if (currentPage > 1) {
       paginado(currentPage - 1);
+    } else {
+      paginado(Math.ceil(allelements / elementsPerPage))
     }
   }
   function handlenext(e) {
     e.preventDefault();
     if (currentPage < pageNumbers.length) {
       paginado(currentPage + 1);
+    }else {
+      paginado(1)
     }
   }
   return (
