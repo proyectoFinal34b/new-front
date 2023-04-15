@@ -66,9 +66,9 @@ const currentUser = {
       <Menu click={clickHandlerMenu}></Menu>
       <div id="view" className=" flex-grow ">
     <NavBarDash props={currentUser}></NavBarDash>
-    <div className=" w-full ">
+    <div className=" w-full my-14 ">
     {info.cats.length===0 || info.users.length===0 || info.products.length===0 || info.orders.length===0  ? <Loading></Loading> : 
-     view==="general" ?  <General cats={info?.cats} orders={info?.orders}></General> : 
+     view==="general" ?  <General cats={info?.cats} orders={info?.orders} users={info?.users} ></General> : 
      view==="gatos" ? <Gatos cats={info?.cats}></Gatos> :
      view==="products" ? <Productos products={info?.products}></Productos> :
      view==="users" ?  <Usuarios users={info?.users}></Usuarios> :
