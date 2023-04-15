@@ -1,15 +1,18 @@
-import React from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect,useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import { isLogged } from "../../redux/actions";
 import Cart from "../carrito/carrito";
+import DarkMode from "./DarkMode";
 
 const Navbar = () => {
-  const isLoggedIn = useSelector((state) => state.logged);
-  const user = useSelector((state) => state.user);
+  const isLoggedIn = sessionStorage.getItem("isLoggedIn")
+  const user = sessionStorage.getItem("userInfo")
+  
   const dispatch = useDispatch();
 
+  useEffect(()=>{
+   console.log(sessionStorage) 
+  },[isLoggedIn])
 
   const [open, setOpen] = useState(null);
   const handleOpen = () => {
@@ -19,7 +22,7 @@ const Navbar = () => {
   const handleClose = () => setOpen(null);
 
   return (
-    <nav className="shadow-md bg-white border-gray-200 dark:bg-gray-900">
+    <nav className="shadow-md bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-10">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link to={"/"}><span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-teal-400">
           BASTET
@@ -27,10 +30,10 @@ const Navbar = () => {
         <div className="flex md:order-2">
           {isLoggedIn ? (
             <div>
-              Hola,{user.name}!!
+              Hola,{user}!!
               <button
               className="text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
-                onClick={() => dispatch(isLogged(false))}
+                onClick={() => (sessionStorage.removeItem("isLoggedIn", false), sessionStorage.removeItem("userInfo", ""), window.location.href = "http://localhost:3000/")}
               >
                 Cerrar sesión
               </button>
@@ -92,7 +95,6 @@ const Navbar = () => {
           </div>
            {/* :""}  */}
         </div>
-
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-cta"
@@ -139,6 +141,7 @@ const Navbar = () => {
                 Donaciones
               </a>
             </li>
+            <DarkMode />
           </ul>
         </div>
       </div>

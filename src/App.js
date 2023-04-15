@@ -1,7 +1,6 @@
-import { Route, Routes, useLocation} from 'react-router-dom';
+import { Route, Routes} from 'react-router-dom';
 import './App.css';
 import Home from './components/home/home';
-import Start from './components/Start';
 import Login from "./components/login/LogIn";
 import DonacionesRender from './components/donaciones/donaciones';
 import GatosRender from './components/gatos/gatos';
@@ -10,14 +9,12 @@ import SobreNosotros from './components/sobre-nosotros/sobre-nosotros';
 import UsuariosRender from './components/usuarios/usuarios';
 import DetailGatos from "./components/detail/render/detailCats"
 import DetailProductos from './components/detail/render/detailProducts';
-import CreateForm from './components/form/FormularioCreacion';
 import Registro from './components/login/Registro';
 import PasarelaDePagos from './components/stripe/stripe';
 import Contraseña from './components/login/Contraseña';
 import Cambio from './components/login/Cambio'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react';
-import axios from 'axios'
 import Dashboard from './components/dashboardAdmin/dashboard';
 import { getUsers } from './redux/actions';
 import { getCats } from './redux/actions';
@@ -29,8 +26,16 @@ function App() {
     dispatch(getUsers)
     dispatch(getCats)
   },[])
+  useEffect(() => {
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
   return (
-    <div className="App">
+    <div className="App cursor-default">
       <Routes>
       <Route path='/'element={<Home/>}> </Route>
       <Route path ="/login/" element={<Login/>}></Route>

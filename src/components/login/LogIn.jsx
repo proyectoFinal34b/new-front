@@ -82,14 +82,17 @@ export default function Login() {
         password: password,
       })
       .then((response) => {
+        console.log(response)
         if (response.data.logged) {
           dispatch(isLogged(response.data));
           sessionStorage.setItem("isLoggedIn", true);
           sessionStorage.setItem("email", email);
           sessionStorage.setItem("password", password);
+          sessionStorage.setItem("userInfo", response.data.validatedUser.name
+)
           setIsSessionStarted(true);
           alert("Inicio de sesión exitoso")
-          window.location.href = "http://localhost:3000/"
+   window.location.href = "http://localhost:3000/" 
         } else {
           alert("Email o contraseña incorrectos");
         }
