@@ -14,6 +14,7 @@ import {
   DEL_ONE_FROM_CART,
   CLEAR_CART,
   TOTAL_AMOUNT,
+  GET_USERS_ID
 } from "./actions";
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
   allProducts: [],
   productsById: [],
   allUsers: [],
+  detail: [],
   logged: false,
   user: {},
   cart: {
@@ -129,7 +131,11 @@ const reducer = (state = initialState, action) => {
           initialValue
         ),}
       };
-
+      case GET_USERS_ID:
+        return{
+          ...state,
+          detail: action.payload,
+        }
     default:
       return { ...state };
   }

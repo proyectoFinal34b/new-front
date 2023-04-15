@@ -15,6 +15,7 @@ import Registro from './components/login/Registro';
 import PasarelaDePagos from './components/stripe/stripe';
 import Contraseña from './components/login/Contraseña';
 import Cambio from './components/login/Cambio'
+import Profile from './components/login/Profile'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react';
 import axios from 'axios'
@@ -38,6 +39,7 @@ function App() {
       <Route path ="/login/registro" element={<Registro/>}></Route>
       <Route path = "/resetpassword" element={<Contraseña/>}></Route>
       <Route path = "/changepassword" element={<Cambio/>}></Route>
+      <Route path = "/profile" element={<Profile/>}></Route>
       <Route path ="/donaciones" element={<DonacionesRender/>}></Route>
       <Route path ="/gatos" element={<GatosRender/>}></Route>
       <Route path ="/gatos/:id" element={<DetailGatos/>}></Route>

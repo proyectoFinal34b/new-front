@@ -15,6 +15,7 @@ export const DEL_ALL_FROM_CART="DEL_ALL_FROM_CART"
 export const DEL_ONE_FROM_CART="DEL_ONE_FROM_CART"
 export const CLEAR_CART="CLEAR_CART";
 export const TOTAL_AMOUNT="TOTAL_AMOUNT"
+export const GET_USERS_ID="GET_USERS_ID"
 
 
 
@@ -120,4 +121,18 @@ export const totalamount= ()=>{
     type:TOTAL_AMOUNT
 
   }
+}
+
+export function getUsersById(id) {
+  return async function (dispatch) {
+    try {
+      const json = await axios.get(`https://proyectofinal-gg57.onrender.com/user/${id}`);
+      return dispatch({
+        type: GET_USERS_ID,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 }

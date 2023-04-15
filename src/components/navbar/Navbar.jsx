@@ -30,7 +30,7 @@ const Navbar = () => {
               Hola,{user.name}!!
               <button
               className="text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
-                onClick={() => dispatch(isLogged(false))}
+                onClick={() => dispatch(isLogged({ logged: false, data: {} }))}
               >
                 Cerrar sesión
               </button>
@@ -90,7 +90,7 @@ const Navbar = () => {
             )}
             {/* {open? <Cart setOpen={setOpen} />: <p onClose={setOpen(true)} className='bg-grey 900'>SVG</p>} */}
           </div>
-           {/* :""}  */}
+          {/* :""} */}
         </div>
 
         <div
