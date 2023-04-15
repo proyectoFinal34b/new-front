@@ -19,14 +19,14 @@ export const CURRENT_PAGE = "CURRENT_PAGE"
 
 
 export const getCats = () => async (dispatch) => {
-    return await axios.get(`http://localhost:3001/cat`)
+    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat`)
     .then(r => {dispatch({ type : GET_CATS, payload : r.data})
     console.log(r.data, "action")})
     .catch(e => console.error(e))
 };
 
 export const searchCats = (name) => async (dispatch) => {
-    return await axios.get(`http://localhost:3001/cat?name=${name}`)
+    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat?name=${name}`)
     .then(r => dispatch({ type : SEARCH_CATS, payload : r.data}))
     .catch(e => console.error(e))
 };
