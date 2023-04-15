@@ -42,7 +42,7 @@ const Navbar = () => {
                   type="button"
                   className="text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
                 >
-                  iniciar sesion
+                  Iniciar sesion
                 </button>{" "}
               </NavLink>
             </>
@@ -104,7 +104,7 @@ const Navbar = () => {
                 className="block py-2 pl-3 pr-4 text-white bg-teal-400 rounded md:bg-transparent md:text-teal-400 md:p-0 md:dark:text-teal-400"
                 aria-current="page"
               >
-                Blog
+                Inicio
               </a>
             </li>
             <li>

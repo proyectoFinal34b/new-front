@@ -50,7 +50,7 @@ export const postCats = (payload) => async (dispatch) => {
     }
   };
 export const getProduct = () => async (dispatch) => {
-    return await axios.get(`https://proyectofinal-gg57.onrender.com/product`)
+    return await axios.get(`http://localhost:3001/product`)
     .then(r => dispatch({ type : GET_PRODUCT, payload : r.data}))
     .catch(e => console.error(e))}
 

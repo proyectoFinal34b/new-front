@@ -21,6 +21,7 @@ export default function Renderizados(props) {
             image={e.image}
             price={e.price}
             ratings={e.ratings}
+            discount={e.discount}
             />)
             :
             <img src={cargando} alt="" />}
