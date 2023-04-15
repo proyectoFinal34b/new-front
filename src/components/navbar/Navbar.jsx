@@ -6,11 +6,13 @@ import DarkMode from "./DarkMode";
 
 const Navbar = () => {
   const [ isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem("isLoggedIn"))
-  if(isLoggedIn){
-    
-  }
-  const user = (JSON.parse(sessionStorage.getItem("userInfo")))
-  console.log(user)
+  const prevUser = JSON.parse(sessionStorage.getItem("userInfo"))
+
+  const [user, setUser] = useState(prevUser)
+  console.log(user,"soy user")  
+  
+
+
   const dispatch = useDispatch();
 
   useEffect(()=>{
@@ -39,7 +41,7 @@ const Navbar = () => {
         <div className="flex md:order-2">
           {isLoggedIn ? (
             <div>
-              Hola, {user.name}!!  
+              Hola, {user?.name}!!  
               <button
               className="text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
                 onClick={handlerLogOut}
