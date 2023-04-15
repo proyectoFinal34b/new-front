@@ -5,9 +5,14 @@ import Cart from "../carrito/carrito";
 import DarkMode from "./DarkMode";
 
 const Navbar = () => {
-  const isLoggedIn = sessionStorage.getItem("isLoggedIn")
-  const user = sessionStorage.getItem("userInfo")
+  const [ isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem("isLoggedIn"))
+  const prevUser = JSON.parse(sessionStorage.getItem("userInfo"))
+
+  const [user, setUser] = useState(prevUser)
+  console.log(user,"soy user")  
   
+
+
   const dispatch = useDispatch();
 
   useEffect(()=>{
@@ -20,6 +25,12 @@ const Navbar = () => {
     console.log(open);
   };
   const handleClose = () => setOpen(null);
+  const handlerLogOut = ()=>{
+    sessionStorage.removeItem("isLoggedIn", false)
+     sessionStorage.removeItem("userInfo", "")
+    sessionStorage.removeItem("id", "")
+    setIsLoggedIn(sessionStorage.getItem("isLoggedIn"))
+  }
 
   return (
     <nav className="shadow-md bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-10">
@@ -30,10 +41,10 @@ const Navbar = () => {
         <div className="flex md:order-2">
           {isLoggedIn ? (
             <div>
-              Hola,{user}!!
+              Hola, {user?.name}!!  
               <button
               className="text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
-                onClick={() => (sessionStorage.removeItem("isLoggedIn", false), sessionStorage.removeItem("userInfo", ""), window.location.href = "http://localhost:3000/")}
+                onClick={handlerLogOut}
               >
                 Cerrar sesión
               </button>

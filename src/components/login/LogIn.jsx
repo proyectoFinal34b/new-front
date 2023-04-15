@@ -86,10 +86,8 @@ export default function Login() {
         if (response.data.logged) {
           dispatch(isLogged(response.data));
           sessionStorage.setItem("isLoggedIn", true);
-          sessionStorage.setItem("email", email);
-          sessionStorage.setItem("password", password);
-          sessionStorage.setItem("userInfo", response.data.validatedUser.name
-)
+          sessionStorage.setItem("userInfo", JSON.stringify(response.data.validatedUser))
+          sessionStorage.setItem("id", response.data.validatedUser.id )
           setIsSessionStarted(true);
           alert("Inicio de sesión exitoso")
    window.location.href = "http://localhost:3000/" 
