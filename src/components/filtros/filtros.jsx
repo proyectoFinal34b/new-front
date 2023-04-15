@@ -188,6 +188,7 @@ export default function GatosFiltrados() {
           className="md:px-1 md:w-full rounded-md border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500 h-10 px-4"
         >
           <option value="">Cualquier edad</option>
+          <option value="0">0 años</option>
           <option value="1">1 año</option>
           <option value="2">2 años</option>
           <option value="3">3 años</option>
