@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form"
 import useFormPersist from "react-hook-form-persist"
 import { Link } from "react-router-dom";
+import { GoogleLogin } from 'react-google-login';
+
 
 export default function Registro() {
   const navigate = useNavigate();
@@ -38,6 +40,11 @@ useEffect(()=>{
         alert("El email ya existe", error);
       });
   };
+/*   const responseGoogle = (response) => {
+    console.log(response);
+    // Aquí puede hacer cualquier cosa con la respuesta de Google, como autenticar al usuario en su aplicación o acceder a los datos del usuario proporcionados por Google
+  }; */
+  
   
 
     
@@ -126,11 +133,19 @@ return(
     </button>
         </form>
         <p className="text-center mb-8">
-          <Link to='/' className="text-sm text-gray-500 hover:text-teal-400">
+          <Link to='/home' className="text-sm text-gray-500 hover:text-teal-400">
             Volver a la página de inicio
           </Link>
         </p>
       </div>
+{/*       <GoogleLogin
+  clientId="bastet-383823"
+  buttonText="Iniciar sesión con Google"
+  onSuccess={responseGoogle}
+  onFailure={responseGoogle}
+  cookiePolicy={'single_host_origin'}
+/> */}
+
       </div>
         )
       }

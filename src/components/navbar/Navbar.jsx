@@ -5,9 +5,8 @@ import Cart from "../carrito/carrito";
 import DarkMode from "./DarkMode";
 
 const Navbar = () => {
-  const [ isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem("isLoggedIn"))
-  const prevUser = JSON.parse(sessionStorage.getItem("userInfo"))
-
+  const [ isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"))
+  const prevUser = JSON.parse(localStorage.getItem("userInfo"))
   const [user, setUser] = useState(prevUser)
   console.log(user,"soy user")  
   
@@ -26,12 +25,12 @@ const Navbar = () => {
   };
   const handleClose = () => setOpen(null);
   const handlerLogOut = ()=>{
-    sessionStorage.removeItem("isLoggedIn", false)
-     sessionStorage.removeItem("userInfo", "")
-    sessionStorage.removeItem("id", "")
-    setIsLoggedIn(sessionStorage.getItem("isLoggedIn"))
+    localStorage.removeItem("isLoggedIn")
+    localStorage.removeItem("userInfo")
+    localStorage.removeItem("id")
+    setIsLoggedIn(localStorage.getItem("isLoggedIn"))
   }
-
+  
   return (
     <nav className="shadow-md bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-10">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
