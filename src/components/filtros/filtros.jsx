@@ -168,7 +168,7 @@ export default function GatosFiltrados() {
         </label>
         <select
           id="gender"
-          onChange={(e) =>(setFiltroStatus(e.target.value),dispatch(currentPageFunction(1)))}
+          onChange={(e) => (setFiltroGender(e.target.value),dispatch(currentPageFunction(1)))}
           value={filtroGender}
           className="md:px-1 md:w-full rounded-md border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500 h-10 px-4"
         >
@@ -183,7 +183,7 @@ export default function GatosFiltrados() {
         </label>
         <select
           id="age"
-          onChange={(e) =>(setFiltroStatus(e.target.value),dispatch(currentPageFunction(1)))}
+          onChange={(e) =>( setFiltroAge(e.target.value),dispatch(currentPageFunction(1)))}
           value={filtroAge}
           className="md:px-1 md:w-full rounded-md border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500 h-10 px-4"
         >

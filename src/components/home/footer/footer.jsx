@@ -13,29 +13,13 @@ const Footer = () => {
         >
           <span className="text-teal-400">Bastet </span> tu gatito te espera
         </h1>
-        <div>
-          <input
-            type="text"
-            placeholder="Correo"
-            className="text-gray-800
-           sm:w-72 w-full sm:mr-5 mr-1 lg:mb-0 mb-4 py-2.5 rounded px-2 focus:outline-none"
-          />
-          <button
-            className="bg-teal-500 hover:bg-teal-500 duration-300 px-5 py-2.5 font-[Poppins]
-           rounded-md text-gray md:w-auto w-full"
-          >
-            Enviar
-          </button>
-        </div>
       </div>
       <ItemsContainer />
       <div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10
+        className=" sm:grid-cols-2 lg:grid-cols-3 gap-10
       text-center pt-2 text-gray-400 text-sm pb-8"
       >
-        <span>© 2023 Bastet . Reservados todos los derechos.</span>
-        <span>Términos · política de privacidad</span>
-        <SocialIcons Icons={Icons} />
+        <span >© 2023 Bastet . Reservados todos los derechos.</span>
       </div>
     </footer>
   );
