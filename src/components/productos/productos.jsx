@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Paginado from "../card/paginado/paginado";
 import ProductFiltrados from "./filtros tienda/filtrosT";
 import Renderizados from "./productos renderizados/renderizados";
-import Cart from "../carrito/carrito";
 
 export default function ProductosRender() {
+
   const dispatch = useDispatch();
   const products = useSelector((state) => state.allProducts);
   const [prueba, setPrueba] = useState(false);
@@ -43,3 +43,4 @@ export default function ProductosRender() {
     </>
   );
 }
+
