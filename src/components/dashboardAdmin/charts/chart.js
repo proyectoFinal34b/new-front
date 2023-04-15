@@ -1,33 +1,18 @@
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
+import { blankDate, updateCount } from '../logic/blankDate';
 
 export default class Example extends PureComponent {
   static demoUrl = 'https://codesandbox.io/s/simple-bar-chart-tpz8r';
 
   render() {
     const {data} = this.props
+    const {periodo} = this.props
     const sortedData = [...data].sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
-
-    const dataForChart = sortedData.map(d=>{
-      return(
-        {date: d.updatedAt.slice(2,10), type: d.state==="albergue"? 1 :  
-        d.state==="apadrinado"? 2 : 3}
-      )
-    })
-
-    const dataByDay = dataForChart.reduce((acc, d) => {
-      const date = d.date;
-      const existingData = acc.find(item => item.date === date);
-    
-      if (existingData) {
-        existingData.count += 1;
-      } else {
-        acc.push({ date: date, count: 1 });
-      }
-    
-      return acc;
-    }, []);
+   const a =  blankDate(periodo)
+   console.log(a)
+   const dataByDay = updateCount(a, sortedData)
+  console.log("console",dataByDay)
 
 
     return (
@@ -45,7 +30,7 @@ export default class Example extends PureComponent {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="date" />
+      <XAxis dataKey="date" interval="preserveStart" angle={-45} textAnchor="end" />
       <YAxis />
       <Tooltip />
       <Legend />

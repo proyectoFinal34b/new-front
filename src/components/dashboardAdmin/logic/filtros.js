@@ -3,7 +3,6 @@ lastMonth.setMonth(lastMonth.getMonth() - 1);
 
 export const filterByDate = (arg, filterValue) => {
     const date = new Date(arg);
-    console.log(date)
     if (filterValue === "Mes actual") {
       return date > lastMonth;
     } else if (filterValue === "Ultimos tres meses") {
