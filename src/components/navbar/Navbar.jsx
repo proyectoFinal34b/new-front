@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { isLogged } from "../../redux/actions";
 import Cart from "../carrito/carrito";
 
@@ -21,9 +21,9 @@ const Navbar = () => {
   return (
     <nav className="shadow-md bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-teal-400">
+        <Link to={"/"}><span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-teal-400">
           BASTET
-        </span>
+        </span></Link> 
         <div className="flex md:order-2">
           {isLoggedIn ? (
             <div>
@@ -42,7 +42,7 @@ const Navbar = () => {
                   type="button"
                   className="text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
                 >
-                  iniciar sesion
+                  Iniciar sesion
                 </button>{" "}
               </NavLink>
             </>
@@ -100,11 +100,11 @@ const Navbar = () => {
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
               <a
-                href="/home"
+                href="/"
                 className="block py-2 pl-3 pr-4 text-white bg-teal-400 rounded md:bg-transparent md:text-teal-400 md:p-0 md:dark:text-teal-400"
                 aria-current="page"
               >
-                Blog
+                Inicio
               </a>
             </li>
             <li>
