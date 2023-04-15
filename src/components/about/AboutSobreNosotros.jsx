@@ -11,8 +11,8 @@ function AboutMe() {
             En este apartado podras encontrar informacion sobre los creadores de este sitio web.
           </p>
         </div>
-        <div className="md:w-1/2 h-auto relative">
-          <img src="https://i.pinimg.com/originals/29/25/8b/29258b3af743172089a2db34a614fbf1.jpg" alt="Gatito" className="h-full w-full object-cover" />
+        <div className="md:w-1/2 h-full relative">
+          <img src="https://i.pinimg.com/originals/29/25/8b/29258b3af743172089a2db34a614fbf1.jpg" alt="Gatito" className="h-full w-full object-cover m-auto" />
           <NavLink to="/about-us"><button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-teal-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">Click</button></NavLink>
         </div>
       </div>

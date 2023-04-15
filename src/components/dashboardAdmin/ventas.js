@@ -2,28 +2,32 @@ import React, { useState } from "react";
 import { sortTable } from "./logic/ordenamientoTablas";
 import { CSVLink } from "react-csv";
 import Buttons from "./logic/buttons";
+import { handleColumnClick, handlerClick } from "./logic/handlers";
+import Example from "./charts/chart";
+import { handlerClickType } from "./logic/handlers";
 
 export default function Ventas({ orders }) {
   const stylesNameCol = "w-28 p-2 cursor-pointer ";
   const stylesTd = "h-8 px-2 py-3  ";
   const [filters, setFilters] = useState({
+    date: "historico",
+    type:"",
     column: "id",
     direction: "desc",
   });
+  const [show, setShow] = useState([...orders])
 
-  const handleColumnClick = (columnName) => {
-    if (columnName === filters.column) {
-      setFilters({
-        ...filters,
-        direction: filters.direction === "asc" ? "desc" : "asc",
-      });
-    } else {
-      setFilters({
-        column: columnName,
-        direction: "asc",
-      });
-    }
+  const handleColumnClickVentas = (columnName) => {
+   handleColumnClick(columnName, filters, setFilters, show, setShow)
   };
+  const handlerClickVentas = (e)=>{
+    handlerClick(e, filters, setFilters, orders, setShow)
+  }
+
+  const handlerClickTypeVenta = (e) => {
+    handlerClickType(e, filters, setFilters, orders, setShow, "delivery")
+  }
+
   const filteredOrders = sortTable(filters.column, filters.direction, orders);
 
  const csvHeaders = [
@@ -52,16 +56,20 @@ export default function Ventas({ orders }) {
   return (
     <>
       <h1>Soy la view ventas</h1>
-      <Buttons></Buttons>
+      <Example data={show} arg={filters.type} periodo={filters.date}></Example>
+      <button value="proceso" onClick={handlerClickTypeVenta}>Proceso</button>
+      <button value="entregado" onClick={handlerClickTypeVenta}>Entregado</button>
+      <button value="cancelado" onClick={handlerClickTypeVenta}>Cancelado</button>
+      <Buttons handlerClick={handlerClickVentas}></Buttons>
       <div>
         <table className="table-fixed cursor-default m-auto border-collapse border border-slate-900">
           <thead>
             <tr className="bg-tableCol  text-white border-collapse border border-slate-900">
-              <th className="w-12" onClick={() => handleColumnClick("id")}>ID</th>
-              <th className="w-36" onClick={() => handleColumnClick("delivery")}>Delivery</th>
-              <th onClick={() => handleColumnClick("list")}>List</th>
-              <th className={stylesNameCol} onClick={() => handleColumnClick("status")}>Status</th>
-              <th className={stylesNameCol} onClick={() => handleColumnClick("createdAt")}>Ralizada</th>
+              <th className="w-12" onClick={() => handleColumnClickVentas("id")}>ID</th>
+              <th className="w-36" onClick={() => handleColumnClickVentas("delivery")}>Delivery</th>
+              <th onClick={() => handleColumnClickVentas("list")}>List</th>
+              <th className={stylesNameCol} onClick={() => handleColumnClickVentas("status")}>Status</th>
+              <th className={stylesNameCol} onClick={() => handleColumnClickVentas("createdAt")}>Ralizada</th>
               <th className={stylesNameCol}>Edit</th>
             </tr>
           </thead>

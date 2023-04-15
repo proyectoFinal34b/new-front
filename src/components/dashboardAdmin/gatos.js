@@ -22,7 +22,7 @@ const handleColumnClickCat = (columnName) => {
   };
   
   const handlerClickTypeCat = (e)=>{
-    handlerClickType(e, filters, setFilters, cats, setShow)
+    handlerClickType(e, filters, setFilters, cats, setShow, "state")
   }
 
   return (
@@ -30,9 +30,11 @@ const handleColumnClickCat = (columnName) => {
       <h1>Soy la view gatos</h1>
 
   <ChartGeneral data={show} arg={filters.type} periodo={filters.date}></ChartGeneral>
-      <button value="adoptado" onClick={handlerClickTypeCat}>Adoptado</button>
-      <button value="apadrinado" onClick={handlerClickTypeCat}>Apadrinado</button>
-      <button value="albergue" onClick={handlerClickTypeCat}>Albergue</button>
+  <div className="flex justify-center mx-10 my-5 space-x-5">
+      <button className="focus:bg-green-200 font-medium bg-[#A3E3DD] w-36 shadow-md p-2 rounded-sm hover:bg-[#0D9488] hover:text-white " value="adoptado" onClick={handlerClickTypeCat}>Adoptado</button>
+      <button className="focus:bg-green-200 font-medium bg-[#A3E3DD] w-36 shadow-md p-2 rounded-sm hover:bg-[#0D9488] hover:text-white " value="apadrinado" onClick={handlerClickTypeCat}>Apadrinado</button>
+      <button className="focus:bg-green-200 font-medium bg-[#A3E3DD] w-36 shadow-md p-2 rounded-sm hover:bg-[#0D9488] hover:text-white " value="albergue" onClick={handlerClickTypeCat}>Albergue</button>
+  </div>    
       <Buttons handlerClick={handlerClickCat}></Buttons>
 
       <div id="table-cats">

@@ -1,12 +1,14 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { currentPageFunction } from "../../../redux/actions";
 
 export default function Paginado({
   elementsPerPage,
   allelements,
-  paginado,
-  currentPage,
 }) {
   const pageNumbers = [];
+  const dispatch = useDispatch()
+  const currentPage = useSelector(state=>state.currentPage)
 
   for (let i = 1; i <= Math.ceil(allelements / elementsPerPage); i++) {
     //cantidad de elementos totales, dividido limite de elementos por pagina
@@ -15,17 +17,13 @@ export default function Paginado({
   function handleprev(e) {
     e.preventDefault();
     if (currentPage > 1) {
-      paginado(currentPage - 1);
-    } else {
-      paginado(Math.ceil(allelements / elementsPerPage))
-    }
+      dispatch(currentPageFunction(currentPage -1))
+    } 
   }
   function handlenext(e) {
     e.preventDefault();
     if (currentPage < pageNumbers.length) {
-      paginado(currentPage + 1);
-    }else {
-      paginado(1)
+      dispatch(currentPageFunction(currentPage +1))
     }
   }
   return (
@@ -38,7 +36,7 @@ export default function Paginado({
       </li>
       {pageNumbers.length &&
         pageNumbers.map((number) => (
-          <li onClick={() => paginado(number)} key={number}>
+          <li onClick={() => dispatch(currentPageFunction(number))} key={number}>
             <button
               className={
                 currentPage === number

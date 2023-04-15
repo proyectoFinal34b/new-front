@@ -47,6 +47,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getUsers, isLogged } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { Redirect } from 'react-router-dom';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -80,20 +81,24 @@ export default function Login() {
       const response = await axios.post("https://proyectofinal-gg57.onrender.com/user/validate", {
         email: email,
         password: password,
+      })
+      .then((response) => {
+        console.log(response)
+        if (response.data.logged) {
+          dispatch(isLogged(response.data));
+          sessionStorage.setItem("isLoggedIn", true);
+          sessionStorage.setItem("userInfo", JSON.stringify(response.data.validatedUser))
+          sessionStorage.setItem("id", response.data.validatedUser.id )
+          setIsSessionStarted(true);
+          alert("Inicio de sesión exitoso")
+   window.location.href = "http://localhost:3000/" 
+        } else {
+          alert("Email o contraseña incorrectos");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
       });
-      if (response.data.logged) {
-        dispatch(isLogged(response.data));
-        sessionStorage.setItem("isLoggedIn", true);
-        sessionStorage.setItem("email", email);
-        sessionStorage.setItem("password", password);
-        setIsSessionStarted(true);
-        navigate("/home");
-      } else {
-        alert("Email o contraseña incorrectos");
-      }
-    } catch (error) {
-      console.error(error);
-    }
   }
 
   function handleLogout() {
@@ -108,7 +113,7 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="w-full sm:max-w-md md:max-w-lg lg:max-w-xl">
-        {!isSessionStarted ? (
+        
           <form
             className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto"
             onSubmit={handleLogin}
@@ -167,19 +172,13 @@ export default function Login() {
             </a>
             </p>
           </form>
-        ) : (
-          <div>
-            <h1>Bienvenido, {email}!</h1>
-            <button onClick={handleLogout}>Cerrar sesión</button>
-          </div>
-        )}
         <p className="text-center mb-8">
-          <Link to='/home' className="text-sm text-gray-500 hover:text-teal-400">
+          <Link to='/' className="text-sm text-gray-500 hover:text-teal-400">
             Volver a la página de inicio
           </Link>
         </p>
       </div>
     </div>
-  );
+  )
 }
 

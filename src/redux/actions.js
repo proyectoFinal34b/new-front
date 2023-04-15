@@ -17,6 +17,7 @@ export const CLEAR_CART="CLEAR_CART";
 export const TOTAL_AMOUNT="TOTAL_AMOUNT"
 export const GET_USERS_ID="GET_USERS_ID"
 
+export const CURRENT_PAGE = "CURRENT_PAGE"
 
 
 export const getCats = () => async (dispatch) => {
@@ -135,4 +136,10 @@ export function getUsersById(id) {
       console.log(error.message);
     }
   };
+}
+export const currentPageFunction = (payload) => {
+  return{
+    type: CURRENT_PAGE,
+    payload: payload
+  }
 }

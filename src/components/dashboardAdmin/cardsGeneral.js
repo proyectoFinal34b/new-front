@@ -1,6 +1,6 @@
 import React, {  useState } from "react"
 import { filterByDate } from "./logic/filtros";
-export default function CardsGeneral({cats, orders}){
+export default function CardsGeneral({cats, orders, users}){
         //estilos para que no este todo en el codigo
         const styleCard = "bg-teal-600 text-white text-xl rounded-md font-semibold w-1/5 mx-auto my-3 shadow-md "
         const styleSelect ="h-6 w-36 text-black text-center text-sm my-auto"
@@ -21,8 +21,10 @@ export default function CardsGeneral({cats, orders}){
         const ventasHechas = orders?.filter((order)=>
             order.delivery === "entregado" && filterByDate(order.createdAt, ventasFilter)
         ) 
-    
-    
+        const usersActive = users?.filter((user)=>
+            user.active === true 
+        )
+        console.log(usersActive)
         const changeHandlerVentas = (event)=>{
             setVentasFilter(event.target.value)
         }
@@ -64,6 +66,10 @@ export default function CardsGeneral({cats, orders}){
              <option value="Ultimo año">Ultimo año</option>
             </select>
             <h1>{ sponsoredCats.length }</h1>
+            </div>
+            <div className={styleCard}>
+                <h1>Usuarios activos</h1>
+                <h2>{usersActive?.length}</h2>
             </div>
         </div>
         </>
