@@ -126,7 +126,7 @@ return(
     </button>
         </form>
         <p className="text-center mb-8">
-          <Link to='/home' className="text-sm text-gray-500 hover:text-teal-400">
+          <Link to='/' className="text-sm text-gray-500 hover:text-teal-400">
             Volver a la página de inicio
           </Link>
         </p>

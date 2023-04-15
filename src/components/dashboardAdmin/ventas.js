@@ -1,40 +1,75 @@
 import React, { useState } from "react";
 import { sortTable } from "./logic/ordenamientoTablas";
+import { CSVLink } from "react-csv";
+import Buttons from "./logic/buttons";
+import { handleColumnClick, handlerClick } from "./logic/handlers";
+import Example from "./charts/chart";
+import { handlerClickType } from "./logic/handlers";
 
 export default function Ventas({ orders }) {
   const stylesNameCol = "w-28 p-2 cursor-pointer ";
   const stylesTd = "h-8 px-2 py-3  ";
   const [filters, setFilters] = useState({
+    date: "historico",
+    type:"",
     column: "id",
     direction: "desc",
   });
+  const [show, setShow] = useState([...orders])
 
-  const handleColumnClick = (columnName) => {
-    if (columnName === filters.column) {
-      setFilters({
-        ...filters,
-        direction: filters.direction === "asc" ? "desc" : "asc",
-      });
-    } else {
-      setFilters({
-        column: columnName,
-        direction: "asc",
-      });
-    }
+  const handleColumnClickVentas = (columnName) => {
+   handleColumnClick(columnName, filters, setFilters, show, setShow)
   };
+  const handlerClickVentas = (e)=>{
+    handlerClick(e, filters, setFilters, orders, setShow)
+  }
+
+  const handlerClickTypeVenta = (e) => {
+    handlerClickType(e, filters, setFilters, orders, setShow, "delivery")
+  }
+
   const filteredOrders = sortTable(filters.column, filters.direction, orders);
+
+ const csvHeaders = [
+    { key: 'id', label: 'ID' },
+    { key: 'delivery', label: 'Delivery' },
+    { key: 'list', label: 'List' },
+    { key: 'status', label: 'Status' },
+    { key: 'createdAt', label: 'Realizada' },
+  ]
+
+  const csvData = filteredOrders.map((order)=>({
+    id: order.id,
+    delivery:
+      order.delivery === 'proceso'
+        ? 'En proceso'
+        : order.delivery === 'cancelado'
+        ? 'Cancelado'
+        : 'Entregado',
+    list: order.list.length,
+    status: order.status === 'activo' ? 'Activo' : 'Inactivo',
+    createdAt: order.createdAt.slice(2,10),
+  }))
+
+  const csvFileName = "orders.csv";
+
   return (
     <>
       <h1>Soy la view ventas</h1>
+      <Example data={show} arg={filters.type} periodo={filters.date}></Example>
+      <button value="proceso" onClick={handlerClickTypeVenta}>Proceso</button>
+      <button value="entregado" onClick={handlerClickTypeVenta}>Entregado</button>
+      <button value="cancelado" onClick={handlerClickTypeVenta}>Cancelado</button>
+      <Buttons handlerClick={handlerClickVentas}></Buttons>
       <div>
         <table className="table-fixed cursor-default m-auto border-collapse border border-slate-900">
           <thead>
             <tr className="bg-tableCol  text-white border-collapse border border-slate-900">
-              <th className="w-12" onClick={() => handleColumnClick("id")}>ID</th>
-              <th className="w-36" onClick={() => handleColumnClick("delivery")}>Delivery</th>
-              <th onClick={() => handleColumnClick("list")}>List</th>
-              <th className={stylesNameCol} onClick={() => handleColumnClick("status")}>Status</th>
-              <th className={stylesNameCol} onClick={() => handleColumnClick("createdAt")}>Ralizada</th>
+              <th className="w-12" onClick={() => handleColumnClickVentas("id")}>ID</th>
+              <th className="w-36" onClick={() => handleColumnClickVentas("delivery")}>Delivery</th>
+              <th onClick={() => handleColumnClickVentas("list")}>List</th>
+              <th className={stylesNameCol} onClick={() => handleColumnClickVentas("status")}>Status</th>
+              <th className={stylesNameCol} onClick={() => handleColumnClickVentas("createdAt")}>Ralizada</th>
               <th className={stylesNameCol}>Edit</th>
             </tr>
           </thead>
@@ -160,6 +195,23 @@ export default function Ventas({ orders }) {
             })}
           </tbody>
         </table>
+        <div className=" font-medium mt-5 flex justify-center items-center">
+          <CSVLink
+            className="bg-[#134E4A] text-white flex shadow-md w-44 justify-center items-center p-2 rounded-md hover:bg-teal-500 hover:text-white"
+            data={csvData}
+            headers={csvHeaders}
+            filename={csvFileName}
+          >
+            Descargar CSV
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+  <polyline points="7 11 12 16 17 11" />
+  <line x1="12" y1="4" x2="12" y2="16" />
+</svg>
+          </CSVLink>
+          
+        </div>
       </div>
     </>
   );

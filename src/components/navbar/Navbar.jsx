@@ -1,15 +1,18 @@
-import React from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { isLogged } from "../../redux/actions";
+import React, { useEffect,useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
 import Cart from "../carrito/carrito";
+import DarkMode from "./DarkMode";
 
 const Navbar = () => {
-  const isLoggedIn = useSelector((state) => state.logged);
-  const user = useSelector((state) => state.user);
+  const isLoggedIn = sessionStorage.getItem("isLoggedIn")
+  const user = sessionStorage.getItem("userInfo")
+  
   const dispatch = useDispatch();
 
+  useEffect(()=>{
+   console.log(sessionStorage) 
+  },[isLoggedIn])
 
   const [open, setOpen] = useState(null);
   const handleOpen = () => {
@@ -19,19 +22,20 @@ const Navbar = () => {
   const handleClose = () => setOpen(null);
 
   return (
-    <nav className="shadow-md bg-white border-gray-200 dark:bg-gray-900">
+    <nav className="shadow-md bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-10">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-teal-400">
+        <Link to={"/"}><span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-teal-400">
           BASTET
-        </span>
+        </span></Link> 
         <div className="flex md:order-2">
           {isLoggedIn ? (
             <div>
-              Hola,{user.name}!!
+              Hola,{user}!!
               <button
-                onClick={() => dispatch(isLogged({ logged: false, data: {} }))}
+              className="text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
+                onClick={() => (sessionStorage.removeItem("isLoggedIn", false), sessionStorage.removeItem("userInfo", ""), window.location.href = "http://localhost:3000/")}
               >
-                Log out
+                Cerrar sesión
               </button>
             </div>
           ) : (
@@ -41,7 +45,7 @@ const Navbar = () => {
                   type="button"
                   className="text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
                 >
-                  iniciar sesion
+                  Iniciar sesion
                 </button>{" "}
               </NavLink>
             </>
@@ -89,9 +93,8 @@ const Navbar = () => {
             )}
             {/* {open? <Cart setOpen={setOpen} />: <p onClose={setOpen(true)} className='bg-grey 900'>SVG</p>} */}
           </div>
-          {/* :""} */}
+           {/* :""}  */}
         </div>
-
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-cta"
@@ -99,11 +102,11 @@ const Navbar = () => {
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
               <a
-                href="/home"
+                href="/"
                 className="block py-2 pl-3 pr-4 text-white bg-teal-400 rounded md:bg-transparent md:text-teal-400 md:p-0 md:dark:text-teal-400"
                 aria-current="page"
               >
-                Blog
+                Inicio
               </a>
             </li>
             <li>
@@ -138,6 +141,7 @@ const Navbar = () => {
                 Donaciones
               </a>
             </li>
+            <DarkMode />
           </ul>
         </div>
       </div>

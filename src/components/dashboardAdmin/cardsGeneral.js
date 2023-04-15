@@ -1,5 +1,6 @@
 import React, {  useState } from "react"
-export default function CardsGeneral({cats, orders}){
+import { filterByDate } from "./logic/filtros";
+export default function CardsGeneral({cats, orders, users}){
         //estilos para que no este todo en el codigo
         const styleCard = "bg-teal-600 text-white text-xl rounded-md font-semibold w-1/5 mx-auto my-3 shadow-md "
         const styleSelect ="h-6 w-36 text-black text-center text-sm my-auto"
@@ -8,29 +9,8 @@ export default function CardsGeneral({cats, orders}){
         const [adopcionesFilter, setAdopcionesFilter] = useState("Mes actual");
         const [sponsorsFilter, setSponsorsFilter] = useState("Mes actual");
     
-        const lastMonth = new Date();
-        lastMonth.setMonth(lastMonth.getMonth() - 1);
-        
-        const filterByDate = (arg, filterValue) => {
-          const date = new Date(arg);
-          if (filterValue === "Mes actual") {
-            return date > lastMonth;
-          } else if (filterValue === "Ultimos tres meses") {
-            const threeMonthsAgo = new Date();
-            threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
-            return date > threeMonthsAgo;
-          } else if (filterValue === "Ultimos seis meses") {
-            const sixMonthsAgo = new Date();
-            sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
-            return date > sixMonthsAgo;
-          } else if (filterValue === "Ultimo año") {
-            const oneYearAgo = new Date();
-            oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-            return date > oneYearAgo;
-          } else {
-            return true;
-          }
-        };
+
+
         
         const adoptedCats = cats?.filter((cat) =>
         cat.state === "adoptado" && filterByDate(cat.updatedAt, adopcionesFilter)
@@ -41,8 +21,10 @@ export default function CardsGeneral({cats, orders}){
         const ventasHechas = orders?.filter((order)=>
             order.delivery === "entregado" && filterByDate(order.createdAt, ventasFilter)
         ) 
-    
-    
+        const usersActive = users?.filter((user)=>
+            user.active === true 
+        )
+        console.log(usersActive)
         const changeHandlerVentas = (event)=>{
             setVentasFilter(event.target.value)
         }
@@ -84,6 +66,10 @@ export default function CardsGeneral({cats, orders}){
              <option value="Ultimo año">Ultimo año</option>
             </select>
             <h1>{ sponsoredCats.length }</h1>
+            </div>
+            <div className={styleCard}>
+                <h1>Usuarios activos</h1>
+                <h2>{usersActive?.length}</h2>
             </div>
         </div>
         </>

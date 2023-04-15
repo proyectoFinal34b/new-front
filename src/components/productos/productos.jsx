@@ -6,16 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Paginado from "../card/paginado/paginado";
 import ProductFiltrados from "./filtros tienda/filtrosT";
 import Renderizados from "./productos renderizados/renderizados";
-import Cart from "../carrito/carrito";
 
 export default function ProductosRender() {
+
   const dispatch = useDispatch();
   const products = useSelector((state) => state.allProducts);
   const [prueba, setPrueba] = useState(false);
   useEffect(() => {
     dispatch(getProduct());
   }, [dispatch, prueba]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage =useSelector(state=>state.currentPage)
   const [productsPerPage, setProductsPerPage] = useState(9);
   const indexOfLastproduct = currentPage * productsPerPage;
   const indexOfFirstproduct = indexOfLastproduct - productsPerPage;
@@ -38,10 +38,9 @@ export default function ProductosRender() {
       <Paginado
         elementsPerPage={productsPerPage}
         allelements={products?.length}
-        paginado={setCurrentPage}
-        currentPage={currentPage}
       />
       <Footer />
     </>
   );
 }
+

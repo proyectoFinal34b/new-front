@@ -8,7 +8,7 @@ function PasswordResetForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://proyectofinal-gg57.onrender.com/forgot", { email:email });
+      const response = await axios.post("https://proyectofinal-gg57.onrender.com/user/forgot", { email:email });
       console.log(response)
       alert('Se ha enviado un correo electrónico para restablecer su contraseña');
       setEmail('');
@@ -41,7 +41,7 @@ function PasswordResetForm() {
           </div>
         </form>
         <p className="text-center mb-8">
-          <Link to='/home' className="text-sm text-gray-500 hover:text-teal-400">
+          <Link to='/' className="text-sm text-gray-500 hover:text-teal-400">
             Volver a la página de inicio
           </Link>
         </p>
