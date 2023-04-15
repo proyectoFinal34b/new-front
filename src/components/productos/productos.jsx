@@ -15,7 +15,7 @@ export default function ProductosRender() {
   useEffect(() => {
     dispatch(getProduct());
   }, [dispatch, prueba]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage =useSelector(state=>state.currentPage)
   const [productsPerPage, setProductsPerPage] = useState(9);
   const indexOfLastproduct = currentPage * productsPerPage;
   const indexOfFirstproduct = indexOfLastproduct - productsPerPage;
@@ -38,8 +38,6 @@ export default function ProductosRender() {
       <Paginado
         elementsPerPage={productsPerPage}
         allelements={products?.length}
-        paginado={setCurrentPage}
-        currentPage={currentPage}
       />
       <Footer />
     </>
