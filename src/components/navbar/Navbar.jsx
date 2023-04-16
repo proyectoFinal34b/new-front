@@ -50,7 +50,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
               <NavLink to="/login">
                 <button
                   type="button"
-                  className="text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
+                  className="text-white bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
                 >
                   Iniciar sesion
                 </button>{" "}
@@ -96,7 +96,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
                   transform="matrix(.64733 0 0 .64733 1.125 1.125)"
                 />
               </svg>
-              { JSON.parse(localStorage.getItem("carrito")).length ?
+              { JSON.parse(localStorage.getItem("carrito"))?.length ?
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 30 30"
