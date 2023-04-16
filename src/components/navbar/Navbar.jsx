@@ -4,20 +4,18 @@ import { Link, NavLink } from "react-router-dom";
 import Cart from "../carrito/carrito";
 import DarkMode from "./DarkMode";
 
-const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    sessionStorage.getItem("isLoggedIn")
-  );
-  const prevUser = JSON.parse(sessionStorage.getItem("userInfo"));
 
-  const [user, setUser] = useState(prevUser);
-  console.log(user, "soy user");
-
+const Navbar = ({handlerDarkMode , darkMode}) => {
+  console.log({handlerDarkMode, darkMode})
+  const styleCompInicio="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-teal-400 md:hover:bg-transparent md:hover:text-teal-400 md:p-0 md:dark:hover:text-teal-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+  const [ isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"))
+  const prevUser = JSON.parse(localStorage.getItem("userInfo"))
+  const [user, setUser] = useState(prevUser)
+  const userType = prevUser?.status
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log(sessionStorage);
-  }, [isLoggedIn]);
+  useEffect(()=>{
+   console.log(localStorage) 
+  },[isLoggedIn])
 
   const [open, setOpen] = useState(null);
   const handleOpen = () => {
@@ -25,21 +23,21 @@ const Navbar = () => {
     console.log(open);
   };
   const handleClose = () => setOpen(null);
-  const handlerLogOut = () => {
-    sessionStorage.removeItem("isLoggedIn", false);
-    sessionStorage.removeItem("userInfo", "");
-    sessionStorage.removeItem("id", "");
-    setIsLoggedIn(sessionStorage.getItem("isLoggedIn"));
-  };
 
+  const handlerLogOut = ()=>{
+    localStorage.clear()
+    localStorage.setItem("darkMode", darkMode)
+    setIsLoggedIn(localStorage.getItem("isLoggedIn"))
+  }
+  
   return (
     <nav className="shadow-md bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-10">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <Link to={"/"}>
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-teal-400">
-            BASTET
-          </span>
-        </Link>
+        <Link to={"/"} className="flex">
+          <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-teal-400">
+          BASTET
+        </span></Link>
+
         <div className="flex md:order-2">
           {isLoggedIn ? (
             <div>
@@ -135,7 +133,7 @@ const Navbar = () => {
             <li>
               <a
                 href="/"
-                className="block py-2 pl-3 pr-4 text-white bg-teal-400 rounded md:bg-transparent md:text-teal-400 md:p-0 md:dark:text-teal-400"
+                className={styleCompInicio}
                 aria-current="page"
               >
                 Inicio
@@ -144,7 +142,7 @@ const Navbar = () => {
             <li>
               <a
                 href="/gatos"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-teal-400 md:hover:bg-transparent md:hover:text-teal-400 md:p-0 md:dark:hover:text-teal-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className={styleCompInicio}
               >
                 Gatos
               </a>
@@ -152,7 +150,7 @@ const Navbar = () => {
             <li>
               <a
                 href="/about-us"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-teal-400 md:hover:bg-transparent md:hover:text-teal-400 md:p-0 md:dark:hover:text-teal-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className={styleCompInicio}
               >
                 Sobre nosotros
               </a>
@@ -160,7 +158,7 @@ const Navbar = () => {
             <li>
               <a
                 href="/productos"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-teal-400 md:hover:bg-transparent md:hover:text-teal-400 md:p-0 md:dark:hover:text-teal-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+               className={styleCompInicio}
               >
                 Tienda
               </a>
@@ -168,13 +166,14 @@ const Navbar = () => {
             <li>
               <a
                 href="/donaciones"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-teal-400 md:hover:bg-transparent md:hover:text-teal-400 md:p-0 md:dark:hover:text-teal-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
+          className={styleCompInicio} 
+          >
                 Donaciones
               </a>
             </li>
-            <DarkMode />
-          </ul>
+            <DarkMode darkMode={darkMode} handlerDarkMode={handlerDarkMode} />
+           {userType==="admin" || userType==="superAdmin" ? <button className=" bg-[#38797c] text-white w-40 rounded-md py-1 shadow-md hover:bg-teal-600" >Dashboard</button>
+          : ""} </ul>
         </div>
       </div>
     </nav>

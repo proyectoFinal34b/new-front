@@ -15,7 +15,7 @@ import Contraseña from './components/login/Contraseña';
 import Cambio from './components/login/Cambio'
 import Profile from './components/login/Profile'
 import { useDispatch } from 'react-redux'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Dashboard from './components/dashboardAdmin/dashboard';
 import { getUsers } from './redux/actions';
 import { getCats } from './redux/actions';
@@ -23,6 +23,18 @@ import { getCats } from './redux/actions';
 
 function App() {
   const dispatch = useDispatch()
+  const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
+
+  const handlerDarkMode = (e) => {
+    const isDarkMode = e.target.checked;
+    setDarkMode(isDarkMode);
+    localStorage.setItem('darkMode', isDarkMode);
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
   useEffect(()=>{
     dispatch(getUsers)
     dispatch(getCats)
@@ -36,9 +48,9 @@ function App() {
     }
   }, []);
   return (
-    <div className="App cursor-default">
+    <div className="App cursor-default dark:bg-bgDark bg-slate-200">
       <Routes>
-      <Route path='/'element={<Home/>}> </Route>
+      <Route path='/'element={<Home darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}> </Route>
       <Route path ="/login/" element={<Login/>}></Route>
       <Route path ="/login/registro" element={<Registro/>}></Route>
       <Route path = "/resetpassword" element={<Contraseña/>}></Route>

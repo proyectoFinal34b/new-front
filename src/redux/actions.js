@@ -22,7 +22,7 @@ export const CURRENT_PAGE = "CURRENT_PAGE"
 
 
 export const getCats = () => async (dispatch) => {
-    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat`)
+    return await axios.get(`http://localhost:3001/cat`)
     .then(r => {dispatch({ type : GET_CATS, payload : r.data})
     console.log(r.data, "action")})
     .catch(e => console.error(e))
@@ -35,7 +35,7 @@ export const searchCats = (name) => async (dispatch) => {
 };
 
 export const getCatsById = (id) => async (dispatch) => {
-    return await axios.get(`https://proyectofinal-gg57.onrender.com/cat/${id}`)
+    return await axios.get(`http://localhost:3001/cat/${id}`)
     .then(r => dispatch({ type : GET_CATS_BY_ID, payload : r.data}))
     .catch(e => console.error(e))
 }

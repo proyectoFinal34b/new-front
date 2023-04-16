@@ -10,10 +10,7 @@ export default class Example extends PureComponent {
     const {periodo} = this.props
     const sortedData = [...data].sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
    const a =  blankDate(periodo)
-   console.log(a)
    const dataByDay = updateCount(a, sortedData)
-  console.log("console",dataByDay)
-
 
     return (
       <>

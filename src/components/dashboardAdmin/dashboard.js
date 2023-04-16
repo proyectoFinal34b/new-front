@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
 import Menu from "./menu";
 import NavBarDash from "./navBarDash";
 import General from "./general";
@@ -9,6 +8,7 @@ import Gatos from "./gatos";
 import Productos from "./productos";
 import Ventas from "./ventas";
 import Usuarios from "./users";
+import { Modal } from "./modal";
 
 export default function Dashboard (){
 
@@ -19,6 +19,18 @@ export default function Dashboard (){
     orders:[],
     products:[]
   })
+  const [modal, setModal] = useState("")
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (e) => {
+    setIsModalOpen(true);
+    setModal(e)
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModal("")
+  };
 /*   const currentUser = useSelector(state=>state.currentUser) */
 const currentUser = {
 	name: "Juje",
@@ -63,17 +75,19 @@ const currentUser = {
   return (
     <>{currentUser?.status === "superAdmin" ?
     <div className="bg-gray-100 flex" >
-      <Menu click={clickHandlerMenu}></Menu>
+      <Menu click={clickHandlerMenu} openModal={openModal}></Menu>
       <div id="view" className=" flex-grow ">
     <NavBarDash props={currentUser}></NavBarDash>
     <div className=" w-full my-14 ">
     {info.cats.length===0 || info.users.length===0 || info.products.length===0 || info.orders.length===0  ? <Loading></Loading> : 
      view==="general" ?  <General cats={info?.cats} orders={info?.orders} users={info?.users} ></General> : 
-     view==="gatos" ? <Gatos cats={info?.cats}></Gatos> :
+     view==="gatos" ? <Gatos openModal={openModal} cats={info?.cats} ></Gatos> :
      view==="products" ? <Productos products={info?.products}></Productos> :
      view==="users" ?  <Usuarios users={info?.users}></Usuarios> :
      view==="orders" ? <Ventas orders={info.orders}></Ventas> : <Loading></Loading>
-}   </div>
+}
+<Modal isOpen={isModalOpen} onClose={closeModal} formType={modal} ></Modal>
+   </div>
       </div>
     </div> : <h1>No tenes permisos</h1>}
     </>

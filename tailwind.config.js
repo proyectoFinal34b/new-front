@@ -8,7 +8,8 @@ module.exports = {
       colors:{
         dashCol: "#A3E3DD",
         buttonCol: "#7eb5b2",
-        tableCol: "#158774"
+        tableCol: "#158774",
+        bgDark:"#213652",
       },
     },
     

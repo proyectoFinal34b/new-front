@@ -95,11 +95,12 @@ export default function PostProduct() {
 }
 
   return (
-    <div className="p-4 dark:bg-gray-900 rounded-md w-1/4 ">
-      <form className="flex flex-col text-red-600 "onSubmit={(e)=> handleSubmit(e) }>
-        <div className="flex flex-col justify-center ">
-          <label className="mb-2 font-bold text-gray-100">Nombre del Producto</label>
-          <input className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+    <div className="p-4 shadow-lg text-gray-700 bg-gray-200 max-w-fit m-auto min-h-fit dark:text-gray-100 dark:bg-gray-900 ">
+       <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Añadir nuevo producto</h2>
+      <form className="flex flex-col "onSubmit={(e)=> handleSubmit(e) }>
+        <div className="flex flex-col">
+          <label className="mb-2 font-bold ">Nombre: </label>
+          <input className="border border-gray-400 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
           type="text"
             value={input.name}
             name="name"
@@ -109,8 +110,8 @@ export default function PostProduct() {
           {errors.name ? <p>{errors.name}</p> : ""}
         </div>
         <div className="flex flex-col justify-center ">
-          <label className="mb-2 font-bold text-gray-100">Precio</label>
-          <input className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+          <label className="mb-2 font-bold ">Precio: </label>
+          <input className="border border-gray-400 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
            type="number"
            min="0"
             value={input.price}
@@ -121,8 +122,8 @@ export default function PostProduct() {
           {errors.price ? <p>{errors.price}</p> : ""}
         </div>
         <div className="flex flex-col justify-center ">
-          <label className="mb-2 font-bold text-gray-100">Stock</label>
-          <input className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+          <label className="mb-2 font-bold ">Stock: </label>
+          <input className="border border-gray-400 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
            type="number"
            min="0"
             value={input.stock}
@@ -133,8 +134,8 @@ export default function PostProduct() {
           {errors.stock ? <p>{errors.stock}</p> : ""}
         </div>
         <div className="flex flex-col justify-center ">
-          <label className="mb-2 font-bold text-gray-100" >Detalle del Producto</label>
-          <textarea className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+          <label className="mb-2 font-bold " >Detalle del Producto: </label>
+          <textarea className="border border-gray-400 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
            type="text"
             value={input.summary}
             name="summary"
@@ -144,10 +145,10 @@ export default function PostProduct() {
           {errors.summary ? <p>{errors.summary}</p> : ""}
         </div>
         <div className="flex flex-col justify-center ">
-          <label className="mb-2 font-bold text-gray-100">Imagen del Producto</label>
-          {input.image.URL&&<img className="border-2 border-gray-900 bg-white h-50   focus:outline-none" src={input.image.URL} alt='productImage'/>}
+          <label className="mb-2 font-bold ">Imagen del Producto</label>
+          {input.image.URL&&<img className="border border-gray-400 bg-white h-50 " src={input.image.URL} alt='productImage'/>}
           
-          <input className="border-2 border-gray-900 text-white  shadow-lg shadow-white-500/50 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+          <input className=" my-5 px-5 pr-16 rounded-lg text-sm focus:outline-none"
             type="file"
             accept="image/*"
            // value={input.image.file}
@@ -157,7 +158,7 @@ export default function PostProduct() {
           />
           {errors.image ? <p>{errors.image}</p> : ""}
         </div>
-        <div className="text-white">
+        <div className="">
         <button type="submit" className="ml-2 px-4 py-2  font-medium  bg-teal-400 rounded-md hover:bg-teal-500 focus:outline-none focus:bg-blue-600">Enviar</button>
         </div>
       </form>

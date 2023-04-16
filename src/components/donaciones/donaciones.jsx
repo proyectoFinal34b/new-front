@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "../navbar/Navbar";
 import Footer from "../home/footer/footer";
-import { Link } from "react-router-dom";
 import cargando from "../../image/en-proceso.png"
 
 
 
 
 
-export default function DonacionesRender() {
+export default function DonacionesRender({handlerDarkMode, darkMode}) {
     return (
         <div>
-            <Navbar/>
+            <Navbar darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>
             <img src = {cargando} alt="" />
-            {/* <Footer/> */}
+             <Footer/> 
         </div>
     )
 }
