@@ -77,7 +77,6 @@ export default function Login() {
 
   async function handleLogin(e) {
     e.preventDefault();
-    try {
       const response = await axios.post("https://proyectofinal-gg57.onrender.com/user/validate", {
         email: email,
         password: password,
