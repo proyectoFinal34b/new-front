@@ -101,6 +101,7 @@ function Profile() {
 
   <div className="flex justify-center items-center">
   <img src="{{ user.image ? user.image : 'https://img.freepik.com/free-vector/cat-collage-element-line-art-animal-illustration-vector_53876-154294.jpg?size=300&ext=jpg&ga=GA1.1.1109572956.1673889122&semt=ais' }}" alt="Descripción de la imagen" />
+
   </div>
   <div className="my-8">
     <p className="text-lg mb-2 font-bold">Nombre: {user.name}</p>
