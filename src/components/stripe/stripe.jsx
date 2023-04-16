@@ -37,9 +37,9 @@ const CheckoutForm = () => {
         }
         ).then(response =>{
             if(response.isConfirmed){
-                window.location.href = "/home";
+                window.location.href = "/";
             }else{
-                window.location.href = "/home";
+                window.location.href = "/";
             }
         })
     }
