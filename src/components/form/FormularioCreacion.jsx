@@ -141,27 +141,27 @@ export default function PostCats() {
 
   return (
     // <div className="sticky top-3 flex justify-end items-center p-1">
-    <div className="p-4 dark:bg-gray-900 rounded-md w-1/5">
-      <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Formulario de creacion</h2>
+    <div className="p-4 shadow-lg text-gray-700 bg-gray-200 max-w-fit m-auto min-h-fit dark:text-gray-100 dark:bg-gray-900 ">
+      <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Añadir nuevo gato</h2>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <div>
-        <label className="mb-2 font-bold text-gray-100">Nombre:</label>
+        <div className="flex flex-col">
+        <label className="mb-2 font-bold dark:text-gray-100">Nombre:</label>
         <input 
         type="text" 
         value={input.name} 
         name="name"
         onChange={(e) => {handleChange(e)}} 
-        className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        className="border border-gray-400 bg-white h-10 px-5 pr-16  rounded-sm text-sm focus:outline-none"
         />
         {errors.name && (<p>{errors.name}</p>)}
         </div>
-        <div>
-  <label className="mb-2 font-bold text-gray-100">Género:</label>
+        <div className="flex flex-col">
+  <label className="mb-2 font-bold ">Género:</label>
   <select
     value={input.gender}
     name="gender"
     onChange={(e) => { handleSelect(e) }}
-    className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+    className="border border-gray-400 bg-white h-10 px-5 pr-16  rounded-sm text-sm focus:outline-none"
   >
     <option value="">Seleccione una opción</option>
     <option value="macho">Macho</option>
@@ -169,8 +169,8 @@ export default function PostCats() {
   </select>
   {errors.gender && (<p>{errors.gender}</p>)}
 </div>
-        <div>
-        <label className="mb-2 font-bold text-gray-100">Edad:</label>
+        <div className="flex flex-col">
+        <label className="mb-2 font-bold ">Edad:</label>
         <input 
         type="number" 
         min="0"
@@ -178,46 +178,46 @@ export default function PostCats() {
         value={input.age} 
         name="age"  
         onChange={(e) => {handleChange(e)}}
-        className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        className="border border-gray-400 bg-white h-10 px-5 pr-16  rounded-sm text-sm focus:outline-none"
         />
         {errors.age && (<p>{errors.age}</p>)}
         </div>
-        <div>
-        <label className="mb-2 font-bold text-gray-100">Descripción:</label>
+        <div className="flex flex-col">
+        <label className="mb-2 font-bold ">Descripción:</label>
         <input 
         type="text" 
         value={input.description} 
         name="description"
         onChange={(e) => {handleChange(e)}}
-        className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        className="border border-gray-400 bg-white h-10 px-5 pr-16 rounded-sm text-sm focus:outline-none"
         />
         {errors.description && (<p>{errors.description}</p>)}
         </div>
-        <div>
-        <label className="mb-2 font-bold text-gray-100">Imagen:</label>
-        {input.image.URL && <img  className="border-2 border-gray-900 bg-white h-50   focus:outline-none" src={input.image.URL} alt="imagen" />}
+        <div className="flex flex-col">
+        <label className="mb-2 font-bold ">Imagen:</label>
+        {input.image.URL && <img  className="border border-gray-400 bg-white h-50   focus:outline-none" src={input.image.URL} alt="imagen" />}
        
         <input 
 
         type="file"
         name="image"  
         onChange={(e) => {handleImageChange(e)}}
-        className=" text-white   pr-16 rounded-lg text-sm focus:outline-none"
+        className="    pr-16  text-sm focus:outline-none"
         />
         {errors.image && (<p >{errors.image}</p>)}
         </div>
-        <div>
-        <label className="mb-2 font-bold text-gray-100">Llegada:</label>
+        <div className="flex flex-col">
+        <label className="mb-2 font-bold ">Ingreso:</label>
         <input 
         type="date"  
         placeholder="dd/mm/aaaa"
         value={input.arrived}
         name="arrived" 
         onChange={(e) => {handleChange(e)}}
-        className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"/>
+        className="border border-gray-400 bg-white h-10 px-5 pr-16 rounded-sm text-sm focus:outline-none"/>
         </div>
-        <div>
-  <label className="mb-2 font-bold text-gray-100">Estado:</label>
+        <div className="flex flex-col">
+  <label className="mb-2 font-bold ">Estado:</label>
   <select
     name="state"
     value={input.state}
@@ -231,7 +231,7 @@ export default function PostCats() {
   </select>
   {errors.state && (<p>{errors.state}</p>)}
 </div>
-        <button type="submit" className="ml-2 px-4 py-2 font-medium text-gray bg-teal-400 rounded-md hover:bg-teal-500 focus:outline-none focus:bg-blue-600">Enviar</button>
+        <button type="submit" className="ml-2 px-4 py-2 font-medium text-gray bg-teal-400 rounded-md hover:bg-teal-500 ">Enviar</button>
         </form>
         </div>
         // </div>

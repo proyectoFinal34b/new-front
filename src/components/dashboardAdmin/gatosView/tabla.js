@@ -1,7 +1,7 @@
 import React from "react";
 import { CSVLink } from "react-csv";
 
-export default function Tabla({handleColumnClickCat, show}){
+export default function Tabla({handleColumnClickCat, show, openModal}){
     const stylesNameCol = "w-28 p-2";
     const stylesTd = "h-8 p-2  ";
 
@@ -10,6 +10,10 @@ export default function Tabla({handleColumnClickCat, show}){
         { label: "Arrivo", key: "arrived" },
         { label: "Edad", key: "age" },
         { label: "Género", key: "gender" },
+        { label: "Vacunado", key: "vaccin" },
+        { label: "ID", key: "id" },
+        { label: "ID", key: "id" },
+        { label: "ID", key: "id" },
         { label: "Estado", key: "state" },
         { label: "Activo", key: "active" },
         { label: "ID", key: "id" },
@@ -123,7 +127,7 @@ export default function Tabla({handleColumnClickCat, show}){
                   )}
                   <td>{cat.id}</td>
                   <td>
-                    <button className="text-white shadow-md bg-teal-900 hover:bg-teal-500  font-medium rounded-lg text-sm px-4 py-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400">
+                    <button name="editGatos" onClick={(e)=>openModal(e.target.name)} className="text-white shadow-md bg-teal-900 hover:bg-teal-500  font-medium rounded-lg text-sm px-4 py-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400">
                       Edit
                     </button>
                   </td>

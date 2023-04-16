@@ -10,12 +10,12 @@ import PostCats from "../form/FormularioCreacion";
 
 
 
-export default function GatosRender() {
+export default function GatosRender({handlerDarkMode , darkMode}) {
     return (
         <>
-        <Navbar/>
+        <Navbar handlerDarkMode={handlerDarkMode} darkMode={darkMode}/>
         <div className="md:grid grid-cols-4">
-        <div class="lg:sticky px-3 p-3 md:col-span-1 ">
+        <div class="lg:sticky lg:top-40 px-3 p-3 md:col-span-1 ">
             <GatosFiltrados />
         </div>
         <div className="md:col-span-3">
