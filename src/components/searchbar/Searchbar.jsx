@@ -63,12 +63,13 @@ export default function SearchBar() {
 
   return (
     <div className="justify-center mt-2">
+      <h1  className="mt-5 font-bold text-gray-800 dark:text-gray-100">Busca por nombre:</h1>
       <input
         type="text"
         value={name}
         placeholder="Gato.."
         onChange={(e) => handleChange(e)}
-        className="border-2 md:w-full md:px-3 md:pr-8 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        className=" md:w-full md:px-3 md:pr-8 shadow-lg my-3   bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
       />
       <button
         type="submit"

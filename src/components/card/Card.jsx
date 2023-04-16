@@ -25,7 +25,7 @@ const stylesbtnCard="px-4 py-2 bg-teal-500 shadow-lg  rounded-lg text-white uppe
           {Array.isArray(cats) ? cats.slice(indexOfFirstcat, indexOfLastcat).map(function (cat) {
             return (
       <div>
-                <div class="bg-slate-50 dark:bg-gray-900 mb-5 w-72 m-auto border-1 border-dashed border-gray-900 shadow-2xl rounded-lg overflow-hidden xl:w-10/12 xl:mb-14 lg:w-60 md:w-64 md:mb-4" key={cat.id}>
+                <div class="bg-slate-100 dark:bg-gray-900 mb-5 w-72 m-auto border-1 border-dashed border-gray-900 shadow-2xl rounded-lg overflow-hidden xl:w-10/12 xl:mb-14 lg:w-60 md:w-64 md:mb-4" key={cat.id}>
                   <p class="mb-3 text-gray-900 dark:text-gray-200 font-semibold text-3xl">{cat.name}</p>
                   <img src={cat.image} alt={cat.name} class="object-cover w-60 h-48 m-auto my-4 object-center xl:w-60 xl:h-60 md:w-60 md:h-44 md:-mb-2" />
                   <div class="p-4">
