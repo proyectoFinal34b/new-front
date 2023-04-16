@@ -15,6 +15,7 @@ export const DEL_ALL_FROM_CART="DEL_ALL_FROM_CART"
 export const DEL_ONE_FROM_CART="DEL_ONE_FROM_CART"
 export const CLEAR_CART="CLEAR_CART";
 export const TOTAL_AMOUNT="TOTAL_AMOUNT"
+export const LOAD_CART= "LOAD_CART"
 export const CURRENT_PAGE = "CURRENT_PAGE"
 
 
@@ -119,6 +120,13 @@ export const totalamount= ()=>{
   return{ 
     type:TOTAL_AMOUNT
 
+  }
+}
+
+export const loadCart= (cart)=>{
+  return{
+    type: LOAD_CART,
+    payload: cart
   }
 }
 
