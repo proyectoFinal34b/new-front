@@ -5,10 +5,10 @@ import About from "../about/About";
 import Portada from "./portada/portada";
 
 
-export default function Home() {
+export default function Home({handlerDarkMode , darkMode}) {
   return (
     <div className="bg-gray-200">
-      <Navbar/>
+      <Navbar darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>
       <Portada/>
       <About/>
       <Footer/>

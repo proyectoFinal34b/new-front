@@ -4,20 +4,15 @@ import { Link, NavLink } from "react-router-dom";
 import Cart from "../carrito/carrito";
 import DarkMode from "./DarkMode";
 
-const Navbar = () => {
+const Navbar = ({handlerDarkMode , darkMode}) => {
   const [ isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"))
   const prevUser = JSON.parse(localStorage.getItem("userInfo"))
   const [user, setUser] = useState(prevUser)
-  console.log(user,"soy user")  
-  
-
-
+  const userType = prevUser?.status
   const dispatch = useDispatch();
-
   useEffect(()=>{
-   console.log(sessionStorage) 
+   console.log(localStorage) 
   },[isLoggedIn])
-
   const [open, setOpen] = useState(null);
   const handleOpen = () => {
     setOpen(true);
@@ -25,9 +20,8 @@ const Navbar = () => {
   };
   const handleClose = () => setOpen(null);
   const handlerLogOut = ()=>{
-    localStorage.removeItem("isLoggedIn")
-    localStorage.removeItem("userInfo")
-    localStorage.removeItem("id")
+    localStorage.clear()
+    localStorage.setItem("darkMode", darkMode)
     setIsLoggedIn(localStorage.getItem("isLoggedIn"))
   }
   
@@ -151,8 +145,9 @@ const Navbar = () => {
                 Donaciones
               </a>
             </li>
-            <DarkMode />
-          </ul>
+            <DarkMode darkMode={darkMode} handlerDarkMode={handlerDarkMode} />
+           {userType==="admin" || userType==="superAdmin" ? <button className=" bg-[#38797c] text-white w-40 rounded-md py-1 shadow-md hover:bg-teal-600" >Dashboard</button>
+          : ""} </ul>
         </div>
       </div>
     </nav>

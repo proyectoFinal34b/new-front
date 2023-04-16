@@ -31,8 +31,7 @@ export default function Login() {
         if (response.data.logged) {
           dispatch(isLogged(response.data));
           localStorage.setItem("isLoggedIn", true);
-          localStorage.setItem("userInfo", JSON.stringify(response.data.validatedUser));
-          localStorage.setItem("id", response.data.validatedUser.id);          
+          localStorage.setItem("userInfo", JSON.stringify(response.data.validatedUser));         
           setIsSessionStarted(true);
           alert("Inicio de sesión exitoso")
    window.location.href = "http://localhost:3000/" 
@@ -113,8 +112,12 @@ export default function Login() {
           <Link to='/' className="text-sm text-gray-500 hover:text-teal-400">
             Volver a la página de inicio
           </Link>
-        </p>
+        </p>      
+      <button>
+        Aiuda
+      </button>
       </div>
+
     </div>
   )
 }

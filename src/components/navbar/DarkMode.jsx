@@ -1,18 +1,7 @@
 import React,{ useState } from "react";
 
-export default function DarkMode(){
-    const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
+export default function DarkMode({handlerDarkMode , darkMode}){
 
-  const handlerDarkMode = (e) => {
-    const isDarkMode = e.target.checked;
-    setDarkMode(isDarkMode);
-    localStorage.setItem('darkMode', isDarkMode);
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  };
       
     return(
         <>
