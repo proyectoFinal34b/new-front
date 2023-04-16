@@ -46,7 +46,7 @@ export default function GatosFiltrados() {
   }, [filtroStatus, filtroGender, filtroAge]);
 
   return (
-    <div className="bg-slate-100 p-4 w-full md:sticky md:top-28 md:w-full  dark:bg-gray-900 rounded-md ">
+    <div className="bg-slate-100 p-4 w-full lg:sticky lg:top-28 lg:w-full  dark:bg-gray-900 rounded-md ">
       <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Gatos</h2>
       <div className="flex flex-col mb-3">
         <label htmlFor="status" className="mb-2 font-bold text-gray-800 dark:text-gray-100">

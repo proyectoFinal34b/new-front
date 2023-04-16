@@ -12,7 +12,7 @@ export default function GatosRender({handlerDarkMode , darkMode}) {
     return (
         <>
         <Navbar handlerDarkMode={handlerDarkMode} darkMode={darkMode}/>
-        <div className="md:grid grid-cols-4">
+        <div className="lg:grid grid-cols-4">
         <div class="lg:sticky lg:top-40 px-3 p-3 md:col-span-1 ">
             <GatosFiltrados />
         </div>
