@@ -5,6 +5,8 @@ import Cart from "../carrito/carrito";
 import DarkMode from "./DarkMode";
 
 const Navbar = ({handlerDarkMode , darkMode}) => {
+  console.log({handlerDarkMode, darkMode})
+  const styleCompInicio="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-teal-400 md:hover:bg-transparent md:hover:text-teal-400 md:p-0 md:dark:hover:text-teal-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
   const [ isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"))
   const prevUser = JSON.parse(localStorage.getItem("userInfo"))
   const [user, setUser] = useState(prevUser)
@@ -28,9 +30,10 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
   return (
     <nav className="shadow-md bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-10">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <Link to={"/"}><span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-teal-400">
+        <Link to={"/"} className="flex">
+          <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-teal-400">
           BASTET
-        </span></Link> 
+        </span></Link>
         <div className="flex md:order-2">
           {isLoggedIn ? (
             <div>
@@ -107,7 +110,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
             <li>
               <a
                 href="/"
-                className="block py-2 pl-3 pr-4 text-white bg-teal-400 rounded md:bg-transparent md:text-teal-400 md:p-0 md:dark:text-teal-400"
+                className={styleCompInicio}
                 aria-current="page"
               >
                 Inicio
@@ -116,7 +119,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
             <li>
               <a
                 href="/gatos"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-teal-400 md:hover:bg-transparent md:hover:text-teal-400 md:p-0 md:dark:hover:text-teal-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className={styleCompInicio}
               >
                 Gatos
               </a>
@@ -124,7 +127,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
             <li>
               <a
                 href="/about-us"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-teal-400 md:hover:bg-transparent md:hover:text-teal-400 md:p-0 md:dark:hover:text-teal-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className={styleCompInicio}
               >
                 Sobre nosotros
               </a>
@@ -132,7 +135,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
             <li>
               <a
                 href="/productos"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-teal-400 md:hover:bg-transparent md:hover:text-teal-400 md:p-0 md:dark:hover:text-teal-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+               className={styleCompInicio}
               >
                 Tienda
               </a>
@@ -140,8 +143,8 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
             <li>
               <a
                 href="/donaciones"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-teal-400 md:hover:bg-transparent md:hover:text-teal-400 md:p-0 md:dark:hover:text-teal-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
+          className={styleCompInicio} 
+          >
                 Donaciones
               </a>
             </li>

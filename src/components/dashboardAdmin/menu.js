@@ -4,6 +4,7 @@ export default function Menu(props) {
 
 
   const buttonStyle = "bg-buttonCol text-white w-40 rounded-md py-1 shadow-md hover:bg-teal-600"
+  const buttonStyle2 = "bg-[#38797c] text-white w-40 rounded-md py-1 shadow-md hover:bg-teal-600"
 
   return (
     <>
@@ -28,10 +29,10 @@ export default function Menu(props) {
             <button name="orders" className={buttonStyle} onClick={(e)=>props.click(e.target.name)}>Ventas</button>
           </li>
           <li>
-            <button name="añadirGato" className={`${buttonStyle} bg-[#38797c]`} onClick={(e)=>props.openModal(e.target.name)}>Añadir Gato</button>
+            <button name="añadirGato" className={buttonStyle2} onClick={(e)=>props.openModal(e.target.name)}>Añadir Gato</button>
           </li>
           <li>
-            <button name="añadirProducto" className={`${buttonStyle} bg-[#38797c]`} onClick={(e)=>props.openModal(e.target.name)}>Añadir Producto</button>
+            <button name="añadirProducto" className={buttonStyle2} onClick={(e)=>props.openModal(e.target.name)}>Añadir Producto</button>
           </li>
         </ul>
       </div>
