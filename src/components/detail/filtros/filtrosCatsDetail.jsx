@@ -24,8 +24,9 @@ export default function DetailGatosFilter(props) {
                     <div class="flex h-96 items-center flex-col justify-center pl-5">
                         <h1 class="text-3xl font-extrabold text-gray-900 sm:text-5xl underline pb-2">{catId.name}</h1>
                         <div class="text-gray-500">Edad: {catId.age}</div>
-                        <div class="border border-gray-300 p-4 rounded-md mt-4 text-gray-500">{catId.description}</div> 
-                        <div class="bg-green-500 text-white font-bold py-2 px-4 rounded-md border border-green-600 mt-5">Estado: {catId.state}</div>
+                        <div class="border border-gray-300 p-4 rounded-md mt-2 text-gray-500">{catId.description}</div> 
+                        <div class="bg-green-500 text-white font-bold py-2 px-4 rounded-md border border-green-600 mt-1">Estado: {catId.state}</div>
+                        <a href="" class="text-2xl dark:bg-gray-900 text-white font-bold py-2 px-12 rounded-md border mb-6 mt-3">ADOPTAR</a>
                     </div>
                 </div>
             </div>

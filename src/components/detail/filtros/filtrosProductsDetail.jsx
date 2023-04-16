@@ -25,10 +25,23 @@ export default function DetailProductosFilter(props) {
                         <h1 class="text-3xl font-extrabold text-gray-900 sm:text-5xl underline pb-2">{productId.name}</h1>
                         <div class="border border-gray-300 p-4 rounded-md mt-4 text-gray-500">{productId.summary}</div> 
                         <div class="text-gray-500 mt-1 mb-5">Stock: {productId.stock}</div>
-                        <div class="text-black font-bold py-2 px-4 rounded-md border border-green-600">Precio: ${productId.price}</div>
-                        <a href="" class="bg-green-500 text-white font-bold py-2 px-4 rounded-md border border-green-600 mt-5">
-                            Comprar  
-                        </a> 
+
+                        <div class="text-black font-bold py-2 px-4 mx-32 rounded-md border border-green-600">
+
+                            <span className="text-xl font-bold">{"$" + (productId.price-(productId.discount?.value/100)*productId.price)}</span>
+                            
+                            {/* <div className="flex items-center gap-1 justify-evenly ">
+                                {productId.discount.active ?  
+                                <div>
+                                    <span className="text-sm line-through opacity-50 ">{"$" + productId.price}</span>
+                                    <span className="bg-green-500 mx-2 px-1.5 rounded-md text-xs text-white">Save {productId.discount.value}%</span>
+                                </div> : ""}
+                            </div> */}
+                            
+                            {/* Precio: ${productId.price} */}
+
+                        </div>
+                        <a href="" class="text-2xl dark:bg-gray-900 text-white font-bold py-2 px-12 rounded-md border mb-6 mt-10 mx-20">COMPRAR</a>
                     </div>
                 </div>
             </div>
