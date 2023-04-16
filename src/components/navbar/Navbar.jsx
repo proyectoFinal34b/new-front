@@ -100,7 +100,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
                   transform="matrix(.64733 0 0 .64733 1.125 1.125)"
                 />
               </svg>
-              { JSON.parse(localStorage.getItem("carrito")).length ?
+              { JSON.parse(localStorage.getItem("carrito"))?.length ?
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 30 30"
