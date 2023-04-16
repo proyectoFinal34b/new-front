@@ -16,6 +16,7 @@ import {
   TOTAL_AMOUNT,
   GET_USERS_ID,
   CURRENT_PAGE,
+  LOAD_CART,
 } from "./actions";
 
 const initialState = {
@@ -79,6 +80,7 @@ const reducer = (state = initialState, action) => {
       };
 
     case ADD_TO_CART:
+      console.log(state.allProducts)
       let newItem = state.allProducts.find(
         (product) => product.id === action.payload
       );
@@ -133,11 +135,6 @@ const reducer = (state = initialState, action) => {
           initialValue
         ),}
       };
-      case GET_USERS_ID:
-        return{
-          ...state,
-          detail: action.payload,
-        }
     case CURRENT_PAGE:
       return{
         ...state, currentPage: action.payload
