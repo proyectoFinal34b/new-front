@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import Cart from "../carrito/carrito";
 import DarkMode from "./DarkMode";
 
+
 const Navbar = ({handlerDarkMode , darkMode}) => {
   console.log({handlerDarkMode, darkMode})
   const styleCompInicio="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-teal-400 md:hover:bg-transparent md:hover:text-teal-400 md:p-0 md:dark:hover:text-teal-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
@@ -15,12 +16,14 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
   useEffect(()=>{
    console.log(localStorage) 
   },[isLoggedIn])
+
   const [open, setOpen] = useState(null);
   const handleOpen = () => {
     setOpen(true);
     console.log(open);
   };
   const handleClose = () => setOpen(null);
+
   const handlerLogOut = ()=>{
     localStorage.clear()
     localStorage.setItem("darkMode", darkMode)
@@ -34,6 +37,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
           <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-teal-400">
           BASTET
         </span></Link>
+
         <div className="flex md:order-2">
           {isLoggedIn ? (
             <div>
