@@ -1,53 +1,8 @@
-// import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
-// import { getUsers, isLogged } from "../../redux/actions"
-// import { useDispatch, useSelector } from "react-redux";
-// import axios from "axios";
-
-// export default function Login() {
-//   const dispatch = useDispatch();
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const isLoggedIn = useSelector(state=>state.logged)
-
-//   useEffect(() => {
-//     dispatch(getUsers());
-//   }, [dispatch]);
-
-//   useEffect(() => {
-//     const storedEmail = localStorage.getItem("email");
-//     const storedIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-//     setEmail(storedEmail || "");
-
-//   }, []);
-
-//   useEffect(() => {
-//     localStorage.setItem("isLoggedIn", isLoggedIn);
-//     localStorage.setItem("email", email);
-//   }, [isLoggedIn, email]);
-
-//   async function handleLogin(e) {
-//     e.preventDefault();
-//     const validation = await axios.post('https://proyectofinal-gg57.onrender.com/user/validate', { email: email, password: password });
-//     console.log(validation)
-//     if (validation.data.logged) {
-//       dispatch(isLogged(validation.data));
-//     } else {
-//       alert("Email o contraseña incorrectos");
-//     }
-//   }
-
-//   function handleLogout() {
-//     dispatch(isLogged(false));
-//     setEmail("");
-//   }
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getUsers, isLogged } from "../../redux/actions";
+import { isLogged } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { Redirect } from 'react-router-dom';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -55,24 +10,14 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [isSessionStarted, setIsSessionStarted] = useState(false);
   const isLoggedIn = useSelector((state) => state.logged);
-  
 
   useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
-
-  useEffect(() => {
-    const storedEmail = sessionStorage.getItem("email");
-    const storedPassword = sessionStorage.getItem("password");
     const storedIsLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
-
     if (storedIsLoggedIn) {
       dispatch(isLogged(true));
       setIsSessionStarted(true);
     }
   }, [dispatch]);
-
-  
 
   function handleLogin(e) {
     e.preventDefault();
@@ -85,9 +30,8 @@ export default function Login() {
         console.log(response)
         if (response.data.logged) {
           dispatch(isLogged(response.data));
-          sessionStorage.setItem("isLoggedIn", true);
-          sessionStorage.setItem("userInfo", JSON.stringify(response.data.validatedUser))
-          sessionStorage.setItem("id", response.data.validatedUser.id )
+          localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem("userInfo", JSON.stringify(response.data.validatedUser));         
           setIsSessionStarted(true);
           alert("Inicio de sesión exitoso")
    window.location.href = "http://localhost:3000/" 
@@ -100,14 +44,7 @@ export default function Login() {
       });
   }
 
-  function handleLogout() {
-    dispatch(isLogged(false));
-    sessionStorage.removeItem("isLoggedIn");
-    sessionStorage.removeItem("email");
-    sessionStorage.removeItem("password");
-    setEmail("");
-    setIsSessionStarted(false);
-  }
+  
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -175,8 +112,12 @@ export default function Login() {
           <Link to='/' className="text-sm text-gray-500 hover:text-teal-400">
             Volver a la página de inicio
           </Link>
-        </p>
+        </p>      
+      <button>
+        Aiuda
+      </button>
       </div>
+
     </div>
   )
 }

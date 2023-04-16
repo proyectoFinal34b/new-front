@@ -4,7 +4,7 @@ import { handleColumnClick, handlerClick, handlerClickType } from "./logic/handl
 import Tabla from "./gatosView/tabla";
 import ChartGeneral from "./charts/chart";
 
-export default function Gatos({ cats }) {
+export default function Gatos({ cats, openModal }) {
 
   const [filters, setFilters] = useState({
     date: "historico",
@@ -14,7 +14,7 @@ export default function Gatos({ cats }) {
   });
   const [show, setShow] = useState([...cats])
 
-const handleColumnClickCat = (columnName) => {
+  const handleColumnClickCat = (columnName) => {
   handleColumnClick(columnName, filters, setFilters, show, setShow)
 };
   const handlerClickCat = (e) => {
@@ -24,6 +24,7 @@ const handleColumnClickCat = (columnName) => {
   const handlerClickTypeCat = (e)=>{
     handlerClickType(e, filters, setFilters, cats, setShow, "state")
   }
+  
 
   return (
     <>
@@ -38,7 +39,7 @@ const handleColumnClickCat = (columnName) => {
       <Buttons handlerClick={handlerClickCat}></Buttons>
 
       <div id="table-cats">
-    <Tabla handleColumnClickCat={handleColumnClickCat} show={show}></Tabla>
+    <Tabla openModal={openModal} handleColumnClickCat={handleColumnClickCat} show={show}></Tabla>
       </div>
     </>
   );
