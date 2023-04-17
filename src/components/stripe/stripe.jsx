@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { loadStripe } from "@stripe/stripe-js";
-import {
-  Elements,
-  CardElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js";
+import React, { useState,useEffect} from "react";
+import {loadStripe} from '@stripe/stripe-js'
+import {Elements, CardElement, useStripe, useElements} from '@stripe/react-stripe-js'
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { PostOrder,loadCart } from "../../redux/actions";
+import { postOrder,loadCart } from "../../redux/actions";
 
-const stripePromise = loadStripe(
-  "pk_test_51Mw8EZKXctGo6PdRordVcWqK5Eb4jPlAgImQ2oQijGbhgqRuTLFipWxQNKEJ5cOpEW6OpjQzsMKbcOLLE4rkaRBc00NRHlsSSD"
-); //conectar con stripe
+const stripePromise = loadStripe("pk_test_51Mw8EZKXctGo6PdRordVcWqK5Eb4jPlAgImQ2oQijGbhgqRuTLFipWxQNKEJ5cOpEW6OpjQzsMKbcOLLE4rkaRBc00NRHlsSSD") //conectar con stripe
+
+
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -58,7 +53,7 @@ const CheckoutForm = () => {
     }
   }
   setOrder({...order, list: resultado}) 
-  console.log(order)
+  //console.log(order)
   },[cartitems])
   
 
@@ -77,9 +72,9 @@ const CheckoutForm = () => {
       allowOutsideClick: false,
     }).then((response) => {
       if (response.isConfirmed) {
-        window.location.href = "/home";
+        window.location.href = "/";
       } else {
-        window.location.href = "/home";
+        window.location.href = "/";
       }
     });
   };
@@ -87,30 +82,30 @@ const CheckoutForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card", //tipo de pago que estamos registrando
-      card: elements.getElement(CardElement), //es como un documentGetById
+    const {error, paymentMethod} = await stripe.createPaymentMethod({
+        type: "card",       //tipo de pago que estamos registrando
+        card: elements.getElement(CardElement),  //es como un documentGetById
     });
     setLoading(true);
 
-    if (!error) {
-      //si no existe un error
+    if (!error){ //si no existe un error
+        
+        const {id} = paymentMethod; //le paso a la base de datos lo que tiene que guardar
 
-      const { id } = paymentMethod; //le paso a la base de datos lo que tiene que guardar
-
-      try {
-        const { data } = await axios.post(
-          "https://proyectofinal-gg57.onrender.com/payment/checkout",
-          {
+        try {
+            
+            const {data} = await axios.post("https://proyectofinal-gg57.onrender.com/payment/checkout",{
             id: id,
             amount: totalamount * 100,
           }
         );
-        dispatch(PostOrder(order));
         console.log(order)
+        console.log(data)
+        dispatch(postOrder(order));
+        
         mostrarAlerta();
 
-        console.log(data);
+        ;
 
         elements.getElement(CardElement).clear(); //limpia la tarjeta
       } catch (error) {
@@ -204,17 +199,19 @@ const CheckoutForm = () => {
         </form>
       </div>
     </div>
-  );
-};
+    )
+}
+
 
 export default function PasarelaDePagos() {
   return (
     <Elements stripe={stripePromise}>
       <div className="min-w-screen min-h-screen bg-gray-200 flex items-center justify-center px-5 pb-10 pt-16">
         <div className="w-full md:w-1/2 lg:w-1/3">
-          <CheckoutForm />
+        <CheckoutForm />
         </div>
-      </div>
-    </Elements>
-  );
+        </div>
+        </Elements>
+    )
 }
+

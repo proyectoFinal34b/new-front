@@ -153,9 +153,10 @@ export const currentPageFunction = (payload) => {
   }
 }
 
- export async function PostOrder(order){
+export const postOrder = (order) => async (dispatch) => {
   try {
     const json = await axios.post('https://proyectofinal-gg57.onrender.com/order', order);
+    console.log(json)
     return json;
   } catch (error) {
     throw Error(error);
