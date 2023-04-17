@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getUsers, isLogged } from "../../redux/actions";
+import { isLogged } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { currentLocation } from "../navbar/Navbar";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -27,20 +28,17 @@ export default function Login() {
         password: password,
       })
       .then((response) => {
-        console.log(response)
         if (response.data.logged) {
           dispatch(isLogged(response.data));
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("userInfo", JSON.stringify(response.data.validatedUser));         
           setIsSessionStarted(true);
           alert("Inicio de sesión exitoso")
-          window.location.href = "http://localhost:3000/" 
-        } else {
-          alert("Email o contraseña incorrectos");
-        }
+          window.location.href = currentLocation
+        } 
       })
       .catch((error) => {
-        console.error(error);
+        alert("Email o contraseña incorrectos");
       });
   }
 
