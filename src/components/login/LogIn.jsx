@@ -34,7 +34,7 @@ export default function Login() {
           localStorage.setItem("userInfo", JSON.stringify(response.data.validatedUser));         
           setIsSessionStarted(true);
           alert("Inicio de sesión exitoso")
-   window.location.href = "http://localhost:3000/" 
+          window.location.href = "http://localhost:3000/" 
         } else {
           alert("Email o contraseña incorrectos");
         }
@@ -113,9 +113,6 @@ export default function Login() {
             Volver a la página de inicio
           </Link>
         </p>      
-      <button>
-        Aiuda
-      </button>
       </div>
 
     </div>
