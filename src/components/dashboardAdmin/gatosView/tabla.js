@@ -29,6 +29,11 @@ export default function Tabla({handleColumnClickCat, show, openModal}){
       }));
       const csvFileName = "cats.csv";
 
+      const handlerEdit = (e)=>{
+        localStorage.setItem("catId", e.target.id)
+        openModal(e.target.name)
+      }
+
     return(
         <>
                 <table className="table-fixed cursor-default m-auto border-collapse border border-slate-900">
@@ -127,7 +132,7 @@ export default function Tabla({handleColumnClickCat, show, openModal}){
                   )}
                   <td>{cat.id}</td>
                   <td>
-                    <button name="editGatos" onClick={(e)=>openModal(e.target.name)} className="text-white shadow-md bg-teal-900 hover:bg-teal-500  font-medium rounded-lg text-sm px-4 py-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400">
+                    <button name="editGatos" id={cat.id} onClick={handlerEdit} className="text-white shadow-md bg-teal-900 hover:bg-teal-500  font-medium rounded-lg text-sm px-4 py-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400">
                       Edit
                     </button>
                   </td>

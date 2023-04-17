@@ -1,6 +1,7 @@
 import React from "react";
 import PostCats from "../form/FormularioCreacion";
 import PostProduct from "../productos/form/formulario";
+import FormularioEdit from "../form/FormularioEdit";
 
 export const Modal = ({ isOpen, onClose, formType }) => {
   return isOpen ? (
@@ -20,7 +21,7 @@ export const Modal = ({ isOpen, onClose, formType }) => {
           </div>
         ) : formType === "editGatos" ? (
                     <div className="relative z-50">
-            <PostCats />
+            <FormularioEdit />
           </div>
         ) :
         (

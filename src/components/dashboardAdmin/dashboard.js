@@ -23,8 +23,8 @@ export default function Dashboard (){
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = (e) => {
-    setIsModalOpen(true);
-    setModal(e)
+      setIsModalOpen(true);
+      setModal(e)
   };
 
   const closeModal = () => {
@@ -60,7 +60,6 @@ export default function Dashboard (){
     products()
     users()
   },[])
-  console.log(info, view)
   return (
     <>{currentUser.status === "superAdmin" ?
     <div className="bg-gray-100 flex" >
