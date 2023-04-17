@@ -28,7 +28,6 @@ export default function Login() {
         password: password,
       })
       .then((response) => {
-        console.log(response)
         if (response.data.logged) {
           dispatch(isLogged(response.data));
           localStorage.setItem("isLoggedIn", true);
@@ -36,12 +35,10 @@ export default function Login() {
           setIsSessionStarted(true);
           alert("Inicio de sesión exitoso")
           window.location.href = currentLocation
-        } else {
-          alert("Email o contraseña incorrectos");
-        }
+        } 
       })
       .catch((error) => {
-        console.error(error);
+        alert("Email o contraseña incorrectos");
       });
   }
 
