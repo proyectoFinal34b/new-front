@@ -10,7 +10,7 @@ import Ventas from "./ventas";
 import Usuarios from "./users";
 import { Modal } from "./modal";
 
-export default function Dashboard (){
+export default function Dashboard ({handlerDarkMode , darkMode}){
 
   const [view, setView] = useState("general")
   const [info , setInfo] = useState({
@@ -61,11 +61,14 @@ export default function Dashboard (){
     users()
   },[])
   return (
-    <>{currentUser.status === "superAdmin" ?
-    <div className="bg-gray-100 flex" >
+    <>{currentUser?.status === "superAdmin" ?
+    <div className="bg-gray-100 dark:bg-bgDark " >
+      <div>
+    <NavBarDash handlerDarkMode={handlerDarkMode} darkMode={darkMode} props={currentUser}></NavBarDash></div>
+      <div className="flex">
       <Menu click={clickHandlerMenu} openModal={openModal}></Menu>
       <div id="view" className=" flex-grow ">
-    <NavBarDash props={currentUser}></NavBarDash>
+        
     <div className=" w-full my-14 ">
     {info.cats.length===0 || info.users.length===0 || info.products.length===0 || info.orders.length===0  ? <Loading></Loading> : 
      view==="general" ?  <General cats={info?.cats} orders={info?.orders} users={info?.users} ></General> : 
@@ -76,6 +79,7 @@ export default function Dashboard (){
 }
 <Modal isOpen={isModalOpen} onClose={closeModal} formType={modal} ></Modal>
    </div>
+      </div>
       </div>
     </div> : <h1>No tenes permisos</h1>}
     </>

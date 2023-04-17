@@ -14,7 +14,8 @@ export default class Example extends PureComponent {
 
     return (
       <>
-      <div className="m-auto flex items-center justify-center">
+      <div className="m-auto max-w-fit flex items-center justify-center mb-10 dark:bg-white dark:backdrop-blur-[3px] dark:bg-opacity-30">
+        
       <BarChart
       width={900}
       height={300}
