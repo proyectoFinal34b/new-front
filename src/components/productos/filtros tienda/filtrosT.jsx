@@ -52,24 +52,6 @@ export default function ProductFiltrados(props) {
         // <div className="sticky top-3 flex justify-start items-center p-1">
             <div className="p-4 w-full md:sticky md:top-3 md:w-full dark:bg-gray-900 rounded-md ">
             <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Productos</h2>
-            {/* category */}
-                {/* <div className="flex flex-col mb-3">
-                <label htmlFor="category" className="mb-2 font-bold text-gray-100">
-                Categoria:
-                </label>
-                <select
-                id="category"
-                onChange={(e) => setFiltroCategory(e.target.value)}
-                value={filtroCategory}
-                className="rounded-md border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500 h-10 px-4"
-                >
-                <option value="">Todas las categorias</option>
-                <option value="albergue">Juguetes</option>
-                <option value="adoptado">Limpieza</option>
-                <option value="apadrinado">Comida</option>
-                </select>
-                </div> */}
-            {/* orden alfabetico */}
                 <div className="flex flex-col mb-4">
                 <label htmlFor="alfabetico" className="mb-2 font-bold text-gray-500">
                 Orden alfabetico:

@@ -46,7 +46,7 @@ export const filterCats = (filtered) => {
 
 export const postCats = (payload) => async (dispatch) => {
     try {
-      const json = await axios.post('/cat', payload);
+      const json = await axios.post(`/cat/${payload.id}`, payload.data);
       return json;
     } catch (error) {
       throw Error(error);
