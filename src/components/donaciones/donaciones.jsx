@@ -36,7 +36,7 @@ export default function DonacionesRender({handlerDarkMode, darkMode}) {
             <div className="w-[30%] flex flex-col items-center">
                 <div className="leading-[.8] text-teal-400 text-center flex flex-col space-y-6">
                     <h1 className="text-[106px] uppercase font-[Poppins]">Bastet</h1>
-                    <p className="text-5xl uppercase text-teal-600">exeso de mimos</p>
+                    <p className="text-5xl uppercase text-teal-600">exceso de mimos</p>
                 </div>
                 <div className="w-full h-[435px] mt-4 hover:scale-105 transition-all">
                     <img src="https://pngimg.es/d/cat_PNG50521.png"  className="w-full h-full object-cover drop-shadow-one"/>
