@@ -15,6 +15,8 @@ export const DEL_ALL_FROM_CART="DEL_ALL_FROM_CART"
 export const DEL_ONE_FROM_CART="DEL_ONE_FROM_CART"
 export const CLEAR_CART="CLEAR_CART";
 export const TOTAL_AMOUNT="TOTAL_AMOUNT"
+export const GET_USERS_ID="GET_USERS_ID"
+
 export const LOAD_CART= "LOAD_CART"
 export const CURRENT_PAGE = "CURRENT_PAGE"
 
@@ -130,6 +132,19 @@ export const loadCart= (cart)=>{
   }
 }
 
+export function getUsersById(id) {
+  return async function (dispatch) {
+    try {
+      const json = await axios.get(`https://proyectofinal-gg57.onrender.com/user/${id}`);
+      return dispatch({
+        type: GET_USERS_ID,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
 export const currentPageFunction = (payload) => {
   return{
     type: CURRENT_PAGE,

@@ -13,6 +13,7 @@ import Registro from './components/login/Registro';
 import PasarelaDePagos from './components/stripe/stripe';
 import Contraseña from './components/login/Contraseña';
 import Cambio from './components/login/Cambio'
+import Profile from './components/login/Profile'
 import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react';
 import Dashboard from './components/dashboardAdmin/dashboard';
@@ -54,13 +55,14 @@ function App() {
       <Route path ="/login/registro" element={<Registro/>}></Route>
       <Route path = "/resetpassword" element={<Contraseña/>}></Route>
       <Route path = "/changepassword" element={<Cambio/>}></Route>
-      <Route path ="/donaciones" element={<DonacionesRender darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
-      <Route path ="/gatos" element={<GatosRender darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
-      <Route path ="/gatos/:id" element={<DetailGatos darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
-      <Route path ="/productos" element={<ProductosRender darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
-      <Route path ="/productos/:id" element={<DetailProductos darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
-      <Route path ="/about-us" element={<SobreNosotros darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
-      <Route path ="/usuario" element={<UsuariosRender darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path = "/profile" element={<Profile/>}></Route>
+      <Route path ="/donaciones" element={<DonacionesRender/>}></Route>
+      <Route path ="/gatos" element={<GatosRender/>}></Route>
+      <Route path ="/gatos/:id" element={<DetailGatos/>}></Route>
+      <Route path ="/productos" element={<ProductosRender/>}></Route>
+      <Route path ="/productos/:id" element={<DetailProductos/>}></Route>
+      <Route path ="/about-us" element={<SobreNosotros/>}></Route>
+      <Route path ="/usuario" element={<UsuariosRender/>}></Route>
       <Route path='/dashboard' element={<Dashboard/>}></Route>
       <Route path='/pasarela' element={<PasarelaDePagos/>}></Route>
      {/* <Route path="/post" element={<CreateForm/>} /> */}

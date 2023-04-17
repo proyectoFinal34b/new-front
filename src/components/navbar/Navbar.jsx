@@ -41,7 +41,10 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
         <div className="flex md:order-2">
           {isLoggedIn ? (
             <div>
-              Hola, {user?.name}!!
+            <Link to='/profile' className="text-base text-gray-500 hover:text-teal-400">
+            Hola, {user?.name}!!
+          </Link>
+          
               <button
                 className="text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
                 onClick={handlerLogOut}
@@ -54,7 +57,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
               <NavLink to="/login">
                 <button
                   type="button"
-                  className="text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
+                  className="text-white bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
                 >
                   Iniciar sesion
                 </button>{" "}

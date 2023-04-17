@@ -14,6 +14,7 @@ import {
   DEL_ONE_FROM_CART,
   CLEAR_CART,
   TOTAL_AMOUNT,
+  GET_USERS_ID,
   CURRENT_PAGE,
   LOAD_CART,
 } from "./actions";
@@ -25,6 +26,7 @@ const initialState = {
   allProducts: [],
   productsById: [],
   allUsers: [],
+  detail: [],
   logged: false,
   user: {},
   cart: {
@@ -133,13 +135,6 @@ const reducer = (state = initialState, action) => {
           initialValue
         ),}
       };
-    case LOAD_CART:
-  
-      return{
-        ...state,
-       cart:{...state.cart, items:action.payload}
-        //cart: state.cart.items.length ? {...state.cart, items:[...state.cart.items, action.payload]} : {...state.cart, items:action.payload}
-      }
     case CURRENT_PAGE:
       return{
         ...state, currentPage: action.payload
