@@ -54,15 +54,16 @@ return(
           <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
            type="text" {...register("name", {required: true, maxLength:10})}/>
           {errors.name?.type==="required" && <p className="text-red-500">Se requiere un nombre</p>}
-          {errors.name?.type==="maxLength" && <p className="text-red-500">Máximo 10 carcateres</p>}
+          {errors.name?.type==="maxLength" && <p className="text-red-500">Máximo 20 carcateres</p>}
         </div>
         <div>
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Apellido:
           </label>
           <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="text" {...register("lastName", {required: true})}/>
+          type="text" {...register("lastName", {required: true, maxLength:10})}/>
           {errors.lastName?.type==="required" && <p className="text-red-500">Se requiere un apellido</p>}
+          {errors.lastName?.type==="maxLength" && <p className="text-red-500">Máximo 20 carcateres</p>}
         </div>
 <div>
           <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -82,9 +83,9 @@ return(
       <input
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         type="text"
-        {...register("address", { required: true })}
+        {...register("adress", { required: true })}
       />
-      {errors.address?.type === "required" && (
+      {errors.adress?.type === "required" && (
         <p className="text-red-500">Se requiere una dirección</p>
       )}
       </div>
@@ -106,8 +107,9 @@ return(
             Contraseña:
           </label>
           <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="string" {...register("password", {required: true})} />
+          type="string" {...register("password", {required: true, maxLength:10})} />
           {errors.password?.type==="required" && <p className="text-red-500">Debe ingresar una contraseña</p>}
+          {errors.password?.type==="maxLength" && <p className="text-red-500">Máximo 20 carcateres</p>}
         </div>
     <button className="bg-gray-900 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
       type="submit">

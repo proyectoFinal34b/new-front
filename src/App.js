@@ -14,13 +14,13 @@ import PasarelaDePagos from './components/stripe/stripe';
 import Contraseña from './components/login/Contraseña';
 import Cambio from './components/login/Cambio'
 import Profile from './components/login/Profile'
+import Contacto from './components/login/Contacto'
 import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react';
 import Dashboard from './components/dashboardAdmin/dashboard';
 import { getUsers } from './redux/actions';
 import { getCats } from './redux/actions';
 import axios from 'axios';
-
 
 function App() {
   const dispatch = useDispatch()
@@ -67,6 +67,7 @@ function App() {
       <Route path ="/usuario" element={<UsuariosRender darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
       <Route path='/dashboard' element={<Dashboard darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
       <Route path='/pasarela' element={<PasarelaDePagos darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path="/contacto" element={<Contacto darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
      {/* <Route path="/post" element={<CreateForm/>} /> */}
      </Routes>
     </div>

@@ -1,6 +1,7 @@
 import React, { useEffect , useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, loadCart } from "../../../redux/actions";
+import Swal from "sweetalert2";
 
 export default function Productcard(props) {
   const carrito = useSelector((state) => state.cart);
@@ -17,11 +18,29 @@ export default function Productcard(props) {
       dispatch(loadCart(local))
     }
   }, []);
+
+  const mostrarAlerta = () => {
+    Swal.fire({
+      title: "Inicie sesión antes de comprar",
+      text: "Para agregar productos al carro debes iniciar sesión",
+      icon: "warning",
+      confirmButtonText: "Iniciar sesión",
+      confirmButtonColor: "#b6ece5",
+      position: "top",
+    }).then((response) => {
+      if (response.isConfirmed) {
+        window.location.href = "/login";
+      }
+    });
+  };
+
   async function agregarAlCarro(id) {
-   dispatch(addToCart(id))
+   if(JSON.parse(localStorage.getItem('userInfo'))){
+    dispatch(addToCart(id))
     setState(!state)
     localStorage.setItem("carrito", JSON.stringify(carrito?.items));
-  }
+  } else mostrarAlerta()
+}
   return (
     <div className="flex m-auto mb-3 w-72 md:w-64 md:mb-4 2xl:w-96">
       <div className="bg-white w-full text-gray-700 sm:min-h-[524px] lg:min-h-[524px] 2xl:min-h-[605px] md:min-h-[34-rem] min-h-[31rem] shadow-lg rounded-md overflow-hidden md:w-96 md:mb-4 ">

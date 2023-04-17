@@ -12,15 +12,10 @@ import {
 import { NavLink } from "react-router-dom";
 
 export default function Cart(props) {
-  // const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const [totalAmount, setTotalAmount] = useState(false);
   const carrito = useSelector((state) => state.cart);
-  //const [cartState, setCartState] = useState([]);
-  //const cart = JSON.parse(localStorage.getItem("carrito")) || carrito.items;
-  console.log( carrito, JSON.parse(localStorage.getItem("carrito")));
 
-  
 
   useEffect(() => {
     const local= JSON.parse(localStorage.getItem("carrito"))
