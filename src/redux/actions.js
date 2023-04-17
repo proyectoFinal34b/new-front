@@ -16,7 +16,7 @@ export const DEL_ONE_FROM_CART="DEL_ONE_FROM_CART"
 export const CLEAR_CART="CLEAR_CART";
 export const TOTAL_AMOUNT="TOTAL_AMOUNT"
 export const GET_USERS_ID="GET_USERS_ID"
-
+export const SEARCH_PRODUCTS= "SEARCH_PRODUCTS"
 export const LOAD_CART= "LOAD_CART"
 export const CURRENT_PAGE = "CURRENT_PAGE"
 
@@ -151,3 +151,9 @@ export const currentPageFunction = (payload) => {
     payload: payload
   }
 }
+
+export const searchProducts = (name) => async (dispatch) => {
+    return await axios.get(`https://proyectofinal-gg57.onrender.com/product?name=${name}`)
+    .then(r => dispatch({ type : SEARCH_PRODUCTS, payload : r.data}))
+    .catch(e => console.error(e))
+};

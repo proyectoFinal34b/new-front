@@ -17,6 +17,7 @@ import {
   GET_USERS_ID,
   CURRENT_PAGE,
   LOAD_CART,
+  SEARCH_PRODUCTS
 } from "./actions";
 
 const initialState = {
@@ -139,6 +140,11 @@ const reducer = (state = initialState, action) => {
       return{
         ...state, currentPage: action.payload
       }
+      case SEARCH_PRODUCTS:
+      return { 
+        ...state, 
+        allProducts: action.payload 
+      };
 
     default:
       return { ...state };
