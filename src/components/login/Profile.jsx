@@ -5,6 +5,7 @@ import { getUsersById } from "../../redux/actions";
 import { Link } from 'react-router-dom';
 import Navbar from "../navbar/Navbar";
 import Loader from "../dashboardAdmin/loading";
+import Footer from "../home/footer/footer";
 
 
 
@@ -229,6 +230,7 @@ function Profile({darkMode,handlerDarkMode}) {
           </Link>
         </p>
     </div>
+    <Footer></Footer>
     </>
   );
 }
