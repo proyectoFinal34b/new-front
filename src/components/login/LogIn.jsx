@@ -1,9 +1,15 @@
+
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { isLogged } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+
+import { Redirect } from 'react-router-dom';
+import {LoginButton} from './LogginAutho'
+
 import { currentLocation } from "../navbar/Navbar";
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -13,6 +19,8 @@ export default function Login() {
   const [isSessionStarted, setIsSessionStarted] = useState(false);
   const isLoggedIn = useSelector((state) => state.logged);
 
+
+ 
   useEffect(() => {
     const storedIsLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
     if (storedIsLoggedIn) {
@@ -47,7 +55,6 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="w-full sm:max-w-md md:max-w-lg lg:max-w-xl">
-        
           <form
             className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto"
             onSubmit={handleLogin}
@@ -90,6 +97,11 @@ export default function Login() {
               >
                 Iniciar sesión
               </button>
+            </div>
+            <br/>
+            <div className="flex items-center justify-center">
+            <LoginButton
+              />
             </div>
             <a
               className="inline-block align-baseline font-bold text-sm text-gray-900 hover:text-teal-500"
