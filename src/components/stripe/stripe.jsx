@@ -3,10 +3,9 @@ import {loadStripe} from '@stripe/stripe-js'
 import {Elements, CardElement, useStripe, useElements} from '@stripe/react-stripe-js'
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const stripePromise = loadStripe("pk_test_51Mw8EZKXctGo6PdRordVcWqK5Eb4jPlAgImQ2oQijGbhgqRuTLFipWxQNKEJ5cOpEW6OpjQzsMKbcOLLE4rkaRBc00NRHlsSSD") //conectar con stripe
+const stripePromise = loadStripe("pk_test_51MxuUbL58axdeL10hN9HMJ2cj9FrWDlfJ3bpVzHmdkcPP7SY1m3xr65NKHN2yaBqKuaGaWJ1G8HlWw9wBlKYSOvY006U6olclj") //conectar con stripe
 
 
 
