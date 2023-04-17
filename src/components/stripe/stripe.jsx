@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import {loadStripe} from '@stripe/stripe-js'
 import {Elements, CardElement, useStripe, useElements} from '@stripe/react-stripe-js'
 import axios from "axios";
@@ -17,9 +17,6 @@ const CheckoutForm = () => {
     const [loading, setLoading] = useState(false);
     const totalamount=useSelector((state)=>state.cart.total);
 
-    // useEffect(() =>{
-    //     mostrarAlerta()
-    // }, []);
 
     const mostrarAlerta = () =>{
         Swal.fire({
