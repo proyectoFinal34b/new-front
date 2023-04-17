@@ -1,46 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
-// import { getUsers, isLogged } from "../../redux/actions"
-// import { useDispatch, useSelector } from "react-redux";
-// import axios from "axios";
-
-// export default function Login() {
-//   const dispatch = useDispatch();
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const isLoggedIn = useSelector(state=>state.logged)
-
-//   useEffect(() => {
-//     dispatch(getUsers());
-//   }, [dispatch]);
-
-//   useEffect(() => {
-//     const storedEmail = localStorage.getItem("email");
-//     const storedIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-//     setEmail(storedEmail || "");
-
-//   }, []);
-
-//   useEffect(() => {
-//     localStorage.setItem("isLoggedIn", isLoggedIn);
-//     localStorage.setItem("email", email);
-//   }, [isLoggedIn, email]);
-
-//   async function handleLogin(e) {
-//     e.preventDefault();
-//     const validation = await axios.post('https://proyectofinal-gg57.onrender.com/user/validate', { email: email, password: password });
-//     console.log(validation)
-//     if (validation.data.logged) {
-//       dispatch(isLogged(validation.data));
-//     } else {
-//       alert("Email o contraseña incorrectos");
-//     }
-//   }
-
-//   function handleLogout() {
-//     dispatch(isLogged(false));
-//     setEmail("");
-//   }
 
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -48,6 +5,7 @@ import { getUsers, isLogged } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Redirect } from 'react-router-dom';
+import {LoginButton} from './LogginAutho'
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -57,6 +15,8 @@ export default function Login() {
   const isLoggedIn = useSelector((state) => state.logged);
   
 
+
+ 
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
@@ -114,7 +74,6 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="w-full sm:max-w-md md:max-w-lg lg:max-w-xl">
-        
           <form
             className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto"
             onSubmit={handleLogin}
@@ -157,6 +116,11 @@ export default function Login() {
               >
                 Iniciar sesión
               </button>
+            </div>
+            <br/>
+            <div className="flex items-center justify-center">
+            <LoginButton
+              />
             </div>
             <a
               className="inline-block align-baseline font-bold text-sm text-gray-900 hover:text-teal-500"
