@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import Cart from "../carrito/carrito";
 import DarkMode from "./DarkMode";
-
+export const currentLocation = window.location.href
 
 const Navbar = ({handlerDarkMode , darkMode}) => {
   console.log({handlerDarkMode, darkMode})
@@ -12,22 +12,22 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
   const prevUser = JSON.parse(localStorage.getItem("userInfo"))
   const [user, setUser] = useState(prevUser)
   const userType = prevUser?.status
+
   const dispatch = useDispatch();
   useEffect(()=>{
-   console.log(localStorage) 
   },[isLoggedIn])
 
   const [open, setOpen] = useState(null);
   const handleOpen = () => {
     setOpen(true);
-    console.log(open);
   };
   const handleClose = () => setOpen(null);
-
+ 
   const handlerLogOut = ()=>{
     localStorage.clear()
     localStorage.setItem("darkMode", darkMode)
     setIsLoggedIn(localStorage.getItem("isLoggedIn"))
+    window.location.href = currentLocation 
   }
   
   return (
@@ -40,18 +40,19 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
 
         <div className="flex md:order-2">
           {isLoggedIn ? (
-            <div>
-            <Link to='/profile' className="text-base text-gray-500 hover:text-teal-400">
+            <>
+            <div className="bg-teal-900 hover:bg-teal-500   dark:bg-teal-400 flex mx-4 px-2 rounded-md text-center items-center justify-center">
+            <Link to='/profile' className="text-base font-medium text-white dark:hover:text-white dark:text-slate-900 hover:text-white">
             Hola, {user?.name}!!
           </Link>
-          
+          </div>
               <button
-                className="text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
+                className="text-white dark:hover:text-white dark:text-slate-900 hover:text-white bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
                 onClick={handlerLogOut}
               >
                 Cerrar sesión
               </button>
-            </div>
+            </>
           ) : (
             <>
               <NavLink to="/login">

@@ -3,10 +3,12 @@ import axios from "axios";
 import { useDispatch } from 'react-redux';
 import { getUsersById } from "../../redux/actions";
 import { Link } from 'react-router-dom';
+import Navbar from "../navbar/Navbar";
+import Loader from "../dashboardAdmin/loading";
 
 
 
-function Profile() {
+function Profile({darkMode,handlerDarkMode}) {
     const dispatch = useDispatch();
     const [user, setUser] = useState(null);
     const [editing, setEditing] = useState(false);
@@ -93,9 +95,11 @@ function Profile() {
       };
   
     if (!user) {
-      return <p>Cargando...</p>;
+      return <Loader></Loader>;
     }
   return (
+    <>
+    <Navbar darkMode={darkMode} handlerDarkMode={handlerDarkMode}></Navbar>
     <div className="bg-gray-100 py-8">
     <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <h1 class="text-3xl font-bold mb-4 text-teal-400">Mi perfil</h1>
@@ -225,6 +229,7 @@ function Profile() {
           </Link>
         </p>
     </div>
+    </>
   );
 }
 

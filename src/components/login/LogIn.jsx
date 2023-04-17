@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getUsers, isLogged } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { currentLocation } from "../navbar/Navbar";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ export default function Login() {
           localStorage.setItem("userInfo", JSON.stringify(response.data.validatedUser));         
           setIsSessionStarted(true);
           alert("Inicio de sesión exitoso")
-          window.location.href = "http://localhost:3000/" 
+          window.location.href = currentLocation
         } else {
           alert("Email o contraseña incorrectos");
         }
