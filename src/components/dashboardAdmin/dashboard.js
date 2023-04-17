@@ -34,19 +34,19 @@ export default function Dashboard (){
   const getUser = JSON.parse(localStorage.getItem("userInfo"))
   const currentUser = getUser
   const users = async ()=>{
-    const response = await axios.get("http://localhost:3001/user")
+    const response = await axios.get("/user")
     setInfo(prevState=>({...prevState, users: response.data}))
   }
   const cats = async () => {
-    const response = await axios.get("http://localhost:3001/cat/")
+    const response = await axios.get("/cat/")
     setInfo(prevState => ({...prevState, cats: response.data}))
   }
   const orders = async () => {
-    const response = await axios.get("http://localhost:3001/order/")
+    const response = await axios.get("/order/")
     setInfo(prevState => ({...prevState, orders: response.data}))
   }
   const products = async () => {
-    const response = await axios.get("http://localhost:3001/product")
+    const response = await axios.get("/product")
     setInfo(prevState => ({...prevState, products:response.data}))  
   }
 
