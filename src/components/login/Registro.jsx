@@ -109,18 +109,6 @@ return(
           type="string" {...register("password", {required: true})} />
           {errors.password?.type==="required" && <p className="text-red-500">Debe ingresar una contraseña</p>}
         </div>
-        <div>
-    <label className="block text-gray-700 text-sm font-bold mb-2">
-      ¿Activar cuenta?
-    </label>
-    <input
-      type="checkbox"
-      {...register("active", { required: true })}
-    />
-    {errors.active && (
-      <p className="text-red-500">Este campo es requerido</p>
-    )}
-  </div>
     <button className="bg-gray-900 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
       type="submit">
         Registrarse
