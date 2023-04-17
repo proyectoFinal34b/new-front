@@ -17,7 +17,7 @@ function Profile({darkMode,handlerDarkMode}) {
       name: "",
       lastName: "",
       email: "",
-      address: "",
+      adress: "",
       phoneNumber: "",
       image: "",
     });
@@ -37,7 +37,7 @@ function Profile({darkMode,handlerDarkMode}) {
           name: user.name,
           lastName: user.lastName,
           email: user.email,
-          address: user.address,
+          adress: user.adress,
           phoneNumber: user.phoneNumber,
           image: user.image,
         });
@@ -51,13 +51,13 @@ function Profile({darkMode,handlerDarkMode}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        const { name, lastName, email, address, phoneNumber, image } = formData;
+        const { name, lastName, email, adress, phoneNumber, image } = formData;
         try {
           const response = await axios.put(`https://proyectofinal-gg57.onrender.com/user/${userInfo.id}`, {
             name,
             lastName,
             email,
-            address,
+            adress,
             phoneNumber,
             image,
           });
@@ -69,7 +69,7 @@ function Profile({darkMode,handlerDarkMode}) {
               name: "",
               lastName: "",
               email: "",
-              address: "",
+              adress: "",
               phoneNumber: "",
               image: "",
             });
@@ -89,7 +89,7 @@ function Profile({darkMode,handlerDarkMode}) {
           name: user.name,
           lastName: user.lastName,
           email: user.email,
-          address: user.address,
+          adress: user.adress,
           phoneNumber: user.phoneNumber,
           image: user.image,
         });
@@ -117,7 +117,7 @@ function Profile({darkMode,handlerDarkMode}) {
         <p className="text-lg mb-2 font-bold">Nombre: {user.name}</p>
         <p className="text-lg mb-2 font-bold">Apellido: {user.lastName}</p>
         <p className="text-lg mb-2 font-bold">Email: {user.email}</p>
-        <p className="text-lg mb-2 font-bold">Dirección: {user.address ? user.address : 'No especificada'}</p>
+        <p className="text-lg mb-2 font-bold">Dirección: {user.adress ? user.adress : 'No especificada'}</p>
         <p className="text-lg mb-2 font-bold">Telefono: {user.phoneNumber}</p>
       </div>
     </div>
@@ -167,16 +167,16 @@ function Profile({darkMode,handlerDarkMode}) {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="address">
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="adress">
             Dirección:
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="address"
+            id="adress"
             type="text"
-            name="address"
-            value={formData.address}
-            onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+            name="adress"
+            value={formData.adress}
+            onChange={(e) => setFormData({ ...formData, adress: e.target.value })}
           />
         </div>
         <div className="mb-4">
