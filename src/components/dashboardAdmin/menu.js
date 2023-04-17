@@ -3,16 +3,14 @@ import React, { useState } from "react";
 export default function Menu(props) {
 
 
-  const buttonStyle = "bg-buttonCol text-white w-40 rounded-md py-1 shadow-md hover:bg-teal-600"
-  const buttonStyle2 = "bg-[#38797c] text-white w-40 rounded-md py-1 shadow-md hover:bg-teal-600"
+  const buttonStyle = "bg-buttonCol text-white w-40 rounded-md py-1 shadow-md hover:bg-teal-600 dark:text-gray-900"
+  const buttonStyle2 = "bg-[#38797c] text-white w-40 rounded-md py-1 shadow-md hover:bg-teal-600 dark:text-gray-200"
 
   return (
     <>
-      <div id="menu" className="bg-dashCol min-h-screen w-1/5">
-        <h1 class="bg-gray-100 self-center text-3xl font-semibold py-6 shadow-md">
-          BASTET
-        </h1>
-        <ul className="mt-8 space-y-8 font-medium text-lg">
+      <div id="menu" className="bg-dashCol min-h-screen w-1/5 dark:bg-slate-900 dark:shadow-white shadow-md ">
+        
+        <ul className="mt-8 space-y-8 font-medium text-lg sticky top-12 ">
           <li>
             <button name="general" className={buttonStyle} onClick={(e)=>props.click(e.target.name)}>General</button>
           </li>

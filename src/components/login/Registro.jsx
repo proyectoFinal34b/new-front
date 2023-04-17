@@ -25,7 +25,7 @@ useEffect(()=>{
 
   const onSubmit = (data) => {
     axios
-      .post("https://proyectofinal-gg57.onrender.com/user", data)
+      .post("/user", data)
       .then((data) => {
         if (data) {
           alert("Gracias por registrarte");

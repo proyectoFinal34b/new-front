@@ -173,7 +173,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
               </a>
             </li>
             <DarkMode darkMode={darkMode} handlerDarkMode={handlerDarkMode} />
-           {userType==="admin" || userType==="superAdmin" ? <button className=" bg-[#38797c] text-white w-40 rounded-md py-1 shadow-md hover:bg-teal-600" >Dashboard</button>
+            {userType==="admin" || userType==="superAdmin" ? <Link to={"/dashboard"}><button className=" bg-[#38797c] text-white w-40 rounded-md py-1 shadow-md hover:bg-teal-600" >Dashboard</button></Link>
           : ""} </ul>
         </div>
       </div>

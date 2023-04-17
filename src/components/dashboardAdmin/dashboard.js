@@ -10,7 +10,7 @@ import Ventas from "./ventas";
 import Usuarios from "./users";
 import { Modal } from "./modal";
 
-export default function Dashboard (){
+export default function Dashboard ({handlerDarkMode , darkMode}){
 
   const [view, setView] = useState("general")
   const [info , setInfo] = useState({
@@ -23,41 +23,30 @@ export default function Dashboard (){
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = (e) => {
-    setIsModalOpen(true);
-    setModal(e)
+      setIsModalOpen(true);
+      setModal(e)
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
     setModal("")
   };
-/*   const currentUser = useSelector(state=>state.currentUser) */
-const currentUser = {
-	name: "Juje",
-	password: "superAdmin",
-	lastName: "Gramajo",
-	email : "superadmin@gmail.com",
-	phoneNumber : 12516,
-	active:true,
-	sponsor: [1,2,3],
-	image: "https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/02/27/16/17494470-1666268773668153-4913147535255666688-n.jpg?quality=75&width=1200&auto=webp",
-	order : [1,2,3],
-	status : "superAdmin"
-}
+  const getUser = JSON.parse(localStorage.getItem("userInfo"))
+  const currentUser = getUser
   const users = async ()=>{
-    const response = await axios.get("http://localhost:3001/user")
+    const response = await axios.get("/user")
     setInfo(prevState=>({...prevState, users: response.data}))
   }
   const cats = async () => {
-    const response = await axios.get("http://localhost:3001/cat/")
+    const response = await axios.get("/cat/")
     setInfo(prevState => ({...prevState, cats: response.data}))
   }
   const orders = async () => {
-    const response = await axios.get("http://localhost:3001/order/")
+    const response = await axios.get("/order/")
     setInfo(prevState => ({...prevState, orders: response.data}))
   }
   const products = async () => {
-    const response = await axios.get("http://localhost:3001/product")
+    const response = await axios.get("/product")
     setInfo(prevState => ({...prevState, products:response.data}))  
   }
 
@@ -71,13 +60,15 @@ const currentUser = {
     products()
     users()
   },[])
-  console.log(info, view)
   return (
     <>{currentUser?.status === "superAdmin" ?
-    <div className="bg-gray-100 flex" >
+    <div className="bg-gray-100 dark:bg-bgDark " >
+      <div>
+    <NavBarDash handlerDarkMode={handlerDarkMode} darkMode={darkMode} props={currentUser}></NavBarDash></div>
+      <div className="flex">
       <Menu click={clickHandlerMenu} openModal={openModal}></Menu>
       <div id="view" className=" flex-grow ">
-    <NavBarDash props={currentUser}></NavBarDash>
+        
     <div className=" w-full my-14 ">
     {info.cats.length===0 || info.users.length===0 || info.products.length===0 || info.orders.length===0  ? <Loading></Loading> : 
      view==="general" ?  <General cats={info?.cats} orders={info?.orders} users={info?.users} ></General> : 
@@ -88,6 +79,7 @@ const currentUser = {
 }
 <Modal isOpen={isModalOpen} onClose={closeModal} formType={modal} ></Modal>
    </div>
+      </div>
       </div>
     </div> : <h1>No tenes permisos</h1>}
     </>

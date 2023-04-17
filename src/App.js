@@ -20,6 +20,7 @@ import { useEffect, useState } from 'react';
 import Dashboard from './components/dashboardAdmin/dashboard';
 import { getUsers } from './redux/actions';
 import { getCats } from './redux/actions';
+import axios from 'axios';
 
 function App() {
   const dispatch = useDispatch()
@@ -47,6 +48,7 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, []);
+  axios.defaults.baseURL = "http://localhost:3001/"
   return (
     <div className="App cursor-default dark:bg-bgDark bg-slate-200">
       <Routes>

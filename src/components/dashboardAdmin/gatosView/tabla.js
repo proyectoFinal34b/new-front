@@ -2,8 +2,8 @@ import React from "react";
 import { CSVLink } from "react-csv";
 
 export default function Tabla({handleColumnClickCat, show, openModal}){
-    const stylesNameCol = "w-28 p-2";
-    const stylesTd = "h-8 p-2  ";
+  const stylesNameCol = "w-24 p-2";
+  const stylesTd = "h-12 w-40 p-2 mb-4 mt-4";
 
     const csvHeaders = [
         { label: "Nombre", key: "name" },
@@ -29,11 +29,17 @@ export default function Tabla({handleColumnClickCat, show, openModal}){
       }));
       const csvFileName = "cats.csv";
 
+      const handlerEdit = (e)=>{
+        localStorage.setItem("catId", e.target.id)
+        openModal(e.target.name)
+      }
+
     return(
         <>
-                <table className="table-fixed cursor-default m-auto border-collapse border border-slate-900">
+                <table className="table-fixed cursor-default m-auto shadow-xl dark:bg-white dark:shadow-md dark:shadow-white mt-10">
           <thead>
-            <tr className="bg-tableCol  text-white border-collapse border border-slate-900">
+            <tr className="bg-tableCol  text-white shadow-md ">
+              <th></th>
               <th className={stylesNameCol}>
                 <button onClick={() => handleColumnClickCat("name")}>
                   Nombre
@@ -78,8 +84,9 @@ export default function Tabla({handleColumnClickCat, show, openModal}){
               return (
                 <tr
                   key={cat.id}
-                  className="hover:bg-gray-300 border-b border-slate-300 "
+                  className="hover:bg-gray-300  dark:text-black dark:hover:bg-gray-400 shadow-md"
                 >
+                  <td><img src={cat.image} alt={cat.name} className="w-28 h-28 object-cover"/></td>
                   <td className={stylesTd}>{cat.name}</td>
                   <td>{cat.arrived.slice(2, 10)}</td>
                   <td>{cat.age}</td>
@@ -127,7 +134,7 @@ export default function Tabla({handleColumnClickCat, show, openModal}){
                   )}
                   <td>{cat.id}</td>
                   <td>
-                    <button name="editGatos" onClick={(e)=>openModal(e.target.name)} className="text-white shadow-md bg-teal-900 hover:bg-teal-500  font-medium rounded-lg text-sm px-4 py-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400">
+                    <button name="editGatos" onClick={handlerEdit} className="text-white shadow-md bg-teal-900 hover:bg-teal-500  font-medium rounded-lg text-sm px-4 py-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400">
                       Edit
                     </button>
                   </td>

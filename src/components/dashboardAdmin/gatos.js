@@ -5,7 +5,7 @@ import Tabla from "./gatosView/tabla";
 import ChartGeneral from "./charts/chart";
 
 export default function Gatos({ cats, openModal }) {
-
+  const stylebtnCat="focus:bg-green-200 font-medium bg-[#A3E3DD] w-36 shadow-md p-2 rounded-sm hover:bg-[#0D9488] hover:text-white"
   const [filters, setFilters] = useState({
     date: "historico",
     type:"",
@@ -28,14 +28,14 @@ export default function Gatos({ cats, openModal }) {
 
   return (
     <>
-      <h1>Soy la view gatos</h1>
+
 
   <ChartGeneral data={show} arg={filters.type} periodo={filters.date}></ChartGeneral>
   <div className="flex justify-center mx-10 my-5 space-x-5">
-      <button className="focus:bg-green-200 font-medium bg-[#A3E3DD] w-36 shadow-md p-2 rounded-sm hover:bg-[#0D9488] hover:text-white " value="adoptado" onClick={handlerClickTypeCat}>Adoptado</button>
-      <button className="focus:bg-green-200 font-medium bg-[#A3E3DD] w-36 shadow-md p-2 rounded-sm hover:bg-[#0D9488] hover:text-white " value="apadrinado" onClick={handlerClickTypeCat}>Apadrinado</button>
-      <button className="focus:bg-green-200 font-medium bg-[#A3E3DD] w-36 shadow-md p-2 rounded-sm hover:bg-[#0D9488] hover:text-white " value="albergue" onClick={handlerClickTypeCat}>Albergue</button>
-  </div>    
+      <button className={stylebtnCat} value="adoptado" onClick={handlerClickTypeCat}>Adoptado</button>
+      <button className={stylebtnCat} value="apadrinado" onClick={handlerClickTypeCat}>Apadrinado</button>
+      <button className={stylebtnCat} value="albergue" onClick={handlerClickTypeCat}>Albergue</button>
+  </div>     
       <Buttons handlerClick={handlerClickCat}></Buttons>
 
       <div id="table-cats">

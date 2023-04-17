@@ -12,17 +12,17 @@ const stylesbtnCard="px-4 py-2 bg-teal-500 shadow-lg  rounded-lg text-white uppe
   const [catsPerPage, setcatsPerPage] = useState(9);
   const indexOfLastcat = currentPage * catsPerPage;
   const indexOfFirstcat = indexOfLastcat - catsPerPage;
-
+  const activeCats = cats.filter(cat=>cat.status!==false)
+console.log(activeCats)
   useEffect(() => {
     dispatch(getCats());
   }, [dispatch]);
-  console.log(cats)
 
   return (
     <>
       <div className='md:pr-3'>
         <div className=" my-10 sm:columns-2 xl:columns-3 lg:columns-3 ">
-          {Array.isArray(cats) ? cats.slice(indexOfFirstcat, indexOfLastcat).map(function (cat) {
+          {Array.isArray(activeCats) ? activeCats.slice(indexOfFirstcat, indexOfLastcat).map(function (cat) {
             return (
       <div>
                 <div className="bg-slate-100 dark:bg-gray-900 mb-5 w-72 m-auto border-1 border-dashed border-gray-900 shadow-2xl rounded-md overflow-hidden xl:w-10/12 xl:mb-14 lg:w-60 md:w-64 md:mb-4" key={cat.id}>
@@ -48,7 +48,7 @@ const stylesbtnCard="px-4 py-2 bg-teal-500 shadow-lg  rounded-lg text-white uppe
 
         <Paginado
          elementsPerPage={catsPerPage}
-          allelements={cats?.length}
+          allelements={activeCats?.length}
         />
   </div>    
 </>

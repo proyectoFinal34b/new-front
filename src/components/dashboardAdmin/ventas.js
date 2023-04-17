@@ -7,8 +7,9 @@ import Example from "./charts/chart";
 import { handlerClickType } from "./logic/handlers";
 
 export default function Ventas({ orders }) {
+  const stylesbtncharmander="focus:bg-green-200 font-medium bg-[#A3E3DD] w-36 shadow-md p-2 mr-4 mb-2 rounded-sm hover:bg-[#0D9488] hover:text-white"
   const stylesNameCol = "w-28 p-2 cursor-pointer ";
-  const stylesTd = "h-8 px-2 py-3  ";
+  const stylesTd = "h-8 px-2 py-3 ";
   const [filters, setFilters] = useState({
     date: "historico",
     type:"",
@@ -55,16 +56,16 @@ export default function Ventas({ orders }) {
 
   return (
     <>
-      <h1>Soy la view ventas</h1>
-      <Example data={show} arg={filters.type} periodo={filters.date}></Example>
-      <button value="proceso" onClick={handlerClickTypeVenta}>Proceso</button>
-      <button value="entregado" onClick={handlerClickTypeVenta}>Entregado</button>
-      <button value="cancelado" onClick={handlerClickTypeVenta}>Cancelado</button>
+     
+     <Example data={show} arg={filters.type} periodo={filters.date}></Example>
+      <button className={stylesbtncharmander} value="proceso" onClick={handlerClickTypeVenta}>Proceso</button>
+      <button className={stylesbtncharmander} value="entregado" onClick={handlerClickTypeVenta}>Entregado</button>
+      <button className={stylesbtncharmander} value="cancelado" onClick={handlerClickTypeVenta}>Cancelado</button>
       <Buttons handlerClick={handlerClickVentas}></Buttons>
       <div>
-        <table className="table-fixed cursor-default m-auto border-collapse border border-slate-900">
+        <table className="table-fixed cursor-default m-auto mt-10">
           <thead>
-            <tr className="bg-tableCol  text-white border-collapse border border-slate-900">
+            <tr className="bg-tableCol  text-white dark:text-black">
               <th className="w-12" onClick={() => handleColumnClickVentas("id")}>ID</th>
               <th className="w-36" onClick={() => handleColumnClickVentas("delivery")}>Delivery</th>
               <th onClick={() => handleColumnClickVentas("list")}>List</th>
@@ -76,8 +77,8 @@ export default function Ventas({ orders }) {
           <tbody>
             {filteredOrders?.map((order) => {
               return (
-                <tr key={order.id} className="hover:bg-gray-300 border-b border-slate-300 ">
-                  <td className={stylesTd}>{order.id}</td>
+                <tr key={order.id} className="hover:bg-gray-300 dark:border-b shadow-md border-slate-300 dark:text-black dark:hover:bg-gray-400 dark:bg-white">
+                    <td className={stylesTd}>{order.id}</td>
                   {order.delivery === "proceso" ? (
                     <td className="flex m-auto justify-center items-center" >
                         En proceso
