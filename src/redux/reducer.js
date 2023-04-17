@@ -17,7 +17,7 @@ import {
   GET_USERS_ID,
   CURRENT_PAGE,
   LOAD_CART,
-  SEARCH_PRODUCTS
+  SEARCH_PRODUCTS,
   GET_ORDERS,
 } from "./actions";
 
