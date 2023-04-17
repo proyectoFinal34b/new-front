@@ -21,7 +21,6 @@ import Dashboard from './components/dashboardAdmin/dashboard';
 import { getUsers } from './redux/actions';
 import { getCats } from './redux/actions';
 
-
 function App() {
   const dispatch = useDispatch()
   const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
