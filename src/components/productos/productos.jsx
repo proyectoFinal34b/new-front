@@ -7,7 +7,7 @@ import Paginado from "../card/paginado/paginado";
 import ProductFiltrados from "./filtros tienda/filtrosT";
 import Renderizados from "./productos renderizados/renderizados";
 
-export default function ProductosRender() {
+export default function ProductosRender({handlerDarkMode, darkMode}) {
 
   const dispatch = useDispatch();
   const products = useSelector((state) => state.allProducts);
@@ -22,7 +22,7 @@ export default function ProductosRender() {
 
   return (
     <>
-      <Navbar />
+      <Navbar darkMode={darkMode} handlerDarkMode={handlerDarkMode} />
       <div className="md:grid grid-cols-4">
         <div className=" lg:sticky top-3 justify-between items-center px-3 p-3 md:col-span-1 w-full md:sticky md:top-3 md:w-full">
           <ProductFiltrados setPrueba={setPrueba} prueba={prueba} />

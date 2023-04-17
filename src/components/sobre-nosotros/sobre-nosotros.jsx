@@ -4,7 +4,7 @@ import Footer from "../home/footer/footer";
 import { Link } from "react-router-dom";
 import cargando from "../../image/en-proceso.png";
 
-export default function SobreNosotros() {
+export default function SobreNosotros({handlerDarkMode , darkMode}) {
   const data = [
     {
       name: "Agustin San Martin",
@@ -51,17 +51,17 @@ export default function SobreNosotros() {
   ]
   return (
     <div>
-      <Navbar></Navbar>
-      <div className="container my-24 px-6 mx-auto">
+      <Navbar handlerDarkMode={handlerDarkMode} darkMode={darkMode}/>
+      <div className="my-24 px-6 mx-auto">
         <section className="mb-32 text-gray-800 text-center flex flex-col items-center">
-          <h2 className="text-3xl font-bold mb-32">
+          <h2 className="text-3xl dark:text-white font-bold mb-32">
             Conoce al equipo <u class="dark:text-teal-400">BASTET</u>
           </h2>
-          <div className="grid gap-x-4 lg:gap-x-8 gap-y-1 md:grid-cols-3 w-1/2">
+          <div className="grid gap-x-4 lg:gap-x-8 gap-y-1 md:grid-cols-3 w-1/2 md:w-4/5 xl:w-3/5 2xl:w-2/5">
             {data.map((data, index) => (
               <div key={index}>
                 <div className="mb-24 md:mb-0">
-                  <div className="rounded-lg shadow-lg h-full block bg-white">
+                  <div className="rounded-lg shadow-lg h-full block dark:bg-slate-200 bg-white">
                     <div className="flex justify-center">
                       <div className="flex justify-center mt-75px">
                         <img
@@ -72,7 +72,7 @@ export default function SobreNosotros() {
                       </div>
                     </div>
                     <div className="p-6">
-                      <h5 className="text-lg font-bold mb-4">{data.name}</h5>
+                      <h5 className="text-lg truncate font-bold mb-4">{data.name}</h5>
                       <p className="mb-6">{data.description}</p>
                       <ul className="list-inside flex mx-auto justify-center">
                         <a href={data.github} target="_blank" class="px-2">

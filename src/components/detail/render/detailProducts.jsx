@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 import GatosFiltrados from "../../filtros/filtros"
 import Card from "../../card/Card"
 
-export default function DetailProductos() {
+export default function DetailProductos({handlerDarkMode, darkMode}) {
     return (
         <>
-        <Navbar/>
+        <Navbar darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>
         <DetailProductosFilter/>
         <Footer/>
         </>

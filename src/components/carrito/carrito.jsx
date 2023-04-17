@@ -7,33 +7,51 @@ import {
   clearCart,
   addToCart,
   totalamount,
+  loadCart,
 } from "../../redux/actions";
 import { NavLink } from "react-router-dom";
 
 export default function Cart(props) {
-  // const [open, setOpen] = useState(false);
-  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [totalAmount, setTotalAmount] = useState(false);
+  const carrito = useSelector((state) => state.cart);
 
-  //   useEffect(() => {
-  //     dispatch();
-  //   }, []);
+
+  useEffect(() => {
+    const local= JSON.parse(localStorage.getItem("carrito"))
+    if(local?.length) {
+      dispatch(loadCart(local))
+      setTotalAmount(!totalAmount);
+    }
+  }, []);
+
+  useEffect(() => {
+    // guardar los datos del carrito en localStorage al actualizar el carrito
+    localStorage.setItem("carrito", JSON.stringify(carrito?.items));
+  }, [carrito]);
+
   function removeAll(id) {
     dispatch(delFromCart(id, true));
+    setTotalAmount(!totalAmount);
+    // saveLocal()
   }
   function limpiarCarrito() {
     dispatch(clearCart());
+    setTotalAmount(!totalAmount);
+    // saveLocal()
   }
   function addOne(id) {
     dispatch(addToCart(id));
     setTotalAmount(!totalAmount);
+   // setCartState(carrito.items)
   }
   function removeOne(id) {
     dispatch(delFromCart(id));
     setTotalAmount(!totalAmount);
+    // saveLocal()
   }
   useEffect(() => {
+    // localStorage.setItem("carrito", JSON.stringify(carrito.items));
     dispatch(totalamount());
     console.log(totalAmount);
   }, [dispatch, totalAmount]);
@@ -89,7 +107,7 @@ export default function Cart(props) {
                             role="list"
                             className="-my-6 divide-y divide-gray-200"
                           >
-                            {cart.items?.map((item) => (
+                            {carrito?.items?.map((item) => (
                               <li key={item.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
@@ -122,8 +140,11 @@ export default function Cart(props) {
                                         >
                                           ➖
                                         </button>
-                                        <p className="text-base">{item.quantity}</p>
-                                        <button onClick={() => addOne(item.id)}>
+                                        <p className="text-base">
+                                          {item.quantity}
+                                        </p>
+                                        
+                                        <button onClick={() => addOne(item.id)} disabled={item.quantity===item.stock}>
                                           ➕
                                         </button>
                                       </div>
@@ -157,7 +178,7 @@ export default function Cart(props) {
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>${cart.total}.00</p>
+                        <p>${carrito.total}.00</p>
                       </div>
                       <div className="mt-6">
                         <NavLink
