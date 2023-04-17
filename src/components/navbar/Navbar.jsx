@@ -88,7 +88,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
               ></path>
             </svg>
           </button>
-          {/* {isLoggedIn? */}
+          {isLoggedIn?
           <div className="ml-2">
             <button 
             className="relative w-25 text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 rounded-lg p-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
@@ -124,7 +124,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
             )}
             {/* {open? <Cart setOpen={setOpen} />: <p onClose={setOpen(true)} className='bg-grey 900'>SVG</p>} */}
           </div>
-          {/* :""}  */}
+           :""}  
         </div>
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
