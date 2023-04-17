@@ -5,7 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 
-const stripePromise = loadStripe("pk_test_51MxuUbL58axdeL10hN9HMJ2cj9FrWDlfJ3bpVzHmdkcPP7SY1m3xr65NKHN2yaBqKuaGaWJ1G8HlWw9wBlKYSOvY006U6olclj") //conectar con stripe
+const stripePromise = loadStripe("pk_test_51Mw8EZKXctGo6PdRordVcWqK5Eb4jPlAgImQ2oQijGbhgqRuTLFipWxQNKEJ5cOpEW6OpjQzsMKbcOLLE4rkaRBc00NRHlsSSD") //conectar con stripe
 
 
 
@@ -54,7 +54,7 @@ const CheckoutForm = () => {
         const {id} = paymentMethod; //le paso a la base de datos lo que tiene que guardar
 
         try {
-            console.log(totalamount)
+            console.log(paymentMethod)
             const {data} = await axios.post("https://proyectofinal-gg57.onrender.com/payment/checkout",{
             id: id,
             amount: totalamount * 100
