@@ -47,6 +47,7 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, []);
+  axios.defaults.baseURL = "https://proyectofinal-gg57.onrender.com"
   return (
     <div className="App cursor-default dark:bg-bgDark bg-slate-200">
       <Routes>

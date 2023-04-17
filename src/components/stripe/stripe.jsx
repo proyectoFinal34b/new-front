@@ -59,7 +59,7 @@ const CheckoutForm = () => {
 
         try {
             console.log(totalamount)
-            const {data} = await axios.post("https://proyectofinal-gg57.onrender.com/payment/checkout",{
+            const {data} = await axios.post("/payment/checkout",{
             id: id,
             amount: totalamount * 100
         }) 

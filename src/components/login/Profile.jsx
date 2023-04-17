@@ -53,7 +53,7 @@ function Profile({darkMode,handlerDarkMode}) {
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
         const { name, lastName, email, address, phoneNumber, image } = formData;
         try {
-          const response = await axios.put(`https://proyectofinal-gg57.onrender.com/user/${userInfo.id}`, {
+          const response = await axios.put(`user/${userInfo.id}`, {
             name,
             lastName,
             email,
