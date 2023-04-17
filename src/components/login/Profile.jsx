@@ -101,7 +101,11 @@ function Profile() {
       <h1 class="text-3xl font-bold mb-4 text-teal-400">Mi perfil</h1>
   
       <div className="flex justify-center items-center">
-        <img src="https://icones.pro/wp-content/uploads/2021/06/icone-github-bleu.png"  alt="" className="rounded-full w-64 h-64 object-cover object-center border-4 border-teal-400"/>
+        {user.image ? (
+      <img src={user.image} alt="" className="rounded-full w-64 h-64 object-cover object-center border-4 border-teal-400" />
+    ) : (
+      <img src="https://icones.pro/wp-content/uploads/2021/06/icone-github-bleu.png" alt="" className="rounded-full w-64 h-64 object-cover object-center border-4 border-teal-400" />
+    )}
       </div>
   
       <div className="my-8">
