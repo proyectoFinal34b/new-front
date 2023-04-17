@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { isLogged } from "../../redux/actions";
+import { Link, useNavigate } from "react-router-dom";
+import { getUsers, isLogged } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 export default function Login() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,10 +20,9 @@ export default function Login() {
     }
   }, [dispatch]);
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
-    axios
-      .post("https://proyectofinal-gg57.onrender.com/user/validate", {
+      const response = await axios.post("https://proyectofinal-gg57.onrender.com/user/validate", {
         email: email,
         password: password,
       })

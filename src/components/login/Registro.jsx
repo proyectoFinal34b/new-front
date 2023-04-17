@@ -28,7 +28,7 @@ useEffect(()=>{
       .post("https://proyectofinal-gg57.onrender.com/user", data)
       .then((data) => {
         if (data) {
-          alert("Usuario registrado");
+          alert("Gracias por registrarte");
           navigate("/login", { replace: true });
         } else {
           alert("Ha ocurrido un error al registrar el usuario");
