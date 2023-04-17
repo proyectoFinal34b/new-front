@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import Cart from "../carrito/carrito";
 import DarkMode from "./DarkMode";
-export const currentLocation = window.location.href
+export const currentLocation = window.location.href.split('/').slice(0, 3).join('/')
 
 const Navbar = ({handlerDarkMode , darkMode}) => {
   console.log({handlerDarkMode, darkMode})
