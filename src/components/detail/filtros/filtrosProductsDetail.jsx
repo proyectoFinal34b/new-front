@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from "react-router-dom"
 import { getProductsById,addToCart, getProduct,loadCart } from "../../../redux/actions"
+import HoverRating from "../../productos/rating/rating";
 
 
 
@@ -42,6 +43,7 @@ console.log(id,productId)
                         <button  onClick={() => agregarAlCarro()} className="bg-green-500 text-white font-bold py-2 px-4 rounded-md border border-green-600 mt-5">
                          Agregar al carro 
                         </button> 
+                        <HoverRating/>
                     </div>
                 </div>
             </div>
