@@ -5,6 +5,7 @@ import { getUsersById } from "../../redux/actions";
 import { Link } from 'react-router-dom';
 
 
+
 function Profile() {
     const dispatch = useDispatch();
     const [user, setUser] = useState(null);
@@ -19,7 +20,7 @@ function Profile() {
     });
   
     useEffect(() => {
-        const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
         if (userInfo) {
           dispatch(getUsersById(userInfo.id));
           setUser(userInfo);
@@ -46,7 +47,7 @@ function Profile() {
   
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
         const { name, lastName, email, address, phoneNumber, image } = formData;
         try {
           const response = await axios.put(`https://proyectofinal-gg57.onrender.com/user/${userInfo.id}`, {
@@ -95,27 +96,30 @@ function Profile() {
       return <p>Cargando...</p>;
     }
   return (
-    <div>
-      <div className="container mx-auto my-8 px-4 md:px-0">
-  <h1 className="text-3xl font-bold mb-4">Mi perfil</h1>
+    <div className="bg-gray-100 py-8">
+    <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <h1 class="text-3xl font-bold mb-4 text-teal-400">Mi perfil</h1>
+  
+      <div className="flex justify-center items-center">
+        <img src="https://icones.pro/wp-content/uploads/2021/06/icone-github-bleu.png"  alt="" className="rounded-full w-64 h-64 object-cover object-center border-4 border-teal-400"/>
+      </div>
+  
+      <div className="my-8">
+        <p className="text-lg mb-2 font-bold">Nombre: {user.name}</p>
+        <p className="text-lg mb-2 font-bold">Apellido: {user.lastName}</p>
+        <p className="text-lg mb-2 font-bold">Email: {user.email}</p>
+        <p className="text-lg mb-2 font-bold">Dirección: {user.address ? user.address : 'No especificada'}</p>
+        <p className="text-lg mb-2 font-bold">Telefono: {user.phoneNumber}</p>
+      </div>
+    </div>
 
-  <div className="flex justify-center items-center">
-  <img src="{{ user.image ? user.image : 'https://img.freepik.com/free-vector/cat-collage-element-line-art-animal-illustration-vector_53876-154294.jpg?size=300&ext=jpg&ga=GA1.1.1109572956.1673889122&semt=ais' }}" alt="Descripción de la imagen" />
+  
 
-  </div>
-  <div className="my-8">
-    <p className="text-lg mb-2 font-bold">Nombre: {user.name}</p>
-    <p className="text-lg mb-2 font-bold">Apellido: {user.lastName}</p>
-    <p className="text-lg mb-2 font-bold">Email: {user.email}</p>
-    <p className="text-lg mb-2 font-bold">Dirección: {user.address ? user.address : 'No especificada'}</p>
-    <p className="text-lg mb-2 font-bold">Telefono: {user.phoneNumber}</p>
-  </div>
-</div>
 
       {editing ? (
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-gray-100 p-8 rounded-lg">
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
+          <label className="block text-gray-700 font-bold mb-2"  htmlFor="name">
             Nombre:
           </label>
           <input
