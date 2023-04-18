@@ -11,21 +11,21 @@ export default function SobreNosotros({handlerDarkMode , darkMode}) {
       img: "https://st2.depositphotos.com/1007566/11403/v/450/depositphotos_114031696-stock-illustration-colorful-cat-front-viewvector-graphic.jpg",
       description: "FullStack Developer",
       github:"https://github.com/agustinsanmartin2694",
-      linkedin:""
+      linkedin:"https://www.linkedin.com/in/agustinsanmartin2694/"
     },
     {
       name: "Bárbara Chialva",
       img: "https://st2.depositphotos.com/1007566/11403/v/450/depositphotos_114031772-stock-illustration-colorful-cat-front-viewvector-graphic.jpg",
       description: "FullStack Developer",
       github:"https://github.com/Bchialva",
-      linkedin:""
+      linkedin:"https://www.linkedin.com/in/juan-antonio-ruiz-hernandez-3566a81b7/"
     },
     {
       name: "Genaro Levato",
       img: "https://st2.depositphotos.com/1007566/11403/v/450/depositphotos_114031922-stock-illustration-colorful-cat-front-viewvector-graphic.jpg",
       description: "FullStack Developer",
       github:"https://github.com/genaaah",
-      linkedin:""
+      linkedin:"https://www.linkedin.com/in/genaro-levato-7118a7255/"
     },
     {
       name: "Juan Antonio Ruiz ",

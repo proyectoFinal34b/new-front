@@ -1,6 +1,8 @@
 import React from "react";
 import PostCats from "../form/FormularioCreacion";
 import PostProduct from "../productos/form/formulario";
+import FormularioEdit from "../form/FormularioEdit";
+import FormularioEditProduct from "../productos/form/formEditProductos";
 
 export const Modal = ({ isOpen, onClose, formType }) => {
   return isOpen ? (
@@ -19,8 +21,12 @@ export const Modal = ({ isOpen, onClose, formType }) => {
             <PostProduct />
           </div>
         ) : formType === "editGatos" ? (
-                    <div className="relative z-50">
-            <PostCats />
+           <div className="relative z-50">
+            <FormularioEdit closeModal={onClose} />
+          </div>
+        ) : formType === "productEdit" ? (
+          <div className="relative z-50">
+            <FormularioEditProduct closeModal={onClose}  />
           </div>
         ) :
         (

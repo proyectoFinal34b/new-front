@@ -47,7 +47,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { isLogged } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { Redirect } from 'react-router-dom';
+/* import {LoginButton} from './LogginAutho' */
+import { currentLocation } from "../navbar/Navbar";
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -72,7 +74,7 @@ export default function Login() {
 
   async function handleLogin(e) {
     e.preventDefault();
-      const response = await axios.post("https://proyectofinal-gg57.onrender.com/user/validate", {
+      const response = await axios.post("/user/validate", {
         email: email,
         password: password,
       })
@@ -141,8 +143,8 @@ export default function Login() {
             </div>
             <br/>
             <div className="flex items-center justify-center">
-            <LoginButton
-              />
+{/*             <LoginButton
+              /> */}
             </div>
             <a
               className="inline-block align-baseline font-bold text-sm text-gray-900 hover:text-teal-500"

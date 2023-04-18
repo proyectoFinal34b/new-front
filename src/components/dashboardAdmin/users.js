@@ -5,9 +5,10 @@ import Buttons from "./logic/buttons";
 import { handleColumnClick, handlerClick, handlerClickType } from "./logic/handlers";
 import Example from "./charts/chart";
 
-export default function Usuarios({ users }) {
-  const stylesNameCol = "w-28 px-2 py-3 cursor-pointer";
-  const stylesTd = "h-8 px-2 py-3";
+export default function Usuarios({ users }) {  
+  const stylesbtncharmander="focus:bg-green-200 font-medium bg-[#A3E3DD] w-36 shadow-md p-2 mr-4 mb-2 rounded-sm hover:bg-[#0D9488] hover:text-white"
+const stylesNameCol = "w-28 px-2 py-3 cursor-pointer";
+const stylesTd = "h-8 px-2 py-3 ";
   const [filters, setFilters] = useState({
     date: "historico",
     type:"",
@@ -52,18 +53,21 @@ export default function Usuarios({ users }) {
 
   return (
     <>
-      <h1>Soy la view users</h1>
+      
       <Example data={show} arg={filters.type} periodo={filters.date}></Example>
-      <button value="superAdmin" onClick={handlerClickTypeUser}>Super Admin</button>
-      <button value="admin" onClick={handlerClickTypeUser}>Admin</button>
-      <button value="user" onClick={handlerClickTypeUser}>User</button>
+      <button className={stylesbtncharmander} value="superAdmin" onClick={handlerClickTypeUser}>Super Admin</button>
+      <button className={stylesbtncharmander} value="admin" onClick={handlerClickTypeUser}>Admin</button>
+      <button className={stylesbtncharmander} value="user" onClick={handlerClickTypeUser}>User</button>
   
       <Buttons handlerClick={handlerClickUser}></Buttons>
       <div>
-        <table className="table-fixed cursor-default m-auto border-collapse border border-slate-900">
+        <table className="table-fixed cursor-default m-auto dark:bg-white">
           <thead>
-            <tr className="bg-tableCol  text-white border-collapse border border-slate-900">
-              <th
+            <tr className="bg-tableCol  text-white dark:text-black">
+              <th>
+
+              </th>
+               <th
                 className={stylesNameCol}
                 onClick={() => handleColumnClickUser("name")}
               >
@@ -105,12 +109,13 @@ export default function Usuarios({ users }) {
               <th className={stylesNameCol}>Edit</th>
             </tr>
           </thead>
-          <tbody className=" border-b border-black ">
+          <tbody className="">
             {filteredUsers?.map((user) => {
               return (
-                <tr className="hover:bg-gray-300 border-b border-slate-300 ">
-                  <td className={stylesTd}>{user.name}</td>
-                  <td>{user.lastName}</td>
+                <tr className="hover:bg-gray-300 shadow-md dark:text-black dark:hover:bg-gray-400">
+                  <td><img src={user.image} alt={user.image} className="h-28 w-28"/></td>
+                  <td> {user.name}</td>
+                  <td className={stylesTd}>{user.lastName}</td>
                   <td>{user.email}</td>
                   <td>{user.createdAt.slice(2,10)}</td>
                   <td>{user.status}</td>

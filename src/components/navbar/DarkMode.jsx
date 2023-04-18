@@ -12,11 +12,10 @@ export default function DarkMode({handlerDarkMode , darkMode}){
   <span class="slider"></span>
 </label>
 <style>{`.switch {
-  font-size: 17px;
   position: relative;
   display: inline-block;
-  width: 53px;
-  height: 25px;
+  width: 55px;
+  height: 27px;
 }
 
 .switch input {
@@ -32,7 +31,7 @@ export default function DarkMode({handlerDarkMode , darkMode}){
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #73C0FC;
+  background-color: #134E4A;
   transition: .4s;
   border-radius: 30px;
 }
@@ -40,7 +39,7 @@ export default function DarkMode({handlerDarkMode , darkMode}){
 .slider:before {
   position: absolute;
   content: "";
-  height: 20px;
+  height: 21px;
   width: 20px;
   border-radius: 20px;
   left: 2px;
@@ -52,7 +51,7 @@ export default function DarkMode({handlerDarkMode , darkMode}){
 
 .sun svg {
   position: absolute;
-  top: 0px;
+  top: 1px;
   left: 30px;
   z-index: 1;
   width: 20px;
@@ -60,12 +59,12 @@ export default function DarkMode({handlerDarkMode , darkMode}){
 }
 
 .moon svg {
-  fill: #73C0FC;
+  fill: #2600FF;
   position: absolute;
-  top: 0px;
+  top: 1px;
   left: 5px;
   z-index: 1;
-  width: 20px;
+  width: 15px;
   height: 25px;
 }
 
@@ -108,7 +107,7 @@ export default function DarkMode({handlerDarkMode , darkMode}){
 }
 
 .input:checked + .slider {
-  background-color: #183153;
+  background-color: #2DD4BF;
 }
 
 .input:focus + .slider {

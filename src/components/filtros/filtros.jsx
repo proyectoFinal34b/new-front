@@ -33,7 +33,6 @@ export default function GatosFiltrados() {
       else{
       tempGatos = tempGatos.filter((gato) => gato.age === parseInt(age));}
     }
-    console.log(tempGatos)
     return tempGatos;
   }
 

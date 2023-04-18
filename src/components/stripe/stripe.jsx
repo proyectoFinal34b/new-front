@@ -93,8 +93,10 @@ const CheckoutForm = () => {
         const {id} = paymentMethod; //le paso a la base de datos lo que tiene que guardar
 
         try {
-            
-            const {data} = await axios.post("https://proyectofinal-gg57.onrender.com/payment/checkout",{
+
+            console.log(totalamount)
+            const {data} = await axios.post("/payment/checkout",{
+
             id: id,
             amount: totalamount * 100,
           }

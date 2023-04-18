@@ -5,9 +5,9 @@ import Buttons from "./logic/buttons";
 import { handleColumnClick, handlerClick, handlerClickType } from "./logic/handlers";
 import Example from "./charts/chart";
 
-export default function Productos({ products }) {
-  const stylesNameCol = "w-28 p-2 cursor-pointer ";
-  const stylesTd = "h-8 px-2 py-3 ";
+export default function Productos({ products, openModal }) {
+  const stylesNameCol = "w-40 p-2 cursor-pointer";
+  const stylesTd = "h-16 px-2 py-3 flex items-center mt-2";
   const [filters, setFilters] = useState({
     date: "historico",
     type:"",
@@ -60,14 +60,14 @@ const csvFileName = "productos.csv";
 
   return (
     <>
-      <h1>Soy la view products</h1>
+
       <Example data={show} arg={filters.type} periodo={filters.date}></Example>
     
       <Buttons handlerClick={handlerClickProductos}></Buttons>
       <div>
-        <table className="table-fixed cursor-default m-auto border-collapse border border-slate-900">
-          <thead className="bg-tableCol  text-white border-collapse border border-slate-900">
-            <th
+        <table className="table-fixed cursor-default m-auto mt-10">
+          <thead className="bg-tableCol  text-white ">        
+              <th
               className="w-22 p-2"
               onClick={() => handleColumnClickProducts("name")}
             >
@@ -85,8 +85,8 @@ const csvFileName = "productos.csv";
           <tbody>
             {filteredProducts?.map((productos) => {
               return (
-                <tr key={productos.id} className="hover:bg-gray-300 border-b border-slate-300 ">
-                  <td className={stylesTd}>{productos.name}</td>
+                <tr key={productos.id} className="hover:bg-gray-300 shadow-md dark:text-black dark:bg-white dark:hover:bg-gray-400">
+                  <td className={stylesTd}><img src={productos.image} alt={productos.image} className="w-16 h-14 mx-4 -mt-2 object-contain"/>{productos.name}</td>
                   <td>${productos.price}</td>
                   <td>{productos.stock}</td>
                   <td>{productos.category.name}</td>
@@ -171,7 +171,7 @@ const csvFileName = "productos.csv";
                   )}</td>
                   <td>{productos.id}</td>
                   <td>
-                    <button className="text-white shadow-md bg-teal-900 hover:bg-teal-500  font-medium rounded-lg text-sm px-4 py-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400">
+                    <button name="productEdit" onClick={(e)=>(openModal(e.target.name), localStorage.setItem("productId", productos.id))} className="text-white shadow-md bg-teal-900 hover:bg-teal-500  font-medium rounded-lg text-sm px-4 py-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400">
                       Edit
                     </button>
                   </td>

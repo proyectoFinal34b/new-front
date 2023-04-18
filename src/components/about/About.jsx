@@ -8,9 +8,9 @@ function About() {
   return (
     <div>
     <AboutGatitos/>
-    <AboutDonaciones/>
-    <AboutTienda/>
     <AboutMe/>
+    <AboutTienda/>
+    <AboutDonaciones/>
     </div>
   );
 }

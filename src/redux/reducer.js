@@ -17,6 +17,7 @@ import {
   GET_USERS_ID,
   CURRENT_PAGE,
   LOAD_CART,
+  SEARCH_PRODUCTS,
   GET_ORDERS,
 } from "./actions";
 
@@ -133,7 +134,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cart:{...state.cart, total: finalValue.reduce(
-          (acc, item) => acc + item.price * item.quantity,
+ (acc, item) => acc + (item?.price-(item.discount?.value/100)*item?.price) * item.quantity,
           initialValue
         ),}
       };
@@ -148,6 +149,13 @@ const reducer = (state = initialState, action) => {
       return{
         ...state, currentPage: action.payload
       }
+
+      case SEARCH_PRODUCTS:
+      return { 
+        ...state, 
+        allProducts: action.payload 
+      };
+
       case GET_ORDERS:
         return{
 

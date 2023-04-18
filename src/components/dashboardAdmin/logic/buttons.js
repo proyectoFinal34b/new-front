@@ -3,9 +3,7 @@ import React, { useState } from "react";
 export default function Buttons ({handlerClick}){
     const styleButton = "focus:bg-green-200 font-medium bg-[#A3E3DD] w-36 shadow-md p-2 rounded-sm hover:bg-[#0D9488] hover:text-white "
     const [filter, setFilter] =  useState("Mes actual")
-
-
-    
+  
     return (
         <>
         <div className="m-4 space-x-6">

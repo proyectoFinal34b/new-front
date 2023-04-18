@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useDispatch } from 'react-redux';
 import { getUsersById } from "../../redux/actions";
 import { Link } from 'react-router-dom';
 import Navbar from "../navbar/Navbar";
 import Loader from "../dashboardAdmin/loading";
 import Footer from "../home/footer/footer";
-
-
+import EditProfile from "./EditProfile";
 
 function Profile({darkMode,handlerDarkMode}) {
     const dispatch = useDispatch();
@@ -17,7 +15,7 @@ function Profile({darkMode,handlerDarkMode}) {
       name: "",
       lastName: "",
       email: "",
-      address: "",
+      adress: "",
       phoneNumber: "",
       image: "",
     });
@@ -37,7 +35,7 @@ function Profile({darkMode,handlerDarkMode}) {
           name: user.name,
           lastName: user.lastName,
           email: user.email,
-          address: user.address,
+          adress: user.adress,
           phoneNumber: user.phoneNumber,
           image: user.image,
         });
@@ -47,53 +45,6 @@ function Profile({darkMode,handlerDarkMode}) {
     const handleEdit = () => {
       setEditing(true);
     };
-  
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        const { name, lastName, email, address, phoneNumber, image } = formData;
-        try {
-          const response = await axios.put(`https://proyectofinal-gg57.onrender.com/user/${userInfo.id}`, {
-            name,
-            lastName,
-            email,
-            address,
-            phoneNumber,
-            image,
-          });
-          if (response.status === 200) {
-            alert("Cambios guardados exitosamente");
-            setEditing(false);
-            dispatch(getUsersById(userInfo.id));
-            setFormData({
-              name: "",
-              lastName: "",
-              email: "",
-              address: "",
-              phoneNumber: "",
-              image: "",
-            });
-            setUser(response.data);
-          }
-        } catch (error) {
-          console.error(error);
-          alert("Ocurrió un error al guardar los cambios");
-        }
-      };
-      
-      
-
-    const handleCancel = () => {
-        setEditing(false);
-        setFormData({
-          name: user.name,
-          lastName: user.lastName,
-          email: user.email,
-          address: user.address,
-          phoneNumber: user.phoneNumber,
-          image: user.image,
-        });
-      };
   
     if (!user) {
       return <Loader></Loader>;
@@ -117,7 +68,7 @@ function Profile({darkMode,handlerDarkMode}) {
         <p className="text-lg mb-2 font-bold">Nombre: {user.name}</p>
         <p className="text-lg mb-2 font-bold">Apellido: {user.lastName}</p>
         <p className="text-lg mb-2 font-bold">Email: {user.email}</p>
-        <p className="text-lg mb-2 font-bold">Dirección: {user.address ? user.address : 'No especificada'}</p>
+        <p className="text-lg mb-2 font-bold">Dirección: {user.adress ? user.adress : 'No especificada'}</p>
         <p className="text-lg mb-2 font-bold">Telefono: {user.phoneNumber}</p>
       </div>
     </div>
@@ -126,100 +77,7 @@ function Profile({darkMode,handlerDarkMode}) {
 
 
       {editing ? (
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-gray-100 p-8 rounded-lg">
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2"  htmlFor="name">
-            Nombre:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="name"
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="lastName">
-            Apellido:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="lastName"
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
-            Email:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="email"
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="address">
-            Dirección:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="address"
-            type="text"
-            name="address"
-            value={formData.address}
-            onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
-            Telefono:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="phoneNumber"
-            type="number"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-          />
-        </div>
-        <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="image">
-        Imagen:
-        </label>
-        <input
-        type="text"
-        onChange={(e) => {
-            const value = e.target.value;
-            setFormData({ ...formData, image: value });
-        }}
-        />
-        </div>
-        <div className="flex justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Guardar cambios
-          </button>
-          <button
-            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="button"
-            onClick={handleCancel}
-          >
-            Cancelar
-          </button>
-        </div>
-      </form>  
+       <EditProfile setFormData={setFormData} formData={formData} setEditing={setEditing} user={user} setUser={setUser} ></EditProfile>
       ) : (
         <button onClick={handleEdit} className="bg-blue-500 text-white px-4 py-2 rounded">Editar perfil</button>
       
