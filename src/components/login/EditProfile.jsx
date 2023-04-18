@@ -83,11 +83,11 @@ export default function EditProfile({setEditing, user, setUser, formData, setFor
     <>
       <form
         onSubmit={handleSubmit}
-        className=" w-1/3 m-auto relative bottom-[772px] block p-8 rounded-lg"
+        className=" w-full sm:w-1/2 lg:w-1/3 m-auto relative bottom-[772px] block p-8 rounded-lg"
       >
-        <div className="">
-          <div className="rounded-full relative left-[157px] bottom-[30px] w-64 h-64 object-cover object-center border-4 border-teal-400 bg-opacity-5 backdrop-filter backdrop-blur-sm">
-        <div className="mb-4 relative top-[100px] z-50">
+        <div className="  items-center ">
+          <div className="rounded-full m-auto justify-center items-center  relative bottom-8  w-64 h-64 object-cover object-center border-4 border-teal-400 bg-opacity-5 backdrop-filter backdrop-blur-sm">
+        <div className="mb-5   z-50">
           <input
             type="file"
             className="sr-only"
