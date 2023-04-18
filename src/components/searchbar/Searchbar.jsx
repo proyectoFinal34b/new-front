@@ -46,7 +46,7 @@ export default function SearchBar() {
   function handleSubmit(e) {
     e.preventDefault();
     if (name) {
-      dispatch(searchCats(name)) .then((response)=>console.log(response))
+      dispatch(searchCats(name)).then((response)=>console.log(response))
       setName("")
       if (allCats.length === 0) {
         alert(`No se encontró ningún gato llamado ${name}`);
