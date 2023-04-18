@@ -27,7 +27,8 @@ export default function FormularioEdit({closeModal}) {
     vaccinesFull:false,
     deworming:false,
     chip:false,
-    hairType:""
+    hairType:"",
+    status:true
   });
   function handleChange(e) {
     const { name, value } = e.target;
@@ -65,9 +66,9 @@ export default function FormularioEdit({closeModal}) {
 
     xhr.send(formData);
     const imageResponse = JSON.parse(xhr.responseText);
+
     return imageResponse.secure_url;
   };
-  
   function handleSelect(e) {
     const { name, value } = e.target;
     let newValue = value;
@@ -83,12 +84,6 @@ export default function FormularioEdit({closeModal}) {
   }
   async function handleSubmit(e) {
     e.preventDefault();
-    const errors = validate(input);
-    if (Object.keys(errors).length > 0) {
-      setErrors(errors);
-      
-      return;
-    }
     
     await axios.put(`/cat/${id}/admin/${idAdmin}`,{...input})
     .then(response=>{
@@ -137,7 +132,8 @@ export default function FormularioEdit({closeModal}) {
           vaccinesFull: cat.vaccinesFull,
           deworming: cat.deworming,
           chip: cat.chip,
-          hairType: cat.hairType
+          hairType: cat.hairType,
+          status: cat.status
         });
       } catch (error) {
         console.error(error);
@@ -147,17 +143,17 @@ export default function FormularioEdit({closeModal}) {
     fetchCat();
   }, [dispatch, id]);
   
-console.log(input)
   const changeHandler = (e)=>{
     setInput({...input, [e.target.name]: !input[e.target.name]})
+    console.log(input)
   }
-
   return (
     // <div className="sticky top-3 flex justify-end items-center p-1">
-    <div className="p-4 shadow-lg text-gray-700 bg-gray-200 max-w-fit m-auto min-h-fit dark:text-gray-100 dark:bg-gray-900 ">
-      <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Editar gato</h2>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div className="flex flex-col">
+    <div className="p-4 shadow-lg text-gray-700 bg-gray-200  dark:text-gray-100 dark:bg-gray-900 ">
+      <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Añadir nuevo gato</h2>
+      <form className="h-full overflow-y-hidden" onSubmit={(e) => handleSubmit(e)}>
+        <div className="columns-2">
+        <div className="flex flex-col mb-2">
         <label className="mb-2 font-bold dark:text-gray-100">Nombre:</label>
         <input 
         type="text" 
@@ -183,7 +179,7 @@ console.log(input)
   </select>
   {errors.gender && (<p>{errors.gender}</p>)}
 </div>
-        <div className="flex flex-col">
+<div className="flex flex-col mb-2">
         <label className="mb-2 font-bold ">Edad:</label>
         <input 
         type="number" 
@@ -208,19 +204,33 @@ console.log(input)
         />
         {errors.description && (<p>{errors.description}</p>)}
         </div>
-        <div className="flex flex-col">
-        <label className="mb-2 font-bold ">Imagen:</label>
-{/*         {input.image.URL ? <img  className="border border-gray-400 bg-white h-50   focus:outline-none" src={input.image.URL} alt="imagen" /> :
-        <img  className="border border-gray-400 bg-white h-50   focus:outline-none" src={input.image} alt="imagen" />} */}
-       
-        <input 
-
-        type="file"
-        name="image"  
-        onChange={(e) => {handleImageChange(e)}}
-        className="  dark:text-slate-900  bg-slate-100 pr-16  text-sm focus:outline-none"
-        />
-        {errors.image && (<p >{errors.image}</p>)}
+        </div>
+        <div className="columns-4 flex justify-center mb-5">
+        <div className="w-full flex flex-col items-center">
+          <label className="mb-2 font-bold ">Imagen del gato</label>
+          {input.image&&<img className="border border-gray-400 bg-white relative w-24  h-24 object-cover" src={input.image} alt='productImage'/>}
+          
+          <input className="sr-only my-5 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+            type="file"
+            accept="image/*"
+           // value={input.image.file}
+            name="image"
+            id="fileInput"
+            onChange={(e) => handleImageChange(e)}
+          /><label
+          htmlFor="fileInput"
+          className="inline-flex relative  mt-2 -mb-3 h-14 w-14 items-center justify-center px-4 py-2 bg-teal-400 rounded-full font-medium hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-camera-plus" width="48" height="48" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <circle cx="12" cy="13" r="3" />
+  <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+  <line x1="15" y1="6" x2="21" y2="6" />
+  <line x1="18" y1="3" x2="18" y2="9" />
+</svg>
+        </label>
+          {errors.image ? <p>{errors.image}</p> : ""}
+        </div>
         </div>
         <div className="flex flex-col">
         <label className="mb-2 font-bold ">Ingreso:</label>
@@ -248,10 +258,11 @@ console.log(input)
   {errors.state && (<p>{errors.state}</p>)}
   <label className="m-2 font-bold "> Ficha veterinaria </label>
   <div className="flex flex-col space-y-2 m-4">
-  <label className="" > Esterilizado? : <input type="checkbox" checked={input.sterilization} name="sterilization" onChange={changeHandler}></input></label> 
-  <label> Vacunas completas? : <input type="checkbox" name="vaccinesFull" checked={input.vaccinesFull} onChange={changeHandler}></input></label> 
-  <label> Desparacitado? : <input type="checkbox" checked={input.deworming} name="deworming" onChange={changeHandler}></input></label> 
-  <label> Chip? : <input type="checkbox" name="chip" checked={input.chip} onChange={changeHandler}></input></label>
+  <label className="" > Esterilizado? : <input type="checkbox" checked={input.sterilization} value={input.sterilization} name="sterilization" onChange={changeHandler}></input></label> 
+  <label> Vacunas completas? : <input type="checkbox" name="vaccinesFull" checked={input.vaccinesFull} value={input.vaccinesFull} onChange={changeHandler}></input></label> 
+  <label> Desparacitado? : <input type="checkbox" checked={input.deworming} value={input.deworming} name="deworming" onChange={changeHandler}></input></label> 
+  <label> Chip? : <input type="checkbox" name="chip" checked={input.chip} value={input.chip}  onChange={changeHandler}></input></label>
+  <label> Gato activo? : <input type="checkbox" name="status" checked={input.status} value={input.status} onChange={changeHandler}></input> </label>
   </div>
 </div>
         <button type="submit" className="ml-2 px-4 py-2 font-medium text-gray bg-teal-400 rounded-md hover:bg-teal-500 ">Enviar</button>

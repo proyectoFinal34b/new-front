@@ -52,11 +52,11 @@ function Profile({darkMode,handlerDarkMode}) {
   return (
     <>
     <Navbar darkMode={darkMode} handlerDarkMode={handlerDarkMode}></Navbar>
-    <div className="bg-gray-100 py-8">
-    <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <h1 class="text-3xl font-bold mb-4 text-teal-400">Mi perfil</h1>
+    <div className="bg-gray-200 dark:bg-bgDark py-8  flex flex-col relative ">
+    <div className="bg-gray-500 w-1/3 m-auto shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <h1 class="text-3xl font-bold mb-4 text-teal-400">Bienvenido {user.name}</h1>
   
-      <div className="flex justify-center items-center">
+      <div className="flex flex-auto  justify-center">
         {user.image ? (
       <img src={user.image} alt="" className="rounded-full w-64 h-64 object-cover object-center border-4 border-teal-400" />
     ) : (
@@ -64,24 +64,83 @@ function Profile({darkMode,handlerDarkMode}) {
     )}
       </div>
   
-      <div className="my-8">
-        <p className="text-lg mb-2 font-bold">Nombre: {user.name}</p>
-        <p className="text-lg mb-2 font-bold">Apellido: {user.lastName}</p>
-        <p className="text-lg mb-2 font-bold">Email: {user.email}</p>
-        <p className="text-lg mb-2 font-bold">Dirección: {user.adress ? user.adress : 'No especificada'}</p>
-        <p className="text-lg mb-2 font-bold">Telefono: {user.phoneNumber}</p>
+      <div className="my-8 ">
+        <div className="mb-4">
+          <label className="block text-gray-800 font-bold mb-2" htmlFor="name">
+            Nombre:
+          </label>
+          <input
+            className="font-bold bg-gray-300 pointer-events-none appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="name"
+            type="text"
+            name="name"
+            value={user.name}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-gray-800 font-bold mb-2"
+            htmlFor="lastName"
+          >
+            Apellido:
+          </label>
+          <input
+            className="font-bold bg-gray-300 appearance-none pointer-events-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="lastName"
+            type="text"
+            name="lastName"
+            value={user.lastName}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-800 font-bold mb-2" htmlFor="email">
+            Email:
+          </label>
+          <input
+            className="font-bold bg-gray-300 pointer-events-none appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="email"
+            type="text"
+            name="email"
+            value={user.email}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-gray-800 font-bold mb-2"
+            htmlFor="address"
+          >
+            Dirección:
+          </label>
+          <input
+            className="font-bold bg-gray-300 pointer-events-none appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="address"
+            type="text"
+            name="address"
+            value={user.address ? user.address : 'No especificada'}
+            
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-800 font-bold mb-2" htmlFor="email">
+            Telefono:
+          </label>
+          <input
+            className="font-bold bg-gray-300 pointer-events-none appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="phoneNumber"
+            type="number"
+            name="phoneNumber"
+            value={user.phoneNumber}
+          />
+        </div>
       </div>
     </div>
-
-  
-
-
+    <div>
       {editing ? (
        <EditProfile setFormData={setFormData} formData={formData} setEditing={setEditing} user={user} setUser={setUser} ></EditProfile>
       ) : (
-        <button onClick={handleEdit} className="bg-blue-500 text-white px-4 py-2 rounded">Editar perfil</button>
+        <button onClick={handleEdit} className=" bg-teal-500 rounded w-32 text-black font-semibold h-10 flex justify-center items-center relative left-[58.2%] bottom-[510px]">Editar perfil</button>
       
-      )}
+      )}</div>
       <p className="text-center mb-8">
           <Link to='/' className="text-sm text-gray-500 hover:text-teal-400">
             Volver a la página de inicio
