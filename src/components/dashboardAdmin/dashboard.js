@@ -23,6 +23,7 @@ export default function Dashboard ({handlerDarkMode , darkMode}){
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = (e) => {
+    console.log(e)
       setIsModalOpen(true);
       setModal(e)
   };

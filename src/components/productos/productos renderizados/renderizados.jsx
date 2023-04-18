@@ -12,8 +12,7 @@ export default function Renderizados(props) {
         dispatch(getProduct())
     },[dispatch])
   return (
-    <div class="">
-             {/* {console.log(prueba,products)} */}
+    <div className="">
              {products?.length?products
             .slice(props.indexOfFirstproduct, props.indexOfLastproduct)
             .map((e)=><Productcard 
@@ -27,7 +26,6 @@ export default function Renderizados(props) {
             />)
             :
             <Loader></Loader>}
-           
         </div>
   )
 }
