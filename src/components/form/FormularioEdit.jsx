@@ -20,7 +20,7 @@ export default function FormularioEdit() {
     age: "",
     gender: "",
     state: "",
-    image: { URL: "", file: "" },
+    image: "",
     description: "",
     arrived: "",
     sterilization:false,
@@ -38,15 +38,16 @@ export default function FormularioEdit() {
       setErrors(validate({ ...input, [name]: value }));
       console.log(errors);
   }
-  function handleImageChange(e){
+  async function handleImageChange (e){
     const file= e.target.files[0];
+    const newImage= await uploadImage(file);
     setInput({
         ...input,
-        image: {URL: URL.createObjectURL(file), file}
+        image: [newImage]
     })
     setErrors(validate({
         ...input,
-        image: {URL: URL.createObjectURL(file), file}
+        image: [newImage]
     }))
   }
   const uploadImage = async (file) => {
@@ -64,9 +65,9 @@ export default function FormularioEdit() {
 
     xhr.send(formData);
     const imageResponse = JSON.parse(xhr.responseText);
-
     return imageResponse.secure_url;
   };
+  
   function handleSelect(e) {
     const { name, value } = e.target;
     let newValue = value;
@@ -87,12 +88,14 @@ export default function FormularioEdit() {
       setErrors(errors);
       return;
     }
-    const newImage= await uploadImage(input.image.file);
-    await axios.put(`/${id}/admin/${idAdmin}`,{...input, image:[newImage]})
+    
+    await axios.put(`/cat/${id}/admin/${idAdmin}`,{...input})
     .then(response=>{
+      console.log(response)
         alert("Actulizado con exito")
     })
     .catch(error =>{
+      console.log(error, "error")
         alert("Error al actualizar, verifique la informacion e intente nuevamente")
     })
 
@@ -117,29 +120,38 @@ export default function FormularioEdit() {
     });
     setErrors({});
   }
-  useEffect(async () => {
-    const cat = await axios.get(`/cat/${id}/`).then(response => response.data)
-    console.log(cat)
-    setInput({
-        name: cat.name,
-        age: cat.age,
-        gender: cat.gender,
-        state: cat.state,
-        image: cat.image,
-        description: cat.description,
-        arrived: cat.arrived.slice(0,10),
-        sterilization:cat.sterilization,
-        vaccinesFull:cat.vaccinesFull,
-        deworming:cat.deworming,
-        chip:cat.chip,
-        hairType:cat.hairType
-    })
+  useEffect(() => {
+    async function fetchCat() {
+      try {
+        const response = await axios.get(`/cat/${id}`);
+        const cat = response.data;
+        setInput({
+          name: cat.name,
+          age: cat.age,
+          gender: cat.gender,
+          state: cat.state,
+          image: cat.image,
+          description: cat.description,
+          arrived: cat?.arrived?.slice(0, 10),
+          sterilization: cat.sterilization,
+          vaccinesFull: cat.vaccinesFull,
+          deworming: cat.deworming,
+          chip: cat.chip,
+          hairType: cat.hairType
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  
+    fetchCat();
   }, [dispatch, id]);
+  
 console.log(input)
   const changeHandler = (e)=>{
     setInput({...input, [e.target.name]: !input[e.target.name]})
   }
-  console.log()
+
   return (
     // <div className="sticky top-3 flex justify-end items-center p-1">
     <div className="p-4 shadow-lg text-gray-700 bg-gray-200 max-w-fit m-auto min-h-fit dark:text-gray-100 dark:bg-gray-900 ">
@@ -199,8 +211,8 @@ console.log(input)
         <div className="flex flex-col">
         <label className="mb-2 font-bold ">Imagen:</label>
 {/*         {input.image.URL ? <img  className="border border-gray-400 bg-white h-50   focus:outline-none" src={input.image.URL} alt="imagen" /> :
-        <img  className="border border-gray-400 bg-white h-50   focus:outline-none" src={input.image} alt="imagen" />}
-        */}
+        <img  className="border border-gray-400 bg-white h-50   focus:outline-none" src={input.image} alt="imagen" />} */}
+       
         <input 
 
         type="file"

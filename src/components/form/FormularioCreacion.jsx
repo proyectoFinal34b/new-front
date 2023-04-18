@@ -107,7 +107,7 @@ export default function PostCats() {
     setErrors({});
   }
   useEffect(() => {
-    dispatch();
+
   }, [dispatch]);
 
   const changeHandler = (e)=>{

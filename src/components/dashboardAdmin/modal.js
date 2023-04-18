@@ -20,7 +20,7 @@ export const Modal = ({ isOpen, onClose, formType }) => {
             <PostProduct />
           </div>
         ) : formType === "editGatos" ? (
-                    <div className="relative z-50">
+           <div className="relative z-50">
             <FormularioEdit />
           </div>
         ) :
