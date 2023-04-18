@@ -134,7 +134,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cart:{...state.cart, total: finalValue.reduce(
-          (acc, item) => acc + item.price * item.quantity,
+ (acc, item) => acc + (item?.price-(item.discount?.value/100)*item?.price) * item.quantity,
           initialValue
         ),}
       };
