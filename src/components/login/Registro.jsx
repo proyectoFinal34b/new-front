@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form"
 import useFormPersist from "react-hook-form-persist"
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2';
+
 
 export default function Registro() {
   const navigate = useNavigate();
+  const [hasError, setHasError] = useState(false);
   const {register, setValue, watch, reset,formState:{errors, isSubmitSuccessful},  handleSubmit} =  useForm({
     defaultValues:{
 active:false
@@ -19,33 +22,50 @@ active:false
     storage:window.localStorage,
     exclude:["password"]
   });
-useEffect(()=>{
-    reset({name:"", lastName:"", email:"", password:"", phoneNumber:"", adress:""})
-  }, [isSubmitSuccessful, reset] )
+  useEffect(() => {
+    if (isSubmitSuccessful && !hasError) { 
+      reset({ name: "", lastName: "", email: "", password: "", phoneNumber: "", adress: "" });
+    }
+  }, [isSubmitSuccessful, reset, hasError]);
 
   const onSubmit = (data) => {
     axios
       .post("/user", data)
       .then((data) => {
         if (data) {
-          alert("Gracias por registrarte");
-          navigate("/login", { replace: true });
+          Swal.fire({
+            icon: 'success',
+            title: 'Gracias por registrarte',
+            showConfirmButton: false,
+            timer: 1500
+          }).then(() => {
+            navigate("/login", { replace: true });
+          });
         } else {
-          alert("Ha ocurrido un error al registrar el usuario");
+          Swal.fire({
+            icon: 'error',
+            title: 'Ha ocurrido un error al registrar el usuario',
+            text: 'Por favor, inténtelo de nuevo',
+            confirmButtonText: 'OK'
+          });
         }
       })
       .catch((error) => {
-        alert("El email ya existe", error);
+        Swal.fire({
+          icon: 'warning',
+          title: 'El correo electrónico ya existe',
+          text: 'Por favor, utilice otro correo',
+          confirmButtonText: 'OK'
+        });
       });
   };
-  
   
 
     
 return(
       <div className="flex items-center justify-center h-screen">
         <div className="w-full sm:max-w-md md:max-w-lg lg:max-w-xl">
-        <h1 className="text-center text-2xl font-bold mb-4">Formulario de Registro de Usuarios</h1>
+        <h1 className="text-center text-2xl font-bold mb-4 text-gray-500">Formulario de Registro de Usuarios</h1>
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -56,7 +76,7 @@ return(
           {errors.name?.type==="required" && <p className="text-red-500">Se requiere un nombre</p>}
           {errors.name?.type==="maxLength" && <p className="text-red-500">Máximo 20 carcateres</p>}
         </div>
-        <div>
+        <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Apellido:
           </label>
@@ -65,9 +85,9 @@ return(
           {errors.lastName?.type==="required" && <p className="text-red-500">Se requiere un apellido</p>}
           {errors.lastName?.type==="maxLength" && <p className="text-red-500">Máximo 20 caracteres</p>}
         </div>
-<div>
+          <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Email:
+            Correo electrónico:
           </label>
           <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="text" {...register('email',{ required:true,
@@ -76,7 +96,7 @@ return(
                   {errors.email?.type==="pattern" && <p className="text-red-500">ingrese un email valido</p>}
                   {errors.email?.type==="required" && <p className="text-red-500">Se requiere un mail</p>}
         </div>    
-        <div>
+        <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">
         Dirección:
       </label>
@@ -89,7 +109,7 @@ return(
         <p className="text-red-500">Se requiere una dirección</p>
       )}
       </div>
-      <div>
+      <div className="mb-4">
       <label className="block text-gray-700 text-sm font-bold mb-2">
         Teléfono:
       </label>
@@ -102,7 +122,7 @@ return(
         <p className="text-red-500">Se requiere un número de teléfono</p>
       )}
         </div>
-  <div>
+        <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Contraseña:
           </label>

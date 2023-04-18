@@ -28,7 +28,7 @@ export default function FormularioEdit({closeModal}) {
     deworming:false,
     chip:false,
     hairType:"",
-    status:true
+    status:""
   });
   function handleChange(e) {
     const { name, value } = e.target;

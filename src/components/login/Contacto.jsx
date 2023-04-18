@@ -22,7 +22,7 @@ function Contacto() {
   return (
     <div className="p-4 shadow-lg text-gray-700 bg-gray-200 max-w-fit m-auto min-h-fit dark:text-gray-100 dark:bg-gray-900 ">
       <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Contactate con nosotros</h2>
-    <form action="https://formsubmit.co/bagu84tw@gmail.com" method="POST">
+    <form action="https://formsubmit.co/bastet1872@gmail.com" method="POST">
         <div className="flex flex-col">
       <label className="mb-2 font-bold dark:text-gray-100"
       htmlFor="name">Nombre</label>
