@@ -43,7 +43,7 @@ export default function DonacionesRender({handlerDarkMode, darkMode}) {
                 </div>
             </div>
             <div className="w-[30%] flex flex-col items-end space-y-32">
-                <div className="relative w-[45%] pt-4 pb-6 px-4 leading-normal text-[#0d5958] bg-[#37c6b6] rounded-xl shadow-one z-50 hover:scale-110 transition-all">
+            <div className="relative w-[45%] pt-4 pb-6 px-4 leading-normal text-[#0d5958] bg-[#37c6b6] rounded-xl shadow-one z-30 hover:scale-110 transition-all">
                   <button>
                     <div className="absolute -top-[30px] left-0 h-20 w-[148px] transform skew-y-[155deg] rounded-tl-xl rounded-tr-3xl -z-10 bg-[#42cfbf] shadow-two"></div>
                     <div className="absolute -top-10 right-4 font-bold text-sm">01</div>
@@ -51,7 +51,7 @@ export default function DonacionesRender({handlerDarkMode, darkMode}) {
                     <h2 className="text-[24px] font-bold leading-[.8]">$1000</h2>
                     </button>
                 </div>
-                <div className="relative w-[45%] pt-4 pb-6 px-4 leading-normal text-[#0d5958] bg-[#37c6b6] rounded-xl shadow-one z-50 hover:scale-110 transition-all">
+                <div className="relative w-[45%] pt-4 pb-6 px-4 leading-normal text-[#0d5958] bg-[#37c6b6] rounded-xl shadow-one z-30 hover:scale-110 transition-all">
                   <button>
                     <div className="absolute -top-[30px] left-0 h-20 w-[148px] transform skew-y-[155deg] rounded-tl-xl rounded-tr-3xl -z-10 bg-[#42cfbf] shadow-two"></div>
                     <div className="absolute -top-10 right-4 font-bold text-sm">02</div>
@@ -59,7 +59,7 @@ export default function DonacionesRender({handlerDarkMode, darkMode}) {
                     <h2 className="text-[24px] font-bold leading-[.8]">$2000</h2>
                     </button>
                 </div>
-                <div className="relative w-[45%] pt-4 pb-6 px-4 leading-normal text-[#0d5958] bg-[#37c6b6] rounded-xl shadow-one z-50 hover:scale-110 transition-all">
+                <div className="relative w-[45%] pt-4 pb-6 px-4 leading-normal text-[#0d5958] bg-[#37c6b6] rounded-xl shadow-one z-30 hover:scale-110 transition-all">
                  <button>
                     <div className="absolute -top-[30px] left-0 h-20 w-[148px] transform skew-y-[155deg] rounded-tl-xl rounded-tr-3xl -z-10 bg-[#42cfbf] shadow-two"></div>
                     <div className="absolute -top-10 right-4 font-bold text-sm">03</div>
