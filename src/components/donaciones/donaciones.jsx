@@ -10,6 +10,16 @@ import '../donaciones/styleDonated.css'
 
 
 export default function DonacionesRender({handlerDarkMode, darkMode}) {
+
+
+    const [selectedValue, setSelectedValue] = useState("");
+
+    const handleButtonClick = (value) => {
+      setSelectedValue(value);
+    };
+  
+
+
     return (
       <div>
         <Navbar darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>
@@ -74,3 +84,56 @@ export default function DonacionesRender({handlerDarkMode, darkMode}) {
       </div>
     );
   }
+
+
+
+
+
+
+//   const [selectedValue, setSelectedValue] = useState("");
+
+//   const handleButtonClick = (value) => {
+//     setSelectedValue(value);
+//   };
+
+//   return (
+//     <div>
+//       <div className="w-[30%] flex flex-col items-end space-y-32">
+//         <div
+//           className="relative w-[45%] pt-4 pb-6 px-4 leading-normal text-[#0d5958] bg-[#37c6b6] rounded-xl shadow-one z-50 hover:scale-110 transition-all"
+//           onClick={() => handleButtonClick("$1000")}
+//         >
+//           <button>
+//             <div className="absolute -top-[30px] left-0 h-20 w-[148px] transform skew-y-[155deg] rounded-tl-xl rounded-tr-3xl -z-10 bg-[#42cfbf] shadow-two"></div>
+//             <div className="absolute -top-10 right-4 font-bold text-sm">01</div>
+//             <p className="uppercase text-sm font-bold mb-3">Donar</p>
+//             <h2 className="text-[24px] font-bold leading-[.8]">$1000</h2>
+//           </button>
+//         </div>
+//         <div
+//           className="relative w-[45%] pt-4 pb-6 px-4 leading-normal text-[#0d5958] bg-[#37c6b6] rounded-xl shadow-one z-50 hover:scale-110 transition-all"
+//           onClick={() => handleButtonClick("$2000")}
+//         >
+//           <button>
+//             <div className="absolute -top-[30px] left-0 h-20 w-[148px] transform skew-y-[155deg] rounded-tl-xl rounded-tr-3xl -z-10 bg-[#42cfbf] shadow-two"></div>
+//             <div className="absolute -top-10 right-4 font-bold text-sm">02</div>
+//             <p className="uppercase text-sm font-bold mb-3">Donar</p>
+//             <h2 className="text-[24px] font-bold leading-[.8]">$2000</h2>
+//           </button>
+//         </div>
+//         <div
+//           className="relative w-[45%] pt-4 pb-6 px-4 leading-normal text-[#0d5958] bg-[#37c6b6] rounded-xl shadow-one z-50 hover:scale-110 transition-all"
+//           onClick={() => handleButtonClick("$3000")}
+//         >
+//           <button>
+//             <div className="absolute -top-[30px] left-0 h-20 w-[148px] transform skew-y-[155deg] rounded-tl-xl rounded-tr-3xl -z-10 bg-[#42cfbf] shadow-two"></div>
+//             <div className="absolute -top-10 right-4 font-bold text-sm">03</div>
+//             <p className="uppercase text-sm font-bold mb-3">Donar</p>
+//             <h2 className="text-[24px] font-bold leading-[.8]">$3000</h2>
+//           </button>
+//         </div>
+//       </div>
+//       <p>Selected value: {selectedValue}</p>
+//     </div>
+//   );
+// }
