@@ -73,8 +73,8 @@ export default function Dashboard ({handlerDarkMode , darkMode}){
     <div className=" w-full my-14 ">
     {info.cats.length===0 || info.users.length===0 || info.products.length===0 || info.orders.length===0  ? <Loading></Loading> : 
      view==="general" ?  <General cats={info?.cats} orders={info?.orders} users={info?.users} ></General> : 
-     view==="gatos" ? <Gatos openModal={openModal} cats={info?.cats} ></Gatos> :
-     view==="products" ? <Productos products={info?.products}></Productos> :
+     view==="gatos" ? <Gatos  openModal={openModal} cats={info?.cats} ></Gatos> :
+     view==="products" ? <Productos products={info?.products} openModal={openModal}></Productos> :
      view==="users" ?  <Usuarios users={info?.users}></Usuarios> :
      view==="orders" ? <Ventas orders={info.orders}></Ventas> : <Loading></Loading>
 }

@@ -5,7 +5,7 @@ import Buttons from "./logic/buttons";
 import { handleColumnClick, handlerClick, handlerClickType } from "./logic/handlers";
 import Example from "./charts/chart";
 
-export default function Productos({ products }) {
+export default function Productos({ products, openModal }) {
   const stylesNameCol = "w-40 p-2 cursor-pointer";
   const stylesTd = "h-16 px-2 py-3 flex items-center mt-2";
   const [filters, setFilters] = useState({
@@ -171,7 +171,7 @@ const csvFileName = "productos.csv";
                   )}</td>
                   <td>{productos.id}</td>
                   <td>
-                    <button className="text-white shadow-md bg-teal-900 hover:bg-teal-500  font-medium rounded-lg text-sm px-4 py-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400">
+                    <button name="productEdit" onClick={(e)=>(openModal(e.target.name), localStorage.setItem("productId", productos.id))} className="text-white shadow-md bg-teal-900 hover:bg-teal-500  font-medium rounded-lg text-sm px-4 py-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400">
                       Edit
                     </button>
                   </td>

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import validate from "./validation";
 import axios from "axios"
 
-export default function FormularioEdit() {
+export default function FormularioEdit({closeModal}) {
     const id = localStorage.getItem("catId")
     const getUser = JSON.parse(localStorage.getItem("userInfo"))
     const currentUser = getUser
@@ -86,6 +86,7 @@ export default function FormularioEdit() {
     const errors = validate(input);
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
+      
       return;
     }
     
@@ -93,13 +94,12 @@ export default function FormularioEdit() {
     .then(response=>{
       console.log(response)
         alert("Actulizado con exito")
+        closeModal()
     })
     .catch(error =>{
       console.log(error, "error")
         alert("Error al actualizar, verifique la informacion e intente nuevamente")
     })
-
-    alert("Gato Creado");
     setInput({
       name: "",
       age: "",

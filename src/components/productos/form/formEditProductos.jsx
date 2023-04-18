@@ -1,14 +1,41 @@
-import { postProduct } from "../../../redux/actions";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import validate from "./validations";
-import axios, { all } from "axios";
+import axios from "axios";
+import { postProduct } from "../../../redux/actions";
 
-export default function PostProduct() {
+export default function FormularioEditProduct({closeModal}) {
   const dispatch = useDispatch();
+  const productId = localStorage.getItem("productId")
+  const getUser = JSON.parse(localStorage.getItem("userInfo"))
+  const currentUser = getUser
+  const idAdmin =currentUser.id
   const [categories, setCategories] = useState([])
 
   useEffect(()=>{
+   async function getProduct (){
+    try {
+        const product = await axios.get(`/product/${productId}/`)
+        .then(response=> response.data)
+        console.log(product)
+        setInput({
+            name:product.name,
+            active:product.name,
+            summary:product.summary,
+            image:product.image,
+            stock:product.stock,
+            price:product.price,
+            discount:{
+                value:product.discount.value,
+                active:product.discount.active
+            },
+            categoryId:product.category.id
+        })
+
+    } catch (error) {
+        console.log(error)
+    }
+   }
    async function getCategories (){
     try {
       const categories = await axios.get("/category").then(response => response.data)
@@ -17,6 +44,7 @@ export default function PostProduct() {
       console.log(error)
     }}
   getCategories()
+  getProduct()
   },[])
 
   const [errors, setErrors] = useState({});
@@ -30,7 +58,7 @@ export default function PostProduct() {
     discount:{
       active:false,
       value:0
-    }
+    },
   });
 
   function handleChange(e) {
@@ -73,7 +101,7 @@ export default function PostProduct() {
     e.preventDefault()
     if(!Object.keys(errors).at(0)){
         
-        dispatch(postProduct(input)).then((response)=> {
+        await axios.put(`/product/${productId}/admin/${idAdmin}`,input).then((response)=> {
             alert('Producto creado')}).catch(err=>{return(console.log(err) ,alert(err))})        
     }else alert('Complete todos los campos requeridos por favor')
 
@@ -138,7 +166,6 @@ export default function PostProduct() {
             accept="image/*"
             name="image"
             onChange={(e) => handleImageChange(e)}
-            required
           />
           {errors.image ? <p className="text-red-600">{errors.image}</p> : ""}
         </div>
