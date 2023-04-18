@@ -4,10 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { isLogged } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-
-import { Redirect } from 'react-router-dom';
-import {LoginButton} from './LogginAutho'
-
+/* import {LoginButton} from './LogginAutho' */
 import { currentLocation } from "../navbar/Navbar";
 
 
@@ -100,8 +97,8 @@ export default function Login() {
             </div>
             <br/>
             <div className="flex items-center justify-center">
-            <LoginButton
-              />
+{/*             <LoginButton
+              /> */}
             </div>
             <a
               className="inline-block align-baseline font-bold text-sm text-gray-900 hover:text-teal-500"
