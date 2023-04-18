@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 /* import {LoginButton} from './LogginAutho' */
 import { currentLocation } from "../navbar/Navbar";
+import Swal from 'sweetalert2'
 
 
 export default function Login() {
@@ -28,23 +29,43 @@ export default function Login() {
 
   async function handleLogin(e) {
     e.preventDefault();
+  
+    if (!email || !password) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos vacíos',
+        text: 'Por favor, ingrese su email y contraseña'
+      });
+      return;
+    }
+  
+    try {
       const response = await axios.post("/user/validate", {
         email: email,
         password: password,
-      })
-      .then((response) => {
-        if (response.data.logged) {
-          dispatch(isLogged(response.data));
-          localStorage.setItem("isLoggedIn", true);
-          localStorage.setItem("userInfo", JSON.stringify(response.data.validatedUser));         
-          setIsSessionStarted(true);
-          alert("Inicio de sesión exitoso")
-          window.location.href = currentLocation
-        } 
-      })
-      .catch((error) => {
-        alert("Email o contraseña incorrectos");
       });
+  
+      if (response.data.logged) {
+        dispatch(isLogged(response.data));
+        localStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("userInfo", JSON.stringify(response.data.validatedUser));         
+        setIsSessionStarted(true);
+        Swal.fire({
+          icon: 'success',
+          title: 'Inicio de sesión exitoso',
+          showConfirmButton: false,
+          timer: 1500
+        }).then(() => {
+          window.location.href = currentLocation;
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Correo electrónico o contraseña incorrectos',
+        text: 'Por favor, inténtelo de nuevo'
+      });
+    }
   }
 
   
@@ -61,7 +82,7 @@ export default function Login() {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 for="email"
               >
-                Email
+                Correo electrónico
               </label>
 
               <input

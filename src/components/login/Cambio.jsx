@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function ChangePasswordForm() {
   const navigate = useNavigate();
@@ -11,18 +12,33 @@ function ChangePasswordForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert('La contraseña y su confirmación no coinciden');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'La contraseña y su confirmación no coinciden',
+        confirmButtonText: 'OK'
+      });
       return;
     }
     try {
       await axios.put("/user/reset", { email, password });
-      alert('La contraseña se ha cambiado con éxito');
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
-      navigate('/login');
+      Swal.fire({
+        icon: 'success',
+        title: 'Contraseña cambiada',
+        text: 'La contraseña se ha cambiado con éxito'
+      }).then(() => {
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+        navigate('/login');
+      });
     } catch (error) {
-      alert('Ha ocurrido un error al cambiar la contraseña');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Ha ocurrido un error al cambiar la contraseña',
+        confirmButtonText: 'OK'
+      });
       console.error(error);
     }
   };
