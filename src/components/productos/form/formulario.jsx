@@ -26,7 +26,7 @@ export default function PostProduct() {
     stock: "",
     image: [],
     summary: "",
-    categoryId:0,
+    categoryId:6,
     discount:{
       active:false,
       value:0

@@ -5,6 +5,9 @@ import validate from "./validation";
 
 export default function PostCats() {
   const dispatch = useDispatch();
+      const getUser = JSON.parse(localStorage.getItem("userInfo"))
+    const currentUser = getUser
+    const idAdmin =currentUser.id
   const [errors, setErrors] = useState({});
   const [catState, setCatState] = useState({
     adoptado: false,
@@ -84,7 +87,7 @@ export default function PostCats() {
       return;
     }
     const newImage= await uploadImage(input.image.file);
-    dispatch(postCats({id:localStorage.getItem("") , data:{...input, image:[newImage]}}));
+    dispatch(postCats({id:idAdmin , data:{...input, image:[newImage]}}));
     alert("Gato Creado");
     setInput({
       name: "",
