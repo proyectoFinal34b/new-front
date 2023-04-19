@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import Cart from "../carrito/carrito";
 import DarkMode from "./DarkMode";
+import { ProfileAutho } from "../../components/login/LogginAutho";
+
 export const currentLocation = window.location.href.split('/').slice(0, 3).join('/')
 
 const Navbar = ({handlerDarkMode , darkMode}) => {
@@ -65,6 +67,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
               </NavLink>
             </>
           )}
+          <div> <ProfileAutho/></div>
 
           <button
             data-collapse-toggle="navbar-cta"
@@ -126,6 +129,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
           </div>
            :""}  
         </div>
+       
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-cta"
