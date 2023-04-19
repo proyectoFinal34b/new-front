@@ -172,6 +172,18 @@ export const postOrder = (order) => async (dispatch) => {
   }
 }
 
+export const postDonated = (order) => async (dispatch) => {
+  try {
+    const json = await axios.post('/order', order);
+    console.log(json)
+    return json;
+  } catch (error) {
+    throw Error(error);
+  }
+}
+
+
+
 export function GetOrders(){
   return async function(dispatch){
     try{
