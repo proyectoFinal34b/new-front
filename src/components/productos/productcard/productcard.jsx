@@ -105,28 +105,21 @@ export default function Productcard(props) {
           {/* rating */}
           <span className="flex items-center mt-1">{props.ratings}</span>
           {/* button */}
-          <div className="mt-2 flex gap-2">
+          <div className="mt-2 flex gap-11">
             <button
               disabled={disabled}
               onClick={() => agregarAlCarro(props.id)}
               className="bg-teal-500/80 hover:bg-teal-500/90 px-6 py-2 rounded-md text-white font-medium tracking-winder transition"
             >
               {disabled ? "Sin Stock" : "Agregar al carro"}
-            </button>
-            <button className="flex-grow flex justify-center items-center bg-gray-300/60 hover:bg-gray-300/80 transition rounded-md">
-              <img
-                class="opacity-50 w-6"
-                src="https://cdn-icons-png.flaticon.com/512/109/109791.png"
-                alt=""
-              />
-            </button>
-          </div>
-          <a
+            </button>         
+            <a
             href={`/productos/${props.id}`}
             class="bg-teal-500/80 hover:bg-teal-500/90 px-6 py-2 rounded-md text-white font-medium tracking-winder transition"
           >
-            Detalle
-          </a>
+            Ir a detalles
+          </a> 
+          </div>
         </div>
       </div>
     </div>

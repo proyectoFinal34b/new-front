@@ -3,7 +3,7 @@ import {loadStripe} from '@stripe/stripe-js'
 import {Elements, CardElement, useStripe, useElements} from '@stripe/react-stripe-js'
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Link , useHref, useLocation, useNavigate} from "react-router-dom";
+import { Link , useHref, useLoaderData, useLocation, useMatch, useNavigate, useNavigation, useSearchParams} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postOrder,loadCart, clearCart } from "../../redux/actions";
 
@@ -11,13 +11,13 @@ const stripePromise = loadStripe("pk_test_51Mw8EZKXctGo6PdRordVcWqK5Eb4jPlAgImQ2
 
 
 
-const CheckoutForm = () => {
+const CheckoutForm = (props) => {
   const stripe = useStripe();
-const href= useHref()
   const elements = useElements();
   const [loading, setLoading] = useState(false);
   const cartitems=useSelector((state) => state.cart.items);
   const totalamount = useSelector((state) => state.cart.total);
+  // const selectedValue = useSelector((state) => state.//completar)
   const dispatch = useDispatch();
   const user= JSON.parse(localStorage.getItem('userInfo'))
   const [order, setOrder] = useState({
@@ -34,7 +34,6 @@ const href= useHref()
       dispatch(loadCart(local))
      
     }
-    console.log(href)
   }, []);
 
   useEffect(()=>{
@@ -95,16 +94,23 @@ const href= useHref()
 
         try {
 
-            console.log(totalamount)
+            console.log(totalamount, props.monto)
             const {data} = await axios.post("/payment/checkout",{
 
             id: id,
-            amount: totalamount * 100,
+            amount: props.monto? props.monto *100 : totalamount * 100,
+            // || completar y mover arriba
           }
         );
         console.log(order)
         console.log(data)
-        dispatch(postOrder(order));
+        if(!props.monto){
+          dispatch(postOrder(order));
+        }
+        // else{
+        //   dispatch de otra peticion al back con el monto de la donacion, que envíe un mail personalizado de donacion
+        // }
+        
         
         mostrarAlerta();
 
@@ -169,7 +175,7 @@ const href= useHref()
             <CardElement className="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" />
           </div>
           <h3 className="font-bold sm:text-xl mb-2 ml-1 p-3">
-            Precio: ${totalamount}.00
+            Precio: ${props.monto? props.monto : totalamount}.00
           </h3>
 
           <button
@@ -208,11 +214,14 @@ const href= useHref()
 
 
 export default function PasarelaDePagos() {
+  const [searchParams] = useSearchParams();
+  const montoDonacion = searchParams.get("monto");
+  console.log(montoDonacion)
   return (
     <Elements stripe={stripePromise}>
       <div className="min-w-screen min-h-screen bg-gray-200 flex items-center justify-center px-5 pb-10 pt-16">
         <div className="w-full md:w-1/2 lg:w-1/3">
-        <CheckoutForm />
+        <CheckoutForm monto={montoDonacion}/>
         </div>
         </div>
         </Elements>
