@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../navbar/Navbar";
 import Footer from "../home/footer/footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../donaciones/styleDonated.css'
 
 
@@ -11,7 +11,7 @@ import '../donaciones/styleDonated.css'
 
 export default function DonacionesRender({handlerDarkMode, darkMode}) {
 
-  
+  const navigate= useNavigate()
 
 
     return (
@@ -48,7 +48,7 @@ export default function DonacionesRender({handlerDarkMode, darkMode}) {
             </div>
             <div className="w-[30%] flex flex-col items-end space-y-32">
             <div className="relative w-[45%] pt-4 pb-6 px-4 leading-normal text-[#0d5958] bg-[#37c6b6] rounded-xl shadow-one z-30 hover:scale-110 transition-all">
-                  <button>
+                  <button onClick={() => navigate('/pasarela?monto=1000')}>
                     <div className="absolute -top-[30px] left-0 h-20 w-[148px] transform skew-y-[155deg] rounded-tl-xl rounded-tr-3xl -z-10 bg-[#42cfbf] shadow-two"></div>
                     <div className="absolute -top-10 right-4 font-bold text-sm">01</div>
                     <p className="uppercase text-sm font-bold mb-3">Donar</p>
@@ -56,7 +56,7 @@ export default function DonacionesRender({handlerDarkMode, darkMode}) {
                     </button>
                 </div>
                 <div className="relative w-[45%] pt-4 pb-6 px-4 leading-normal text-[#0d5958] bg-[#37c6b6] rounded-xl shadow-one z-30 hover:scale-110 transition-all">
-                  <button>
+                  <button onClick={() => navigate('/pasarela?monto=2000')}>
                     <div className="absolute -top-[30px] left-0 h-20 w-[148px] transform skew-y-[155deg] rounded-tl-xl rounded-tr-3xl -z-10 bg-[#42cfbf] shadow-two"></div>
                     <div className="absolute -top-10 right-4 font-bold text-sm">02</div>
                     <p className="uppercase text-sm font-bold mb-3">Donar</p>
@@ -64,7 +64,7 @@ export default function DonacionesRender({handlerDarkMode, darkMode}) {
                     </button>
                 </div>
                 <div className="relative w-[45%] pt-4 pb-6 px-4 leading-normal text-[#0d5958] bg-[#37c6b6] rounded-xl shadow-one z-30 hover:scale-110 transition-all">
-                 <button>
+                 <button onClick={() => navigate('/pasarela?monto=3000')}>
                     <div className="absolute -top-[30px] left-0 h-20 w-[148px] transform skew-y-[155deg] rounded-tl-xl rounded-tr-3xl -z-10 bg-[#42cfbf] shadow-two"></div>
                     <div className="absolute -top-10 right-4 font-bold text-sm">03</div>
                     <p className="uppercase text-sm font-bold mb-3">Donar</p>
