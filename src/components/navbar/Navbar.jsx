@@ -31,7 +31,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
   }
   
   return (
-    <nav className="shadow-md bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-10">
+    <nav className="shadow-md bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-40">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link to={"/"} className="flex">
           <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-teal-400">

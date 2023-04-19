@@ -56,7 +56,7 @@ export default function Cart(props) {
 
   return (
     <Transition.Root show={props.open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={props.onClose}>
+      <Dialog as="div" className="relative z-40" onClose={props.onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
