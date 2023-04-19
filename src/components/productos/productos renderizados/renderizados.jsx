@@ -22,6 +22,7 @@ export default function Renderizados(props) {
             price={e.price}
             ratings={e.ratings}
             discount={e.discount}
+            stock={e.stock}
             id={e.id}
             />)
             :

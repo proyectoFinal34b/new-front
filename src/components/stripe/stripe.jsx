@@ -3,9 +3,9 @@ import {loadStripe} from '@stripe/stripe-js'
 import {Elements, CardElement, useStripe, useElements} from '@stripe/react-stripe-js'
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link , useHref, useLocation, useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { postOrder,loadCart } from "../../redux/actions";
+import { postOrder,loadCart, clearCart } from "../../redux/actions";
 
 const stripePromise = loadStripe("pk_test_51Mw8EZKXctGo6PdRordVcWqK5Eb4jPlAgImQ2oQijGbhgqRuTLFipWxQNKEJ5cOpEW6OpjQzsMKbcOLLE4rkaRBc00NRHlsSSD") //conectar con stripe
 
@@ -13,7 +13,7 @@ const stripePromise = loadStripe("pk_test_51Mw8EZKXctGo6PdRordVcWqK5Eb4jPlAgImQ2
 
 const CheckoutForm = () => {
   const stripe = useStripe();
-
+const href= useHref()
   const elements = useElements();
   const [loading, setLoading] = useState(false);
   const cartitems=useSelector((state) => state.cart.items);
@@ -34,6 +34,7 @@ const CheckoutForm = () => {
       dispatch(loadCart(local))
      
     }
+    console.log(href)
   }, []);
 
   useEffect(()=>{
@@ -107,7 +108,8 @@ const CheckoutForm = () => {
         
         mostrarAlerta();
 
-        ;
+        dispatch(clearCart());
+        localStorage.setItem("carrito",JSON.stringify([]))
 
         elements.getElement(CardElement).clear(); //limpia la tarjeta
       } catch (error) {

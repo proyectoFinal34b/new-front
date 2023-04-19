@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import Cart from "../carrito/carrito";
 import DarkMode from "./DarkMode";
@@ -9,13 +9,15 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
   console.log({handlerDarkMode, darkMode})
   const styleCompInicio="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-teal-400 md:hover:bg-transparent md:hover:text-teal-400 md:p-0 md:dark:hover:text-teal-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
   const [ isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"))
+  const carrito= useSelector(state=> state.cart.items)
   const prevUser = JSON.parse(localStorage.getItem("userInfo"))
   const [user, setUser] = useState(prevUser)
   const userType = prevUser?.status
 
   const dispatch = useDispatch();
   useEffect(()=>{
-  },[isLoggedIn])
+    JSON.parse(localStorage.getItem('carritolength'))
+  },[isLoggedIn, carrito])
 
   const [open, setOpen] = useState(null);
   const handleOpen = () => {
@@ -114,7 +116,8 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
               >
                 <circle cx="20" cy="10" r="7" fill="#DF013A" />
                 <text x="18" y="13" fill="#fff" font-size="10">
-                 {JSON.parse(localStorage.getItem("carrito")).length}
+                 {JSON.parse(localStorage.getItem("carritolength"))}
+                 {console.log(JSON.parse(localStorage.getItem("carrito"))?.length)}
                 </text>
               </svg> : ''}
             </button>
