@@ -9,6 +9,7 @@ import Productos from "./productos";
 import Ventas from "./ventas";
 import Usuarios from "./users";
 import { Modal } from "./modal";
+import llamados from "./logic/llamados";
 
 export default function Dashboard ({handlerDarkMode , darkMode}){
 
@@ -34,40 +35,24 @@ export default function Dashboard ({handlerDarkMode , darkMode}){
   };
   const getUser = JSON.parse(localStorage.getItem("userInfo"))
   const currentUser = getUser
-  const users = async ()=>{
-    const response = await axios.get("/user")
-    setInfo(prevState=>({...prevState, users: response.data}))
-  }
-  const cats = async () => {
-    const response = await axios.get("/cat/")
-    setInfo(prevState => ({...prevState, cats: response.data}))
-  }
-  const orders = async () => {
-    const response = await axios.get("/order/")
-    setInfo(prevState => ({...prevState, orders: response.data}))
-  }
-  const products = async () => {
-    const response = await axios.get("/product")
-    setInfo(prevState => ({...prevState, products:response.data}))  
-  }
+ 
 
   const clickHandlerMenu = (view)=>{
     return setView(view)
   }
 
   useEffect(()=>{
-    orders()
-    cats()
-    products()
-    users()
+  llamados(setInfo)
   },[])
+  
   return (
     <>{currentUser?.status === "superAdmin" ?
     <div className="bg-gray-100 dark:bg-bgDark " >
       <div>
     <NavBarDash handlerDarkMode={handlerDarkMode} darkMode={darkMode} props={currentUser}></NavBarDash></div>
       <div className="flex">
-      <Menu click={clickHandlerMenu} openModal={openModal}></Menu>
+
+      <Menu setInfo={setInfo} click={clickHandlerMenu} openModal={openModal}></Menu>
       <div id="view" className=" flex-grow ">
         
     <div className=" w-full my-14 ">

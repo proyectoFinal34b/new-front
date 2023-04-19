@@ -138,7 +138,7 @@ function Profile({darkMode,handlerDarkMode}) {
       {editing ? (
        <EditProfile setFormData={setFormData} formData={formData} setEditing={setEditing} user={user} setUser={setUser} ></EditProfile>
       ) : (
-        <button onClick={handleEdit} className=" bg-teal-500 rounded w-32 text-black font-semibold h-10 flex justify-center items-center relative left-[58.2%] bottom-[510px]">Editar perfil</button>
+        <button onClick={handleEdit} className=" bg-teal-500 rounded w-32 text-black font-semibold h-10 flex justify-center items-center relative sm:left-[54.2%] left-[65.2%] bottom-[510px]">Editar perfil</button>
       
       )}</div>
       <p className="text-center mb-8">

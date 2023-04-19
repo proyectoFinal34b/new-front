@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import llamados from "./logic/llamados";
 
 export default function Menu(props) {
 
@@ -11,6 +12,9 @@ export default function Menu(props) {
       <div id="menu" className="bg-dashCol min-h-screen w-1/5 dark:bg-slate-900 dark:shadow-white shadow-md ">
         
         <ul className="mt-8 space-y-8 font-medium text-lg sticky top-12 ">
+          <li>
+            <button className={buttonStyle2} onClick={()=>llamados(props.setInfo)}>Actualizar</button>
+          </li>
           <li>
             <button name="general" className={buttonStyle} onClick={(e)=>props.click(e.target.name)}>General</button>
           </li>

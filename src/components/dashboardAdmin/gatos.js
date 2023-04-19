@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Buttons from "./logic/buttons";
 import { handleColumnClick, handlerClick, handlerClickType } from "./logic/handlers";
 import Tabla from "./gatosView/tabla";
@@ -24,6 +24,8 @@ export default function Gatos({ cats, openModal }) {
   const handlerClickTypeCat = (e)=>{
     handlerClickType(e, filters, setFilters, cats, setShow, "state")
   }
+
+
   
 
   return (
