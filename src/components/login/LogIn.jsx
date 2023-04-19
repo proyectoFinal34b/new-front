@@ -1,10 +1,53 @@
+// import React, { useState, useEffect } from "react";
+// import { Link } from "react-router-dom";
+// import { getUsers, isLogged } from "../../redux/actions"
+// import { useDispatch, useSelector } from "react-redux";
+// import axios from "axios";
+
+// export default function Login() {
+//   const dispatch = useDispatch();
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const isLoggedIn = useSelector(state=>state.logged)
+
+//   useEffect(() => {
+//     dispatch(getUsers());
+//   }, [dispatch]);
+
+//   useEffect(() => {
+//     const storedEmail = localStorage.getItem("email");
+//     const storedIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+//     setEmail(storedEmail || "");
+
+//   }, []);
+
+//   useEffect(() => {
+//     localStorage.setItem("isLoggedIn", isLoggedIn);
+//     localStorage.setItem("email", email);
+//   }, [isLoggedIn, email]);
+
+//   async function handleLogin(e) {
+//     e.preventDefault();
+//     const validation = await axios.post('https://proyectofinal-gg57.onrender.com/user/validate', { email: email, password: password });
+//     console.log(validation)
+//     if (validation.data.logged) {
+//       dispatch(isLogged(validation.data));
+//     } else {
+//       alert("Email o contraseña incorrectos");
+//     }
+//   }
+
+//   function handleLogout() {
+//     dispatch(isLogged(false));
+//     setEmail("");
+//   }
 
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { isLogged } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-/* import {LoginButton} from './LogginAutho' */
+import { LoginButton } from "./LogginAutho";
 import { currentLocation } from "../navbar/Navbar";
 import Swal from 'sweetalert2'
 
@@ -16,9 +59,12 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [isSessionStarted, setIsSessionStarted] = useState(false);
   const isLoggedIn = useSelector((state) => state.logged);
+  
 
+  // useEffect(() => {
+  //   dispatch(getUsers());
+  // }, [dispatch]);
 
- 
   useEffect(() => {
     const storedIsLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
     if (storedIsLoggedIn) {
@@ -73,6 +119,8 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="w-full sm:max-w-md md:max-w-lg lg:max-w-xl">
+
+        
           <form
             className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto"
             onSubmit={handleLogin}
@@ -118,8 +166,7 @@ export default function Login() {
             </div>
             <br/>
             <div className="flex items-center justify-center">
-{/*             <LoginButton
-              /> */}
+             <LoginButton/>
             </div>
             <a
               className="inline-block align-baseline font-bold text-sm text-gray-900 hover:text-teal-500"
