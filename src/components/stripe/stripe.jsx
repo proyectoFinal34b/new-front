@@ -18,6 +18,7 @@ const CheckoutForm = () => {
   const [loading, setLoading] = useState(false);
   const cartitems=useSelector((state) => state.cart.items);
   const totalamount = useSelector((state) => state.cart.total);
+  // const selectedValue = useSelector((state) => state.//completar)
   const dispatch = useDispatch();
   const user= JSON.parse(localStorage.getItem('userInfo'))
   const [order, setOrder] = useState({
@@ -99,6 +100,7 @@ const CheckoutForm = () => {
 
             id: id,
             amount: totalamount * 100,
+            // || completar y mover arriba
           }
         );
         console.log(order)
