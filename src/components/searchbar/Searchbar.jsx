@@ -63,10 +63,18 @@ export default function SearchBar() {
     } else {
       Swal.fire({
         title: 'Ingrese un gato',
-        icon: 'error'
+        icon: 'error',
+        confirmButtonColor: "#228883",
+        timer: "5000",
+        timerProgressBar: true,
+      position: "top",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowOutsideClick: false,
       });
     }
   }
+
 
   // function handleSubmit(e) {
   //   e.preventDefault();

@@ -172,15 +172,15 @@ export const postOrder = (order) => async (dispatch) => {
   }
 }
 
-export const postDonated = (order) => async (dispatch) => {
-  try {
-    const json = await axios.post('/order', order);
-    console.log(json)
-    return json;
-  } catch (error) {
-    throw Error(error);
-  }
-}
+// export const postDonated = (donatedd) => async (dispatch) => {
+//   try {
+//     const json = await axios.post('/donatedd', donatedd);
+//     console.log(json)
+//     return json;
+//   } catch (error) {
+//     throw Error(error);
+//   }
+// }
 
 
 

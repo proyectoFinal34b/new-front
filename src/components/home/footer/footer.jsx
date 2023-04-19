@@ -16,8 +16,8 @@ const Footer = () => {
       </div>
       <ItemsContainer />
       <div
-        className=" sm:grid-cols-2 lg:grid-cols-3 gap-10
-      text-center pt-2 text-gray-400 text-sm pb-8"
+        className="sm:grid-cols-2 lg:grid-cols-3 gap-10
+      text-center text-gray-400 text-sm pb-6"
       >
         <span >© 2023 Bastet . Reservados todos los derechos.</span>
       </div>

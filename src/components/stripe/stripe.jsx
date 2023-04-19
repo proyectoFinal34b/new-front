@@ -28,6 +28,12 @@ const CheckoutForm = (props) => {
     total: totalamount,
   });
 
+  // const [donatedd, setDonatedd] = useState({
+  //   delivery: "",
+  //   status: "",
+  //   user: user,
+  // });
+
   useEffect(() => {
     const local= JSON.parse(localStorage.getItem("carrito"))
     if(local?.length) {
@@ -63,7 +69,7 @@ const CheckoutForm = (props) => {
       text: "tu pago ha sido realizado",
       icon: "success",
       confirmButtonText: "volver al inicio",
-      confirmButtonColor: "#b6ece5",
+      confirmButtonColor: "#228883",
       timer: "20000",
       timerProgressBar: true,
       position: "top",
@@ -102,13 +108,14 @@ const CheckoutForm = (props) => {
           }
         );
         console.log(order)
+        // console.log(donatedd)
         console.log(data)
         if(!props.monto){
           dispatch(postOrder(order));
         }
-        else{
-          dispatch(postDonated(order))
-        }
+        // else{
+        //   dispatch(postDonated(donatedd))
+        // }
         
         
         mostrarAlerta();
