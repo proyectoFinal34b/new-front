@@ -37,6 +37,8 @@ import React from 'react'
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchCats } from "../../redux/actions";
+import Swal from 'sweetalert2';
+
 
 export default function SearchBar() {
   const dispatch = useDispatch();
@@ -46,15 +48,40 @@ export default function SearchBar() {
   function handleSubmit(e) {
     e.preventDefault();
     if (name) {
-      dispatch(searchCats(name)).then((response)=>console.log(response))
-      setName("")
-      if (allCats.length === 0) {
-        alert(`No se encontró ningún gato llamado ${name}`);
-      }
+      dispatch(searchCats(name))
+        .then((response) => {
+          console.log(response);
+          if (response.payload.length === 0) {
+            Swal.fire({
+              title: `No se encontró ningún gato llamado ${name}`,
+              icon: 'warning'
+            });
+          }
+        })
+        .catch((error) => console.log(error));
+      setName("");
     } else {
-      alert("Ingrese un gato.");
+      Swal.fire({
+        title: 'Ingrese un gato',
+        icon: 'error'
+      });
     }
   }
+
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   if (name) {
+  //     dispatch(searchCats(name)) 
+  //     .then((response)=>console.log(response))
+  //     setName("")
+  //     if (allCats.length === 0) {
+  //       alert(`No se encontró ningún gato llamado ${name}`);
+  //     }
+  //   } else {
+  //     alert("Ingrese un gato.");
+  //   }
+  // }
+
 
   function handleChange(e) {
     e.preventDefault();

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { filterProduct, getProduct, searchProducts } from "../../../redux/actions";
+import Swal from 'sweetalert2';
 
 
 export default function ProductFiltrados(props) {
@@ -58,15 +59,39 @@ export default function ProductFiltrados(props) {
       function handleSubmit(e) {
         e.preventDefault();
         if (name) {
-          dispatch(searchProducts(name)).then((response)=>console.log(response))
-          setName("")
-          if (productos.length === 0) {
-            alert(`No se encontró ningún producto llamado ${name}`);
-          }
+          dispatch(searchProducts(name))
+            .then((response) => {
+              console.log(response);
+              if (response.payload.length === 0) {
+                Swal.fire({
+                  icon: "warning",
+                  text: `No se encontró ningún producto llamado ${name}`
+                });
+              }
+            })
+            .catch((error) => console.log(error));
+          setName("");
         } else {
-          alert("Ingrese un producto.");
+          Swal.fire({
+            icon: "error",
+            text: "Ingrese un producto",
+          });
         }
       }
+      
+
+    //   function handleSubmit(e) {
+    //     e.preventDefault();
+    //     if (name) {
+    //       dispatch(searchProducts(name)).then((response)=>console.log(response))
+    //       setName("")
+    //       if (productos.length === 0) {
+    //         alert(`No se encontró ningún producto llamado ${name}`);
+    //       }
+    //     } else {
+    //       alert("Ingrese un producto.");
+    //     }
+    //   }
     
     return(
         // <div className="sticky top-3 flex justify-start items-center p-1">
