@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import Swal from "sweetalert2";
-import { currentLocation } from "../navbar/Navbar";
+import Navbar, { currentLocation } from "../navbar/Navbar";
 import imagen from '../about/logardo.png';
 import {Link} from 'react-router-dom'
+import Footer from "../home/footer/footer";
 
-function Contacto() {
+function Contacto({handlerDarkMode , darkMode}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -70,7 +71,9 @@ function Contacto() {
   };
 
   return (
-    <div className="flex justify-center items-center w-screen h-screen">
+    <>
+     
+    <div className="flex justify-center items-center w-full h-full my-16">
     <div className="p-10 shadow-lg text-gray-700 bg-gray-200 max-w-fit m-auto min-h-fit dark:text-gray-500 dark:bg-gray-900">
     <div className="flex justify-center">
   <img src={imagen} alt="Descripción de la imagen" className="w-16 h-14 mx-auto block" />
@@ -141,6 +144,7 @@ function Contacto() {
       </form>
     </div>
   </div>
+        </>
   );
 }
 

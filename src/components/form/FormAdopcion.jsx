@@ -2,12 +2,14 @@ import React from "react";
 import Contacto from "../login/Contacto";
 import {Link} from 'react-router-dom'
 
-export default function FormAdopcion() {
+export default function FormAdopcion({handlerDarkMode , darkMode}) {
   return (
-    <div className="flex justify-center items-center mx-64">
-    <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
+    <>
+   
+    <div className="flex justify-center items-center w-1/2 m-auto">
+    <div className="w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Formulario de adopcion</h5>
-        <p className="font-normal text-gray-700 dark:text-gray-400">¡Qué emoción que estés considerando adoptar un gato! Sabemos que es una 
+        <p className="font-normal my-10 text-gray-700 dark:text-gray-400">¡Qué emoción que estés considerando adoptar un gato! Sabemos que es una 
             gran decisión, pero te aseguramos que es una de las más gratificantes 
             que puedes tomar. 
             Para iniciar este proceso, por favor llena nuestro formulario de 
@@ -23,7 +25,10 @@ export default function FormAdopcion() {
             </div>
             <Link to='/gatos'><button className="bg-gray-900 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Volver</button></Link>
     </div>
+    <div className="w-1/2">
     <Contacto/>
+    </div>
 </div>
+</>
   );
 }
