@@ -23,6 +23,8 @@ import Dashboard from './components/dashboardAdmin/dashboard';
 import { getUsers } from './redux/actions';
 import { getCats } from './redux/actions';
 import axios from 'axios';
+import Navbar from './components/navbar/Navbar';
+import Footer from './components/home/footer/footer';
 
 function App() {
   const dispatch = useDispatch()
@@ -50,7 +52,7 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, []);
-  axios.defaults.baseURL = "https://proyectofinal-gg57.onrender.com/"
+  axios.defaults.baseURL = "http://localhost:3001/"
   return (
     <div className="App cursor-default dark:bg-bgDark bg-slate-200">
       <Routes>
@@ -69,9 +71,23 @@ function App() {
       <Route path ="/usuario" element={<UsuariosRender darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
       <Route path='/dashboard' element={<Dashboard darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
       <Route path='/pasarela' element={<PasarelaDePagos darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
-      <Route path="/contacto" element={<Contacto darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
-      <Route path="/formadopcion"element={<FormAdopcion darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
-      <Route path="/formapadrinamiento" element={<FormApadrinamiento darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path="/contacto" element={
+        <>
+      <Navbar darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>
+      <Contacto darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>
+      <Footer></Footer></>}></Route>
+      <Route path="/formadopcion"element={
+        <>
+        <Navbar darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>
+      <FormAdopcion darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>
+      <Footer></Footer>
+      </>}></Route>
+      <Route path="/formapadrinamiento" element={
+      <>
+      <Navbar darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>
+      <FormApadrinamiento darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>
+      <Footer></Footer>
+      </>}></Route>
      {/* <Route path="/post" element={<CreateForm/>} /> */}
      </Routes>
     </div>
