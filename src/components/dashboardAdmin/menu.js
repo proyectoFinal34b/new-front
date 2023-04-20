@@ -18,9 +18,6 @@ export default function Menu(props) {
             <button className={buttonStyle2} onClick={()=>props.updateHandler()}>Actualizar</button>
           </li>
           <li>
-            <button name="general" className={buttonStyle} onClick={(e)=>props.click(e.target.name)}>General</button>
-          </li>
-          <li>
             <button name="gatos" className={buttonStyle} onClick={(e)=>props.click(e.target.name)}>Gatos</button>
           </li>
           <li>

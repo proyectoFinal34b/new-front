@@ -95,33 +95,7 @@ return(
                   })}></input>
                   {errors.email?.type==="pattern" && <p className="text-red-500">ingrese un email valido</p>}
                   {errors.email?.type==="required" && <p className="text-red-500">Se requiere un mail</p>}
-        </div>    
-        <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">
-        Dirección:
-      </label>
-      <input
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        type="text"
-        {...register("adress", { required: true })}
-      />
-      {errors.adress?.type === "required" && (
-        <p className="text-red-500">Se requiere una dirección</p>
-      )}
-      </div>
-      <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2">
-        Teléfono:
-      </label>
-      <input
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        type="number"
-        {...register("phoneNumber", { required: true })}
-      />
-      {errors.phoneNumber?.type === "required" && (
-        <p className="text-red-500">Se requiere un número de teléfono</p>
-      )}
-        </div>
+        </div> 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Contraseña:

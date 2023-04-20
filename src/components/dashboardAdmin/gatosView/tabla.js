@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CSVLink } from "react-csv";
 
 export default function Tabla({handleColumnClickCat, show, openModal}){
@@ -33,6 +33,7 @@ export default function Tabla({handleColumnClickCat, show, openModal}){
         localStorage.setItem("catId", e.target.id)
         openModal(e.target.name)
       }
+
 
     return(
         <>
