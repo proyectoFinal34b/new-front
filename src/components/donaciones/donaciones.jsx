@@ -3,7 +3,7 @@ import Navbar from "../navbar/Navbar";
 import Footer from "../home/footer/footer";
 import { Link, useNavigate } from "react-router-dom";
 import '../donaciones/styleDonated.css'
-
+import BotonSup from "../support/buttonSup";
 
 
 
@@ -74,6 +74,7 @@ export default function DonacionesRender({handlerDarkMode, darkMode}) {
             </div>
         </div>
     </div>
+    <BotonSup/>
     <Footer/>
       </div>
     );

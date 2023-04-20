@@ -22,16 +22,14 @@ const CheckoutForm = (props) => {
   const user= JSON.parse(localStorage.getItem('userInfo'))
   const [order, setOrder] = useState({
     list: [],
-    delivery: "",
+    delivery: "En proceso",
     status: "",
     user: user,
     total: totalamount,
   });
 
-  // const [donatedd, setDonatedd] = useState({
-  //   delivery: "",
-  //   status: "",
-  //   user: user,
+  // const [donate, setDonatedd] = useState({  mail de donacion
+  //   email: ""
   // });
 
   useEffect(() => {
@@ -97,7 +95,7 @@ const CheckoutForm = (props) => {
     if (!error){ //si no existe un error
         
         const {id} = paymentMethod; //le paso a la base de datos lo que tiene que guardar
-
+      console.log(user)
         try {
 
             console.log(totalamount, props.monto)
@@ -113,9 +111,9 @@ const CheckoutForm = (props) => {
         if(!props.monto){
           dispatch(postOrder(order));
         }
-        // else{
-        //   dispatch(postDonated(donatedd))
-        // }
+        else{
+          dispatch(postDonated(user))
+        }
         
         
         mostrarAlerta();

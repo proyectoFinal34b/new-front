@@ -147,7 +147,7 @@ export default function ProductFiltrados(props) {
             <button
                 type="submit"
                 onClick={(e) => handleSubmit(e)}
-                className="md:w-2/3  px-5 py-2 my-2 font-medium text-gray bg-teal-400 rounded-md hover:bg-teal-500 focus:outline-none focus:bg-blue-600"
+                className="md:w-2/3  px-5 py-2 my-2 font-medium text-gray bg-teal-400 rounded-md hover:bg-teal-500 focus:outline-none focus:bg-teal-400"
             >
                 Buscar
             </button>

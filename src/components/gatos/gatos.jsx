@@ -3,6 +3,7 @@ import Navbar from "../navbar/Navbar";
 import Footer from "../home/footer/footer";
 import GatosFiltrados from "../filtros/filtros"
 import Card from "../card/Card"
+import BotonSup from "../support/buttonSup";
 
 
 
@@ -20,6 +21,7 @@ export default function GatosRender({handlerDarkMode , darkMode}) {
         <Card/>
         </div>
         </div>
+        <BotonSup/>
         <Footer/>
         </>
     )

@@ -10,6 +10,9 @@ import {
 import HoverRating from "../../productos/rating/rating";
 import Loader from "../../dashboardAdmin/loading";
 import CarruselProduct from "../../Carrusel/CarruselProd";
+import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
+
 
 
 export default function DetailProductosFilter(props) {
@@ -19,6 +22,8 @@ export default function DetailProductosFilter(props) {
   const [disabled, setDisabled] = useState(false);
   const [renderPage, setRenderPage] = useState();
   const { id } = useParams();
+
+  const { user:userAuth0, isAuthenticated } = useAuth0(); 
 
   useEffect(() => {
     dispatch(getProductsById(id));
@@ -49,12 +54,29 @@ export default function DetailProductosFilter(props) {
     } else setDisabled(false);
   }
 
-  async function agregarAlCarro() {
-    dispatch(addToCart(productId.id));
-    productCuantity();
-    localStorage.setItem("carrito", JSON.stringify(carrito?.items));
-  }
+  const mostrarAlerta = () => {
+    Swal.fire({
+      title: "Inicie sesión antes de comprar",
+      text: "Para agregar productos al carro debes iniciar sesión",
+      icon: "warning",
+      confirmButtonText: "Iniciar sesión",
+      confirmButtonColor: "#b6ece5",
+      position: "top",
+    }).then((response) => {
+      if (response.isConfirmed) {
+        window.location.href = "/login";
+      }
+    });
+  };
 
+  async function agregarAlCarro() {
+    if (JSON.parse(localStorage.getItem("userInfo"))||isAuthenticated) {
+      dispatch(addToCart(productId.id));
+      localStorage.setItem("carrito", JSON.stringify(carrito?.items));
+
+      productCuantity();
+    } else mostrarAlerta();
+  }
   return (
     <>
       {/* DIV GENERAL */}

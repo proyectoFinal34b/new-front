@@ -81,8 +81,16 @@ export default function DetailGatosFilter(props) {
             <h1 className="text-2xl font-bold mb-5 mt-10 xl:mt-20">¿Me Queres Adoptar?</h1>
             <p className="lg:w-3/5 lg:m-auto">Si estás interesado en adoptarme, ¡genial! Puedes contactar a mis humanos cuidadores para obtener más información sobre el proceso de adopción, no estes triste por si no podes adoptarme existe la posibilidad de que me ayudes, siendo mi padrino. Ellos estarán más que felices de responder cualquier pregunta que tengas sobre mí. Gracias por considerar darme un hogar amoroso. Mientras espero por una familia, mis cuidadores humanos me brindan amor y atención diariamente.</p>
         <div className="lg:flex lg:px-28">
-        <button className={stylesbtn}>ADOPTAME<img className="h-9 ml-2" src="https://em-content.zobj.net/thumbs/160/samsung/349/paw-prints_1f43e.png"/></button>
-        <button className={stylesbtn}>APADRINAME<img className="h-9 ml-2 p-1" src="https://em-content.zobj.net/thumbs/120/samsung/349/red-heart_2764-fe0f.png"/></button>
+        <Link to="/formadopcion">
+        <button className={stylesbtn}>
+            ADOPTAME<img className="h-9 ml-2" src="https://em-content.zobj.net/thumbs/160/samsung/349/paw-prints_1f43e.png"/>
+        </button>
+        </Link>
+        <Link to="/formapadrinamiento">
+        <button className={stylesbtn}>
+            APADRINAME<img className="h-9 ml-2 p-1" src="https://em-content.zobj.net/thumbs/120/samsung/349/red-heart_2764-fe0f.png"/>
+        </button>
+        </Link>
         </div>
         </div>
         <div className="hidden xl:inline mt-10 bg-gray-800 shadow-md">

@@ -3,6 +3,7 @@ import Footer from "./footer/footer";
 import Navbar from "../navbar/Navbar";
 import About from "../about/About";
 import Portada from "./portada/portada";
+import BotonSup from "../support/buttonSup";
 
 
 export default function Home({handlerDarkMode , darkMode}) {
@@ -11,6 +12,7 @@ export default function Home({handlerDarkMode , darkMode}) {
       <Navbar darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>
       <Portada/>
       <About/>
+      <BotonSup/>
       <Footer/>
     </div>
   );
