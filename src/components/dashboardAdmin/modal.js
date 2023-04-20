@@ -3,6 +3,8 @@ import PostCats from "../form/FormularioCreacion";
 import PostProduct from "../productos/form/formulario";
 import FormularioEdit from "../form/FormularioEdit";
 import FormularioEditProduct from "../productos/form/formEditProductos";
+import FormularioEditUser from "../form/FormUsers/FormularioEditUsers";
+import FormularioEditOrders from "../form/FormOrders/FormularioEditOrders";
 
 export const Modal = ({ isOpen, onClose, formType }) => {
   return isOpen ? (
@@ -28,7 +30,16 @@ export const Modal = ({ isOpen, onClose, formType }) => {
           <div className="relative z-50">
             <FormularioEditProduct closeModal={onClose}  />
           </div>
-        ) :
+        ) : formType === "editUsers" ? (
+          <div className="relative z-50">
+            <FormularioEditUser closeModal={onClose}/>
+          </div>
+        ) : formType === "editOrder" ? (
+          <div className="relative z-50">
+            <FormularioEditOrders closeModal={onClose} />
+          </div>
+        ) 
+        :
         (
           ""
         )}

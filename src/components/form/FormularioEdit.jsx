@@ -28,7 +28,7 @@ export default function FormularioEdit({closeModal}) {
     deworming:false,
     chip:false,
     hairType:"",
-    status:""
+    status:false
   });
   function handleChange(e) {
     const { name, value } = e.target;
@@ -84,42 +84,28 @@ export default function FormularioEdit({closeModal}) {
   }
   async function handleSubmit(e) {
     e.preventDefault();
-    
-    await axios.put(`/cat/${id}/admin/${idAdmin}`,{...input})
-    .then(response=>{
-      console.log(response)
-        alert("Actulizado con exito")
-        closeModal()
-    })
-    .catch(error =>{
-      console.log(error, "error")
-        alert("Error al actualizar, verifique la informacion e intente nuevamente")
-    })
-    setInput({
-      name: "",
-      age: "",
-      gender: "",
-      state: {
-        adoptado: null,
-        apadrinado: null,
-        albergue: null,
-      },
-      image: { URL: "", file: "" },
-      description: "",
-      arrived: "",
-    });
-    setCatState({
-      adoptado: false,
-      apadrinado: false,
-      enAlbergue: false,
-    });
-    setErrors({});
-  }
+    console.log(input);
+    await axios
+      .put(`/cat/${id}/admin/${idAdmin}`, { ...input })
+      .then((response) => {
+        console.log(response);
+        alert("Actualizado con éxito");
+        closeModal();
+      })
+      .catch((error) => {
+        console.log(error, "error");
+        alert(
+          "Error al actualizar, verifique la información e intente nuevamente"
+        );
+      });
+    }
+  
   useEffect(() => {
     async function fetchCat() {
       try {
         const response = await axios.get(`/cat/${id}`);
         const cat = response.data;
+        console.log(cat.status)
         setInput({
           name: cat.name,
           age: cat.age,
@@ -143,10 +129,13 @@ export default function FormularioEdit({closeModal}) {
     fetchCat();
   }, [dispatch, id]);
   
-  const changeHandler = (e)=>{
-    setInput({...input, [e.target.name]: !input[e.target.name]})
-    console.log(input)
-  }
+  const changeHandler = (e) => {
+    setInput((prevState) => ({
+      ...prevState,
+      [e.target.name]: !prevState[e.target.name],
+    }));
+    console.log(input.status);
+  };
   return (
     // <div className="sticky top-3 flex justify-end items-center p-1">
     <div className="p-4 shadow-lg text-gray-700 bg-gray-200  dark:text-gray-100 dark:bg-gray-900 ">

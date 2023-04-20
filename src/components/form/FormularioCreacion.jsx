@@ -5,6 +5,9 @@ import validate from "./validation";
 
 export default function PostCats() {
   const dispatch = useDispatch();
+      const getUser = JSON.parse(localStorage.getItem("userInfo"))
+    const currentUser = getUser
+    const idAdmin =currentUser.id
   const [errors, setErrors] = useState({});
   const [catState, setCatState] = useState({
     adoptado: false,
@@ -84,7 +87,7 @@ export default function PostCats() {
       return;
     }
     const newImage= await uploadImage(input.image.file);
-    dispatch(postCats({id:localStorage.getItem("") , data:{...input, image:[newImage]}}));
+    dispatch(postCats({id:idAdmin , data:{...input, image:[newImage]}}));
     alert("Gato Creado");
     setInput({
       name: "",
@@ -219,7 +222,7 @@ export default function PostCats() {
     <option value="" className="dark:text-slate-900">Selecciona un estado</option>
     <option value="adoptado" className="dark:text-slate-900">Adoptado</option>
     <option value="apadrinado" className="dark:text-slate-900">Apadrinado</option>
-    <option value="enAlbergue" className="dark:text-slate-900">En Albergue</option>
+    <option value="albergue" className="dark:text-slate-900">En Albergue</option>
   </select>
   {errors.state && (<p>{errors.state}</p>)}
   <label className="m-2 font-bold "> Ficha veterinaria </label>

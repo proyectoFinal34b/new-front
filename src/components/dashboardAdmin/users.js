@@ -5,10 +5,11 @@ import Buttons from "./logic/buttons";
 import { handleColumnClick, handlerClick, handlerClickType } from "./logic/handlers";
 import Example from "./charts/chart";
 
-export default function Usuarios({ users }) {  
+export default function Usuarios({ users, openModal }) {  
   const stylesbtncharmander="focus:bg-green-200 font-medium bg-[#A3E3DD] w-36 shadow-md p-2 mr-4 mb-2 rounded-sm hover:bg-[#0D9488] hover:text-white"
 const stylesNameCol = "w-28 px-2 py-3 cursor-pointer";
 const stylesTd = "h-8 px-2 py-3 ";
+const [edit, setEdit] = useState(false)
   const [filters, setFilters] = useState({
     date: "historico",
     type:"",
@@ -50,7 +51,10 @@ const stylesTd = "h-8 px-2 py-3 ";
         id: user.id,
       }));
       const csvFileName = "usuarios.csv";
-
+      const handlerEdit = (e)=>{
+        localStorage.setItem("userIdEdit", e.target.id)
+        openModal(e.target.name)
+      }
   return (
     <>
       
@@ -160,7 +164,7 @@ const stylesTd = "h-8 px-2 py-3 ";
                   )}
                   <td>{user.id}</td>
                   <td>
-                    <button className="text-white shadow-md bg-teal-900 hover:bg-teal-500  font-medium rounded-lg text-sm px-4 py-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400">
+                    <button name="editUsers" id={user.id} onClick={handlerEdit} className="text-white shadow-md bg-teal-900 hover:bg-teal-500  font-medium rounded-lg text-sm px-4 py-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400">
                       Edit
                     </button>
                   </td>

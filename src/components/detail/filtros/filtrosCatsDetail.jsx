@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from "react-router-dom"
-import { getCatsById } from "../../../redux/actions"
+import { getCatsById,getCats } from "../../../redux/actions"
 import Loader from "../../dashboardAdmin/loading";
+import CarruselCat from "../../Carrusel/CarruselCat";
+
 
 
 export default function DetailGatosFilter(props) {
@@ -90,6 +92,10 @@ export default function DetailGatosFilter(props) {
         </button>
         </Link>
         </div>
+        </div>
+        <div className="hidden xl:inline mt-10 bg-gray-800 shadow-md">
+            <h1 className="font-extrabold text-2xl h-10 mt-2 flex justify-center items-center text-white shadow-md">Conoce más Historias</h1>
+            <CarruselCat/>
         </div>
         </div> : <Loader></Loader>
     )

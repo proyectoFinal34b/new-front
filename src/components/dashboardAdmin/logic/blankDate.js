@@ -8,7 +8,7 @@ export const blankDate = (timePeriod) => {
   let startDate;
   let endDate;
   let datesArray = [];
-
+console.log(timePeriod)
   if (timePeriod === "Ultima semana") {
     const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
     startDate = new Date(sevenDaysAgo.getFullYear(), sevenDaysAgo.getMonth(), sevenDaysAgo.getDate());
@@ -17,10 +17,10 @@ export const blankDate = (timePeriod) => {
   } else if (timePeriod === "Mes actual") {
     startDate = new Date(year, month, 1);
     endDate = new Date(year, month, daysInMonth);
-  } else if (timePeriod === "Ultimos 3 meses") {
+  } else if (timePeriod === "Ultimos tres meses") {
     startDate = new Date(year, month - 2, 1);
     endDate = new Date(year, month + 1, 0);
-  } else if (timePeriod === "Ultimos 6 meses") {
+  } else if (timePeriod === "Ultimos seis meses") {
     startDate = new Date(year, month - 5, 1);
     endDate = new Date(year, month + 1, 0);
   } else if (timePeriod === "Ultimo año") {
@@ -46,22 +46,32 @@ export const blankDate = (timePeriod) => {
 };
 
 
-  export const updateCount = (blankDateArray, otherArray) => {
-    const updatedArray = blankDateArray.map((blankDateObj) => {
-      const matchingObjs = otherArray.filter((otherObj) => {
-        const otherDate = otherObj.updatedAt.toString().slice(2, 10);
-        return otherDate === blankDateObj.date;
-      });
-      const count = matchingObjs.length;
-      if (count > 0) {
-        return {
-          ...blankDateObj,
-          count: blankDateObj.count + count,
-        };
+export const updateCount = (blankDateArray, otherArray) => {
+  const updatedArray = blankDateArray.map((blankDateObj) => {
+    const matchingObjs = otherArray.filter((otherObj) => {
+      const otherDate = new Date(otherObj.updatedAt);
+      const blankDate = blankDateObj.date
+      const blankDate2 = new Date(blankDateObj.date)
+      if (blankDateArray.length === 3 || blankDateArray.length === 6 || blankDateArray.length === 12) {
+        return otherDate.getMonth() === blankDate2.getMonth();
       } else {
-        return blankDateObj;
+        console.log(otherDate?.toISOString().slice(2,10) === blankDate)
+        return otherDate?.toISOString().slice(2,10) === blankDate
       }
     });
-    return updatedArray;
-  };
+
+    const count = matchingObjs.length;
+    if (count > 0) {
+      return {
+        ...blankDateObj,
+        count: blankDateObj.count + count,
+      };
+    } else {
+      return blankDateObj;
+    }
+  });
+
+  return updatedArray;
+};
+
   
