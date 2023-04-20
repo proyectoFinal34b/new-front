@@ -172,7 +172,7 @@ export default function DetailProductosFilter(props) {
             </div>
             <h1 className="text-black">
               {" "}
-              ME FALTA UN PUTO CARRUSEL LALALALALALA
+             
             </h1>
           </>
         ) : (
