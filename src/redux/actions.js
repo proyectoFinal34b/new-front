@@ -187,12 +187,12 @@ export function GetOrders(){
 }
 }
 
-export const postDonated = (email) => async (dispatch) => {
-  try {
-    const json = await axios.post('/donate', email);
-    console.log(json)
-    return json;
-  } catch (error) {
-    throw Error(error);
-  }
-}
+// export const postDonated = (email) => async (dispatch) => {
+//   try {
+//     const json = await axios.post('/donate', email);
+//     console.log(json)                                          mail de donaciones
+//     return json;
+//   } catch (error) {
+//     throw Error(error);
+//   }
+// }
