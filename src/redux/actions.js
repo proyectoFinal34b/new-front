@@ -172,17 +172,6 @@ export const postOrder = (order) => async (dispatch) => {
   }
 }
 
-// export const postDonated = (donatedd) => async (dispatch) => {
-//   try {
-//     const json = await axios.post('/donatedd', donatedd);
-//     console.log(json)
-//     return json;
-//   } catch (error) {
-//     throw Error(error);
-//   }
-// }
-
-
 
 export function GetOrders(){
   return async function(dispatch){
@@ -197,3 +186,13 @@ export function GetOrders(){
     }
 }
 }
+
+// export const postDonated = (email) => async (dispatch) => {
+//   try {
+//     const json = await axios.post('/donate', email);
+//     console.log(json)                                          mail de donaciones
+//     return json;
+//   } catch (error) {
+//     throw Error(error);
+//   }
+// }

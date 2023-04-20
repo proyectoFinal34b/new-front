@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Paginado from "../card/paginado/paginado";
 import ProductFiltrados from "./filtros tienda/filtrosT";
 import Renderizados from "./productos renderizados/renderizados";
+import BotonSup from "../support/buttonSup";
 
 export default function ProductosRender({handlerDarkMode, darkMode}) {
 
@@ -39,6 +40,7 @@ export default function ProductosRender({handlerDarkMode, darkMode}) {
         elementsPerPage={productsPerPage}
         allelements={products?.length}
       />
+      <BotonSup/>
       <Footer />
     </>
   );

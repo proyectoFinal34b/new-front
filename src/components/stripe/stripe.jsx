@@ -28,10 +28,8 @@ const CheckoutForm = (props) => {
     total: totalamount,
   });
 
-  // const [donatedd, setDonatedd] = useState({
-  //   delivery: "",
-  //   status: "",
-  //   user: user,
+  // const [donate, setDonatedd] = useState({  mail de donacion
+  //   email: ""
   // });
 
   useEffect(() => {
@@ -114,7 +112,7 @@ const CheckoutForm = (props) => {
           dispatch(postOrder(order));
         }
         // else{
-        //   dispatch(postDonated(donatedd))
+        //   dispatch(postDonated(donate)) mail de donacion
         // }
         
         

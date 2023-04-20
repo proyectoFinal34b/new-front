@@ -3,6 +3,7 @@ import Navbar from "../navbar/Navbar";
 import Footer from "../home/footer/footer";
 import { Link } from "react-router-dom";
 import cargando from "../../image/en-proceso.png";
+import BotonSup from "../support/buttonSup";
 
 export default function SobreNosotros({handlerDarkMode , darkMode}) {
   const data = [
@@ -18,7 +19,7 @@ export default function SobreNosotros({handlerDarkMode , darkMode}) {
       img: "https://st2.depositphotos.com/1007566/11403/v/450/depositphotos_114031772-stock-illustration-colorful-cat-front-viewvector-graphic.jpg",
       description: "FullStack Developer",
       github:"https://github.com/Bchialva",
-      linkedin:"https://www.linkedin.com/in/juan-antonio-ruiz-hernandez-3566a81b7/"
+      linkedin:"https://www.linkedin.com/in/b%C3%A1rbara-chialva-211404273/"
     },
     {
       name: "Genaro Levato",
@@ -101,6 +102,7 @@ export default function SobreNosotros({handlerDarkMode , darkMode}) {
           </div>
         </section>
       </div>
+      <BotonSup/>
       <Footer/>
     </div>
   );
