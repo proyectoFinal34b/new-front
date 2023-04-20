@@ -95,7 +95,7 @@ const CheckoutForm = (props) => {
     if (!error){ //si no existe un error
         
         const {id} = paymentMethod; //le paso a la base de datos lo que tiene que guardar
-
+      console.log(user)
         try {
 
             console.log(totalamount, props.monto)
@@ -111,9 +111,9 @@ const CheckoutForm = (props) => {
         if(!props.monto){
           dispatch(postOrder(order));
         }
-        // else{
-        //   dispatch(postDonated(donate)) mail de donacion
-        // }
+        else{
+          dispatch(postDonated(user))
+        }
         
         
         mostrarAlerta();
