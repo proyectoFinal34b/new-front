@@ -37,7 +37,7 @@ console.log(activeCats)
                     </div>
                     <div className="mt-8 mb-3 md:flex md:flex-col space-y-4 ">
                       <a  href={`/gatos/${cat.id}`} className={stylesbtnCard}>Mi Historia</a>
-                      <a  className={stylesbtnCard}>Adoptar</a>
+                      <a href="/formadopcion" className={stylesbtnCard}>Adoptar</a>
                     </div>
                   </div>
 

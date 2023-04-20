@@ -22,7 +22,7 @@ const CheckoutForm = (props) => {
   const user= JSON.parse(localStorage.getItem('userInfo'))
   const [order, setOrder] = useState({
     list: [],
-    delivery: "",
+    delivery: "En proceso",
     status: "",
     user: user,
     total: totalamount,

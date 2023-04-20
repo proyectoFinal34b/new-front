@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import Cart from "../carrito/carrito";
 import DarkMode from "./DarkMode";
-import { ProfileAutho } from "../../components/login/LogginAutho";
-
+import { useAuth0 } from "@auth0/auth0-react";
+import {LogoutButton} from "../login/LogginAutho";
 export const currentLocation = window.location.href.split('/').slice(0, 3).join('/')
 
 const Navbar = ({handlerDarkMode , darkMode}) => {
@@ -15,9 +15,11 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
   const prevUser = JSON.parse(localStorage.getItem("userInfo"))
   const [user, setUser] = useState(prevUser)
   const userType = prevUser?.status
-
+  const { user:userAuth0, isAuthenticated } = useAuth0(); 
   const dispatch = useDispatch();
-  useEffect(()=>{
+
+   useEffect(()=>{
+   
     JSON.parse(localStorage.getItem('carritolength'))
   },[isLoggedIn, carrito])
 
@@ -48,6 +50,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
             <div className="bg-teal-900 hover:bg-teal-500   dark:bg-teal-400 flex mx-4 px-2 rounded-md text-center items-center justify-center">
             <Link to='/profile' className="text-base font-medium text-white dark:hover:text-white dark:text-slate-900 hover:text-white">
             Hola, {user?.name}!!
+          
           </Link>
           </div>
               <button
@@ -59,7 +62,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
             </>
           ) : (
             <>
-              <NavLink to="/login">
+            {isAuthenticated? " ":  <NavLink to="/login">
                 <button
                   type="button"
                   className="text-white bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
@@ -67,10 +70,23 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
                   Iniciar sesion
                 </button>{" "}
               </NavLink>
+            }
             </>
           )}
-          <div> <ProfileAutho/></div>
-
+          {isAuthenticated ? (
+            <>
+            <div className="bg-teal-900 hover:bg-teal-500   dark:bg-teal-400 flex mx-4 px-2 rounded-md text-center items-center justify-center">
+            <Link to='/profile' className="text-base font-medium text-white dark:hover:text-white dark:text-slate-900 hover:text-white">
+            Hola, {userAuth0?.name}!!
+          </Link>
+          </div>
+          <LogoutButton/>
+            </>
+          ) : (
+            <> 
+            </>
+          )}
+          
           <button
             data-collapse-toggle="navbar-cta"
             type="button"
@@ -93,7 +109,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
               ></path>
             </svg>
           </button>
-          {isLoggedIn?
+          {isLoggedIn || isAuthenticated?
           <div className="ml-2">
             <button 
             className="relative w-25 text-gray bg-teal-900 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-00 rounded-lg p-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400"
@@ -123,6 +139,7 @@ const Navbar = ({handlerDarkMode , darkMode}) => {
                  {console.log(JSON.parse(localStorage.getItem("carrito"))?.length)}
                 </text>
               </svg> : ''}
+              
             </button>
             
             {open && (

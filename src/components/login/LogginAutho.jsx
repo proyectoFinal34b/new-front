@@ -45,9 +45,6 @@ export const ProfileAutho = () => {
         <h2>Direccion : {user.address}</h2>
         <h2>Telefono : {user.phone_number}</h2>
       </div>
-      <div>
-        <LogoutButton/>
-      </div>
      </>
     )
   );

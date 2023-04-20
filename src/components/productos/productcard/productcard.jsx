@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, loadCart } from "../../../redux/actions";
 import Swal from "sweetalert2";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Productcard(props) {
   const carrito = useSelector((state) => state.cart);
   const [state, setState] = useState(true);
   const [disabled, setDisabled] = useState(false);
   const dispatch = useDispatch();
+  const { user:userAuth0, isAuthenticated } = useAuth0(); 
+
 
   useEffect(() => {
     localStorage.setItem(
@@ -49,7 +52,7 @@ export default function Productcard(props) {
   };
 
   async function agregarAlCarro(id) {
-    if (JSON.parse(localStorage.getItem("userInfo"))) {
+    if (JSON.parse(localStorage.getItem("userInfo"))||isAuthenticated) {
       dispatch(addToCart(id));
       setState(!state);
       localStorage.setItem("carrito", JSON.stringify(carrito?.items));
