@@ -28,11 +28,9 @@ const CheckoutForm = (props) => {
     total: totalamount,
   });
 
-  // const [donatedd, setDonatedd] = useState({
-  //   delivery: "",
-  //   status: "",
-  //   user: user,
-  // });
+  const [donate, setDonatedd] = useState({
+    email: "email"
+  });
 
   useEffect(() => {
     const local= JSON.parse(localStorage.getItem("carrito"))
@@ -113,9 +111,9 @@ const CheckoutForm = (props) => {
         if(!props.monto){
           dispatch(postOrder(order));
         }
-        // else{
-        //   dispatch(postDonated(donatedd))
-        // }
+        else{
+          dispatch(postDonated(donate))
+        }
         
         
         mostrarAlerta();
