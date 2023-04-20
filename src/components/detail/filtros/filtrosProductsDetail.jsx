@@ -81,7 +81,7 @@ if(productId?.ratings){
  let count = 0
 productId.ratings?.map(a=>count += parseInt(a.rated))
 console.log(count)
- var currentRating = count / productId?.ratings.length
+ var currentRating = count / productId?.ratings?.length
 }
 
   return (
@@ -172,7 +172,7 @@ console.log(count)
                   </button>
 
                   <HoverRating id={productId.id}/>
-                    Rating actual: {Math.ceil(currentRating)} entre {productId.ratings.length} reviews
+                    Rating actual: {Math.ceil(currentRating)} entre {productId?.ratings?.length} reviews
                 </div>
               </div>
             </div>
