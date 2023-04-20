@@ -9,6 +9,8 @@ import {
 } from "../../../redux/actions";
 import HoverRating from "../../productos/rating/rating";
 import Loader from "../../dashboardAdmin/loading";
+import CarruselProduct from "../../Carrusel/CarruselProd";
+
 
 export default function DetailProductosFilter(props) {
   const carrito = useSelector((state) => state.cart);
@@ -57,16 +59,16 @@ export default function DetailProductosFilter(props) {
     <>
       {/* DIV GENERAL */}
 
-      <div className="xl:w-1/2 lg:w-2/3 sm:w-3/5 sm:p-5 w-full m-auto rounded-sm bg-slate-300 shadow-xl dark:bg-slate-600 dark:text-white p-4 mb-20 mt-20 flex flex-col items-center dark:shadow-xl">
+      <div className="xl:w-3/5 lg:w-2/3 sm:w-3/5 sm:p-5 w-full m-auto rounded-sm bg-slate-300 shadow-xl dark:bg-slate-600 dark:text-white p-5  mb-20 mt-20 flex flex-col items-center dark:shadow-xl">
         {productId?.length !== 0 ? (
           <>
             <div className="">
-              <div className="flex flex-col lg:flex-row justify-center items-center p-4 ">
+              <div className="flex flex-col lg:flex-row justify-center items-center p-10 ">
                 <div className="flex w-3/6">
                   <img
                     src={productId.image}
                     alt={productId.name}
-                    className="w-96 lg:w-full rounded-md object-fill m-auto shadow-md dark:shadow-md"
+                    className="w-96 lg:w-full rounded-md object-contain m-auto shadow-md dark:shadow-md"
                   />
                 </div>
                 <div className="lg:ml-32">
@@ -147,10 +149,10 @@ export default function DetailProductosFilter(props) {
             <div className="dark:text-white text-black p-10 flex justify-center items-center text-center text-lg w-5/6">
               Descripción: {productId.summary}
             </div>
-            <h1 className="text-black">
-              {" "}
-              ME FALTA UN PUTO CARRUSEL LALALALALALA
-            </h1>
+            <div className="bg-gray-800 mt-10 w-full shadow-md hidden xl:inline">
+            <h1 className="font-extrabold text-2xl h-12 items-center m-auto justify-center flex text-white shadow-md">Sigue Viendo Nuestros Productos</h1>
+            <CarruselProduct/>
+        </div>
           </>
         ) : (
           <Loader></Loader>

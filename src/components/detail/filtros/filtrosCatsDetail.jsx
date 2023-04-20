@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from "react-router-dom"
-import { getCatsById } from "../../../redux/actions"
+import { getCatsById,getCats } from "../../../redux/actions"
 import Loader from "../../dashboardAdmin/loading";
+import CarruselCat from "../../Carrusel/CarruselCat";
+
 
 
 export default function DetailGatosFilter(props) {
@@ -82,6 +84,10 @@ export default function DetailGatosFilter(props) {
         <button className={stylesbtn}>ADOPTAME<img className="h-9 ml-2" src="https://em-content.zobj.net/thumbs/160/samsung/349/paw-prints_1f43e.png"/></button>
         <button className={stylesbtn}>APADRINAME<img className="h-9 ml-2 p-1" src="https://em-content.zobj.net/thumbs/120/samsung/349/red-heart_2764-fe0f.png"/></button>
         </div>
+        </div>
+        <div className="hidden xl:inline mt-10 bg-gray-800 shadow-md">
+            <h1 className="font-extrabold text-2xl h-10 mt-2 flex justify-center items-center text-white shadow-md">Conoce más Historias</h1>
+            <CarruselCat/>
         </div>
         </div> : <Loader></Loader>
     )
