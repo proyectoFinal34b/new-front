@@ -222,7 +222,7 @@ export default function PostCats() {
     <option value="" className="dark:text-slate-900">Selecciona un estado</option>
     <option value="adoptado" className="dark:text-slate-900">Adoptado</option>
     <option value="apadrinado" className="dark:text-slate-900">Apadrinado</option>
-    <option value="enAlbergue" className="dark:text-slate-900">En Albergue</option>
+    <option value="albergue" className="dark:text-slate-900">En Albergue</option>
   </select>
   {errors.state && (<p>{errors.state}</p>)}
   <label className="m-2 font-bold "> Ficha veterinaria </label>

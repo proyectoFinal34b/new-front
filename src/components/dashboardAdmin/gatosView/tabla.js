@@ -30,7 +30,6 @@ export default function Tabla({handleColumnClickCat, show, openModal}){
       const csvFileName = "cats.csv";
 
       const handlerEdit = (e)=>{
-        console.log(e.target.id)
         localStorage.setItem("catId", e.target.id)
         openModal(e.target.name)
       }

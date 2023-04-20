@@ -17,7 +17,7 @@ const users = async (setInfo)=>{
     setInfo(prevState => ({...prevState, products:response.data}))  
   }
 
-export default function llamados(setInfo    ){
+export default function llamados(setInfo){
     users(setInfo)
     cats(setInfo)
     orders(setInfo)

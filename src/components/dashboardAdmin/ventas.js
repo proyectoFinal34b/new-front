@@ -6,7 +6,7 @@ import { handleColumnClick, handlerClick } from "./logic/handlers";
 import Example from "./charts/chart";
 import { handlerClickType } from "./logic/handlers";
 
-export default function Ventas({ orders }) {
+export default function Ventas({ orders, openModal }) {
   const stylesbtncharmander="focus:bg-green-200 font-medium bg-[#A3E3DD] w-36 shadow-md p-2 mr-4 mb-2 rounded-sm hover:bg-[#0D9488] hover:text-white"
   const stylesNameCol = "w-28 p-2 cursor-pointer ";
   const stylesTd = "h-8 px-2 py-3 ";
@@ -53,7 +53,10 @@ export default function Ventas({ orders }) {
   }))
 
   const csvFileName = "orders.csv";
-
+  const editHandler = (e)=>{
+    localStorage.setItem("orderId", e.target.id)
+    openModal(e.target.name)
+  }
   return (
     <>
      
@@ -187,7 +190,7 @@ export default function Ventas({ orders }) {
                   )}
                   <td>{order.createdAt.slice(2, 10)}</td>
                   <td>
-                    <button className="text-white shadow-md bg-teal-900 hover:bg-teal-500  font-medium rounded-lg text-sm px-4 py-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400">
+                    <button name="editOrder" id={order.id} onClick={editHandler} className="text-white shadow-md bg-teal-900 hover:bg-teal-500  font-medium rounded-lg text-sm px-4 py-1 text-center mr-3 md:mr-0 dark:bg-teal-400 dark:hover:bg-white-200 dark:focus:ring-teal-400">
                       Edit
                     </button>
                   </td>

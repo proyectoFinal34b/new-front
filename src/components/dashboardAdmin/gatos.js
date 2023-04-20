@@ -25,7 +25,7 @@ export default function Gatos({ cats, openModal }) {
     handlerClickType(e, filters, setFilters, cats, setShow, "state")
   }
 
-
+  useEffect(()=>{},[cats])
   
 
   return (

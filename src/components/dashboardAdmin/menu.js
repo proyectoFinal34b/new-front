@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import llamados from "./logic/llamados";
 
 export default function Menu(props) {
+
+
 
 
   const buttonStyle = "bg-buttonCol text-white w-40 rounded-md py-1 shadow-md hover:bg-teal-600 dark:text-gray-900"
@@ -13,7 +15,7 @@ export default function Menu(props) {
         
         <ul className="mt-8 space-y-8 font-medium text-lg sticky top-12 ">
           <li>
-            <button className={buttonStyle2} onClick={()=>llamados(props.setInfo)}>Actualizar</button>
+            <button className={buttonStyle2} onClick={()=>props.updateHandler()}>Actualizar</button>
           </li>
           <li>
             <button name="general" className={buttonStyle} onClick={(e)=>props.click(e.target.name)}>General</button>

@@ -10,7 +10,6 @@ export default function General ({cats, orders, users}) {
         </div>
         <div id="chart ">
             <div className="dark:text-white">
-                <h1>Ventas</h1>
 
             </div>
         </div>
