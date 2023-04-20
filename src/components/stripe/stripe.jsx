@@ -169,6 +169,7 @@ const CheckoutForm = (props) => {
               className="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
               placeholder="John Smith"
               type="text"
+              required
             />
           </div>
         </div>
