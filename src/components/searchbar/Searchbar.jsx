@@ -37,7 +37,8 @@ import React from 'react'
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchCats } from "../../redux/actions";
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
+
 
 export default function SearchBar() {
   const dispatch = useDispatch();
@@ -47,15 +48,48 @@ export default function SearchBar() {
   function handleSubmit(e) {
     e.preventDefault();
     if (name) {
-      dispatch(searchCats(name)) .then((response)=>console.log(response))
-      setName("")
-      if (allCats.length === 0) {
-        alert(`No se encontró ningún gato llamado ${name}`);
-      }
+      dispatch(searchCats(name))
+        .then((response) => {
+          console.log(response);
+          if (response.payload.length === 0) {
+            Swal.fire({
+              title: `No se encontró ningún gato llamado ${name}`,
+              icon: 'warning'
+            });
+          }
+        })
+        .catch((error) => console.log(error));
+      setName("");
     } else {
-      alert("Ingrese un gato.");
+      Swal.fire({
+        title: 'Ingrese un gato',
+        icon: 'error',
+        confirmButtonColor: "#228883",
+        timer: "5000",
+        timerProgressBar: true,
+      position: "top",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      });
     }
   }
+
+
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   if (name) {
+  //     dispatch(searchCats(name)) 
+  //     .then((response)=>console.log(response))
+  //     setName("")
+  //     if (allCats.length === 0) {
+  //       alert(`No se encontró ningún gato llamado ${name}`);
+  //     }
+  //   } else {
+  //     alert("Ingrese un gato.");
+  //   }
+  // }
+
 
   function handleChange(e) {
     e.preventDefault();
@@ -63,18 +97,19 @@ export default function SearchBar() {
   }
 
   return (
-    <div className="flex justify-center mt-2 p-2">
+    <div className="justify-center mt-2">
+      <h1  className="mt-5 font-bold text-gray-800 dark:text-gray-100">Busca por nombre:</h1>
       <input
         type="text"
         value={name}
         placeholder="Gato.."
         onChange={(e) => handleChange(e)}
-        className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        className=" md:w-full md:px-3 md:pr-8 shadow-lg my-3   bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
       />
       <button
         type="submit"
         onClick={(e) => handleSubmit(e)}
-        className="ml-2 px-4 py-2 font-medium text-gray bg-teal-400 rounded-md hover:bg-teal-500 focus:outline-none focus:bg-blue-600"
+        className="md:w-2/3  px-5 py-2 my-2 font-medium text-gray bg-teal-400 rounded-md hover:bg-teal-500 focus:outline-none focus:bg-teal-400"
       >
         Buscar
       </button>

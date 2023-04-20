@@ -1,24 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "../navbar/Navbar";
-import SearchBar from "../searchbar/Searchbar"
 import Footer from "../home/footer/footer";
-import { Link } from "react-router-dom";
 import GatosFiltrados from "../filtros/filtros"
 import Card from "../card/Card"
-import PostCats from "../form/FormularioCreacion";
+import BotonSup from "../support/buttonSup";
 
 
 
 
-export default function GatosRender() {
+
+export default function GatosRender({handlerDarkMode , darkMode}) {
     return (
-        <div>
-        <Navbar/>
-        {/* <SearchBar/> */}
-        <PostCats />
-        <GatosFiltrados />
-        <Card />
-        <Footer/>
+        <>
+        <Navbar handlerDarkMode={handlerDarkMode} darkMode={darkMode}/>
+        <div className="lg:grid grid-cols-4">
+        <div class="lg:sticky lg:top-40 px-3 p-3 md:col-span-1 ">
+            <GatosFiltrados />
         </div>
+        <div className="md:col-span-3">
+        <Card/>
+        </div>
+        </div>
+        <BotonSup/>
+        <Footer/>
+        </>
     )
 }

@@ -1,34 +1,78 @@
-import { Route, Routes, useLocation} from 'react-router-dom';
+import { Route, Routes} from 'react-router-dom';
 import './App.css';
 import Home from './components/home/home';
-import Start from './components/Start';
 import Login from "./components/login/LogIn";
 import DonacionesRender from './components/donaciones/donaciones';
 import GatosRender from './components/gatos/gatos';
 import ProductosRender from './components/productos/productos';
 import SobreNosotros from './components/sobre-nosotros/sobre-nosotros';
 import UsuariosRender from './components/usuarios/usuarios';
-import DetailCat from './components/card/detial';
-import CreateForm from './components/form/FormularioCreacion';
+import DetailGatos from "./components/detail/render/detailCats"
+import DetailProductos from './components/detail/render/detailProducts';
+import Registro from './components/login/Registro';
+import PasarelaDePagos from './components/stripe/stripe';
+import Contraseña from './components/login/Contraseña';
+import Cambio from './components/login/Cambio'
+import Profile from './components/login/Profile'
+import Contacto from './components/login/Contacto'
+import FormAdopcion from './components/form/FormAdopcion'
+import FormApadrinamiento from './components/form/FormApadrinamiento'
 import { useDispatch } from 'react-redux'
-import { useEffect } from 'react';
-import axios from 'axios'
-
+import { useEffect, useState } from 'react';
+import Dashboard from './components/dashboardAdmin/dashboard';
+import { getUsers } from './redux/actions';
+import { getCats } from './redux/actions';
+import axios from 'axios';
 
 function App() {
+  const dispatch = useDispatch()
+  const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
+
+  const handlerDarkMode = (e) => {
+    const isDarkMode = e.target.checked;
+    setDarkMode(isDarkMode);
+    localStorage.setItem('darkMode', isDarkMode);
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
+  useEffect(()=>{
+    dispatch(getUsers)
+    dispatch(getCats)
+  },[])
+  useEffect(() => {
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+  axios.defaults.baseURL = "https://proyectofinal-gg57.onrender.com/"
   return (
-    <div className="App">
+    <div className="App cursor-default dark:bg-bgDark bg-slate-200">
       <Routes>
-      <Route exact path='/' element={<Start/>} />
-      <Route path='/home'element={<Home/>}> </Route>
-      <Route path ="/login" element={<Login/>}></Route>
-      <Route path ="/donaciones" element={<DonacionesRender/>}></Route>
-      <Route path ="/gatos" element={<GatosRender/>}></Route>
-      <Route path ="/detail" element={<DetailCat/>}></Route>
-      <Route path ="/productos" element={<ProductosRender/>}></Route>
-      <Route path ="/about-me" element={<SobreNosotros/>}></Route>
-      <Route path ="/usuario" element={<UsuariosRender/>}></Route>
-      {/* <Route path="/post" element={<CreateForm/>} /> */}
+      <Route path='/'element={<Home darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}> </Route>
+      <Route path ="/login/" element={<Login darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path ="/login/registro" element={<Registro darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path = "/resetpassword" element={<Contraseña darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path = "/changepassword" element={<Cambio darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path = "/profile" element={<Profile darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path ="/donaciones" element={<DonacionesRender darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path ="/gatos" element={<GatosRender darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path ="/gatos/:id" element={<DetailGatos darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path ="/productos" element={<ProductosRender darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path ="/productos/:id" element={<DetailProductos darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path ="/about-us" element={<SobreNosotros darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path ="/usuario" element={<UsuariosRender darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path='/dashboard' element={<Dashboard darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path='/pasarela' element={<PasarelaDePagos darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path="/contacto" element={<Contacto darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path="/formadopcion"element={<FormAdopcion darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path="/formapadrinamiento" element={<FormApadrinamiento darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+     {/* <Route path="/post" element={<CreateForm/>} /> */}
      </Routes>
     </div>
 

@@ -1,64 +1,71 @@
 import React, { useState, useEffect } from "react";
-import { postCats, getCats } from "../../redux/actions";
+import { postCats } from "../../redux/actions";
 import { useDispatch } from "react-redux";
-
-function validate(input) {
-  let errors = {};
-
-  if (!input.name) {
-    errors.name = "Se requiere un nombre";
-  } else if (!input.name.match(/^[A-Za-z\s]+$/)) {
-    errors.name = "Sólo letras por favor";
-  }
-
-  if (!input.age) errors.age = "La edad es obligatoria";
-
-  if (!input.gender) {
-    errors.gender = "Este campo es obligatorio";
-  }
-
-  if (!input.description) errors.description = "Este campo es obligatorio";
-
-  if (!input.state) {
-    errors.state = "Debe seleccionar una opción";
-  }   
-  return errors;
-}
+import validate from "./validation";
 
 export default function PostCats() {
   const dispatch = useDispatch();
+      const getUser = JSON.parse(localStorage.getItem("userInfo"))
+    const currentUser = getUser
+    const idAdmin =currentUser.id
   const [errors, setErrors] = useState({});
   const [catState, setCatState] = useState({
     adoptado: false,
     apadrinado: false,
     enAlbergue: false,
   });
-
   const [input, setInput] = useState({
     name: "",
     age: "",
     gender: "",
     state: "",
-    image: [],
+    image: { URL: "", file: "" },
     description: "",
     arrived: "",
+    sterilization:false,
+    vaccinesFull:false,
+    deworming:false,
+    chip:false,
+    hairType:""
   });
-
   function handleChange(e) {
     const { name, value } = e.target;
-    if (name === "image") {
-      setInput(prevState => ({
-        ...prevState,
-        [name]: [...prevState[name], value],
-      }));
-    } else {
       setInput({
         ...input,
         [name]: value,
       });
-    }
+      setErrors(validate({ ...input, [name]: value }));
+      console.log(errors);
   }
+  function handleImageChange(e){
+    const file= e.target.files[0];
+    setInput({
+        ...input,
+        image: {URL: URL.createObjectURL(file), file}
+    })
+    setErrors(validate({
+        ...input,
+        image: {URL: URL.createObjectURL(file), file}
+    }))
+  }
+  const uploadImage = async (file) => {
+    let formData = new FormData();
+    formData?.append("file", file);
+    formData?.append("upload_preset", "bastet_preset");
+    formData.append("api_key", 543988556363587);
 
+    const xhr = new XMLHttpRequest();
+    xhr.open(
+      "POST",
+      "https://api.cloudinary.com/v1_1/ddjt3rahz/image/upload",
+      false
+    );
+
+    xhr.send(formData);
+    const imageResponse = JSON.parse(xhr.responseText);
+
+    return imageResponse.secure_url;
+  };
   function handleSelect(e) {
     const { name, value } = e.target;
     let newValue = value;
@@ -72,15 +79,15 @@ export default function PostCats() {
       [name]: newValue,
     }));
   }
-
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const errors = validate(input);
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
       return;
     }
-    dispatch(postCats(input));
+    const newImage= await uploadImage(input.image.file);
+    dispatch(postCats({id:idAdmin , data:{...input, image:[newImage]}}));
     alert("Gato Creado");
     setInput({
       name: "",
@@ -91,7 +98,7 @@ export default function PostCats() {
         apadrinado: null,
         albergue: null,
       },
-      image: [],
+      image: { URL: "", file: "" },
       description: "",
       arrived: "",
     });
@@ -102,101 +109,133 @@ export default function PostCats() {
     });
     setErrors({});
   }
-
   useEffect(() => {
-    dispatch(getCats());
+
   }, [dispatch]);
 
+  const changeHandler = (e)=>{
+    setInput({...input, [e.target.name]: !input[e.target.name]})
+  }
   return (
-    <div className="sticky top-3 flex justify-start items-center p-1">
-    <div className="p-4 dark:bg-gray-900 rounded-md w-1/5">
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div>
-        <label className="mb-2 font-bold text-gray-100">Nombre:</label>
+    // <div className="sticky top-3 flex justify-end items-center p-1">
+    <div className="p-4 shadow-lg text-gray-700 bg-gray-200  dark:text-gray-100 dark:bg-gray-900 ">
+      <h2 className="text-3xl dark:text-teal-400 font-bold mb-3">Añadir nuevo gato</h2>
+      <form className="h-full overflow-y-hidden" onSubmit={(e) => handleSubmit(e)}>
+        <div className="columns-2">
+        <div className="flex flex-col mb-2">
+        <label className="mb-2 font-bold dark:text-gray-100">Nombre:</label>
         <input 
         type="text" 
+        placeholder="Nombre..."
         value={input.name} 
         name="name"
         onChange={(e) => {handleChange(e)}} 
-        className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        className="border border-gray-400 dark:text-slate-900 bg-white h-10 px-5 pr-16  rounded-sm text-sm focus:outline-none"
         />
         {errors.name && (<p>{errors.name}</p>)}
         </div>
-        <div>
-  <label className="mb-2 font-bold text-gray-100">Género:</label>
+        <div className="flex flex-col">
+  <label className="mb-2 font-bold ">Género:</label>
   <select
     value={input.gender}
     name="gender"
     onChange={(e) => { handleSelect(e) }}
-    className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+    className="border border-gray-400 bg-white h-10 px-5 pr-16  dark:text-slate-900 rounded-sm text-sm focus:outline-none"
   >
-    <option value="">Seleccione una opción</option>
-    <option value="macho">Macho</option>
-    <option value="hembra">Hembra</option>
+    <option value="" className="dark:text-slate-900">Seleccione una opción</option>
+    <option value="macho" className="dark:text-slate-900">Macho</option>
+    <option value="hembra" className="dark:text-slate-900">Hembra</option>
   </select>
   {errors.gender && (<p>{errors.gender}</p>)}
 </div>
-        <div>
-        <label className="mb-2 font-bold text-gray-100">Edad:</label>
+<div className="flex flex-col mb-2">
+        <label className="mb-2 font-bold ">Edad:</label>
         <input 
         type="number" 
+        min="0"
         placeholder="1,2,3..."
         value={input.age} 
         name="age"  
         onChange={(e) => {handleChange(e)}}
-        className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        className="border border-gray-400 bg-white h-10 px-5 pr-16 dark:text-slate-900  rounded-sm text-sm focus:outline-none"
         />
         {errors.age && (<p>{errors.age}</p>)}
         </div>
-        <div>
-        <label className="mb-2 font-bold text-gray-100">Descripción:</label>
+        <div className="flex flex-col">
+        <label className="mb-2 font-bold ">Descripción:</label>
         <input 
         type="text" 
         value={input.description} 
         name="description"
+        placeholder="Descripción..."
         onChange={(e) => {handleChange(e)}}
-        className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        className="border dark:text-slate-900 border-gray-400 bg-white h-10 px-5 pr-16 rounded-sm text-sm focus:outline-none"
         />
         {errors.description && (<p>{errors.description}</p>)}
         </div>
-        <div>
-        <label className="mb-2 font-bold text-gray-100">Imagen:</label>
-        <input 
-        type="text"
-        value={input.image}  
-        name="image"  
-        onChange={(e) => {handleChange(e)}}
-        className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-        />
         </div>
-        <div>
-        <label className="mb-2 font-bold text-gray-100">Llegada:</label>
+        <div className="columns-4 flex justify-center mb-5">
+        <div className="w-full flex flex-col items-center">
+          <label className="mb-2 font-bold ">Imagen del gato</label>
+          {input.image.URL&&<img className="border border-gray-400 bg-white relative w-24  h-24 object-cover" src={input.image.URL} alt='productImage'/>}
+          
+          <input className="sr-only my-5 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+            type="file"
+            accept="image/*"
+           // value={input.image.file}
+            name="image"
+            id="fileInput"
+            onChange={(e) => handleImageChange(e)}
+          /><label
+          htmlFor="fileInput"
+          className="inline-flex relative  mt-2 -mb-3 h-14 w-14 items-center justify-center px-4 py-2 bg-teal-400 rounded-full font-medium hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-camera-plus" width="48" height="48" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <circle cx="12" cy="13" r="3" />
+  <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+  <line x1="15" y1="6" x2="21" y2="6" />
+  <line x1="18" y1="3" x2="18" y2="9" />
+</svg>
+        </label>
+          {errors.image ? <p>{errors.image}</p> : ""}
+        </div>
+        </div>
+        <div className="flex flex-col">
+        <label className="mb-2 font-bold ">Ingreso:</label>
         <input 
         type="date"  
         placeholder="dd/mm/aaaa"
         value={input.arrived}
         name="arrived" 
         onChange={(e) => {handleChange(e)}}
-        className="border-2 border-gray-900 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"/>
+        className="border dark:text-slate-900 border-gray-400 bg-white h-10 px-5 pr-16 rounded-sm text-sm focus:outline-none"/>
         </div>
-        <div>
-  <label className="mb-2 font-bold text-gray-100">Estado:</label>
+        <div className="flex flex-col">
+  <label className="mb-2 font-bold ">Estado:</label>
   <select
     name="state"
     value={input.state}
     onChange={(e) => { handleSelect(e) }}
-    className="mb-2"
+    className="mb-2 dark:text-slate-900"
   >
-    <option value="">Selecciona un estado</option>
-    <option value="adoptado">Adoptado</option>
-    <option value="apadrinado">Apadrinado</option>
-    <option value="enAlbergue">En Albergue</option>
+    <option value="" className="dark:text-slate-900">Selecciona un estado</option>
+    <option value="adoptado" className="dark:text-slate-900">Adoptado</option>
+    <option value="apadrinado" className="dark:text-slate-900">Apadrinado</option>
+    <option value="albergue" className="dark:text-slate-900">En Albergue</option>
   </select>
   {errors.state && (<p>{errors.state}</p>)}
+  <label className="m-2 font-bold "> Ficha veterinaria </label>
+  <div className="flex flex-col space-y-2 m-4">
+  <label className="" > Esterilizado? : <input type="checkbox" value={input.sterilization} name="sterilization" onChange={changeHandler}></input></label> 
+  <label> Vacunas completas? : <input type="checkbox" name="vaccinesFull" value={input.vaccinesFull} onChange={changeHandler}></input></label> 
+  <label> Desparacitado? : <input type="checkbox" value={input.deworming} name="deworming" onChange={changeHandler}></input></label> 
+  <label> Chip? : <input type="checkbox" name="chip" value={input.chip} onChange={changeHandler}></input></label>
+  </div>
 </div>
-        <button type="submit" className="ml-2 px-4 py-2 font-medium text-gray bg-teal-400 rounded-md hover:bg-teal-500 focus:outline-none focus:bg-blue-600">Enviar</button>
+        <button type="submit" className="ml-2 px-4 py-2 font-medium text-gray bg-teal-400 rounded-md hover:bg-teal-500 ">Enviar</button>
         </form>
         </div>
-        </div>
+        // </div>
         )
       }
