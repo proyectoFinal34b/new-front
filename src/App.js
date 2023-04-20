@@ -15,6 +15,8 @@ import Contraseña from './components/login/Contraseña';
 import Cambio from './components/login/Cambio'
 import Profile from './components/login/Profile'
 import Contacto from './components/login/Contacto'
+import FormAdopcion from './components/form/FormAdopcion'
+import FormApadrinamiento from './components/form/FormApadrinamiento'
 import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react';
 import Dashboard from './components/dashboardAdmin/dashboard';
@@ -68,6 +70,8 @@ function App() {
       <Route path='/dashboard' element={<Dashboard darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
       <Route path='/pasarela' element={<PasarelaDePagos darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
       <Route path="/contacto" element={<Contacto darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path="/formadopcion"element={<FormAdopcion darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
+      <Route path="/formapadrinamiento" element={<FormApadrinamiento darkMode={darkMode} handlerDarkMode={handlerDarkMode}/>}></Route>
      {/* <Route path="/post" element={<CreateForm/>} /> */}
      </Routes>
     </div>
