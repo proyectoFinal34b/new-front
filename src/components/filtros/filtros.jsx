@@ -18,31 +18,31 @@ export default function GatosFiltrados() {
   function aplicarFiltros(state, gender, age) {
     let tempGatos = gatos;
     
-
     if (state) {
       tempGatos = tempGatos.filter((gato) => gato.state === state);
     }
+    
     if (gender) {
       tempGatos = tempGatos.filter((gato) => gato.gender.toLowerCase() === gender);
-      
     }
+    
     if (age) {
       if (age==="5"){
         tempGatos = tempGatos.filter((gato) => gato.age >= parseInt(age));
+      } else {
+        tempGatos = tempGatos.filter((gato) => gato.age === parseInt(age));
       }
-      else{
-      tempGatos = tempGatos.filter((gato) => gato.age === parseInt(age));}
     }
+    
     return tempGatos;
   }
 
-  const gatosFiltrados = aplicarFiltros(filtroStatus, filtroGender, filtroAge);
-  
-  
   useEffect(() => {
+    const gatosFiltrados = aplicarFiltros(filtroStatus, filtroGender, filtroAge);
     dispatch(filterCats(gatosFiltrados));
-    
   }, [filtroStatus, filtroGender, filtroAge]);
+
+  
 
   return (
     <div className="bg-slate-100 p-4 w-full lg:sticky lg:top-28 lg:w-full  dark:bg-gray-900 rounded-md ">

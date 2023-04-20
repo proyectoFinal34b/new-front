@@ -73,8 +73,15 @@ export default function ProductFiltrados(props) {
           setName("");
         } else {
           Swal.fire({
-            icon: "error",
-            text: "Ingrese un producto",
+          title: 'Ingrese un producto',
+          icon: 'error',
+          confirmButtonColor: "#228883",
+          timer: "5000",
+          timerProgressBar: true,
+          position: "top",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          allowOutsideClick: false,
           });
         }
       }

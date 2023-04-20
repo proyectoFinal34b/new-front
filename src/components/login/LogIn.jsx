@@ -100,7 +100,7 @@ export default function Login() {
           icon: 'success',
           title: 'Inicio de sesión exitoso',
           showConfirmButton: false,
-          timer: 1500
+          timer: 3500
         }).then(() => {
           window.location.href = currentLocation;
         });
@@ -165,9 +165,6 @@ export default function Login() {
               </button>
             </div>
             <br/>
-            <div className="flex items-center justify-center">
-             <LoginButton/>
-            </div>
             <a
               className="inline-block align-baseline font-bold text-sm text-gray-900 hover:text-teal-500"
               href="/resetpassword"
@@ -183,6 +180,7 @@ export default function Login() {
             </a>
             </p>
           </form>
+          <LoginButton/>
         <p className="text-center mb-8">
           <Link to='/' className="text-sm text-gray-500 hover:text-teal-400">
             Volver a la página de inicio
