@@ -77,6 +77,13 @@ export default function DetailProductosFilter(props) {
       productCuantity();
     } else mostrarAlerta();
   }
+if(productId?.ratings){
+ let count = 0
+productId.ratings?.map(a=>count += parseInt(a.rated))
+console.log(count)
+ var currentRating = count / productId?.ratings.length
+}
+
   return (
     <>
       {/* DIV GENERAL */}
@@ -164,7 +171,8 @@ export default function DetailProductosFilter(props) {
                     </svg>
                   </button>
 
-                  <HoverRating />
+                  <HoverRating id={productId.id}/>
+                    Rating actual: {Math.ceil(currentRating)} entre {productId.ratings.length} reviews
                 </div>
               </div>
             </div>

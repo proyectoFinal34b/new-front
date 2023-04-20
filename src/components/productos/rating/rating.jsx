@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../rating/styleRating.css'
+import axios from 'axios';
 
 
-
-export default function HoverRating() {
+export default function HoverRating({id , value}) {
 
 
     const [rating, setRating] = useState(0);
@@ -17,10 +17,24 @@ export default function HoverRating() {
       setRating(0);
     };
   
-    const handleInputChange = (event) => {
+    const handleInputChange = async (event) => {
       const { value } = event.target;
       setRating(value);
+      await axios.post(`/product/${id}/ratings`,{rated: value, review:""})
+      .then(res=>alert(res)).catch(res=>alert("aiuda"))
     };
+
+    useEffect(()=>{
+      async function getRating(){
+        try {
+          const rating = await axios.get(`/product/${id}`).then(res=>res.data.ratings.rated)
+          setRating(rating)
+        } catch (error) {
+            console.log(error)
+        }
+      }
+      getRating()
+    },[])
   
     return (
       <div className="rating">
@@ -29,7 +43,7 @@ export default function HoverRating() {
             type="radio"
             id="star-1"
             name="star-radio"
-            value="1"
+            value="5"
             onChange={handleInputChange}
           />
           <svg
@@ -49,7 +63,7 @@ export default function HoverRating() {
             type="radio"
             id="star-2"
             name="star-radio"
-            value="2"
+            value="4"
             onChange={handleInputChange}
           />
           <svg
@@ -89,7 +103,7 @@ export default function HoverRating() {
             type="radio"
             id="star-4"
             name="star-radio"
-            value="4"
+            value="2"
             onChange={handleInputChange}
           />
         <svg
@@ -109,7 +123,7 @@ export default function HoverRating() {
             type="radio"
             id="star-5"
             name="star-radio"
-            value="5"
+            value="1"
             onChange={handleInputChange}
           />
         <svg
