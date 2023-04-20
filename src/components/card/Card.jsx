@@ -27,7 +27,9 @@ console.log(activeCats)
       <div>
                 <div className="bg-slate-100 dark:bg-gray-900 mb-5 w-72 m-auto border-1 border-dashed border-gray-900 shadow-2xl rounded-md overflow-hidden xl:w-10/12 xl:mb-14 lg:w-60 md:w-64 md:mb-4" key={cat.id}>
                   <p className="m-3 text-gray-900 dark:text-gray-200 font-semibold text-2xl">{cat.name}</p>
+                  <a href={`/gatos/${cat.id}`}>
                   <img src={cat.image} alt={cat.name} className="object-cover w-60 h-48 m-auto my-4 object-center xl:w-72 xl:h-60 md:w-60 md:h-44 md:-mb-2" />
+                  </a>
                   <div className="p-7">
                     <div>
                     <span className='text-gray-900 dark:text-gray-200 mr-5 xl:text-xl'>{cat.state.charAt(0).toUpperCase()+cat.state.slice(1)}</span>

@@ -5,7 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { Link , useHref, useLoaderData, useLocation, useMatch, useNavigate, useNavigation, useSearchParams} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { postOrder,loadCart, clearCart } from "../../redux/actions";
+import { postOrder,loadCart, clearCart, postDonated } from "../../redux/actions";
 
 const stripePromise = loadStripe("pk_test_51Mw8EZKXctGo6PdRordVcWqK5Eb4jPlAgImQ2oQijGbhgqRuTLFipWxQNKEJ5cOpEW6OpjQzsMKbcOLLE4rkaRBc00NRHlsSSD") //conectar con stripe
 
@@ -27,6 +27,12 @@ const CheckoutForm = (props) => {
     user: user,
     total: totalamount,
   });
+
+  // const [donatedd, setDonatedd] = useState({
+  //   delivery: "",
+  //   status: "",
+  //   user: user,
+  // });
 
   useEffect(() => {
     const local= JSON.parse(localStorage.getItem("carrito"))
@@ -63,7 +69,7 @@ const CheckoutForm = (props) => {
       text: "tu pago ha sido realizado",
       icon: "success",
       confirmButtonText: "volver al inicio",
-      confirmButtonColor: "#b6ece5",
+      confirmButtonColor: "#228883",
       timer: "20000",
       timerProgressBar: true,
       position: "top",
@@ -99,16 +105,16 @@ const CheckoutForm = (props) => {
 
             id: id,
             amount: props.monto? props.monto *100 : totalamount * 100,
-            // || completar y mover arriba
           }
         );
         console.log(order)
+        // console.log(donatedd)
         console.log(data)
         if(!props.monto){
           dispatch(postOrder(order));
         }
         // else{
-        //   dispatch de otra peticion al back con el monto de la donacion, que envíe un mail personalizado de donacion
+        //   dispatch(postDonated(donatedd))
         // }
         
         
